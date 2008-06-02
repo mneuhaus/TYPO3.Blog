@@ -28,7 +28,6 @@ declare(ENCODING = 'utf-8');
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @repository
  */
 class F3_Blog_Domain_PostRepository {
 
