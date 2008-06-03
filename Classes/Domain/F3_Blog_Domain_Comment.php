@@ -37,12 +37,12 @@ class F3_Blog_Domain_Comment {
 	protected $date;
 
 	/**
-	 * @var string(45)
+	 * @var string
 	 */
 	protected $author;
 
 	/**
-	 * @var text
+	 * @var string
 	 */
 	protected $content;
 

@@ -32,7 +32,7 @@ declare(ENCODING = 'utf-8');
 class F3_Blog_Domain_Tag {
 
 	/**
-	 * @var string(45)
+	 * @var string
 	 */
 	protected $name;
 

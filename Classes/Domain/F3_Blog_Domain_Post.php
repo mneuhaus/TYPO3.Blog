@@ -52,7 +52,7 @@ class F3_Blog_Domain_Post {
 	protected $author;
 
 	/**
-	 * @var text
+	 * @var string
 	 */
 	protected $content;
 
