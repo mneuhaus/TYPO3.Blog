@@ -15,67 +15,35 @@ declare(ENCODING = 'utf-8');
  *                                                                        */
 
 /**
- * @package
- * @subpackage
+ * @package Blog
+ * @subpackage Domain
  * @version $Id$
  */
 
 /**
+ * A repository for Blogs
  *
- *
- * @package
- * @subpackage
+ * @package Blog
+ * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * @repository of F3_Blog_Domain_Post
  */
-class F3_Blog_Domain_PostRepository {
-
-
-	/**
-	 * @var array of F3_Blog_Domain_Post
-	 */
-	protected $posts = array();
+class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
 
 	/**
-	 * add
+	 * Returns a Blog with a matching name if found
 	 *
-	 * -> triggers persistence in CR session
-	 *
-	 * @param unknown_type $post
+	 * @param string $name The name to match against
+	 * @return F3_Blog_Domain_Blog
 	 */
-	public function add($post) {
-		$this->posts[] = $post;
-	}
-
-	/**
-	 * remove
-	 *
-	 * -> triggers persistence in CR session
-	 *
-	 * @param unknown_type $post
-	 */
-	public function remove($post) {}
-
-	public function findAll() {
-
-	}
-
-	public function findByTitle($title) {
-		$query = $this->queryFactory->create()->
-			select('F3_Blog_Domain_Post');
-
-// How to write criteria in fluent interface?
-	}
-
-	public function findMostRecentPosts() {
-		$this->persistenceManager->savePending('F3_Blo');
-
-		$query = $this->persistenceManager->createQuery()->
-			select('F3_Blog_Domain_Post')->
-			orderedDescendingBy('date')->
-			limit(5);
-		$posts = $query->execute();
+	public function findByName($name) {
+		foreach($this->objects as $object) {
+			if($object->name == $name) {
+				return $object;
+			}
+		}
 	}
 }
 ?>

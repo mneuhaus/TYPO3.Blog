@@ -15,16 +15,16 @@ declare(ENCODING = 'utf-8');
  *                                                                        */
 
 /**
- * @package
- * @subpackage
+ * @package Blog
+ * @subpackage Domain
  * @version $Id$
  */
 
 /**
+ * A blog post
  *
- *
- * @package
- * @subpackage
+ * @package Blog
+ * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
@@ -42,15 +42,23 @@ class F3_Blog_Domain_Post {
 	protected $date;
 
 	/**
-	 * @var array of F3_Blog_Domain_Post
+	 * @var array of F3_Blog_Domain_Tag
 	 */
 	protected $tags = array();
 
 	/**
-	 * @var string(45)
+	 * @var string
 	 */
 	protected $author;
+
+	/**
+	 * @var text
+	 */
 	protected $content;
+
+	/**
+	 * @var array of F3_Blog_Domain_Comment
+	 */
 	protected $comments = array();
 
 	/**
@@ -78,21 +86,70 @@ class F3_Blog_Domain_Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param string $tags
+	 * @param array $tags One or more F3_Blog_Domain_Tag objects
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function setTags($tags) {
+	public function setTags(array $tags) {
 		$this->tags = $tags;
 	}
 
 	/**
-	 * Enter description here...
+	 * Adds a tag to this post
+	 *
+	 * @param F3_Blog_Domain_Tag $tag
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function addTag(F3_Blog_Domain_Tag $tag) {
+		$this->tags[] = $tag;
+	}
+
+	/**
+	 * Sets the author for this post
+	 *
+	 * @param string $author
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function setAuthor($author) {
+		$this->author = $author;
+	}
+
+	/**
+	 * Sets the content for this post
+	 *
+	 * @param string $content
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function setContent($content) {
+		$this->content = $content;
+	}
+
+	/**
+	 * Adds a comment to this post
 	 *
 	 * @param F3_Blog_Domain_Comment $comment
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function addComment(F3_Blog_Domain_Comment $comment) {
 		$this->comments[] = $comment;
+	}
+
+	/**
+	 * Returns this post as a formatted string
+	 *
+	 * @return string
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function __toString() {
+		return $this->title . chr(10) .
+			' written on ' . date_format($this->date, 'Y-m-d') . chr(10) .
+			' by ' . $this->author . chr(10) .
+			wordwrap($this->content, 70, chr(10)) . chr(10) .
+			implode(', ', $this->tags);
 	}
 }
 ?>

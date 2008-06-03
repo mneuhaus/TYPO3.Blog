@@ -21,7 +21,7 @@ declare(ENCODING = 'utf-8');
  */
 
 /**
- * A blog post comment
+ * A blog
  *
  * @package Blog
  * @subpackage Domain
@@ -29,65 +29,59 @@ declare(ENCODING = 'utf-8');
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Domain_Comment {
+class F3_Blog_Domain_Blog {
 
 	/**
-	 * @var DateTime
+	 * The Blog's name
+	 * @var string
 	 */
-	protected $date;
+	protected $name;
 
 	/**
-	 * @var string(45)
+	 * The posts contained in this blog
+	 * @var array of F3_Blog_Domain_Post
 	 */
-	protected $author;
+	protected $posts = array();
 
 	/**
-	 * @var text
-	 */
-	protected $content;
-
-	/**
-	 * Setter for date
+	 * Adds a post to this blog
 	 *
-	 * @param string $date
+	 * @param F3_Blog_Domain_Post $post
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setDate($date) {
-		$this->date = $date;
+	public function addPost(F3_Blog_Domain_Post $post) {
+		$this->posts[] = $post;
 	}
 
 	/**
-	 * Sets the author for this comment
+	 * Returns all posts in this blog
 	 *
-	 * @param string $author
-	 * @return void
+	 * @return array of F3_Blog_Domain_Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setAuthor($author) {
-		$this->author = $author;
+	public function getPosts() {
+		return $this->posts;
 	}
 
 	/**
-	 * Sets the content for this comment
+	 * Returns the latest $count posts from the blog
 	 *
-	 * @param string $content
-	 * @return void
+	 * @param integer $count
+	 * @return array of F3_Blog_Domain_Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setContent($content) {
-		$this->content = $content;
+	public function getLatestPosts($count = 5) {
 	}
 
 	/**
-	 * Returns this comment as a formatted string
+	 * Returns this blog as a formatted string
 	 *
 	 * @return string
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __toString() {
-		return $this->author . ' said on ' . date('Y-m-d', $this->date) . ':' . chr(10) .
-			$this->content . chr(10);
+		return $this->name;
 	}
 }
 ?>

@@ -16,78 +16,67 @@ declare(ENCODING = 'utf-8');
 
 /**
  * @package Blog
- * @subpackage Domain
+ * @subpackage View
  * @version $Id$
  */
 
 /**
- * A blog post comment
+ * View for displaying the latest posts
  *
  * @package Blog
- * @subpackage Domain
+ * @subpackage View
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Domain_Comment {
+class F3_Blog_View_LatestPosts {
 
 	/**
-	 * @var DateTime
+	 * @var F3_Blog_Domain_Blog
 	 */
-	protected $date;
+	protected $blog;
 
 	/**
-	 * @var string(45)
-	 */
-	protected $author;
-
-	/**
-	 * @var text
-	 */
-	protected $content;
-
-	/**
-	 * Setter for date
+	 * Sets the model for this view, a Blog
 	 *
-	 * @param string $date
+	 * @param F3_Blog_Domain_Blog $blog The Blog to display the latest entries from
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setDate($date) {
-		$this->date = $date;
+	public function setBlog(F3_Blog_Domain_Blog $blog) {
+		$this->blog = $blog;
 	}
 
 	/**
-	 * Sets the author for this comment
+	 * Renders a list of the latest posts
 	 *
-	 * @param string $author
-	 * @return void
+	 * @return string The HTML to display
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setAuthor($author) {
-		$this->author = $author;
+	public function render() {
+		$latestPosts = $this->fetchLatestPosts();
+
+		$HTML = '<html><body><h1>Latest posts</h1>';
+		if (count($latestPosts)) {
+			foreach ($latestPosts as $post) {
+				$HTML .= '<pre>' . (string)$post . '</pre>';
+				$HTML .= '<hr />';
+			}
+		} else {
+			$HTML .= '<p>None found.</p>';
+		}
+		$HTML .= '</body></html>';
 	}
 
 	/**
-	 * Sets the content for this comment
+	 * Fetches the latest posts from the Blog
 	 *
-	 * @param string $content
-	 * @return void
+	 * @return array of F3_Blog_Domain_Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setContent($content) {
-		$this->content = $content;
-	}
-
-	/**
-	 * Returns this comment as a formatted string
-	 *
-	 * @return string
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function __toString() {
-		return $this->author . ' said on ' . date('Y-m-d', $this->date) . ':' . chr(10) .
-			$this->content . chr(10);
+	protected function fetchLatestPosts() {
+		return (array) $this->blog->findMostRecentPosts(5);
 	}
 }
+
 ?>

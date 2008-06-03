@@ -16,28 +16,45 @@ declare(ENCODING = 'utf-8');
 
 /**
  * @package Blog
+ * @subpackage Domain
  * @version $Id$
  */
 
 /**
- *
+ * A blog post tag
  *
  * @package Blog
+ * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Controller_Post extends F3_FLOW3_MVC_Controller_ActionController {
+class F3_Blog_Domain_Tag {
 
 	/**
-	 * Default action for this controller
-	 *
-	 * @return string The rendered view
-	 * @author robert
+	 * @var string(45)
 	 */
-	public function defaultAction() {
-		return $this->view->render();
+	protected $name;
+
+	/**
+	 * Setter for name
+	 *
+	 * @param string $name
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function setName($name) {
+		$this->name = $name;
+	}
+
+	/**
+	 * Returns this tag as a formatted string
+	 *
+	 * @return string
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function __toString() {
+		return $this->name;
 	}
 }
-
 ?>

@@ -16,78 +16,80 @@ declare(ENCODING = 'utf-8');
 
 /**
  * @package Blog
- * @subpackage Domain
- * @version $Id$
+ * @subpackage Controller
+ * @version $Id:$
  */
 
 /**
- * A blog post comment
+ * The default controller for the Blog package
  *
  * @package Blog
- * @subpackage Domain
- * @version $Id$
+ * @subpackage Controller
+ * @version $Id:$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Domain_Comment {
+class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionController {
 
 	/**
-	 * @var DateTime
+	 * @var F3_Blog_Domain_BlogRepository
 	 */
-	protected $date;
+	protected $blogRepository;
 
 	/**
-	 * @var string(45)
+	 * @var F3_Blog_Domain_Blog
 	 */
-	protected $author;
+	protected $blog;
 
 	/**
-	 * @var text
-	 */
-	protected $content;
-
-	/**
-	 * Setter for date
-	 *
-	 * @param string $date
+	 * Injects the BlogRepository
+	 * @param F3_Blog_Domain_BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @required
 	 */
-	public function setDate($date) {
-		$this->date = $date;
+	public function injectBlogRepository(F3_Blog_Domain_BlogRepository $blogRepository) {
+		$this->blogRepository = $blogRepository;
 	}
 
 	/**
-	 * Sets the author for this comment
+	 * Initializes the controller
 	 *
-	 * @param string $author
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setAuthor($author) {
-		$this->author = $author;
+	public function initializeController() {
+		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
+
+		$blog = $this->blogRepository->findByName('FLOW3');
+		if(is_a($blog, 'F3_Blog_Domain_Blog')) {
+			$this->blog = $blog;
+		} else {
+			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);
+		}
 	}
 
 	/**
-	 * Sets the content for this comment
+	 * Default action for this controller
 	 *
-	 * @param string $content
+	 * @return string The rendered view
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function defaultAction() {
+		$this->showLatestPostsAction();
+	}
+
+	/**
+	 * Action that display the latest posts
+	 *
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setContent($content) {
-		$this->content = $content;
-	}
-
-	/**
-	 * Returns this comment as a formatted string
-	 *
-	 * @return string
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function __toString() {
-		return $this->author . ' said on ' . date('Y-m-d', $this->date) . ':' . chr(10) .
-			$this->content . chr(10);
+	public function showLatestPostsAction() {
+		$latestPostsView = $this->componentManager->getComponent('F3_Blog_View_LatestPosts');
+		$latestPostsView->setBlog($this->blog);
+		$this->response->setContent($latestPostsView->render());
 	}
 }
+
 ?>
