@@ -61,6 +61,9 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	public function initializeController() {
 		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
 
+		$blog = $this->componentManager->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
+		$this->blogRepository->add($blog);
+
 		$blog = $this->blogRepository->findByName('FLOW3');
 		if($blog instanceof F3_Blog_Domain_Blog) {
 			$this->blog = $blog;
@@ -76,7 +79,7 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function defaultAction() {
-		$this->showLatestPostsAction();
+		return $this->latestPostsAction();
 	}
 
 	/**
@@ -85,10 +88,10 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function showLatestPostsAction() {
+	public function latestPostsAction() {
 		$latestPostsView = $this->componentManager->getComponent('F3_Blog_View_LatestPosts');
 		$latestPostsView->setPosts($this->blog->getLatestPosts(5));
-		$this->response->setContent($latestPostsView->render());
+		return $latestPostsView->render();
 	}
 }
 

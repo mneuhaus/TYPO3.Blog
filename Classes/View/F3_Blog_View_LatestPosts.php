@@ -43,7 +43,7 @@ class F3_Blog_View_LatestPosts {
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setLatestPosts(array $posts) {
+	public function setPosts(array $posts) {
 		$this->posts = $posts;
 	}
 
@@ -64,6 +64,7 @@ class F3_Blog_View_LatestPosts {
 			$HTML .= '<p>None found.</p>';
 		}
 		$HTML .= '</body></html>';
+		return $HTML;
 	}
 
 }
