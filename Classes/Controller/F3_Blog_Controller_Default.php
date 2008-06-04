@@ -63,6 +63,8 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 
 		$blog = $this->componentManager->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
 		$this->blogRepository->add($blog);
+		$post = $this->componentManager->getComponent('F3_Blog_Domain_Post');
+		$blog->addPost($post);
 
 		$blog = $this->blogRepository->findByName('FLOW3');
 		if($blog instanceof F3_Blog_Domain_Blog) {

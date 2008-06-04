@@ -63,6 +63,15 @@ class F3_Blog_Domain_Post {
 	protected $comments = array();
 
 	/**
+	 * Constructs this post
+	 *
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function __construct() {
+		$this->date = new DateTime();
+	}
+
+	/**
 	 * Setter for title
 	 *
 	 * @param string $title
