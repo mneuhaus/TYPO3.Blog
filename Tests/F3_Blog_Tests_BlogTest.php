@@ -16,34 +16,30 @@ declare(ENCODING = 'utf-8');
 
 /**
  * @package Blog
- * @subpackage Domain
+ * @subpackage Tests
  * @version $Id$
  */
 
 /**
- * A repository for Blogs
- *
  * @package Blog
- * @subpackage Domain
+ * @subpackage Tests
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @repository of F3_Blog_Domain_Post
  */
-class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
+class F3_Blog_Tests_BlogTest extends F3_Testing_BaseTestCase {
 
 	/**
-	 * Returns a Blog with a matching name if found
+	 * Make sure Blog is protoype
 	 *
-	 * @param string $name The name to match against
-	 * @return F3_Blog_Domain_Blog
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @test
 	 */
-	public function findByName($name) {
-		foreach($this->objects as $blog) {
-			if($blog->getName() == $name) {
-				return $blog;
-			}
-		}
+	public function blogIsPrototype() {
+		$firstInstance = $this->componentManager->getComponent('F3_Blog_Domain_Blog');
+		$secondInstance = $this->componentManager->getComponent('F3_Blog_Domain_Blog');
+		$this->assertNotSame($secondInstance, $firstInstance, 'F3_Blog_Domain_Blog is not prototype.');
 	}
 }
+
 ?>

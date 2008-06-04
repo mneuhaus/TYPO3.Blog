@@ -49,13 +49,22 @@ class F3_Blog_Domain_Tag {
 	}
 
 	/**
+	 * Returns this tag's name
+	 *
+	 * @return string This tag's name
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
 	 * Returns this tag as a formatted string
 	 *
 	 * @return string
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __toString() {
-		return $this->name;
+		return $this->getName();
 	}
 }
 ?>

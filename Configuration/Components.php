@@ -14,36 +14,18 @@ declare(ENCODING = 'utf-8');
  * Public License for more details.                                       *
  *                                                                        */
 
+/*                                                                        *
+ * Components configuration for the Blog package                          *
+ *                                                                        */
+
 /**
  * @package Blog
- * @subpackage Domain
  * @version $Id$
  */
 
-/**
- * A repository for Blogs
- *
- * @package Blog
- * @subpackage Domain
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @repository of F3_Blog_Domain_Post
- */
-class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
+$c->F3_Blog_Domain_Blog->scope = 'prototype';
+$c->F3_Blog_Domain_Post->scope = 'prototype';
+$c->F3_Blog_Domain_Comment->scope = 'prototype';
+$c->F3_Blog_Domain_Tag->scope = 'prototype';
 
-	/**
-	 * Returns a Blog with a matching name if found
-	 *
-	 * @param string $name The name to match against
-	 * @return F3_Blog_Domain_Blog
-	 */
-	public function findByName($name) {
-		foreach($this->objects as $blog) {
-			if($blog->getName() == $name) {
-				return $blog;
-			}
-		}
-	}
-}
 ?>

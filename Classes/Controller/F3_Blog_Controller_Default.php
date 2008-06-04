@@ -17,7 +17,7 @@ declare(ENCODING = 'utf-8');
 /**
  * @package Blog
  * @subpackage Controller
- * @version $Id:$
+ * @version $Id$
  */
 
 /**
@@ -25,7 +25,7 @@ declare(ENCODING = 'utf-8');
  *
  * @package Blog
  * @subpackage Controller
- * @version $Id:$
+ * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
@@ -62,7 +62,7 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
 
 		$blog = $this->blogRepository->findByName('FLOW3');
-		if(is_a($blog, 'F3_Blog_Domain_Blog')) {
+		if($blog instanceof F3_Blog_Domain_Blog) {
 			$this->blog = $blog;
 		} else {
 			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);
@@ -87,7 +87,7 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 */
 	public function showLatestPostsAction() {
 		$latestPostsView = $this->componentManager->getComponent('F3_Blog_View_LatestPosts');
-		$latestPostsView->setBlog($this->blog);
+		$latestPostsView->setPosts($this->blog->getLatestPosts(5));
 		$this->response->setContent($latestPostsView->render());
 	}
 }

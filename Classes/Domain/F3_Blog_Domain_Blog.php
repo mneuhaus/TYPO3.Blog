@@ -45,6 +45,27 @@ class F3_Blog_Domain_Blog {
 	protected $posts = array();
 
 	/**
+	 * Constructs a Blog
+	 *
+	 * @param string $name The name for the blog
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function __construct($name) {
+		$this->name = $name;
+	}
+
+	/**
+	 * Returns the blog's name
+	 *
+	 * @return string The blog's name
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
 	 * Adds a post to this blog
 	 *
 	 * @param F3_Blog_Domain_Post $post
@@ -73,6 +94,7 @@ class F3_Blog_Domain_Blog {
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getLatestPosts($count = 5) {
+		return array_slice($this->posts, -5, 5, TRUE);
 	}
 
 	/**

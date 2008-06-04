@@ -16,56 +16,50 @@ declare(ENCODING = 'utf-8');
 
 /**
  * @package Blog
- * @subpackage View
+ * @subpackage Tests
  * @version $Id$
  */
 
 /**
- * View for displaying the latest posts
- *
  * @package Blog
- * @subpackage View
+ * @subpackage Tests
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_View_LatestPosts {
+class F3_Blog_Tests_BlogRepositoryTest extends F3_Testing_BaseTestCase {
 
 	/**
-	 * @var array
-	 */
-	protected $posts = array();
-
-	/**
-	 * Sets the model for this view, an array of blog posts
+	 * Make sure BlogRepository is singleton
 	 *
-	 * @param array $posts The blog posts to display
-	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @test
 	 */
-	public function setLatestPosts(array $posts) {
-		$this->posts = $posts;
+	public function blogRepositoryIsSingleton() {
+		$firstInstance = $this->componentManager->getComponent('F3_Blog_Domain_BlogRepository');
+		$secondInstance = $this->componentManager->getComponent('F3_Blog_Domain_BlogRepository');
+		$this->assertSame($secondInstance, $firstInstance, 'F3_Blog_Domain_BlogRepository is not prototype.');
 	}
 
 	/**
-	 * Renders a list of the latest posts
+	 * Check that a blog can be found by name
 	 *
-	 * @return string The HTML to display
 	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @test
 	 */
-	public function render() {
-		$HTML = '<html><body><h1>Latest posts</h1>';
-		if (count($this->posts)) {
-			foreach ($this->posts as $post) {
-				$HTML .= '<pre>' . (string)$post . '</pre>';
-				$HTML .= '<hr />';
-			}
-		} else {
-			$HTML .= '<p>None found.</p>';
-		}
-		$HTML .= '</body></html>';
+	public function blogsAddedToTheBlogRepositoryCanBeFoundByName() {
+		$blog1 = new F3_Blog_Domain_Blog('FLOW1');
+		$blog2 = new F3_Blog_Domain_Blog('FLOW2');
+		$blog3 = new F3_Blog_Domain_Blog('FLOW3');
+		$blog4 = new F3_Blog_Domain_Blog('FLOW4');
+		$blogRepository = new F3_Blog_Domain_BlogRepository();
+		$blogRepository->add($blog1);
+		$blogRepository->add($blog2);
+		$blogRepository->add($blog3);
+		$blogRepository->add($blog4);
+		$foundBlog = $blogRepository->findByName('FLOW3');
+		$this->assertSame($blog3, $foundBlog, 'The blog could not be found by findByName.');
 	}
-
 }
 
 ?>

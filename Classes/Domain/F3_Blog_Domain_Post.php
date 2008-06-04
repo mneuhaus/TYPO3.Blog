@@ -129,6 +129,17 @@ class F3_Blog_Domain_Post {
 	}
 
 	/**
+	 * Setter for the comments to this post
+	 *
+	 * @param array $comments an array of F3_Blog_Domain_Comment instances
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function setComments(array $comments) {
+		$this->comments = $comments;
+	}
+
+	/**
 	 * Adds a comment to this post
 	 *
 	 * @param F3_Blog_Domain_Comment $comment
@@ -137,6 +148,16 @@ class F3_Blog_Domain_Post {
 	 */
 	public function addComment(F3_Blog_Domain_Comment $comment) {
 		$this->comments[] = $comment;
+	}
+
+	/**
+	 * Returns the comments to this post
+	 *
+	 * @return array of F3_Blog_Domain_Comment
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function getComments() {
+		return $this->comments;
 	}
 
 	/**
