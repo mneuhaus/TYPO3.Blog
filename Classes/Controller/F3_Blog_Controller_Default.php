@@ -67,7 +67,7 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 		$blog->addPost($post);
 
 		$blog = $this->blogRepository->findByName('FLOW3');
-		if($blog instanceof F3_Blog_Domain_Blog) {
+		if ($blog instanceof F3_Blog_Domain_Blog) {
 			$this->blog = $blog;
 		} else {
 			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);

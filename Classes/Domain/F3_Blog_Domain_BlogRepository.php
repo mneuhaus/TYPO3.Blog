@@ -39,8 +39,8 @@ class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
 	 * @return F3_Blog_Domain_Blog
 	 */
 	public function findByName($name) {
-		foreach($this->objects as $blog) {
-			if($blog->getName() == $name) {
+		foreach ($this->objects as $blog) {
+			if ($blog->getName() == $name) {
 				return $blog;
 			}
 		}

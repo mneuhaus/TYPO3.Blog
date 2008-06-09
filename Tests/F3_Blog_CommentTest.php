@@ -27,7 +27,7 @@ declare(ENCODING = 'utf-8');
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Tests_CommentTest extends F3_Testing_BaseTestCase {
+class F3_Blog_CommentTest extends F3_Testing_BaseTestCase {
 
 	/**
 	 * Make sure Comment is protoype
