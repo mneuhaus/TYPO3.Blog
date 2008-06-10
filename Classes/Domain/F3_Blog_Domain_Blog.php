@@ -33,10 +33,24 @@ declare(ENCODING = 'utf-8');
 class F3_Blog_Domain_Blog {
 
 	/**
-	 * The Blog's name
+	 * The blog's name
 	 * @var string
 	 */
 	protected $name;
+
+	/**
+	 * A short description of the blog
+	 *
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * The blog's logo
+	 *
+	 * @var string
+	 */
+	protected $logo;
 
 	/**
 	 * The posts contained in this blog
@@ -45,13 +59,13 @@ class F3_Blog_Domain_Blog {
 	protected $posts = array();
 
 	/**
-	 * Constructs a Blog
+	 * Sets this blog's name
 	 *
-	 * @param string $name The name for the blog
+	 * @param string $name The blog's name
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function __construct($name) {
+	public function setName($name) {
 		$this->name = $name;
 	}
 

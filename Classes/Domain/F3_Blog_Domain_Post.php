@@ -85,11 +85,11 @@ class F3_Blog_Domain_Post {
 	/**
 	 * Setter for date
 	 *
-	 * @param string $date
+	 * @param DateTime $date
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function setDate($date) {
+	public function setDate(DateTime $date) {
 		$this->date = $date;
 	}
 
