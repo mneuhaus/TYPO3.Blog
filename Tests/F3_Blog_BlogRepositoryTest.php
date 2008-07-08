@@ -48,14 +48,10 @@ class F3_Blog_BlogRepositoryTest extends F3_Testing_BaseTestCase {
 	 * @test
 	 */
 	public function blogsAddedToTheBlogRepositoryCanBeFoundByName() {
-		$blog1 = new F3_Blog_Domain_Blog();
-		$blog1->setName('FLOW1');
-		$blog2 = new F3_Blog_Domain_Blog();
-		$blog2->setName('FLOW2');
-		$blog3 = new F3_Blog_Domain_Blog();
-		$blog3->setName('FLOW3');
-		$blog4 = new F3_Blog_Domain_Blog();
-		$blog4->setName('FLOW4');
+		$blog1 = new F3_Blog_Domain_Blog('FLOW1');
+		$blog2 = new F3_Blog_Domain_Blog('FLOW2');
+		$blog3 = new F3_Blog_Domain_Blog('FLOW3');
+		$blog4 = new F3_Blog_Domain_Blog('FLOW4');
 		$blogRepository = new F3_Blog_Domain_BlogRepository();
 		$blogRepository->add($blog1);
 		$blogRepository->add($blog2);

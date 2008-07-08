@@ -54,7 +54,8 @@ class F3_Blog_Domain_Blog {
 
 	/**
 	 * The posts contained in this blog
-	 * @var array of F3_Blog_Domain_Post
+	 * @var array
+	 * @reference
 	 */
 	protected $posts = array();
 
