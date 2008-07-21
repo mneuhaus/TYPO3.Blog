@@ -35,6 +35,7 @@ class F3_Blog_Domain_Blog {
 
 	/**
 	 * The blog's name
+	 *
 	 * @var string
 	 */
 	protected $name;
@@ -55,6 +56,7 @@ class F3_Blog_Domain_Blog {
 
 	/**
 	 * The posts contained in this blog
+	 *
 	 * @var array
 	 * @reference
 	 */

@@ -49,6 +49,15 @@ class F3_Blog_Domain_Comment {
 	protected $content;
 
 	/**
+	 * Constructs this comment
+	 *
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function __construct() {
+		$this->date = new DateTime();
+	}
+
+	/**
 	 * Setter for date
 	 *
 	 * @param string $date

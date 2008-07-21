@@ -61,10 +61,27 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	public function initializeController() {
 		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
 
+			// a block of code giving us some data work with...
 		$blog = $this->componentManager->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
 		$this->blogRepository->add($blog);
 		$post = $this->componentManager->getComponent('F3_Blog_Domain_Post');
+		$post->setAuthor('John Doe');
+		$post->setTitle('About persistence and Lorem Ipsum');
+		$post->setContent('Lorem ipsum dolor sit amet...');
 		$blog->addPost($post);
+
+		$tag1 = $this->componentManager->getComponent('F3_Blog_Domain_Tag');
+		$tag1->setName('Development');
+		$post->addTag($tag1);
+		$tag2 = $this->componentManager->getComponent('F3_Blog_Domain_Tag');
+		$tag2->setName('PHP');
+		$post->addTag($tag2);
+
+		$comment = $this->componentManager->getComponent('F3_Blog_Domain_Comment');
+		$comment->setAuthor('Jane Done');
+		$comment->setContent('Lest lieber BILDblog!');
+		$post->addComment($comment);
+			// end of dummy data block
 
 		$blog = $this->blogRepository->findByName('FLOW3');
 		if ($blog instanceof F3_Blog_Domain_Blog) {

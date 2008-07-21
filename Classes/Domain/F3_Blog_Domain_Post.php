@@ -44,7 +44,8 @@ class F3_Blog_Domain_Post {
 	protected $date;
 
 	/**
-	 * @var array of F3_Blog_Domain_Tag
+	 * @var array
+	 * @reference
 	 */
 	protected $tags = array();
 
@@ -59,7 +60,8 @@ class F3_Blog_Domain_Post {
 	protected $content;
 
 	/**
-	 * @var array of F3_Blog_Domain_Comment
+	 * @var array
+	 * @reference
 	 */
 	protected $comments = array();
 
