@@ -62,9 +62,9 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
 
 			// a block of code giving us some data work with...
-		$blog = $this->componentManager->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
+		$blog = $this->componentFactory->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
 		$this->blogRepository->add($blog);
-		$post = $this->componentManager->getComponent('F3_Blog_Domain_Post');
+		$post = $this->componentFactory->getComponent('F3_Blog_Domain_Post');
 		$post->setAuthor('John Doe');
 		$post->setTitle('About persistence and Lorem Ipsum');
 		$post->setContent('Lorem ipsum dolor sit amet...');
@@ -108,7 +108,7 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function latestPostsAction() {
-		$latestPostsView = $this->componentManager->getComponent('F3_Blog_View_LatestPosts');
+		$latestPostsView = $this->componentFactory->getComponent('F3_Blog_View_LatestPosts');
 		$latestPostsView->setPosts($this->blog->getLatestPosts(5));
 		return $latestPostsView->render();
 	}

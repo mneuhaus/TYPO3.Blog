@@ -36,8 +36,8 @@ class F3_Blog_CommentTest extends F3_Testing_BaseTestCase {
 	 * @test
 	 */
 	public function commentIsPrototype() {
-		$firstInstance = $this->componentManager->getComponent('F3_Blog_Domain_Comment');
-		$secondInstance = $this->componentManager->getComponent('F3_Blog_Domain_Comment');
+		$firstInstance = $this->componentFactory->getComponent('F3_Blog_Domain_Comment');
+		$secondInstance = $this->componentFactory->getComponent('F3_Blog_Domain_Comment');
 		$this->assertNotSame($secondInstance, $firstInstance, 'F3_Blog_Domain_Comment is not prototype.');
 	}
 }

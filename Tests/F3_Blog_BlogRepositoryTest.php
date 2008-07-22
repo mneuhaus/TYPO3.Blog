@@ -36,8 +36,8 @@ class F3_Blog_BlogRepositoryTest extends F3_Testing_BaseTestCase {
 	 * @test
 	 */
 	public function blogRepositoryIsSingleton() {
-		$firstInstance = $this->componentManager->getComponent('F3_Blog_Domain_BlogRepository');
-		$secondInstance = $this->componentManager->getComponent('F3_Blog_Domain_BlogRepository');
+		$firstInstance = $this->componentFactory->getComponent('F3_Blog_Domain_BlogRepository');
+		$secondInstance = $this->componentFactory->getComponent('F3_Blog_Domain_BlogRepository');
 		$this->assertSame($secondInstance, $firstInstance, 'F3_Blog_Domain_BlogRepository is not prototype.');
 	}
 

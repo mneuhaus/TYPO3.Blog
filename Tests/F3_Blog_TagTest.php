@@ -36,8 +36,8 @@ class F3_Blog_TagTest extends F3_Testing_BaseTestCase {
 	 * @test
 	 */
 	public function tagIsPrototype() {
-		$firstInstance = $this->componentManager->getComponent('F3_Blog_Domain_Tag');
-		$secondInstance = $this->componentManager->getComponent('F3_Blog_Domain_Tag');
+		$firstInstance = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
+		$secondInstance = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
 		$this->assertNotSame($secondInstance, $firstInstance, 'F3_Blog_Domain_Tag is not prototype.');
 	}
 }
