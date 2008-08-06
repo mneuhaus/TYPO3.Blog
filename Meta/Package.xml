@@ -1,53 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<package version="1.0" xmlns="http://typo3.org/ns/2008/flow3/package"
-         xmlns:ns="http://typo3.org/ns/2008/flow3/package">
-  <key>Blog</key>
-
-  <title>Blog Package</title>
-
-  <description>The Blog package to show off FLOW3</description>
-
-  <version>0.0.1</version>
-
-  <state>Development</state>
-
-  <categories>
-    <category>Testing</category>
-  </categories>
-
-  <parties>
-    <person role="LeadDeveloper">
-      <name>Karsten Dambekalns</name>
-
-      <email>karsten@typo3.org</email>
-    </person>
-
-    <company>
-      <name/>
-
-      <email/>
-    </company>
-  </parties>
-
-  <constraints>
-    <depends>
-      <package minVersion="0.3.0">FLOW3</package>
-
-      <system minVersion="5.2.0" type="PHP"/>
-    </depends>
-
-    <conflicts/>
-
-    <suggests/>
-  </constraints>
-
-  <repository>
-    <downloads>
-      <total>0</total>
-
-      <thisVersion>0</thisVersion>
-    </downloads>
-
-    <uploads/>
-  </repository>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<package xmlns="http://typo3.org/ns/2008/flow3/package">
+    <key>Blog</key>
+    <title>Blog Package</title>
+    <description>The Blog package to show off FLOW3</description>
+    <version>0.0.1</version>
+    <state>Development</state>
+    <categories>
+        <category>Testing</category>
+    </categories>
+    <parties>
+        <person role="LeadDeveloper">
+            <name>Karsten Dambekalns</name>
+            <email>karsten@typo3.org</email>
+            <website></website>
+            <organisation>TYPO3 Association</organisation>
+            <repositoryUserName></repositoryUserName>
+        </person>
+        <person role="LeadDeveloper">
+            <name>Robert Lemke</name>
+            <email>robert@typo3.org</email>
+            <website></website>
+            <organisation>TYPO3 Association</organisation>
+            <repositoryUserName></repositoryUserName>
+        </person>
+    </parties>
+    <constraints>
+        <depends>
+            <package minVersion="0.3.0">FLOW3</package>
+            <package>TYPO3CR</package>
+        </depends>
+        <conflicts/>
+        <suggests/>
+    </constraints>
 </package>
