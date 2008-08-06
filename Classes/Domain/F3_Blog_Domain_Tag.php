@@ -39,6 +39,14 @@ class F3_Blog_Domain_Tag {
 	protected $name;
 
 	/**
+	 * dummy to make the Persistence aspect work
+	 *
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function __construct() {}
+
+	/**
 	 * Setter for name
 	 *
 	 * @param string $name

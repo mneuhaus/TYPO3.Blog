@@ -180,7 +180,7 @@ class F3_Blog_Domain_Post {
 	 */
 	public function __toString() {
 		return $this->title . chr(10) .
-			' written on ' . date_format($this->date, 'Y-m-d') . chr(10) .
+			' written on ' . $this->date->format('Y-m-d') . chr(10) .
 			' by ' . $this->author . chr(10) .
 			wordwrap($this->content, 70, chr(10)) . chr(10) .
 			implode(', ', $this->tags);

@@ -97,7 +97,7 @@ class F3_Blog_Domain_Comment {
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __toString() {
-		return $this->author . ' said on ' . date('Y-m-d', $this->date) . ':' . chr(10) .
+		return $this->author . ' said on ' . $this->date->format('Y-m-d') . ':' . chr(10) .
 			$this->content . chr(10);
 	}
 }

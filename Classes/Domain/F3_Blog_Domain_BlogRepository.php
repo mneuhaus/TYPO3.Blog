@@ -33,17 +33,19 @@ declare(ENCODING = 'utf-8');
 class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
 
 	/**
-	 * Returns a Blog with a matching name if found
+	 * Returns one or more Blogs with a matching name if found.
 	 *
 	 * @param string $name The name to match against
-	 * @return F3_Blog_Domain_Blog
+	 * @return array
 	 */
 	public function findByName($name) {
-		foreach ($this->objects as $blog) {
-			if ($blog->getName() == $name) {
-				return $blog;
-			}
+		$query = $this->queryFactory->create('F3_Blog_Domain_Blog');
+		$blogs = $query->matching($query->equals('name', $name))->execute();
+		foreach ($blogs as $blog) {
+			$this->add($blog);
 		}
+
+		return $blogs;
 	}
 }
 ?>

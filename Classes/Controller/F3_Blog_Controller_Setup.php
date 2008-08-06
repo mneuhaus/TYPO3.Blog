@@ -21,7 +21,8 @@ declare(ENCODING = 'utf-8');
  */
 
 /**
- * The default controller for the Blog package
+ * The setup controller for the Blog package, currently just setting up some
+ * data to play with.
  *
  * @package Blog
  * @subpackage Controller
@@ -29,17 +30,12 @@ declare(ENCODING = 'utf-8');
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionController {
+class F3_Blog_Controller_Setup extends F3_FLOW3_MVC_Controller_ActionController {
 
 	/**
 	 * @var F3_Blog_Domain_BlogRepository
 	 */
 	protected $blogRepository;
-
-	/**
-	 * @var F3_Blog_Domain_Blog
-	 */
-	protected $blog;
 
 	/**
 	 * Injects the BlogRepository
@@ -59,37 +55,41 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function initializeController() {
-		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
-
-		$blogs = $this->blogRepository->findByName('FLOW3');
-		if ($blogs[0] instanceof F3_Blog_Domain_Blog) {
-			$this->blog = $blogs[0];
-		} else {
-			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);
-		}
+		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request', 'F3_FLOW3_MVC_CLI_Request');
 	}
 
 	/**
 	 * Default action for this controller
 	 *
-	 * @return string The rendered view
+	 * @return string
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function defaultAction() {
-		return $this->latestPostsAction();
+		$blog = $this->componentFactory->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
+
+		$post = $this->componentFactory->getComponent('F3_Blog_Domain_Post');
+		$post->setAuthor('John Doe');
+		$post->setTitle('About persistence and Lorem Ipsum');
+		$post->setContent('Lorem ipsum dolor sit amet...');
+
+		$tag1 = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
+		$tag1->setName('Development');
+		$tag2 = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
+		$tag2->setName('PHP');
+
+		$comment = $this->componentFactory->getComponent('F3_Blog_Domain_Comment');
+		$comment->setAuthor('Jane Done');
+		$comment->setContent('Lest lieber BILDblog!');
+
+		$post->addTag($tag1);
+		$post->addTag($tag2);
+		$post->addComment($comment);
+		$blog->addPost($post);
+		$this->blogRepository->add($blog);
+
+		return 'Some data has been added to the BlogRepository...';
 	}
 
-	/**
-	 * Action that display the latest posts
-	 *
-	 * @return string The rendered view
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function latestPostsAction() {
-		$latestPostsView = $this->componentFactory->getComponent('F3_Blog_View_LatestPosts');
-		$latestPostsView->setPosts($this->blog->getLatestPosts($this->settings->latestView->maxItems));
-		return $latestPostsView->render();
-	}
 }
 
 ?>
