@@ -64,26 +64,44 @@ class F3_Blog_Controller_Setup extends F3_FLOW3_MVC_Controller_ActionController 
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function defaultAction() {
-		$blog = $this->componentFactory->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
-
-		$post = $this->componentFactory->getComponent('F3_Blog_Domain_Post');
-		$post->setAuthor('John Doe');
-		$post->setTitle('About persistence and Lorem Ipsum');
-		$post->setContent('Lorem ipsum dolor sit amet...');
-
 		$tag1 = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
 		$tag1->setName('Development');
 		$tag2 = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
 		$tag2->setName('PHP');
+		$tag3 = $this->componentFactory->getComponent('F3_Blog_Domain_Tag');
+		$tag3->setName('Java');
 
 		$comment = $this->componentFactory->getComponent('F3_Blog_Domain_Comment');
 		$comment->setAuthor('Jane Done');
 		$comment->setContent('Lest lieber BILDblog!');
 
-		$post->addTag($tag1);
-		$post->addTag($tag2);
-		$post->addComment($comment);
-		$blog->addPost($post);
+		$post1 = $this->componentFactory->getComponent('F3_Blog_Domain_Post');
+		$post1->setAuthor('John Doe');
+		$post1->setTitle('About persistence and Lorem Ipsum');
+		$post1->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+		$post1->addTag($tag1);
+		$post1->addTag($tag2);
+		$post1->addComment($comment);
+
+		$post2 = $this->componentFactory->getComponent('F3_Blog_Domain_Post');
+		$post2->setAuthor('Jimmy Nilsson');
+		$post2->setTitle('Why DDD matters');
+		$post2->setContent('On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.');
+		$post2->addTag($tag1);
+		$post2->addTag($tag3);
+
+		$post3 = $this->componentFactory->getComponent('F3_Blog_Domain_Post');
+		$post3->setAuthor('Robert Lemke');
+		$post3->setTitle('Why FLOW3 rocks');
+		$post3->setContent('It can change the way you work. It gives you fast results. It is a reliable foundation for complex applications. And it is backed by one of the biggest PHP communities.');
+		$post3->addTag($tag2);
+		$post3->addTag($tag3);
+
+		$blog = $this->componentFactory->getComponent('F3_Blog_Domain_Blog', 'FLOW3');
+		$blog->addPost($post1);
+		$blog->addPost($post2);
+		$blog->addPost($post3);
+
 		$this->blogRepository->add($blog);
 
 		return 'Some data has been added to the BlogRepository...';
