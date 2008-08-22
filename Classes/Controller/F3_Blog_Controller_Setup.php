@@ -42,7 +42,6 @@ class F3_Blog_Controller_Setup extends F3_FLOW3_MVC_Controller_ActionController 
 	 * @param F3_Blog_Domain_BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 * @required
 	 */
 	public function injectBlogRepository(F3_Blog_Domain_BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
