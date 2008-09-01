@@ -60,10 +60,22 @@ class F3_Blog_Domain_Post {
 	protected $content;
 
 	/**
+	 * @var int
+	 */
+	protected $votes = 0;
+
+
+	/**
 	 * @var array
 	 * @reference
 	 */
 	protected $comments = array();
+
+	/**
+	 * @var boolean
+	 */
+	protected $published = FALSE;
+
 
 	/**
 	 * Constructs this post
@@ -86,6 +98,16 @@ class F3_Blog_Domain_Post {
 	}
 
 	/**
+	 * Getter for title
+	 *
+	 * @return string
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
 	 * Setter for date
 	 *
 	 * @param DateTime $date
@@ -94,6 +116,17 @@ class F3_Blog_Domain_Post {
 	 */
 	public function setDate(DateTime $date) {
 		$this->date = $date;
+	}
+
+	/**
+	 * Getter for date
+	 *
+	 *
+	 * @return DateTime
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getDate() {
+		return $this->date;
 	}
 
 	/**
@@ -119,6 +152,16 @@ class F3_Blog_Domain_Post {
 	}
 
 	/**
+	 * Getter for tags
+	 *
+	 * @return array holding F3_Blog_Domain_Tag objects
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getTags() {
+		return $this->tags;
+	}
+
+	/**
 	 * Sets the author for this post
 	 *
 	 * @param string $author
@@ -130,6 +173,16 @@ class F3_Blog_Domain_Post {
 	}
 
 	/**
+	 * Getter for author
+	 *
+	 * @return string
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getAuthor() {
+		return $this->author;
+	}
+
+	/**
 	 * Sets the content for this post
 	 *
 	 * @param string $content
@@ -138,6 +191,37 @@ class F3_Blog_Domain_Post {
 	 */
 	public function setContent($content) {
 		$this->content = $content;
+	}
+
+	/**
+	 * Getter for content
+	 *
+	 * @return string
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getContent() {
+		return $this->content;
+	}
+
+	/**
+	 * Sets the votes for this post
+	 *
+	 * @param int $votes
+	 * @return void
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function setVotes($votes) {
+		$this->votes = $votes;
+	}
+
+	/**
+	 * Getter for votes
+	 *
+	 * @return int
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getVotes() {
+		return $this->votes;
 	}
 
 	/**
@@ -170,6 +254,27 @@ class F3_Blog_Domain_Post {
 	 */
 	public function getComments() {
 		return $this->comments;
+	}
+
+	/**
+	 * Sets the published/unpublished state for this post
+	 *
+	 * @param boolean $published
+	 * @return void
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function setPublished($published) {
+		$this->published = $published;
+	}
+
+	/**
+	 * Getter for published/unpublished state of this post
+	 *
+	 * @return boolean
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getPublished() {
+		return $this->published;
 	}
 
 	/**

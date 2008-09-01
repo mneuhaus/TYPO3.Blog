@@ -69,6 +69,16 @@ class F3_Blog_Domain_Comment {
 	}
 
 	/**
+	 * Getter for date
+	 *
+	 * @return DateTime
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getDate() {
+		return $this->date;
+	}
+
+	/**
 	 * Sets the author for this comment
 	 *
 	 * @param string $author
@@ -80,6 +90,16 @@ class F3_Blog_Domain_Comment {
 	}
 
 	/**
+	 * Getter for author
+	 *
+	 * @return string
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getAuthor() {
+		return $this->author;
+	}
+
+	/**
 	 * Sets the content for this comment
 	 *
 	 * @param string $content
@@ -88,6 +108,16 @@ class F3_Blog_Domain_Comment {
 	 */
 	public function setContent($content) {
 		$this->content = $content;
+	}
+
+	/**
+	 * Getter for content
+	 *
+	 * @return string
+	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 */
+	public function getContent() {
+		return $this->content;
 	}
 
 	/**

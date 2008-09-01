@@ -52,12 +52,28 @@ class F3_Blog_View_LatestPosts {
 	 *
 	 * @return string The HTML to display
 	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function render() {
 		$HTML = '<html><body><h1>Latest posts</h1>';
 		if (count($this->posts)) {
 			foreach ($this->posts as $post) {
-				$HTML .= '<pre>' . (string)$post . '</pre>';
+				$HTML .= '<h2>' . $post->getTitle() . '</h2>';
+				$HTML .= 'by ' . $post->getAuthor();
+				if(! $post->getPublished()) {
+						$HTML .= ' (unpublished)';
+					}
+				$HTML .= ' with ' . (string)$post->getVotes() . ' votes';
+				$HTML .= '<p>' . $post->getContent() . '</p>';
+				$HTML .= '<p>Tags: ';
+				foreach($post->getTags() as $tag) {
+					$HTML .= ' ' . (string)$tag;
+				}
+				$HTML .= '</p><p>Comments:</p>';
+				foreach($post->getComments() as $comment) {
+					$HTML .= '<p>Written on ' . $comment->getDate()->format('Y-m-d') . ' by ' . $comment->getAuthor() . ':<br />';
+					$HTML .= $comment->getContent() . '</p>';
+				}
 				$HTML .= '<hr />';
 			}
 		} else {
