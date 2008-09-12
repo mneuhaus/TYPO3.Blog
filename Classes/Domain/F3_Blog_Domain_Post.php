@@ -1,5 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
+namespace F3::Blog::Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -31,7 +32,7 @@ declare(ENCODING = 'utf-8');
  * @scope prototype
  * @entity
  */
-class F3_Blog_Domain_Post {
+class Post {
 
 	/**
 	 * @var string
@@ -132,7 +133,7 @@ class F3_Blog_Domain_Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param array $tags One or more F3_Blog_Domain_Tag objects
+	 * @param array $tags One or more F3::Blog::Domain::Tag objects
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
@@ -143,18 +144,18 @@ class F3_Blog_Domain_Post {
 	/**
 	 * Adds a tag to this post
 	 *
-	 * @param F3_Blog_Domain_Tag $tag
+	 * @param F3::Blog::Domain::Tag $tag
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function addTag(F3_Blog_Domain_Tag $tag) {
+	public function addTag(F3::Blog::Domain::Tag $tag) {
 		$this->tags[] = $tag;
 	}
 
 	/**
 	 * Getter for tags
 	 *
-	 * @return array holding F3_Blog_Domain_Tag objects
+	 * @return array holding F3::Blog::Domain::Tag objects
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getTags() {
@@ -227,7 +228,7 @@ class F3_Blog_Domain_Post {
 	/**
 	 * Setter for the comments to this post
 	 *
-	 * @param array $comments an array of F3_Blog_Domain_Comment instances
+	 * @param array $comments an array of F3::Blog::Domain::Comment instances
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
@@ -238,18 +239,18 @@ class F3_Blog_Domain_Post {
 	/**
 	 * Adds a comment to this post
 	 *
-	 * @param F3_Blog_Domain_Comment $comment
+	 * @param F3::Blog::Domain::Comment $comment
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function addComment(F3_Blog_Domain_Comment $comment) {
+	public function addComment(F3::Blog::Domain::Comment $comment) {
 		$this->comments[] = $comment;
 	}
 
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return array of F3_Blog_Domain_Comment
+	 * @return array of F3::Blog::Domain::Comment
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getComments() {

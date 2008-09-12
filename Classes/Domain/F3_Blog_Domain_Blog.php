@@ -1,5 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
+namespace F3::Blog::Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -31,7 +32,7 @@ declare(ENCODING = 'utf-8');
  * @scope prototype
  * @entity
  */
-class F3_Blog_Domain_Blog {
+class Blog {
 
 	/**
 	 * The blog's name
@@ -96,18 +97,18 @@ class F3_Blog_Domain_Blog {
 	/**
 	 * Adds a post to this blog
 	 *
-	 * @param F3_Blog_Domain_Post $post
+	 * @param F3::Blog::Domain::Post $post
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function addPost(F3_Blog_Domain_Post $post) {
+	public function addPost(F3::Blog::Domain::Post $post) {
 		$this->posts[] = $post;
 	}
 
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return array of F3_Blog_Domain_Post
+	 * @return array of F3::Blog::Domain::Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getPosts() {
@@ -118,7 +119,7 @@ class F3_Blog_Domain_Blog {
 	 * Returns the latest $count posts from the blog
 	 *
 	 * @param integer $count
-	 * @return array of F3_Blog_Domain_Post
+	 * @return array of F3::Blog::Domain::Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getLatestPosts($count = 5) {

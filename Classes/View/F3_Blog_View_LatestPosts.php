@@ -1,5 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
+namespace F3::Blog::View;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -29,7 +30,7 @@ declare(ENCODING = 'utf-8');
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_View_LatestPosts {
+class LatestPosts {
 
 	/**
 	 * @var array

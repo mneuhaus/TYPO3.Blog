@@ -1,5 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
+namespace F3::Blog::Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -31,7 +32,7 @@ declare(ENCODING = 'utf-8');
  * @scope prototype
  * @valueobject
  */
-class F3_Blog_Domain_Tag {
+class Tag {
 
 	/**
 	 * @var string

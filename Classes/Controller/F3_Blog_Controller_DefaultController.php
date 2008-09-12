@@ -1,5 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
+namespace F3::Blog::Controller;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -29,25 +30,25 @@ declare(ENCODING = 'utf-8');
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionController {
+class DefaultController extends F3::FLOW3::MVC::Controller::ActionController {
 
 	/**
-	 * @var F3_Blog_Domain_BlogRepository
+	 * @var F3::Blog::Domain::BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @var F3_Blog_Domain_Blog
+	 * @var F3::Blog::Domain::Blog
 	 */
 	protected $blog;
 
 	/**
 	 * Injects the BlogRepository
-	 * @param F3_Blog_Domain_BlogRepository $blogRepository
+	 * @param F3::Blog::Domain::BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function injectBlogRepository(F3_Blog_Domain_BlogRepository $blogRepository) {
+	public function injectBlogRepository(F3::Blog::Domain::BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
 	}
 
@@ -58,10 +59,10 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function initializeController() {
-		$this->supportedRequestTypes = array('F3_FLOW3_MVC_Web_Request');
+		$this->supportedRequestTypes = array('F3::FLOW3::MVC::Web::Request');
 
 		$blogs = $this->blogRepository->findByName('FLOW3');
-		if (count($blogs) && $blogs[0] instanceof F3_Blog_Domain_Blog) {
+		if (count($blogs) && $blogs[0] instanceof F3::Blog::Domain::Blog) {
 			$this->blog = $blogs[0];
 		} else {
 			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);
@@ -85,7 +86,7 @@ class F3_Blog_Controller_Default extends F3_FLOW3_MVC_Controller_ActionControlle
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function latestPostsAction() {
-		$latestPostsView = $this->componentFactory->getComponent('F3_Blog_View_LatestPosts');
+		$latestPostsView = $this->componentFactory->getComponent('F3::Blog::View::LatestPosts');
 		$latestPostsView->setPosts($this->blog->getLatestPosts($this->settings->latestView->maxItems));
 		return $latestPostsView->render();
 	}

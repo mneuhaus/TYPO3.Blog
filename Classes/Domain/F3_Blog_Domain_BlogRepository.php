@@ -1,5 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
+namespace F3::Blog::Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -28,9 +29,9 @@ declare(ENCODING = 'utf-8');
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @repository of F3_Blog_Domain_Post
+ * @repository of F3::Blog::Domain::Post
  */
-class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
+class BlogRepository extends F3::FLOW3::Persistence::Repository {
 
 	/**
 	 * Returns one or more Blogs with a matching name if found.
@@ -39,7 +40,7 @@ class F3_Blog_Domain_BlogRepository extends F3_FLOW3_Persistence_Repository {
 	 * @return array
 	 */
 	public function findByName($name) {
-		$query = $this->queryFactory->create('F3_Blog_Domain_Blog');
+		$query = $this->queryFactory->create('F3::Blog::Domain::Blog');
 		$blogs = $query->matching($query->equals('name', $name))->execute();
 		foreach ($blogs as $blog) {
 			$this->add($blog);
