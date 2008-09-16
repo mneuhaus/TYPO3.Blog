@@ -31,7 +31,7 @@ namespace F3::Blog::Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class Setup extends F3::FLOW3::MVC::Controller::ActionController {
+class SetupController extends F3::FLOW3::MVC::Controller::ActionController {
 
 	/**
 	 * @var F3::Blog::Domain::BlogRepository
