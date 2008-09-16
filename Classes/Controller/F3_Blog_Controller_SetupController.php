@@ -59,13 +59,13 @@ class SetupController extends F3::FLOW3::MVC::Controller::ActionController {
 	}
 
 	/**
-	 * Default action for this controller
+	 * Index action for this controller
 	 *
 	 * @return string
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
-	public function defaultAction() {
+	public function indexAction() {
 		$tag1 = $this->componentFactory->getComponent('F3::Blog::Domain::Tag');
 		$tag1->setName('Development');
 		$tag2 = $this->componentFactory->getComponent('F3::Blog::Domain::Tag');

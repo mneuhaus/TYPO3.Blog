@@ -70,12 +70,12 @@ class DefaultController extends F3::FLOW3::MVC::Controller::ActionController {
 	}
 
 	/**
-	 * Default action for this controller
+	 * Index action for this controller
 	 *
 	 * @return string The rendered view
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function defaultAction() {
+	public function indexAction() {
 		return $this->latestPostsAction();
 	}
 
