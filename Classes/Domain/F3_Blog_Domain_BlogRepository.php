@@ -29,7 +29,6 @@ namespace F3::Blog::Domain;
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @repository of F3::Blog::Domain::Post
  */
 class BlogRepository extends F3::FLOW3::Persistence::Repository {
 
@@ -40,7 +39,7 @@ class BlogRepository extends F3::FLOW3::Persistence::Repository {
 	 * @return array
 	 */
 	public function findByName($name) {
-		$query = $this->queryFactory->create('F3::Blog::Domain::Blog');
+		$query = $this->createQuery();
 		$blogs = $query->matching($query->equals('name', $name))->execute();
 		foreach ($blogs as $blog) {
 			$this->add($blog);
