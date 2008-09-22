@@ -61,7 +61,7 @@ class Post {
 	protected $content;
 
 	/**
-	 * @var int
+	 * @var integer
 	 */
 	protected $votes = 0;
 
@@ -207,7 +207,7 @@ class Post {
 	/**
 	 * Sets the votes for this post
 	 *
-	 * @param int $votes
+	 * @param integer $votes
 	 * @return void
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
@@ -218,7 +218,7 @@ class Post {
 	/**
 	 * Getter for votes
 	 *
-	 * @return int
+	 * @return integer
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getVotes() {

@@ -41,9 +41,6 @@ class BlogRepository extends F3::FLOW3::Persistence::Repository {
 	public function findByName($name) {
 		$query = $this->createQuery();
 		$blogs = $query->matching($query->equals('name', $name))->execute();
-		foreach ($blogs as $blog) {
-			$this->add($blog);
-		}
 
 		return $blogs;
 	}
