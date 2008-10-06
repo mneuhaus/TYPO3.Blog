@@ -127,6 +127,58 @@ class Blog {
 	}
 
 	/**
+	 * Returns single post posts by UUID
+	 *
+	 * @param string $UUID the post identifier
+	 * @return F3::Blog::Domain::Post post or NULL if not found
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function findPostByIdentifier($UUID) {
+		foreach($this->posts as $post) {
+			if ($post->getIdentifier() === $UUID) {
+				return $post;
+			}
+		}
+		return NULL;
+	}
+
+	/**
+	 * Returns single post posts by title
+	 *
+	 * @param string $postTitle the title of this post
+	 * @return F3::Blog::Domain::Post post or NULL if not found
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function findPostByTitle($postTitle) {
+		foreach($this->posts as $post) {
+			if (strtolower($post->getTitle()) === strtolower($postTitle)) {
+				return $post;
+			}
+		}
+		return NULL;
+	}
+
+	/**
+	 * Returns posts posts by tag
+	 *
+	 * @param string $tag
+	 * @return array of F3::Blog::Domain::Post
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function findPostsByTag($tag) {
+		$foundPosts = array();
+		foreach($this->posts as $post) {
+			foreach($post->getTags() as $postTag) {
+				if (strtolower($postTag) === strtolower($tag)) {
+					$foundPosts[] = $post;
+					break;
+				}
+			}
+		}
+		return $foundPosts;
+	}
+
+	/**
 	 * Returns this blog as a formatted string
 	 *
 	 * @return string

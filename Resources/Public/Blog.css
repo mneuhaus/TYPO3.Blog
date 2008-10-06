@@ -1,0 +1,38 @@
+#main-nav {
+	background-color: #99011e;
+	border-color: #700016;
+}
+#main-nav ul {
+	border-color: #99011e;
+}
+#main-nav li a {
+	border-right: 1px solid #ffffff;
+	border-top: 1px solid #99011e;
+}
+#main-nav li a:hover {
+	background-color: #e56508;
+	border-top: 1px solid #e56508;
+}
+div#sub-nav-title {
+	background-color: #99011e;
+	border-color: #700016;
+}
+div#sub-nav {
+	border-color: #99011e;
+}
+
+h1.csc-firstHeader, h2.csc-firstHeader {
+	color: #700016;
+}
+
+a, a:visited {
+	color: #700016;
+}
+a:hover {
+	color: #e56508;
+}
+
+.comment-header {
+	background-color: #99011e;
+	border-color: #700016;
+}

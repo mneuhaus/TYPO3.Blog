@@ -22,7 +22,7 @@ namespace F3::Blog::Controller;
  */
 
 /**
- * The default controller for the Blog package
+ * Comments controller for the Blog package
  *
  * @package Blog
  * @subpackage Controller
@@ -30,7 +30,7 @@ namespace F3::Blog::Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class DefaultController extends F3::FLOW3::MVC::Controller::ActionController {
+class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
 
 	/**
 	 * @var F3::Blog::Domain::BlogRepository
@@ -44,19 +44,36 @@ class DefaultController extends F3::FLOW3::MVC::Controller::ActionController {
 
 	/**
 	 * Injects the BlogRepository
+	 * 
 	 * @param F3::Blog::Domain::BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function injectBlogRepository(F3::Blog::Domain::BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
 	}
 
 	/**
+	 * Initializes arguments for this controller
+	 *
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function initializeArguments() {
+		$this->arguments->addNewArgument('name');
+		$this->arguments->addNewArgument('body');
+		$this->arguments->addNewArgument('postUUID');
+	}
+	
+
+	/**
 	 * Initializes the controller
 	 *
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function initializeController() {
 		$this->supportedRequestTypes = array('F3::FLOW3::MVC::Web::Request');
@@ -70,25 +87,27 @@ class DefaultController extends F3::FLOW3::MVC::Controller::ActionController {
 	}
 
 	/**
-	 * Index action for this controller
+	 * Action that adds a comment to a blog post and redirects to single view
 	 *
 	 * @return string The rendered view
-	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function indexAction() {
-		return $this->latestPostsAction();
-	}
+	public function createAction() {
+		$name = $this->arguments['name']->getValue();
+		$body = $this->arguments['body']->getValue();
+		$postUUID = $this->arguments['postUUID']->getValue();
+		
+		$post = $this->blog->findPostByIdentifier($postUUID);
 
-	/**
-	 * Action that display the latest posts
-	 *
-	 * @return string The rendered view
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function latestPostsAction() {
-		$latestPostsView = $this->componentFactory->getComponent('F3::Blog::View::LatestPosts');
-		$latestPostsView->setPosts($this->blog->getLatestPosts($this->settings->latestView->maxItems));
-		return $latestPostsView->render();
+		$comment = $this->componentFactory->getComponent('F3::Blog::Domain::Comment');
+		$comment->setAuthor($name);
+		$comment->setContent($body);
+		$post->addComment($comment);
+		
+		// @todo: this should not be a _view_ helper obviously
+		// a global URIHelper has to be implemented which allows redirects too
+		$linkHelper = $this->componentFactory->getComponent('F3::FLOW3::MVC::View::Helper::LinkHelper');
+		$this->redirect($this->request->getBaseURI() . $linkHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
 	}
 }
 

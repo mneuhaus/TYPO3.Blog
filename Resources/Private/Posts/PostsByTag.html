@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE
+	html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<!-- 
+	This website is powered by FLOW3 ;)
+-->
+
+	<base href="{$baseURI}" />
+	<link href="http://buzz.typo3.org/typo3temp/stylesheet_71e56952f4.css" type="text/css" rel="stylesheet" />
+	<link href="http://buzz.typo3.org/fileadmin/news.typo3.org/css/typo3.all-main.css" type="text/css" rel="stylesheet" />
+	<link href="http://buzz.typo3.org/fileadmin/news.typo3.org/css/typo3.org-main.css" type="text/css" rel="stylesheet" />
+
+	<link href="http://buzz.typo3.org/fileadmin/news.typo3.org/css/tt_news_styles.css" type="text/css" rel="stylesheet" />
+	<link href="http://buzz.typo3.org/fileadmin/buzz.typo3.org/css/ve_guestbook_styles.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="Resources/Web/Blog/Public/Blog.css" type="text/css" media="all" />
+	<script type="text/javascript" src="http://buzz.typo3.org/fileadmin/news.typo3.org/inc/external_links.js"></script>
+	<title>FLOW3 blog.Resource</title>
+	<meta name="generator" content="FLOW3" />
+	<script type="text/javascript" src="http://buzz.typo3.org/typo3temp/javascript_f52d1a094f.js"></script>
+</head>
+	<body>
+		<div id="typo3org-container">
+			<div id="logo"><a href="./"><img src="Resources/Web/Blog/Public/f3_logo.gif" height="40" width="109" alt="" /></a></div>
+			<div id="services">
+				<form id="portal-nav" action="#">
+					<fieldset>
+						<label for="portal-select">Go to:</label>
+							<select id="portal-select">
+								<option class="section" value="">General</option>
+								<option value="http://typo3.com">TYPO3.com Home</option>
+								<option value="http://association.typo3.org">TYPO3 Association Home</option>
+								<option class="section" value="">Development</option>
+								<option value="http://typo3.org">typo3.org Home</option>
+								<option value="http://bugs.typo3.org">Bugtracker</option>
+								<option value="http://news.typo3.org">News</option>
+								<option selected="selected" value="http://buzz.typo3.org">Blogs</option>
+								<option value="http://wiki.typo3.org">Wiki</option>
+								<option value="http://lists.netfielders.de">Mailing lists</option>
+							</select>
+						</fieldset>
+				</form>
+				<form id="search" action="http://news.typo3.org/search/" method="post">
+					<fieldset>
+						<label for="sword">Search:</label>
+						<input id="sword" type="text" readonly="readonly" name="tx_indexedsearch[sword]" value="" />
+						<input class="go-button" onmouseover="this.src='http://buzz.typo3.org/fileadmin/news.typo3.org/images/button-go-mouseover.gif'" onmouseout="this.src='http://buzz.typo3.org/fileadmin/news.typo3.org/images/button-go-normal.gif'" type="image" src="http://buzz.typo3.org/fileadmin/news.typo3.org/images/button-go-normal.gif" disabled="disabled" alt="Submit" />
+					</fieldset>
+				</form>
+			</div>
+			<div id="main-nav"><ul id="navlist"><li class="menu1-level1-no"><a href="#">Home</a></li><li class="menu1-level1-no"><a href="#">People</a></li><li class="menu1-level1-no"><a href="#" onfocus="blurLink(this);">Teams</a></li><li class="menu1-level1-no"><a href="#" onfocus="blurLink(this);">Help</a></li></ul></div>
+			<div id="rootline-nav">
+				<div id="topic-image"><img src="http://buzz.typo3.org/fileadmin/buzz.typo3.org/images/blog_resource.gif" alt="blog.Resource" /></div>
+			</div>
+			<div id="left-column">
+				<div id="sub-nav">
+					<div id="sub-nav-title"></div>
+					<div id="sub-nav-content"></div>
+				</div>
+				<div id="left_content">
+					<div class="feedicons">
+						<p>News-Feeds:</p><br />
+						<a href="#" rel="external"><img src="http://buzz.typo3.org/fileadmin/news.typo3.org/img/rss2.gif" alt="RSS 2.0" height="15" width="80" /></a><br />
+						<a href="#" rel="external"><img src="http://buzz.typo3.org/fileadmin/news.typo3.org/img/rss091.gif" alt="RSS 0.91" height="15" width="80" /></a><br />
+						<a href="#" rel="external"><img src="http://buzz.typo3.org/fileadmin/news.typo3.org/img/rdf.gif" alt="RDF" height="15" width="80" /></a><br />
+						<a href="#" rel="external"><img src="http://buzz.typo3.org/fileadmin/news.typo3.org/img/atom03.gif" alt="ATOM 0.3" height="15" width="80" /></a>
+					</div>
+				</div>
+				<div id="sponsors">
+					<div id="sponsors-headline">Sponsors</div>
+				</div>
+			</div>
+			<div id="main-column">
+				<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Posts tagged with &quot;{$tag}&quot;:</h1></div>
+				<div class="news-list-container">
+					{foreach from=$posts item=post}
+						{assign var='postDate' value=$post->getDate()}
+						{assign var='postUUID' value=$post->getIdentifier()}
+						<div class="news-list-item">
+							<h3>
+								<span class="news-list-date">{$postDate->format('l m. \o\f F Y')}</span>
+								{linkTo actionName="show" arguments="postUUID=$postUUID"}{$post->getTitle()}{/linkTo}
+							</h3>
+							<p class="bodytext">{$post->getContent()|truncate:100:"..."}</p>
+							<div class="news-list-category">
+								Tags:
+								{foreach from=$post->getTags() item=tag}
+									{linkTo controllerName="Posts" actionName="postsByTag" arguments="tag=$tag"}{$tag}{/linkTo}&nbsp;
+								{/foreach}
+							</div>
+							<div class="news-list-morelink">{linkTo actionName="show" arguments="postUUID=$postUUID"}[read more >> ]{/linkTo}</div>
+							<hr class="clearer" />
+						</div>
+					{/foreach}
+				</div>
+				<div class="news-single-backlink">{linkTo actionName="index"}<- Back to latest posts{/linkTo}</div>
+			</div>
+			<div id="footer">
+				<div id="footer-copyright">
+					&copy;2006 <a href="http://association.typo3.org/" rel="external">TYPO3 Association</a>
+				</div>
+				<img title="" src="fileadmin/news.typo3.org/images/logo-typo3-blackwhite.gif" alt="" height="27" width="27" />
+			</div>
+		</div>
+	</body>
+</html>

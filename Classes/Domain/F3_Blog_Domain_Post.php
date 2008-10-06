@@ -35,6 +35,12 @@ namespace F3::Blog::Domain;
 class Post {
 
 	/**
+	 * @var string UUID
+	 * @identifier
+	 */
+	protected $identifier;
+
+	/**
 	 * @var string
 	 */
 	protected $title;
@@ -82,9 +88,21 @@ class Post {
 	 * Constructs this post
 	 *
 	 * @author Robert Lemke <robert@typo3.org>
+	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function __construct() {
 		$this->date = new DateTime();
+		$this->identifier = F3::FLOW3::Utility::Algorithms::generateUUID();
+	}
+
+	/**
+	 * Getter for identifier
+	 *
+	 * @return string
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function getIdentifier() {
+		return $this->identifier;
 	}
 
 	/**
