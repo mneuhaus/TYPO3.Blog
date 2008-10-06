@@ -106,8 +106,8 @@ class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
 		
 		// @todo: this should not be a _view_ helper obviously
 		// a global URIHelper has to be implemented which allows redirects too
-		$linkHelper = $this->componentFactory->getComponent('F3::FLOW3::MVC::View::Helper::LinkHelper');
-		$this->redirect($this->request->getBaseURI() . $linkHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
+		$URIHelper = $this->view->getViewHelper('F3::FLOW3::MVC::View::Helper::URIHelper');
+		$this->redirect($this->request->getBaseURI() . $URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
 	}
 }
 
