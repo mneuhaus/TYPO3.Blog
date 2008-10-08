@@ -44,7 +44,7 @@ class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
 
 	/**
 	 * Injects the BlogRepository
-	 * 
+	 *
 	 * @param F3::Blog::Domain::BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
@@ -52,6 +52,20 @@ class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
 	 */
 	public function injectBlogRepository(F3::Blog::Domain::BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
+	}
+
+	/**
+I	 * Injects the URI Helper
+	 *
+	 * @param F3::FLOW3::MVC::View::Helper::URIHelper $URIHelper The URI Helper
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 * @todo this should not be a _view_ helper obviously
+	 * @todo a global URIHelper has to be implemented which allows redirects too
+	 *
+	 */
+	public function injectURIHelper(F3::FLOW3::MVC::View::Helper::URIHelper $URIHelper) {
+		$this->URIHelper = $URIHelper;
 	}
 
 	/**
@@ -64,26 +78,24 @@ class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
 	public function initializeArguments() {
 		$this->arguments->addNewArgument('name');
 		$this->arguments->addNewArgument('body');
-		$this->arguments->addNewArgument('postUUID');
+		$this->arguments->addNewArgument('postUUID', 'UUID');
 	}
-	
 
 	/**
-	 * Initializes the controller
+	 * Initializes the current action
 	 *
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 * @author Bastian Waidelich <bastian@typo3.org>
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function initializeController() {
-		$this->supportedRequestTypes = array('F3::FLOW3::MVC::Web::Request');
-
+	public function initializeAction() {
 		$blogs = $this->blogRepository->findByName('FLOW3');
 		if (count($blogs) && $blogs[0] instanceof F3::Blog::Domain::Blog) {
 			$this->blog = $blogs[0];
 		} else {
-			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);
+			$this->throwStatus(404, NULL, 'No blogs found, run the setup controller to create one.');
 		}
+
+		$this->URIHelper->setRequest($this->request);
 	}
 
 	/**
@@ -96,18 +108,15 @@ class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
 		$name = $this->arguments['name']->getValue();
 		$body = $this->arguments['body']->getValue();
 		$postUUID = $this->arguments['postUUID']->getValue();
-		
+
 		$post = $this->blog->findPostByIdentifier($postUUID);
 
 		$comment = $this->componentFactory->getComponent('F3::Blog::Domain::Comment');
 		$comment->setAuthor($name);
 		$comment->setContent($body);
 		$post->addComment($comment);
-		
-		// @todo: this should not be a _view_ helper obviously
-		// a global URIHelper has to be implemented which allows redirects too
-		$URIHelper = $this->view->getViewHelper('F3::FLOW3::MVC::View::Helper::URIHelper');
-		$this->redirect($this->request->getBaseURI() . $URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
+
+		$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
 	}
 }
 

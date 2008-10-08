@@ -1,0 +1,243 @@
+/*--------------------------------- tt_news LIST view  -----------------------------------*/
+.news-list-item {
+	padding-bottom:20px;
+} 
+
+.news-list-container H2,.news-single-item H2 {
+	margin: 0px;
+}
+
+.news-list-container H2 A:LINK,.news-list-container H2 A:VISITED,.news-list-container H2 A:HOVER {
+text-decoration:none;
+}
+
+
+.news-list-container H2 A {
+	/*color:#fff;*/
+text-decoration:none;
+}
+
+.news-list-date {
+	float: right;
+}
+
+.news-list-imgcaption {
+	padding-top:3px;
+	padding-right:3px;
+}
+
+.news-list-container IMG {
+	float: right;
+
+	margin-bottom:5px;
+	margin-right:2px;
+	margin-left:5px;
+}
+
+.news-list-category IMG {
+	float: none;
+	border:none;
+	margin:0px;
+}
+
+.news-list-morelink  {
+	padding-bottom:5px;
+}
+
+
+.news-list-category,.news-list-author,.news-list-imgcaption,.news-list-date  {
+	font-size:10px;
+}
+	
+	/*---------------------------------  tt_news Page-Browser ---------------------------------*/
+
+.news-list-browse {
+text-align:center;
+margin-bottom:20px;
+}
+
+.tx-ttnews-browsebox {
+
+	margin:3px;
+	padding:3px;
+}
+.activeLinkWrap,.tx-ttnews-browsebox-strong {
+font-weight:bold;
+}
+.disabledLinkWrap { color: #ccc; }
+.disabledLinkWrap, .inactiveLinkWrap, .activeLinkWrap {
+padding:0px 2px;
+}
+
+	/*--------------------------------- tt_news SINGLE view  ---------------------------------*/
+
+
+.news-single-item {
+	padding:5px;	
+	margin-bottom:5px;
+
+
+}
+.news-single-item H2 {
+
+	font-weight:bold;
+	color: #333;
+	margin: 0px;
+}
+.news-single-item H3 {
+	margin-bottom: 15px;
+		font-size: 13px;
+}
+
+	
+
+/**/
+
+		
+
+.news-single-img {
+	float: right;
+margin-left:5px;
+
+}
+
+
+
+.news-single-imgcaption {
+	padding:3px;
+	clear:both;
+}
+
+.news-single-category {
+font-size: 10px;
+	float: right;
+}
+.news-single-backlink, .news-single-backlink a {
+	font-weight: bold;
+	font-size: 10px;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+.news-single-timedata {
+	float: right;
+}
+.news-single-timedata, .news-single-author,.news-single-imgcaption {
+	font-size: 10px;
+}
+.news-single-author {
+	padding-bottom: 3px;
+}
+.news-single-additional-info {
+	/*background-color: #BBE53A;*/
+	clear: both;
+
+	margin-top: 15px;
+/* 	border: 1px solid #666; */
+	padding:3px;
+	padding-bottom:0px;
+
+}
+.news-single-related,.news-single-files,.news-single-links  {
+/* 	border: 1px solid #666; */
+	margin:0px;
+	margin-bottom: 3px;
+	padding:3px;
+	/*background-color:#F9FFE5;*/
+}
+
+.news-single-related DD, .news-single-links DD, .news-single-files DD {
+	margin-left:20px;
+
+}
+
+.news-single-related DT, .news-single-links DT, .news-single-files DT {
+	font-weight: bold;
+	font-size: 11px;
+	margin-left:5px;
+	width:90%;
+}
+	
+/*--------------------------------- tt_news Archivemenu (AMENU) --------------------------------- */
+.news-amenu-container {
+	width:165px;
+padding:0px;
+}
+.news-amenu-container LI {
+	padding-bottom:1px;
+
+}
+.news-amenu-container UL LI A:LINK, .news-amenu-container UL LI A:VISITED {
+/* 	background: transparent url('tt_news_styles_FILES/orangearrow2_no.gif') left center no-repeat; */
+	text-align: left;
+	text-decoration: none;
+	color: #666;
+/* 	padding-left: 12px; */
+}
+.news-amenu-container UL LI A:HOVER, .news-amenu-container UL LI A:ACTIVE {
+/* 	background: transparent url('tt_news_styles_FILES/orangearrow2.gif') left center no-repeat; */
+	color: black;
+}
+.news-amenu-container UL {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 11px;
+
+	margin-top:5px;
+	margin-left:0px;
+	padding-left:20px;
+	margin-bottom:0px;
+	list-style-type: none;
+}
+.news-amenu-container H2, .news-catmenu-header {
+	color:#000;
+	font-size:12px;
+	padding-top:3px;
+	padding-bottom:1px;
+	padding-left:20px;
+}
+.news-amenu-item-year {
+	font-weight: bold;
+       margin-top:10px;
+	padding: 2px;
+	background-color: #fff;
+	color:#000;
+}
+/* -------------------------------------------- */
+.news-catmenu-header {
+font-weight:bold;
+	padding-bottom: 2px;
+	padding-left: 0px;
+
+}
+
+
+.news-catmenu  {
+	padding:5px;
+	margin:0px 10px 10px 10px;
+
+}
+  
+.news-catmenu DIV {
+	font-size:10px;
+	white-space: nowrap;
+}
+.news-catmenu DIV img {
+	margin:0px;
+	padding:0px;
+	vertical-align: middle;
+
+
+
+}
+.news-catmenu-ACT {
+	font-weight:bold;
+}
+
+/*-----------------------------------  clearer  -----------------------------------*/
+/* prevent floated images from overlapping the div-containers they are wrapped in  */
+
+.news-list-container HR.clearer,.news-single-item HR.clearer {
+	clear:right;
+	height:1px;
+	border:1px solid #fff;
+
+}

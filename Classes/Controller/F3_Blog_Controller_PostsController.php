@@ -61,28 +61,26 @@ class PostsController extends F3::FLOW3::MVC::Controller::ActionController {
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function initializeArguments() {
-		$this->arguments->addNewArgument('postUUID');
+		$this->arguments->addNewArgument('postUUID', 'UUID');
 		$this->arguments->addNewArgument('tag');
 	}
-	
+
 
 	/**
-	 * Initializes the controller
+	 * Initializes the current action
 	 *
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 * @author Bastian Waidelich <bastian@typo3.org>
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function initializeController() {
-		$this->supportedRequestTypes = array('F3::FLOW3::MVC::Web::Request');
-
+	public function initializeAction() {
 		$blogs = $this->blogRepository->findByName('FLOW3');
 		if (count($blogs) && $blogs[0] instanceof F3::Blog::Domain::Blog) {
 			$this->blog = $blogs[0];
 		} else {
-			throw new RuntimeException('No Blog found in BlogRepository', 1212490598);
+			$this->throwStatus(404, NULL, 'No blogs found, run the setup controller to create one.');
 		}
 	}
+
 
 	/**
 	 * Index action for this controller. Displays latest posts
