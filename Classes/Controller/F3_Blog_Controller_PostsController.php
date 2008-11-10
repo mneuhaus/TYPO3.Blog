@@ -91,7 +91,7 @@ class PostsController extends F3::FLOW3::MVC::Controller::ActionController {
 	 */
 	public function indexAction() {
 		$this->view->assign('baseURI', $this->request->getBaseURI());
-		$this->view->assign('posts', $this->blog->getLatestPosts($this->settings->latestView->maxItems));
+		$this->view->assign('posts', $this->blog->getLatestPosts($this->settings['latestView']['maxItems']));
 		return $this->view->render();
 	}
 

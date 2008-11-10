@@ -111,7 +111,7 @@ I	 * Injects the URI Helper
 
 		$post = $this->blog->findPostByIdentifier($postUUID);
 
-		$comment = $this->componentFactory->getComponent('F3::Blog::Domain::Comment');
+		$comment = $this->componentFactory->create('F3::Blog::Domain::Comment');
 		$comment->setAuthor($name);
 		$comment->setContent($body);
 		$post->addComment($comment);
