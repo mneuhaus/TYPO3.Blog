@@ -66,18 +66,18 @@ class SetupController extends F3::FLOW3::MVC::Controller::ActionController {
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function indexAction() {
-		$tag1 = $this->componentFactory->create('F3::Blog::Domain::Tag');
+		$tag1 = $this->objectFactory->create('F3::Blog::Domain::Tag');
 		$tag1->setName('Development');
-		$tag2 = $this->componentFactory->create('F3::Blog::Domain::Tag');
+		$tag2 = $this->objectFactory->create('F3::Blog::Domain::Tag');
 		$tag2->setName('PHP');
-		$tag3 = $this->componentFactory->create('F3::Blog::Domain::Tag');
+		$tag3 = $this->objectFactory->create('F3::Blog::Domain::Tag');
 		$tag3->setName('Java');
 
-		$comment = $this->componentFactory->create('F3::Blog::Domain::Comment');
+		$comment = $this->objectFactory->create('F3::Blog::Domain::Comment');
 		$comment->setAuthor('Jane Done');
 		$comment->setContent('Lest lieber BILDblog!');
 
-		$post1 = $this->componentFactory->create('F3::Blog::Domain::Post');
+		$post1 = $this->objectFactory->create('F3::Blog::Domain::Post');
 		$post1->setAuthor('John Doe');
 		$post1->setTitle('About persistence and Lorem Ipsum');
 		$post1->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
@@ -87,7 +87,7 @@ class SetupController extends F3::FLOW3::MVC::Controller::ActionController {
 		$post1->setPublished(TRUE);
 		$post1->setVotes(5);
 
-		$post2 = $this->componentFactory->create('F3::Blog::Domain::Post');
+		$post2 = $this->objectFactory->create('F3::Blog::Domain::Post');
 		$post2->setAuthor('Jimmy Nilsson');
 		$post2->setTitle('Why DDD matters');
 		$post2->setContent('On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.');
@@ -95,7 +95,7 @@ class SetupController extends F3::FLOW3::MVC::Controller::ActionController {
 		$post2->addTag($tag3);
 		$post2->setVotes(3);
 
-		$post3 = $this->componentFactory->create('F3::Blog::Domain::Post');
+		$post3 = $this->objectFactory->create('F3::Blog::Domain::Post');
 		$post3->setAuthor('Robert Lemke');
 		$post3->setTitle('Why FLOW3 rocks');
 		$post3->setContent('It can change the way you work. It gives you fast results. It is a reliable foundation for complex applications. And it is backed by one of the biggest PHP communities.');
@@ -104,7 +104,7 @@ class SetupController extends F3::FLOW3::MVC::Controller::ActionController {
 		$post3->setPublished(TRUE);
 		$post3->setVotes(7);
 
-		$blog = $this->componentFactory->create('F3::Blog::Domain::Blog', 'FLOW3');
+		$blog = $this->objectFactory->create('F3::Blog::Domain::Blog', 'FLOW3');
 		$blog->addPost($post1);
 		$blog->addPost($post2);
 		$blog->addPost($post3);
