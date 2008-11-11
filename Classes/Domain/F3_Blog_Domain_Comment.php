@@ -47,6 +47,11 @@ class Comment {
 	/**
 	 * @var string
 	 */
+	protected $emailAddress;
+
+	/**
+	 * @var string
+	 */
 	protected $content;
 
 	/**
@@ -101,6 +106,27 @@ class Comment {
 	}
 
 	/**
+	 * Sets the authors email for this comment
+	 *
+	 * @param string $emailAddress email of the author
+	 * @return void
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
+	}
+
+	/**
+	 * Getter for authors email
+	 *
+	 * @return string
+	 * @author Bastian Waidelich <bastian@typo3.org>
+	 */
+	public function getEmailAddress() {
+		return $this->emailAddress;
+	}
+
+	/**
 	 * Sets the content for this comment
 	 *
 	 * @param string $content
@@ -128,7 +154,7 @@ class Comment {
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __toString() {
-		return $this->author . ' said on ' . $this->date->format('Y-m-d') . ':' . chr(10) .
+		return $this->author . ' (' . $this->email . ') said on ' . $this->date->format('Y-m-d') . ':' . chr(10) .
 			$this->content . chr(10);
 	}
 }

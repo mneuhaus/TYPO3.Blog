@@ -78,6 +78,7 @@ I	 * Injects the URI Helper
 	public function initializeArguments() {
 		$this->arguments->addNewArgument('name');
 		$this->arguments->addNewArgument('body');
+		$this->arguments->addNewArgument('email', 'EmailAddress');
 		$this->arguments->addNewArgument('postUUID', 'UUID');
 	}
 
@@ -105,15 +106,17 @@ I	 * Injects the URI Helper
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function createAction() {
+		$postUUID = $this->arguments['postUUID']->getValue();
+		$post = $this->blog->findPostByIdentifier($postUUID);
+
 		$name = $this->arguments['name']->getValue();
 		$body = $this->arguments['body']->getValue();
-		$postUUID = $this->arguments['postUUID']->getValue();
-
-		$post = $this->blog->findPostByIdentifier($postUUID);
+		$email = $this->arguments['email']->getValue();
 
 		$comment = $this->objectFactory->create('F3::Blog::Domain::Comment');
 		$comment->setAuthor($name);
 		$comment->setContent($body);
+		$comment->setEmailAddress($email);
 		$post->addComment($comment);
 
 		$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));

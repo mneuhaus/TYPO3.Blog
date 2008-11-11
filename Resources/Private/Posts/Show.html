@@ -98,8 +98,9 @@
 								<a name="comment"></a> comment #{counter}
 							</div>
 							<div class="comment-info">
-								<img src="Resources/Web/Blog/Public/gravatar_default.gif" class="gravatar" width="40" height="40" alt="Gravatar" title="This is ..." />
-								<span class="comment-author">{$comment->getAuthor()}</span>
+								<img src="{gravatar email=$comment->getEmail() default=`$baseURI`Resources/Web/Blog/Public/gravatar_default.gif size=40}" class="gravatar" width="40" height="40" alt="Gravatar" title="{$comment->getAuthor()}" />
+								
+								<span class="comment-author"><a href="mailto:{$comment->getEmail()}">{$comment->getAuthor()}</a></span>
 								<span class="comment-date">{$date->format('F m, Y')}</span>
 								<span class="comment-time">{$date->format('H:i')}</span>
 							</div>
@@ -118,6 +119,9 @@
 						<input type="hidden" name="postUUID" value="{$post->getIdentifier()}" />
 						<label for="author">name <span class="required">(required)</span></label><br />
 						<input id="author" type="text" name="name" value="" />
+						<br />
+						<label for="email">email <span class="required">(required)</span></label><br />
+						<input id="email" type="text" name="email" value="" />
 						<br />
 						<label for="text">message <span class="required">(required)</span></label><br />
 						<textarea id="text" name="body" class="tx-guestbook-form-textarea" rows="8" cols="46"></textarea>
