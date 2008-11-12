@@ -52,7 +52,6 @@ class Post {
 
 	/**
 	 * @var array
-	 * @reference
 	 */
 	protected $tags = array();
 
@@ -71,10 +70,8 @@ class Post {
 	 */
 	protected $votes = 0;
 
-
 	/**
 	 * @var array
-	 * @reference
 	 */
 	protected $comments = array();
 

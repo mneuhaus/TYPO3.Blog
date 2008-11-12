@@ -59,7 +59,6 @@ class Blog {
 	 * The posts contained in this blog
 	 *
 	 * @var array
-	 * @reference
 	 */
 	protected $posts = array();
 
