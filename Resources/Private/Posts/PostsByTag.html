@@ -81,7 +81,7 @@
 						{assign var='postUUID' value=$post->getIdentifier()}
 						<div class="news-list-item">
 							<h3>
-								<span class="news-list-date">{$postDate->format('l m. \o\f F Y')}</span>
+								<span class="news-list-date">{$postDate->format('l j. \o\f F Y')}</span>
 								{linkTo actionName="show" arguments="postUUID=$postUUID"}{$post->getTitle()}{/linkTo}
 							</h3>
 							<p class="bodytext">{$post->getContent()|truncate:100:"..."}</p>
