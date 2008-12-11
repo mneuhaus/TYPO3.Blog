@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::Domain;
+namespace F3\Blog\Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -35,7 +35,7 @@ namespace F3::Blog::Domain;
 class Comment {
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $date;
 
@@ -60,24 +60,24 @@ class Comment {
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __construct() {
-		$this->date = new DateTime();
+		$this->date = new \DateTime();
 	}
 
 	/**
 	 * Setter for date
 	 *
-	 * @param string $date
+	 * @param \DateTime $date
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setDate($date) {
+	public function setDate(\DateTime $date) {
 		$this->date = $date;
 	}
 
 	/**
 	 * Getter for date
 	 *
-	 * @return DateTime
+	 * @return \DateTime
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getDate() {

@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::View;
+namespace F3\Blog\View;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -30,7 +30,7 @@ namespace F3::Blog::View;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class PostsIndex extends F3::Smarty::View {
+class PostsIndex extends \F3\Smarty\View {
 
 	/**
 	 * Initializes the view

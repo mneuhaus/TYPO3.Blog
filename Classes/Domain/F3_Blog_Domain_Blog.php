@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::Domain;
+namespace F3\Blog\Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -96,18 +96,18 @@ class Blog {
 	/**
 	 * Adds a post to this blog
 	 *
-	 * @param F3::Blog::Domain::Post $post
+	 * @param \F3\Blog\Domain\Post $post
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function addPost(F3::Blog::Domain::Post $post) {
+	public function addPost(\F3\Blog\Domain\Post $post) {
 		$this->posts[] = $post;
 	}
 
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return array of F3::Blog::Domain::Post
+	 * @return array of \F3\Blog\Domain\Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getPosts() {
@@ -118,7 +118,7 @@ class Blog {
 	 * Returns the latest $count posts from the blog
 	 *
 	 * @param integer $count
-	 * @return array of F3::Blog::Domain::Post
+	 * @return array of \F3\Blog\Domain\Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getLatestPosts($count = 5) {
@@ -129,7 +129,7 @@ class Blog {
 	 * Returns single post posts by UUID
 	 *
 	 * @param string $UUID the post identifier
-	 * @return F3::Blog::Domain::Post post or NULL if not found
+	 * @return \F3\Blog\Domain\Post post or NULL if not found
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function findPostByIdentifier($UUID) {
@@ -145,7 +145,7 @@ class Blog {
 	 * Returns single post posts by title
 	 *
 	 * @param string $postTitle the title of this post
-	 * @return F3::Blog::Domain::Post post or NULL if not found
+	 * @return \F3\Blog\Domain\Post post or NULL if not found
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function findPostByTitle($postTitle) {
@@ -161,7 +161,7 @@ class Blog {
 	 * Returns posts posts by tag
 	 *
 	 * @param string $tag
-	 * @return array of F3::Blog::Domain::Post
+	 * @return array of \F3\Blog\Domain\Post
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function findPostsByTag($tag) {

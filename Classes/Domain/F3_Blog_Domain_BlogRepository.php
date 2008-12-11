@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::Domain;
+namespace F3\Blog\Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -30,7 +30,7 @@ namespace F3::Blog::Domain;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class BlogRepository extends F3::FLOW3::Persistence::Repository {
+class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
 	 * Returns one or more Blogs with a matching name if found.

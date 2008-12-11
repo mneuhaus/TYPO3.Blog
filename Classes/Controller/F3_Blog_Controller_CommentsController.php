@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::Controller;
+namespace F3\Blog\Controller;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -30,41 +30,41 @@ namespace F3::Blog::Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class CommentsController extends F3::FLOW3::MVC::Controller::ActionController {
+class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @var F3::Blog::Domain::BlogRepository
+	 * @var \F3\Blog\Domain\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @var F3::Blog::Domain::Blog
+	 * @var \F3\Blog\Domain\Blog
 	 */
 	protected $blog;
 
 	/**
 	 * Injects the BlogRepository
 	 *
-	 * @param F3::Blog::Domain::BlogRepository $blogRepository
+	 * @param \F3\Blog\Domain\BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function injectBlogRepository(F3::Blog::Domain::BlogRepository $blogRepository) {
+	public function injectBlogRepository(\F3\Blog\Domain\BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
 	}
 
 	/**
 I	 * Injects the URI Helper
 	 *
-	 * @param F3::FLOW3::MVC::View::Helper::URIHelper $URIHelper The URI Helper
+	 * @param F3\FLOW3\MVC\View\Helper\URIHelper $URIHelper The URI Helper
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 * @todo this should not be a _view_ helper obviously
 	 * @todo a global URIHelper has to be implemented which allows redirects too
 	 *
 	 */
-	public function injectURIHelper(F3::FLOW3::MVC::View::Helper::URIHelper $URIHelper) {
+	public function injectURIHelper(\F3\FLOW3\MVC\View\Helper\URIHelper $URIHelper) {
 		$this->URIHelper = $URIHelper;
 	}
 
@@ -90,7 +90,7 @@ I	 * Injects the URI Helper
 	 */
 	public function initializeAction() {
 		$blogs = $this->blogRepository->findByName('FLOW3');
-		if (count($blogs) && $blogs[0] instanceof F3::Blog::Domain::Blog) {
+		if (count($blogs) && $blogs[0] instanceof \F3\Blog\Domain\Blog) {
 			$this->blog = $blogs[0];
 		} else {
 			$this->throwStatus(404, NULL, 'No blogs found, run the setup controller to create one.');
@@ -113,7 +113,7 @@ I	 * Injects the URI Helper
 		$body = $this->arguments['body']->getValue();
 		$email = $this->arguments['email']->getValue();
 
-		$comment = $this->objectFactory->create('F3::Blog::Domain::Comment');
+		$comment = $this->objectFactory->create('F3\Blog\Domain\Comment');
 		$comment->setAuthor($name);
 		$comment->setContent($body);
 		$comment->setEmailAddress($email);

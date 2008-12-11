@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::Controller;
+namespace F3\Blog\Controller;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -30,26 +30,26 @@ namespace F3::Blog::Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class PostsController extends F3::FLOW3::MVC::Controller::ActionController {
+class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @var F3::Blog::Domain::BlogRepository
+	 * @var \F3\Blog\Domain\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @var F3::Blog::Domain::Blog
+	 * @var \F3\Blog\Domain\Blog
 	 */
 	protected $blog;
 
 	/**
 	 * Injects the BlogRepository
-	 * @param F3::Blog::Domain::BlogRepository $blogRepository
+	 * @param \F3\Blog\Domain\BlogRepository $blogRepository
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function injectBlogRepository(F3::Blog::Domain::BlogRepository $blogRepository) {
+	public function injectBlogRepository(\F3\Blog\Domain\BlogRepository $blogRepository) {
 		$this->blogRepository = $blogRepository;
 	}
 
@@ -74,7 +74,7 @@ class PostsController extends F3::FLOW3::MVC::Controller::ActionController {
 	 */
 	public function initializeAction() {
 		$blogs = $this->blogRepository->findByName('FLOW3');
-		if (count($blogs) && $blogs[0] instanceof F3::Blog::Domain::Blog) {
+		if (count($blogs) && $blogs[0] instanceof \F3\Blog\Domain\Blog) {
 			$this->blog = $blogs[0];
 		} else {
 			$this->throwStatus(404, NULL, 'No blogs found, run the setup controller to create one.');

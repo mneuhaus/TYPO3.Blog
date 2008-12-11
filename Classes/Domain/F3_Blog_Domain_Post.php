@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3::Blog::Domain;
+namespace F3\Blog\Domain;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -46,7 +46,7 @@ class Post {
 	protected $title;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $date;
 
@@ -88,8 +88,8 @@ class Post {
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function __construct() {
-		$this->date = new DateTime();
-		$this->identifier = F3::FLOW3::Utility::Algorithms::generateUUID();
+		$this->date = new \DateTime();
+		$this->identifier = F3\FLOW3\Utility\Algorithms::generateUUID();
 	}
 
 	/**
@@ -126,11 +126,11 @@ class Post {
 	/**
 	 * Setter for date
 	 *
-	 * @param DateTime $date
+	 * @param \DateTime $date
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function setDate(DateTime $date) {
+	public function setDate(\DateTime $date) {
 		$this->date = $date;
 	}
 
@@ -138,7 +138,7 @@ class Post {
 	 * Getter for date
 	 *
 	 *
-	 * @return DateTime
+	 * @return \DateTime
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getDate() {
@@ -148,7 +148,7 @@ class Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param array $tags One or more F3::Blog::Domain::Tag objects
+	 * @param array $tags One or more \F3\Blog\Domain\Tag objects
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
@@ -159,18 +159,18 @@ class Post {
 	/**
 	 * Adds a tag to this post
 	 *
-	 * @param F3::Blog::Domain::Tag $tag
+	 * @param \F3\Blog\Domain\Tag $tag
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function addTag(F3::Blog::Domain::Tag $tag) {
+	public function addTag(\F3\Blog\Domain\Tag $tag) {
 		$this->tags[] = $tag;
 	}
 
 	/**
 	 * Getter for tags
 	 *
-	 * @return array holding F3::Blog::Domain::Tag objects
+	 * @return array holding \F3\Blog\Domain\Tag objects
 	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getTags() {
@@ -243,7 +243,7 @@ class Post {
 	/**
 	 * Setter for the comments to this post
 	 *
-	 * @param array $comments an array of F3::Blog::Domain::Comment instances
+	 * @param array $comments an array of \F3\Blog\Domain\Comment instances
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
@@ -254,18 +254,18 @@ class Post {
 	/**
 	 * Adds a comment to this post
 	 *
-	 * @param F3::Blog::Domain::Comment $comment
+	 * @param \F3\Blog\Domain\Comment $comment
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function addComment(F3::Blog::Domain::Comment $comment) {
+	public function addComment(\F3\Blog\Domain\Comment $comment) {
 		$this->comments[] = $comment;
 	}
 
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return array of F3::Blog::Domain::Comment
+	 * @return array of \F3\Blog\Domain\Comment
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getComments() {
