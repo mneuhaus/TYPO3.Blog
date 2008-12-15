@@ -89,7 +89,7 @@ class Post {
 	 */
 	public function __construct() {
 		$this->date = new \DateTime();
-		$this->identifier = F3\FLOW3\Utility\Algorithms::generateUUID();
+		$this->identifier = \F3\FLOW3\Utility\Algorithms::generateUUID();
 	}
 
 	/**
