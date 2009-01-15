@@ -65,7 +65,6 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->arguments->addNewArgument('tag');
 	}
 
-
 	/**
 	 * Initializes the current action
 	 *
@@ -80,7 +79,6 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$this->throwStatus(404, NULL, 'No blogs found, run the setup controller to create one.');
 		}
 	}
-
 
 	/**
 	 * Index action for this controller. Displays latest posts

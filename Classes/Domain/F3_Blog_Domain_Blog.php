@@ -101,7 +101,7 @@ class Blog {
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function addPost(\F3\Blog\Domain\Post $post) {
-		$this->posts[] = $post;
+		$this->posts[$post->getIdentifier()] = $post;
 	}
 
 	/**
@@ -122,7 +122,11 @@ class Blog {
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getLatestPosts($count = 5) {
-		return array_slice($this->posts, -$count, $count, TRUE);
+		if (is_array($this->posts)) {
+			return array_slice($this->posts, -$count, $count, TRUE);
+		} else {
+			return array();
+		}
 	}
 
 	/**
@@ -133,12 +137,11 @@ class Blog {
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function findPostByIdentifier($UUID) {
-		foreach($this->posts as $post) {
-			if ($post->getIdentifier() === $UUID) {
-				return $post;
-			}
+		if (array_key_exists($UUID, $this->posts)) {
+			return $this->posts[$UUID];
+		} else {
+			return NULL;
 		}
-		return NULL;
 	}
 
 	/**
@@ -149,7 +152,7 @@ class Blog {
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function findPostByTitle($postTitle) {
-		foreach($this->posts as $post) {
+		foreach ($this->posts as $post) {
 			if (strtolower($post->getTitle()) === strtolower($postTitle)) {
 				return $post;
 			}
@@ -166,8 +169,8 @@ class Blog {
 	 */
 	public function findPostsByTag($tag) {
 		$foundPosts = array();
-		foreach($this->posts as $post) {
-			foreach($post->getTags() as $postTag) {
+		foreach ($this->posts as $post) {
+			foreach ($post->getTags() as $postTag) {
 				if (strtolower($postTag) === strtolower($tag)) {
 					$foundPosts[] = $post;
 					break;

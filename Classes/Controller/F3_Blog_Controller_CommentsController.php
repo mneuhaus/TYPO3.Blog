@@ -55,7 +55,7 @@ class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-I	 * Injects the URI Helper
+	 * Injects the URI Helper
 	 *
 	 * @param F3\FLOW3\MVC\View\Helper\URIHelper $URIHelper The URI Helper
 	 * @return void
