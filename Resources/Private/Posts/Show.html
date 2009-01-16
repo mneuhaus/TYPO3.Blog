@@ -101,7 +101,7 @@
 								<img src="{gravatar email=$comment->getEmailAddress() default=`$baseURI`Resources/Web/Blog/Public/gravatar_default.gif size=40}" class="gravatar" width="40" height="40" alt="Gravatar" title="{$comment->getAuthor()}" />
 								
 								<span class="comment-author"><a href="mailto:{$comment->getEmailAddress()}">{$comment->getAuthor()}</a></span>
-								<span class="comment-date">{$date->format('F m, Y')}</span>
+								<span class="comment-date">{$date->format('F d, Y')}</span>
 								<span class="comment-time">{$date->format('H:i')}</span>
 							</div>
 							<div class="comment-text">
