@@ -76,9 +76,7 @@ class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function initializeArguments() {
-		$this->arguments->addNewArgument('name');
-		$this->arguments->addNewArgument('body');
-		$this->arguments->addNewArgument('email', 'EmailAddress');
+		$this->arguments->addNewArgument('comment', 'F3\Blog\Domain\Comment');
 		$this->arguments->addNewArgument('postUUID', 'UUID');
 	}
 
@@ -109,16 +107,10 @@ class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$postUUID = $this->arguments['postUUID']->getValue();
 		$post = $this->blog->findPostByIdentifier($postUUID);
 
-		$name = $this->arguments['name']->getValue();
-		$body = $this->arguments['body']->getValue();
-		$email = $this->arguments['email']->getValue();
-
-		$comment = $this->objectFactory->create('F3\Blog\Domain\Comment');
-		$comment->setAuthor($name);
-		$comment->setContent($body);
-		$comment->setEmailAddress($email);
-		$post->addComment($comment);
-
+		$comment = $this->arguments['comment']->getValue();
+		if ($comment != NULL) {
+			$post->addComment($comment);
+		}
 		$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
 	}
 }

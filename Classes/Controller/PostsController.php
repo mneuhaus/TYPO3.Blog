@@ -88,7 +88,6 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function indexAction() {
-		$this->view->assign('baseURI', $this->request->getBaseURI());
 		$this->view->assign('posts', $this->blog->getLatestPosts($this->settings['latestView']['maxItems']));
 		return $this->view->render();
 	}
@@ -101,7 +100,6 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function postsByTagAction() {
 		$tag = $this->arguments['tag']->getValue();
-		$this->view->assign('baseURI', $this->request->getBaseURI());
 		$this->view->assign('tag', $tag);
 		$this->view->assign('posts', $this->blog->findPostsByTag($tag));
 		return $this->view->render();
@@ -116,7 +114,6 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function showAction() {
 		$postUUID = $this->arguments['postUUID']->getValue();
 		$post = $this->blog->findPostByIdentifier($postUUID);
-		$this->view->assign('baseURI', $this->request->getBaseURI());
 		$this->view->assign('post', $post);
 		return $this->view->render();
 	}

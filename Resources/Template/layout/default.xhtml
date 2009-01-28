@@ -2,6 +2,7 @@
 <!DOCTYPE
 	html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{namespace f3=F3\Fluid\ViewHelpers}
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -10,12 +11,12 @@
 	This website is powered by FLOW3 ;)
 -->
 
-	<base href="{$baseURI}" />
+	<f3:base />
 	<link href="Resources/Web/Blog/Public/stylesheet_71e56952f4.css" type="text/css" rel="stylesheet" />
 	<link href="Resources/Web/Blog/Public/typo3.all-main.css" type="text/css" rel="stylesheet" />
 	<link href="Resources/Web/Blog/Public/typo3.org-main.css" type="text/css" rel="stylesheet" />
 
-	<link href="Resources/Web/Blog/Public/tt_news_styles.css" type="text/css" rel="stylesheet" />
+	<link href="Resources/Web/Blog/Public/news.typo3.org/css/tt_news_styles.css" type="text/css" rel="stylesheet" />
 	<link href="Resources/Web/Blog/Public/ve_guestbook_styles.css" type="text/css" rel="stylesheet" />
 	<link rel="stylesheet" href="Resources/Web/Blog/Public/Blog.css" type="text/css" media="all" />
 	<title>FLOW3 blog.Resource</title>
@@ -74,29 +75,12 @@
 				</div>
 			</div>
 			<div id="main-column">
-				<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Posts tagged with &quot;{$tag}&quot;:</h1></div>
-				<div class="news-list-container">
-					{foreach from=$posts item=post}
-						{assign var='postDate' value=$post->getDate()}
-						{assign var='postUUID' value=$post->getIdentifier()}
-						<div class="news-list-item">
-							<h3>
-								<span class="news-list-date">{$postDate->format('l j. \o\f F Y')}</span>
-								{linkTo actionName="show" arguments="postUUID=$postUUID"}{$post->getTitle()}{/linkTo}
-							</h3>
-							<p class="bodytext">{$post->getContent()|truncate:100:"..."}</p>
-							<div class="news-list-category">
-								Tags:
-								{foreach from=$post->getTags() item=tag}
-									{linkTo controllerName="Posts" actionName="postsByTag" arguments="tag=$tag"}{$tag}{/linkTo}&nbsp;
-								{/foreach}
-							</div>
-							<div class="news-list-morelink">{linkTo actionName="show" arguments="postUUID=$postUUID"}[read more >> ]{/linkTo}</div>
-							<hr class="clearer" />
-						</div>
-					{/foreach}
-				</div>
-				<div class="news-single-backlink">{linkTo actionName="index"}<- Back to latest posts{/linkTo}</div>
+				
+				
+				
+				<f3:render section="contents" />
+				
+				
 			</div>
 			<div id="footer">
 				<div id="footer-copyright">
