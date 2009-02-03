@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <html xmlns="http://typo3.org/ns/html-base"
-      xmlns:xsi="http://typo3.org/ns/html-base"
-      xmlns:blog="http://typo3.org/ns/fluid/F3/Blog/ViewHelpers"
-      xsi:schemaLocation="http://typo3.org/ns/html-base
-         http://localhost/BlogExample/Public/Resources/Web/Fluid/Public/html-base.xsd
-         http://typo3.org/ns/fluid/F3/Blog/ViewHelpers
-         http://localhost/BlogExample/Public/Resources/Fluid/XSD/F3_Blog_ViewHelpers.xsd">
-    <!-- Your content goes here -->
+		xmlns:xsi="http://typo3.org/ns/html-base"
+		xmlns:blog="http://typo3.org/ns/fluid/F3/Blog/ViewHelpers"
+		xsi:schemaLocation="http://typo3.org/ns/html-base
+			http://localhost/BlogExample/Public/Resources/Web/Fluid/Public/html-base.xsd
+			http://typo3.org/ns/fluid/F3/Blog/ViewHelpers
+			http://localhost/BlogExample/Public/Resources/Fluid/XSD/F3_Blog_ViewHelpers.xsd">
+	 <!-- Your content goes here -->
 {namespace f3=F3\Fluid\ViewHelpers}
 {namespace blog=F3\Blog\ViewHelpers}
 <f3:layout name="default" />
@@ -33,8 +33,8 @@
 					<a name="comment"></a>
 				</div>
 				<div class="comment-info">
-					<blog:gravatar email="{comment.emailAddress}" default="Resources/Web/Blog/Public/gravatar_default.gif" size="40" class="gravatar" width="40" height="40" title="{comment.author}" />
-					
+					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" width="40" height="40" title="{comment.author}" />
+
 					<span class="comment-author"><a href="mailto:{comment.emailAddress}">{comment.author}</a></span>
 					<span class="comment-date"><f3:format.date target="{post.date}" format="F m, Y" /></span>
 					<span class="comment-time"><f3:format.date target="{post.date}" format="H:i" /></span>

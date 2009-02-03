@@ -33,6 +33,13 @@ namespace F3\Blog\Controller;
 class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
+	 * Use Fluid as the default template engine
+	 * @var string
+	 */
+	protected $viewObjectName = 'F3\Fluid\View\TemplateView';
+
+	/**
+	 * @inject
 	 * @var \F3\Blog\Domain\BlogRepository
 	 */
 	protected $blogRepository;
@@ -41,17 +48,6 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @var \F3\Blog\Domain\Blog
 	 */
 	protected $blog;
-
-	/**
-	 * Injects the BlogRepository
-	 * @param \F3\Blog\Domain\BlogRepository $blogRepository
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 */
-	public function injectBlogRepository(\F3\Blog\Domain\BlogRepository $blogRepository) {
-		$this->blogRepository = $blogRepository;
-	}
 
 	/**
 	 * Initializes arguments for this controller
