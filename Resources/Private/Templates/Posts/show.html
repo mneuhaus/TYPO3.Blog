@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<html xmlns="http://typo3.org/ns/html-base"
+		xmlns:xsi="http://typo3.org/ns/html-base"
+		xmlns:blog="http://typo3.org/ns/fluid/F3/Blog/ViewHelpers"
+		xsi:schemaLocation="http://typo3.org/ns/html-base
+			http://localhost/BlogExample/Public/Resources/Web/Fluid/Public/html-base.xsd
+			http://typo3.org/ns/fluid/F3/Blog/ViewHelpers
+			http://localhost/BlogExample/Public/Resources/Fluid/XSD/F3_Blog_ViewHelpers.xsd">
+	 <!-- Your content goes here -->
+{namespace f3=F3\Fluid\ViewHelpers}
+{namespace blog=F3\Blog\ViewHelpers}
+<f3:layout name="default" />
+<f3:section name="contents">
+	<div class="news-single-item">
+		<div class="news-single-timedata"><f3:format.date target="{post.date}" format="d.m.y H:i" /></div>
+		<h2>{post.title}</h2>
+		<div class="news-single-category">
+			Tags:
+			<f3:for each="{post.tags}" as="tag">
+				<f3:link action="postsByTag" arguments="{ tag : tag }">{tag}</f3:link>
+			</f3:for>
+		</div>
+		<p class="news-single-author">{post.author}</p>
+		<p class="bodytext">{post.content}</p>
+		<hr class="clearer" />
+		<div class="news-single-backlink"><f3:link action="index"><- Back</f3:link></div>
+	</div>
+	<div class="tx-veguestbook-pi1">
+		<h2>comments</h2>
+		<f3:for each="{post.comments}" as="comment">
+			<div class="comment">
+				<div class="comment-header">
+					<a name="comment"></a>
+				</div>
+				<div class="comment-info">
+					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" width="40" height="40" title="{comment.author}" />
+
+					<span class="comment-author"><a href="mailto:{comment.emailAddress}">{comment.author}</a></span>
+					<span class="comment-date"><f3:format.date target="{post.date}" format="F m, Y" /></span>
+					<span class="comment-time"><f3:format.date target="{post.date}" format="H:i" /></span>
+				</div>
+				<div class="comment-text">
+					{comment.content}<!--  TODO: replace newlines here -->
+				</div>
+				<hr class="clear" />
+			</div>
+		</f3:for>
+	</div>
+	<div class="tx-veguestbook-pi1">
+		<span class="tx-guestbook-form-error"></span>
+		<a name="commentform"></a>
+		<f3:form name="comment" method="post" controller="Comments" action="create" class="comment-form">
+			<h4>Add your own</h4>
+			<input type="hidden" name="postUUID" value="{post.identifier}" />
+			<label for="author">name <span class="required">(required)</span></label><br />
+			<f3:form.textbox id="author" property="name" />
+			<br />
+			<label for="email">email <span class="required">(required)</span></label><br />
+			<f3:form.textbox id="email" property="email" />
+			<br />
+			<label for="text">message <span class="required">(required)</span></label><br />
+			<f3:form.textarea id="text" property="content" class="tx-guestbook-form-textarea" rows="8" cols="46" />
+			<br />
+			<f3:form.submit>Say it</f3:form.submit>
+		</f3:form>
+	</div>
+</f3:section>
+</html>
