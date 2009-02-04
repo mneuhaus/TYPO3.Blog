@@ -36,7 +36,7 @@ class Post {
 
 	/**
 	 * @var string UUID
-	 * @identifier
+	 * @uuid
 	 */
 	protected $identifier;
 
