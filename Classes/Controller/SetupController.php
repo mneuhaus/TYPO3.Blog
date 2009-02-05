@@ -34,19 +34,10 @@ namespace F3\Blog\Controller;
 class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
+	 * @inject
 	 * @var \F3\Blog\Domain\BlogRepository
 	 */
 	protected $blogRepository;
-
-	/**
-	 * Injects the BlogRepository
-	 * @param \F3\Blog\Domain\BlogRepository $blogRepository
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function injectBlogRepository(\F3\Blog\Domain\BlogRepository $blogRepository) {
-		$this->blogRepository = $blogRepository;
-	}
 
 	/**
 	 * Initializes the controller

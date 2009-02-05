@@ -30,43 +30,24 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
+class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
+	 * @inject
 	 * @var \F3\Blog\Domain\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
+	 * @inject
+	 * @var \F3\FLOW3\MVC\View\Helper\URIHelper
+	 */
+	protected $URIHelper;
+
+	/**
 	 * @var \F3\Blog\Domain\Blog
 	 */
 	protected $blog;
-
-	/**
-	 * Injects the BlogRepository
-	 *
-	 * @param \F3\Blog\Domain\BlogRepository $blogRepository
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 */
-	public function injectBlogRepository(\F3\Blog\Domain\BlogRepository $blogRepository) {
-		$this->blogRepository = $blogRepository;
-	}
-
-	/**
-	 * Injects the URI Helper
-	 *
-	 * @param F3\FLOW3\MVC\View\Helper\URIHelper $URIHelper The URI Helper
-	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
-	 * @todo this should not be a _view_ helper obviously
-	 * @todo a global URIHelper has to be implemented which allows redirects too
-	 *
-	 */
-	public function injectURIHelper(\F3\FLOW3\MVC\View\Helper\URIHelper $URIHelper) {
-		$this->URIHelper = $URIHelper;
-	}
 
 	/**
 	 * Initializes arguments for this controller
@@ -111,7 +92,7 @@ class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
 		if ($comment != NULL) {
 			$post->addComment($comment);
 		}
-		$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Posts'));
+		$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('postUUID' => $postUUID), 'Post'));
 	}
 }
 

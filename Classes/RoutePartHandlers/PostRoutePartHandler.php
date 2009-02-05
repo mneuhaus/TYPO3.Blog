@@ -33,55 +33,60 @@ namespace F3\Blog\RoutePartHandlers;
 class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 
 	/**
-	 * @var \F3\Blog\Domain\BlogRepository
+	 * @inject
+	 * @var \F3\Blog\Domain\PostRepository
 	 */
-	protected $blogRepository;
+	protected $postRepository;
 
 	/**
-	 * @var \F3\Blog\Domain\Blog
+	 * @inject
+	 * @var \F3\FLOW3\Cache\Frontend\VariableFrontend
 	 */
-	protected $blog;
+	protected $mappingCache;
 
 	/**
-	 * Injects the BlogRepository
-	 * 
-	 * @param \F3\Blog\Domain\BlogRepository $blogRepository
+	 * @var array
+	 */
+	protected $mapping = array();
+
+	/**
+	 * Initializes the object
+	 *
 	 * @return void
-	 * @author Bastian Waidelich <bastian@typo3.org>
+	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function injectBlogRepository(\F3\Blog\Domain\BlogRepository $blogRepository) {
-		$this->blogRepository = $blogRepository;
-		$blogs = $this->blogRepository->findByName('FLOW3');
-		if (count($blogs) && $blogs[0] instanceof \F3\Blog\Domain\Blog) {
-			$this->blog = $blogs[0];
+	public function initializeObject() {
+		if ($this->mappingCache->has('map')) {
+			$this->mapping = $this->mappingCache->get('map');
 		}
 	}
 
 	/**
 	 * Checks whether $value is an existing post title.
-	 * 
+	 *
 	 * @param string $value to match
 	 * @return boolean TRUE if post could be found
 	 * @author Bastian Waidelich <bastian@typo3.org>
+	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	protected function matchValue($value) {
 		if (!parent::matchValue($value)) {
 			return FALSE;
 		}
 
-		$postTitle = str_replace('-', ' ', $this->value);
-		$post = $this->blog->findPostByTitle($postTitle);
-		if ($post === NULL) {
+		$postUUID = array_search($this->value, $this->mapping);
+		if ($postUUID !== FALSE) {
+			$this->value = $postUUID;
+			return TRUE;
+		} else {
 			$this->value = NULL;
 			return FALSE;
 		}
-		$this->value = $post->getIdentifier();
-		return TRUE;
 	}
 
 	/**
 	 * Checks whether $value is a valid post UUID.
-	 * 
+	 *
 	 * @param string $value to resolve
 	 * @return boolean TRUE if post could be found
 	 * @author Bastian Waidelich <bastian@typo3.org>
@@ -92,13 +97,21 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 		}
 
 		$postUUID = $this->value;
-		$post = $this->blog->findPostByIdentifier($postUUID);
-		if ($post === NULL) {
-			$this->value = NULL;
-			return FALSE;
+		if (isset($this->mapping[$postUUID])) {
+			$this->value = $this->mapping[$postUUID];
+			return TRUE;
+		} else {
+			$post = $this->postRepository->findByUUID($postUUID);
+			if ($post === NULL) {
+				$this->value = NULL;
+				return FALSE;
+			} else {
+				$this->value = strtolower(str_replace(' ', '-', $post->getTitle()));
+				$this->mapping[$postUUID] = $this->value;
+				$this->mappingCache->set('map', $this->mapping);
+				return TRUE;
+			}
 		}
-		$this->value = str_replace(' ', '-', $post->getTitle());
-		return TRUE;
 	}
 }
 ?>

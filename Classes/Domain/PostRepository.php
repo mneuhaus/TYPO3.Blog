@@ -22,7 +22,7 @@ namespace F3\Blog\Domain;
  */
 
 /**
- * A repository for Blogs
+ * A repository for Posts
  *
  * @package Blog
  * @subpackage Domain
@@ -30,20 +30,7 @@ namespace F3\Blog\Domain;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class BlogRepository extends \F3\FLOW3\Persistence\Repository {
-
-	/**
-	 * Returns one or more Blogs with a matching name if found.
-	 *
-	 * @param string $name The name to match against
-	 * @return array
-	 */
-	public function findByName($name) {
-		$query = $this->createQuery();
-		$blogs = $query->matching($query->equals('name', $name))->execute();
-
-		return $blogs;
-	}
+class PostRepository extends \F3\FLOW3\Persistence\Repository {
 
 }
 ?>

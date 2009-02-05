@@ -1,0 +1,15 @@
+#                                                                          #
+# Object Configuration for the Blog                                        #
+#                                                                          #
+
+# @package Blog
+# @version $Id$
+
+F3\Blog\RoutePartHandlers\PostRoutePartHandler:
+  properties:
+    mappingCache:
+      object:
+        factoryClassName: F3\FLOW3\Cache\Manager
+        factoryMethodName: getCache
+        arguments:
+          1: value: Blog_PostRoutePartHandler_MappingCache

@@ -30,7 +30,7 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
+class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * Use Fluid as the default template engine
@@ -45,21 +45,15 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $blogRepository;
 
 	/**
+	 * @inject
+	 * @var \F3\Blog\Domain\PostRepository
+	 */
+	protected $postRepository;
+
+	/**
 	 * @var \F3\Blog\Domain\Blog
 	 */
 	protected $blog;
-
-	/**
-	 * Initializes arguments for this controller
-	 *
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 */
-	public function initializeArguments() {
-		$this->arguments->addNewArgument('postUUID', 'UUID');
-		$this->arguments->addNewArgument('tag');
-	}
 
 	/**
 	 * Initializes the current action
@@ -91,11 +85,11 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Displays a list of posts matching a given Tag
 	 *
+	 * @param string $tag
 	 * @return string The rendered view
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function postsByTagAction() {
-		$tag = $this->arguments['tag']->getValue();
+	public function postsByTagAction($tag) {
 		$this->view->assign('tag', $tag);
 		$this->view->assign('posts', $this->blog->findPostsByTag($tag));
 		return $this->view->render();
@@ -104,15 +98,15 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Action that displays one single post
 	 *
+	 * @param string $postUUID
 	 * @return string The rendered view
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function showAction() {
-		$postUUID = $this->arguments['postUUID']->getValue();
-		$post = $this->blog->findPostByIdentifier($postUUID);
-		$this->view->assign('post', $post);
+	public function showAction($postUUID) {
+		$this->view->assign('post', $this->postRepository->findByUUID($postUUID));
 		return $this->view->render();
 	}
+
 }
 
 ?>
