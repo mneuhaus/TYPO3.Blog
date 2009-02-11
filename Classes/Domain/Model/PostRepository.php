@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain;
+namespace F3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -22,7 +22,7 @@ namespace F3\Blog\Domain;
  */
 
 /**
- * A repository for Posts
+ * A repository for Blog Posts
  *
  * @package Blog
  * @subpackage Domain
@@ -32,5 +32,23 @@ namespace F3\Blog\Domain;
  */
 class PostRepository extends \F3\FLOW3\Persistence\Repository {
 
+	/**
+	 * @inject
+	 * @var \F3\FLOW3\Persistence\Manager
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * Finds posts by the specified blog
+	 *
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @return array The posts
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
+		$blogUUID = $this->persistenceManager->getUUID($blog);
+		$query = $this->createQuery();
+		return $query->matching($query->equals('blog', $blogUUID))->execute();
+	}
 }
 ?>
