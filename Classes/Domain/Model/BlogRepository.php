@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain;
+namespace F3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -44,6 +44,5 @@ class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 
 		return $blogs;
 	}
-
 }
 ?>

@@ -22,8 +22,7 @@ namespace F3\Blog\Controller;
  */
 
 /**
- * The setup controller for the Blog package, currently just setting up some
- * data to play with.
+ * The posts controller for the Blog package
  *
  * @package Blog
  * @subpackage Controller
@@ -31,7 +30,13 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
+class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
+
+	/**
+	 * Use Fluid as the default template engine
+	 * @var string
+	 */
+	protected $viewObjectName = 'F3\Fluid\View\TemplateView';
 
 	/**
 	 * @inject
@@ -46,32 +51,52 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $postRepository;
 
 	/**
-	 * Index action for this controller
+	 * @var \F3\Blog\Domain\Model\Blog
+	 */
+	protected $blog;
+
+	/**
+	 * Initializes additional arguments for this controller
 	 *
-	 * @return string
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function initializeArguments() {
+		$this->arguments->addNewArgument('blog');
+	}
+
+	/**
+	 * Initializes the current action
+	 *
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function initializeAction() {
+		$this->blog = $this->blogRepository->findOneByName((string)$this->arguments['blog']);
+		if ($this->blog === FALSE) $this->throwStatus(404, NULL, 'The blog "' . $this->arguments['blog'] . ' was not found. Run the setup controller to create a blog.');
+	}
+
+	/**
+	 * List action for this controller. Displays latest posts
+	 *
+	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function indexAction() {
-		foreach ($this->blogRepository->findAll() as $blog) {
-			$this->blogRepository->remove($blog);
-		}
-
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog', 'flow3');
-
-		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
-		$post->setAuthor('John Doe');
-		$post->setTitle('About persistence and Lorem Ipsum');
-		$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-		$post->setPublished(TRUE);
-		$post->setVotes(5);
-
-		$this->postRepository->add($post);
-
-		$blog->addPost($post);
-		$this->blogRepository->add($blog);
-		return 'Some data has been added to the BlogRepository...';
+		$posts = $this->postRepository->findByBlog($this->blog);
+		$this->view->assign('posts', $posts);
 	}
 
+	/**
+	 * Action that displays one single post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post The post to display
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function showAction(\F3\Blog\Domain\Model\Post $post) {
+		$this->view->assign('post', $post);
+	}
 }
 
 ?>

@@ -22,8 +22,7 @@ namespace F3\Blog\Controller;
  */
 
 /**
- * The setup controller for the Blog package, currently just setting up some
- * data to play with.
+ * Comments controller for the Blog package
  *
  * @package Blog
  * @subpackage Controller
@@ -31,47 +30,53 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
+class CommentsController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Model\BlogRepository
+	 * @var \F3\FLOW3\MVC\View\Helper\URIHelper
+	 * @todo this should not be a _view_ helper obviously
+	 * @todo a global URIHelper has to be implemented which allows redirects too
 	 */
-	protected $blogRepository;
+	protected $URIHelper;
 
 	/**
-	 * @inject
-	 * @var \F3\Blog\Domain\Model\PostRepository
-	 */
-	protected $postRepository;
-
-	/**
-	 * Index action for this controller
+	 * Initializes additional arguments for this controller
 	 *
-	 * @return string
+	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function indexAction() {
-		foreach ($this->blogRepository->findAll() as $blog) {
-			$this->blogRepository->remove($blog);
-		}
-
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog', 'flow3');
-
-		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
-		$post->setAuthor('John Doe');
-		$post->setTitle('About persistence and Lorem Ipsum');
-		$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-		$post->setPublished(TRUE);
-		$post->setVotes(5);
-
-		$this->postRepository->add($post);
-
-		$blog->addPost($post);
-		$this->blogRepository->add($blog);
-		return 'Some data has been added to the BlogRepository...';
+	public function initializeArguments() {
+		$this->arguments->addNewArgument('post', 'F3\Blog\Domain\Model\Post');
 	}
 
+	/**
+	 * Initializes the current action
+	 *
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function initializeAction() {
+		$this->URIHelper->setRequest($this->request);
+	}
+
+	/**
+	 * Action that adds a comment to a blog post and redirects to single view
+	 *
+	 * @param \F3\Blog\Domain\Model\Comment $comment The comment to create
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function createAction(\F3\Blog\Domain\Model\Comment $comment) {
+		$post = $this->arguments['post']->getValue();
+		if ($this->arguments['comment']->isValid() && $post !== NULL) {
+			$post->addComment($comment);
+			$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('post' => $post), 'Posts'));
+		} else {
+
+		}
+
+	}
 }
 
 ?>

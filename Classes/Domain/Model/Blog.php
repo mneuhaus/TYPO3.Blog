@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain;
+namespace F3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -22,7 +22,7 @@ namespace F3\Blog\Domain;
  */
 
 /**
- * A blog post tag
+ * A blog
  *
  * @package Blog
  * @subpackage Domain
@@ -30,19 +30,53 @@ namespace F3\Blog\Domain;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  * @scope prototype
- * @valueobject
+ * @entity
  */
-class Tag {
+class Blog {
 
 	/**
+	 * The blog's name
+	 *
 	 * @var string
+	 * identifier
 	 */
 	protected $name;
 
 	/**
-	 * Setter for name
+	 * A short description of the blog
 	 *
-	 * @param string $name
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * The blog's logo
+	 *
+	 * @var string
+	 */
+	protected $logo;
+
+	/**
+	 * The posts contained in this blog
+	 *
+	 * @var array
+	 */
+	protected $posts = array();
+
+	/**
+	 * Constructs this blog
+	 *
+	 * @param string $name Name of this blog
+	 * @return
+	 */
+	public function __construct($name) {
+		$this->name = $name;
+	}
+
+	/**
+	 * Sets this blog's name
+	 *
+	 * @param string $name The blog's name
 	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
@@ -51,22 +85,51 @@ class Tag {
 	}
 
 	/**
-	 * Returns this tag's name
+	 * Returns the blog's name
 	 *
-	 * @return string This tag's name
+	 * @return string The blog's name
+	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * Returns this tag as a formatted string
+	 * Adds a post to this blog
 	 *
-	 * @return string
+	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function addPost(\F3\Blog\Domain\Model\Post $post) {
+# This is where later the blog should be set in the post. However, it currently causes an infinite loop:
+#		$post->setBlog($this);
+		$this->posts[] = $post;
+	}
+
+	/**
+	 * Returns all posts in this blog
+	 *
+	 * @return array of \F3\Blog\Domain\Model\Post
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function __toString() {
-		return $this->getName();
+	public function getPosts() {
+		return $this->posts;
+	}
+
+	/**
+	 * Returns the latest $count posts from the blog
+	 *
+	 * @param integer $count
+	 * @return array of \F3\Blog\Domain\Model\Post
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function getLatestPosts($count = 5) {
+		if (is_array($this->posts)) {
+			return array_slice($this->posts, -$count, $count, TRUE);
+		} else {
+			return array();
+		}
 	}
 }
 ?>
