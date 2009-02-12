@@ -73,7 +73,7 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function initializeAction() {
 		$this->blog = $this->blogRepository->findOneByName((string)$this->arguments['blog']);
-		if ($this->blog === FALSE) $this->throwStatus(404, NULL, 'The blog "' . $this->arguments['blog'] . ' was not found. Run the setup controller to create a blog.');
+		if ($this->blog === FALSE) $this->throwStatus(404, NULL, 'The blog "' . $this->arguments['blog'] . '" was not found. Run the setup controller to create a blog.');
 	}
 
 	/**

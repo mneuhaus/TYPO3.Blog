@@ -38,7 +38,7 @@ class Blog {
 	 * The blog's name
 	 *
 	 * @var string
-	 * identifier
+	 * @identity
 	 */
 	protected $name;
 
@@ -102,8 +102,7 @@ class Blog {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function addPost(\F3\Blog\Domain\Model\Post $post) {
-# This is where later the blog should be set in the post. However, it currently causes an infinite loop:
-#		$post->setBlog($this);
+		$post->setBlog($this);
 		$this->posts[] = $post;
 	}
 

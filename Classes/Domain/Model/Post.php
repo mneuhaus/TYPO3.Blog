@@ -41,11 +41,13 @@ class Post {
 
 	/**
 	 * @var string
+	 * @identity
 	 */
 	protected $title;
 
 	/**
 	 * @var \DateTime
+	 * @identity
 	 */
 	protected $date;
 

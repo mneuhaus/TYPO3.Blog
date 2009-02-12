@@ -33,16 +33,37 @@ namespace F3\Blog\Domain\Model;
 class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
+	 * @inject
+	 * @var \F3\Blog\Domain\Model\PostRepository
+	 */
+	protected $postRepository;
+
+	/**
 	 * Returns one or more Blogs with a matching name if found.
 	 *
 	 * @param string $name The name to match against
 	 * @return array
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function findByName($name) {
 		$query = $this->createQuery();
 		$blogs = $query->matching($query->equals('name', $name))->execute();
 
 		return $blogs;
+	}
+
+	/**
+	 * Remove the blog's posts before removing the blog itself.
+	 *
+	 * @param \F3\Blog\Domain\Model\Blog
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function remove($blog) {
+		foreach ($blog->getPosts() as $post) {
+			$this->postRepository->remove($post);
+		}
+		parent::remove($blog);
 	}
 }
 ?>
