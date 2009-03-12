@@ -34,7 +34,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Persistence\Manager
+	 * @var \F3\FLOW3\Persistence\ManagerInterface
 	 */
 	protected $persistenceManager;
 
@@ -47,6 +47,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 */
 	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
 		$blogUUID = $this->persistenceManager->getUUID($blog);
+var_dump($blogUUID);
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blogUUID))->execute();
 	}

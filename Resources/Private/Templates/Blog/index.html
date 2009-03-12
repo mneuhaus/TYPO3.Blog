@@ -6,21 +6,26 @@
 	<p class="bodytext">This installation serves as a demonstration for basic development techniques used in FLOW3 applications.
 		Please note that this example might be not fully functional at certain times because we're continuously working on it
 		and it has not yet been officially released.</p>
-	<p class="bodytext">Here is a list of blogs:</p>
 
-	<div class="news-list-container">
-		<f3:for each="{blogs}" as="blog">
-			<div class="news-list-item">
-				<h3>
-					<f3:link action="show" arguments="{blog : blog.name}">{blog.name}</f3:link>
-				</h3>
-				<ul>
-					<f3:for each="{blog.posts}" as="post">
-						<li>{post.title}</li>
-					</f3:for>
-				</ul>
-				<hr class="clearer" />
-			</div>
-		</f3:for>
-	</div>
+	<f3:if condition="{blogs}">
+		<f3:then>
+			<p class="bodytext">Here is a list of blogs:</p>
+			<ul>
+				<f3:for each="{blogs}" as="blog">
+					<li>
+						<h3><f3:link action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f3:link></h3>
+						<p>
+							{blog.description}
+							<f3:link action="edit" controller="Blog" arguments="{blog : blog}">Edit</f3:link>
+							<f3:link action="delete" controller="Blog" arguments="{blog : blog}">Delete</f3:link>
+						</p>
+					</li>
+				</f3:for>
+			</ul>
+			<p><f3:link action="new">Create another blog</f3:link></p>
+		</f3:then>
+		<f3:else>
+			<p><strong><f3:link action="new">Create your first blog</f3:link></strong></p>
+		</f3:else>
+	</f3:if>
 </f3:section>

@@ -30,7 +30,7 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
+class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * Use Fluid as the default template engine
@@ -56,34 +56,15 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $blog;
 
 	/**
-	 * Initializes additional arguments for this controller
-	 *
-	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
-	 */
-	public function initializeArguments() {
-		$this->arguments->addNewArgument('blog');
-	}
-
-	/**
-	 * Initializes the current action
-	 *
-	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
-	 */
-	public function initializeAction() {
-		$this->blog = $this->blogRepository->findOneByName((string)$this->arguments['blog']);
-		if ($this->blog === FALSE) $this->throwStatus(404, NULL, 'The blog "' . $this->arguments['blog'] . '" was not found. Run the setup controller to create a blog.');
-	}
-
-	/**
 	 * List action for this controller. Displays latest posts
 	 *
-	 * @return void
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show the posts of
+	 * @return string
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function indexAction() {
-		$posts = $this->postRepository->findByBlog($this->blog);
+	public function indexAction(\F3\Blog\Domain\Model\Blog $blog) {
+		$posts = $blog->getPosts();
+		$this->view->assign('blog', $blog);
 		$this->view->assign('posts', $posts);
 	}
 
@@ -97,6 +78,7 @@ class PostsController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function showAction(\F3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('post', $post);
 	}
+
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain\Model;
+namespace F3\Blog\RoutePartHandlers;
 
 /*                                                                        *
  * This script is part of the TYPO3 project - inspiring people to share!  *
@@ -16,40 +16,46 @@ namespace F3\Blog\Domain\Model;
  *                                                                        */
 
 /**
- * @package Blog
- * @subpackage Domain
+ * @package FLOW3
+ * @subpackage MVC
  * @version $Id$
  */
 
 /**
- * A repository for Blogs
+ * Blog route part handler
  *
- * @package Blog
- * @subpackage Domain
+ * @package FLOW3
+ * @subpackage MVC
  * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * @scope prototype
  */
-class BlogRepository extends \F3\FLOW3\Persistence\Repository {
+class BlogRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 
 	/**
-	 * @inject
-	 * @var \F3\Blog\Domain\Model\PostRepository
-	 */
-	protected $postRepository;
-
-	/**
-	 * Remove the blog's posts before removing the blog itself.
+	 * While matching, converts the blog title into an identifer array
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @param string $value value to match, the blog title
+	 * @return boolean TRUE if value could be matched successfully, otherwise FALSE.
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function remove($blog) {
-		foreach ($blog->getPosts() as $post) {
-			$this->postRepository->remove($post);
-		}
-		parent::remove($blog);
+	protected function matchValue($value) {
+		if ($value === NULL || $value === '') return FALSE;
+		$this->value = array('__identity' => array('name' => $value));
+		return TRUE;
+	}
+
+	/**
+	 * Resolves the name of the blog
+	 *
+	 * @param \F3\Blog\Domain\Model\Blog $value The Blog object
+	 * @return boolean TRUE if the name of the blog could be resolved and stored in $this->value, otherwise FALSE.
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	protected function resolveValue($value) {
+		if (!$value instanceof \F3\Blog\Domain\Model\Blog) return FALSE;
+		$this->value = $value->getName();
+		return TRUE;
 	}
 }
 ?>

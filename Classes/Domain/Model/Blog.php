@@ -40,14 +40,14 @@ class Blog {
 	 * @var string
 	 * @identity
 	 */
-	protected $name;
+	protected $name = '';
 
 	/**
 	 * A short description of the blog
 	 *
 	 * @var string
 	 */
-	protected $description;
+	protected $description = '';
 
 	/**
 	 * The blog's logo
@@ -92,6 +92,27 @@ class Blog {
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * Sets the description for the blog
+	 *
+	 * @param string $description
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
+	/**
+	 * Returns the description
+	 *
+	 * @return string
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function getDescription() {
+		return $this->description;
 	}
 
 	/**

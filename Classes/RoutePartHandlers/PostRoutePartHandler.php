@@ -33,72 +33,57 @@ namespace F3\Blog\RoutePartHandlers;
 class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 
 	/**
-	 * @var \F3\Blog\Domain\Model\BlogRepository
-	 */
-	protected $blogRepository;
-
-	/**
-	 * @var \F3\Blog\Domain\Model\Blog
-	 */
-	protected $blog;
-
-	/**
-	 * Injects the BlogRepository
+	 * Splits the given value into the date and title of the post and sets this
+	 * value to an identity array accordingly.
 	 *
-	 * @param \F3\Blog\Domain\Model\BlogRepository $blogRepository
-	 * @return void
-	 * @author Bastian Waidelich <bastian@typo3.org>
-	 */
-	public function injectBlogRepository(\F3\Blog\Domain\Model\BlogRepository $blogRepository) {
-#		$this->blogRepository = $blogRepository;
-#		$blogs = $this->blogRepository->findByName('FLOW3');
-#		if (count($blogs) && $blogs[0] instanceof \F3\Blog\Domain\Model\Blog) {
-#			$this->blog = $blogs[0];
-#		}
-	}
-
-	/**
-	 * Checks whether $value is an existing post title.
-	 *
-	 * @param string $value to match
-	 * @return boolean TRUE if post could be found
-	 * @author Bastian Waidelich <bastian@typo3.org>
+	 * @param string $value The value (ie. part of the request path) to match. This string is rendered by findValueToMatch()
+	 * @return boolean TRUE if the request path formally matched
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	protected function matchValue($value) {
-		return FALSE;
 		if (!parent::matchValue($value)) {
 			return FALSE;
 		}
-
-		$postTitle = str_replace('-', ' ', $this->value);
-		$post = $this->blog->findPostByTitle($postTitle);
-		if ($post === NULL) {
-			$this->value = NULL;
-			return FALSE;
-		}
-		$this->value = $post->getIdentifier();
+		$matches = array();
+		preg_match('/^([0-9]{4})\/([0-9]{2})\/([0-9]{2})\/([a-zA-Z\-]+)/', $value, $matches);
+		$this->value = array(
+			'__identity' => array(
+				'date' => new \DateTime($matches[3] . '/' . $matches[2] . '/' . $matches[1]),
+				'title' => $matches[4]
+		)
+		);
 		return TRUE;
 	}
 
 	/**
-	 * Checks whether $value is a valid post UUID.
+	 * Checks if the remaining request path starts with the path signature of a post, which
+	 * is: YYYY/MM/DD/TITLE eg. 2009/03/09/My-First-Blog-Entry
 	 *
-	 * @param string $value to resolve
-	 * @return boolean TRUE if post could be found
-	 * @author Bastian Waidelich <bastian@typo3.org>
+	 * If the request path matches this pattern, the matching part is returned as the "value
+	 * to match" for further processing in matchValue(). The remaining part of the requestPath
+	 * (eg. the format ".html") is ignored.
+	 *
+	 * @param string $requestPath The request path acting as the subject for matching in this Route Part
+	 * @return string The post identifying part of the request path or an empty string if it doesn't match
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	protected function findValueToMatch($requestPath) {
+		$matches = array();
+		preg_match('/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/[a-zA-Z\-]+/', $requestPath, $matches);
+		return (count($matches) === 1) ? current($matches) : '';
+	}
+
+	/**
+	 * Resolves the name of the post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $value The Post object
+	 * @return boolean TRUE if the post could be resolved and stored in $this->value, otherwise FALSE.
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	protected function resolveValue($value) {
-		if (!parent::resolveValue($value)) {
-			return FALSE;
-		}
-
-		$postUUID = $this->value;
-		$post = $this->blog->findPostByIdentifier($postUUID);
-		if ($post === NULL) {
-			$this->value = NULL;
-			return FALSE;
-		}
-		$this->value = str_replace(' ', '-', $post->getTitle());
+		if (!$value instanceof \F3\Blog\Domain\Model\Post) return FALSE;
+		$this->value = $value->getDate()->format('Y/m/d/');
+		$this->value .= str_replace(' ', '-', $value->getTitle());
 		return TRUE;
 	}
 }

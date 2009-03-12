@@ -1,0 +1,19 @@
+{namespace f3=F3\Fluid\ViewHelpers}
+<f3:layout name="default" />
+
+<f3:section name="contents">
+	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">{blog.name}</h1></div>
+	<p class="bodytext">Here's a list of posts:</p>
+	<div class="news-list-container">
+		<f3:for each="{posts}" as="post">
+			<div class="news-list-item">
+				<h3>
+					<span class="news-list-date"><f3:format.date target="{post.date}" format='l j. \o\f F Y' /></span>
+					<f3:link action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f3:link>
+				</h3>
+				<p class="bodytext"><f3:text.crop maxCharacters="100">{post.content}</f3:text.crop></p>
+				<hr class="clearer" />
+			</div>
+		</f3:for>
+	</div>
+</f3:section>

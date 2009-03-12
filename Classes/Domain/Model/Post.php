@@ -36,6 +36,7 @@ class Post {
 
 	/**
 	 * @var \F3\Blog\Domain\Model\Blog
+	 * @identity
 	 */
 	protected $blog;
 
