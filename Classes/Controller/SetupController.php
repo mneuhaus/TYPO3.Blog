@@ -56,7 +56,8 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$this->blogRepository->remove($blog);
 		}
 
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog', 'flow3');
+		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
+		$blog->setName('flow3');
 		$blog->setDescription('A blog about FLOW3 development.');
 
 		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
