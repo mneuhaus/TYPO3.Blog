@@ -36,7 +36,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Use Fluid as the default template engine
 	 * @var string
 	 */
-	protected $viewObjectName = 'F3\Fluid\View\TemplateView';
+	protected $defaultViewObjectName = 'F3\Fluid\View\TemplateView';
 
 	/**
 	 * @inject
