@@ -35,9 +35,10 @@ namespace F3\Blog\Domain\Model;
 class Blog {
 
 	/**
-	 * The blog's name
+	 * The blog's name. Also acts as the identifier.
 	 *
 	 * @var string
+	 * @validate Alphanumeric, Length(minimum = 3, maximum = 50)
 	 * @identity
 	 */
 	protected $name = '';
@@ -46,6 +47,7 @@ class Blog {
 	 * A short description of the blog
 	 *
 	 * @var string
+	 * @validate Text, Length(maximum = 150)
 	 */
 	protected $description = '';
 
@@ -59,18 +61,17 @@ class Blog {
 	/**
 	 * The posts contained in this blog
 	 *
-	 * @var array
+	 * @var \SplObjectStorage
 	 */
-	protected $posts = array();
+	protected $posts;
 
 	/**
-	 * Constructs this blog
+	 * Constructs a new Blog
 	 *
-	 * @param string $name Name of this blog
-	 * @return
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function __construct($name) {
-		$this->name = $name;
+	public function __construct() {
+		$this->posts = new \SplObjectStorage();
 	}
 
 	/**
@@ -124,32 +125,19 @@ class Blog {
 	 */
 	public function addPost(\F3\Blog\Domain\Model\Post $post) {
 		$post->setBlog($this);
-		$this->posts[] = $post;
+		$this->posts->attach($post);
 	}
 
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return array of \F3\Blog\Domain\Model\Post
-	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @return \SplObjectStorage
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function getPosts() {
+		# FIXME getPosts() must return a clone of $this->posts, but currently PHP bug #47671 blocks that
 		return $this->posts;
 	}
 
-	/**
-	 * Returns the latest $count posts from the blog
-	 *
-	 * @param integer $count
-	 * @return array of \F3\Blog\Domain\Model\Post
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function getLatestPosts($count = 5) {
-		if (is_array($this->posts)) {
-			return array_slice($this->posts, -$count, $count, TRUE);
-		} else {
-			return array();
-		}
-	}
 }
 ?>

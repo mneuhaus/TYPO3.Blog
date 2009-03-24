@@ -78,16 +78,15 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Creates a new blog
 	 *
-	 * @param array $properties Properties of the new blog
+	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh Blog object which has not yet been added to the repository
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function createAction(array $properties) {
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog', $properties['name']);
-		$blog->setDescription($properties['description']);
-		$this->blogRepository->add($blog);
+	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
+		$this->blogRepository->add($newBlog);
 		$this->redirect('/blogs/');
 	}
+
 
 	/**
 	 * Edits an existing blog
@@ -104,12 +103,13 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Updates an existing blog
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The existing, unmodified blog
-	 * @param array $properties The properties (names and values) to update
+	 * @param \F3\Blog\Domain\Model\Blog $updatedBlog A clone of the original blog with the updated values already applied
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, array $properties) {
-		$blog->setDescription($properties['description']);
+	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
+return 'this doesn\'t work yet';
+		$this->blogRepository->replace($blog, $updatedBlog);
 		$this->redirect('/blogs/');
 	}
 
@@ -125,5 +125,4 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->redirect('/blogs/');
 	}
 }
-
 ?>

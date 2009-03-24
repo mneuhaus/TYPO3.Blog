@@ -4,12 +4,12 @@
 <f3:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new blog</h1></div>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f3:form method="post" action="create">
+	<f3:form method="post" action="create" name="newBlog">
 		<label for="name">Name <span class="required">(required)</span></label><br />
-		<f3:form.textbox name="properties[name]" property="name" />
+		<f3:form.textbox property="name" />
 		<br />
 		<label for="description">Description</label><br />
-		<f3:form.textarea name="properties[description]" property="description" />
+		<f3:form.textarea property="description" />
 		<br />
 		<f3:form.submit>Create</f3:form.submit>
 	</f3:form>

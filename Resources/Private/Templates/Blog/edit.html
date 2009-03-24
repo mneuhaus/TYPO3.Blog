@@ -4,9 +4,10 @@
 <f3:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit blog "{blog.name}"</h1></div>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f3:form method="post" action="update" object="blog" arguments="{blog: blog}">
-		<label for="name">Description</label><br />
-		<f3:form.textarea name="properties[description]" property="description" value="{blog.description}" />
+	<f3:form method="post" action="update" arguments="{blog: blog}">
+		<f3:form.hidden name="updatedBlog[__identity][name]" value="flow3" />
+		<label for="description">Description</label><br />
+		<f3:form.textarea name="updatedBlog[description]" value="{blog.description}" />
 		<br />
 		<f3:form.submit>Update</f3:form.submit>
 	</f3:form>

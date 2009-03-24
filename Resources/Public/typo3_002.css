@@ -6,7 +6,6 @@ and association.typo3.org
 
 body {
 	font-family: Arial, Verdana, sans-serif;
-	background: url('../images/background-greygradient.gif') repeat-x;
 	background-color: white;
 	padding: 0;
 	margin: 0;
@@ -47,7 +46,6 @@ h1.csc-firstHeader, h2.csc-firstHeader {
 h1.underlined, h2.underlined {
 	font-size: 13px;
 	padding: 0 0 10px 0;
-	background: url('../images/underlined_headline_bg.gif') repeat-x 0 24px;
 	margin: 10px 0 14px 0;
 }
 
@@ -91,7 +89,6 @@ th, td {
 }
 
 #main-column ul li {
-	background: url('../images/background-li.gif') no-repeat 4px 8px;
 	padding: 0 0 0 15px;
 	margin: 10px 0 10px 0;
 }
@@ -339,7 +336,6 @@ div#sub-nav ul#sub-level1 {
 
 div#sub-nav ul#sub-level1 li a {
 	width: 150px;
-	background: url('../images/background-subnav.gif') repeat-x 20px 2px;
 	padding: 4px 0 0 0;
 	margin: 0 0 0 12px;
 	display: block;
