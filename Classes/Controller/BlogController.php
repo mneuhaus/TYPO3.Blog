@@ -108,7 +108,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
-return 'this doesn\'t work yet';
 		$this->blogRepository->replace($blog, $updatedBlog);
 		$this->redirect('/blogs/');
 	}
