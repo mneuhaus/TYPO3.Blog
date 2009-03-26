@@ -1,16 +1,15 @@
-{namespace f3=F3\Fluid\ViewHelpers}
-<f3:layout name="default" />
+<f:layout name="default" />
 
-<f3:section name="contents">
+<f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new blog</h1></div>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f3:form method="post" action="create" name="newBlog">
+	<f:form method="post" action="create" object="{newBlog}" name="newBlog">
 		<label for="name">Name <span class="required">(required)</span></label><br />
-		<f3:form.textbox property="name" />
+		<f:form.textbox property="name" />
 		<br />
 		<label for="description">Description</label><br />
-		<f3:form.textarea property="description" />
+		<f:form.textarea property="description" />
 		<br />
-		<f3:form.submit>Create</f3:form.submit>
-	</f3:form>
-</f3:section>
+		<f:form.submit>Create</f:form.submit>
+	</f:form>
+</f:section>

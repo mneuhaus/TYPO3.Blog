@@ -69,10 +69,12 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Displays a form for creating a new blog
 	 * (No code needed, it's all automatic - really!)
 	 *
+	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function newAction() {
+	public function newAction(\F3\Blog\Domain\Model\Blog $newBlog = NULL) {
+		$this->view->assign('newBlog', $newBlog);
 	}
 
 	/**
@@ -84,7 +86,8 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
-		$this->redirect('/blogs/');
+		$this->redirect('blogs/');
+		//$this->forward('new', NULL, NULL, $this->request->getArguments());
 	}
 
 

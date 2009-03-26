@@ -1,14 +1,15 @@
-{namespace f3=F3\Fluid\ViewHelpers}
-<f3:layout name="default" />
+<f:layout name="default" />
 
-<f3:section name="contents">
+<f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit blog "{blog.name}"</h1></div>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f3:form method="post" action="update" arguments="{blog: blog}">
-		<f3:form.hidden name="updatedBlog[__identity][name]" value="flow3" />
+	<f:form method="post" action="update" name="updatedBlog" object="{blog}" arguments="{blog: blog}" >
+		
+		<f:form.hidden name="updatedBlog[__identity][name]" value="{blog.name}" />
+		
 		<label for="description">Description</label><br />
-		<f3:form.textarea name="updatedBlog[description]" value="{blog.description}" />
+		<f:form.textarea property="description" />
 		<br />
-		<f3:form.submit>Update</f3:form.submit>
-	</f3:form>
-</f3:section>
+		<f:form.submit>Update</f:form.submit>
+	</f:form>
+</f:section>

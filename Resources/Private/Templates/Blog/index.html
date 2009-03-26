@@ -1,31 +1,30 @@
-{namespace f3=F3\Fluid\ViewHelpers}
-<f3:layout name="default" />
+<f:layout name="default" />
 
-<f3:section name="contents">
+<f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Welcome to the FLOW3 Blog Example</h1></div>
 	<p class="bodytext">This installation serves as a demonstration for basic development techniques used in FLOW3 applications.
 		Please note that this example might be not fully functional at certain times because we're continuously working on it
 		and it has not yet been officially released.</p>
 
-	<f3:if condition="{blogs}">
-		<f3:then>
+	<f:if condition="{blogs}">
+		<f:then>
 			<p class="bodytext">Here is a list of blogs:</p>
 			<ul>
-				<f3:for each="{blogs}" as="blog">
+				<f:for each="{blogs}" as="blog">
 					<li>
-						<h3><f3:link action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f3:link></h3>
+						<h3><f:link action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:link></h3>
 						<p>
 							{blog.description}
-							<f3:link action="edit" controller="Blog" arguments="{blog : blog}">Edit</f3:link>
-							<f3:link action="delete" controller="Blog" arguments="{blog : blog}">Delete</f3:link>
+							<f:link action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:link>
+							<f:link action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:link>
 						</p>
 					</li>
-				</f3:for>
+				</f:for>
 			</ul>
-			<p><f3:link action="new">Create another blog</f3:link></p>
-		</f3:then>
-		<f3:else>
-			<p><strong><f3:link action="new">Create your first blog</f3:link></strong></p>
-		</f3:else>
-	</f3:if>
-</f3:section>
+			<p><f:link action="new">Create another blog</f:link></p>
+		</f:then>
+		<f:else>
+			<p><strong><f:link action="new">Create your first blog</f:link></strong></p>
+		</f:else>
+	</f:if>
+</f:section>
