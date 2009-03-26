@@ -46,8 +46,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
-		$blogUUID = $this->persistenceManager->getUUID($blog);
-var_dump($blogUUID);
+		$blogUUID = $this->persistenceManager->getBackend()->getUUIDByObject($blog);
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blogUUID))->execute();
 	}

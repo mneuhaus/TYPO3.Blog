@@ -57,7 +57,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		}
 
 		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
-		$blog->setName('flow3');
+		$blog->setName('FLOW3');
 		$blog->setDescription('A blog about FLOW3 development.');
 
 		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
@@ -71,7 +71,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 		$blog->addPost($post);
 		$this->blogRepository->add($blog);
-		return 'Some data has been added to the BlogRepository...';
+		$this->redirect('/blogs/');
 	}
 
 }
