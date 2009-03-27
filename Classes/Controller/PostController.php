@@ -63,7 +63,8 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function indexAction(\F3\Blog\Domain\Model\Blog $blog) {
-		$posts = $this->postRepository->findByBlog($blog);
+#		$posts = $this->postRepository->findByBlog($blog); FIXME
+		$posts = $blog->getPosts();
 		$this->view->assign('blog', $blog);
 		$this->view->assign('posts', $posts);
 	}

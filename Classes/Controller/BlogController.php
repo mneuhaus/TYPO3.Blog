@@ -86,7 +86,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
-		$this->redirect('blogs/');
+		$this->redirect('index');
 		//$this->forward('new', NULL, NULL, $this->request->getArguments());
 	}
 
@@ -112,7 +112,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
 		$this->blogRepository->replace($blog, $updatedBlog);
-		$this->redirect('/blogs/');
+		$this->redirect('index');
 	}
 
 	/**
@@ -124,7 +124,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->remove($blog);
-		$this->redirect('/blogs/');
+		$this->redirect('index');
 	}
 }
 ?>

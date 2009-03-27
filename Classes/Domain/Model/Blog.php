@@ -135,8 +135,10 @@ class Blog {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function getPosts() {
-		# FIXME getPosts() must return a clone of $this->posts, but currently PHP bug #47671 blocks that
-		return $this->posts;
+		if (version_compare(PHP_VERSION, '5.3.0RC1', '<') === TRUE) {
+			throw new \Exception('getPosts only works with PHP 5.3.0RC1 or higher.');
+		}
+		return clone $this->posts;
 	}
 
 }
