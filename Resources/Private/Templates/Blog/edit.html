@@ -4,12 +4,8 @@
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit blog "{blog.name}"</h1></div>
 	<p class="bodytext">Enter information about your new blog below:</p>
 	<f:form method="post" action="update" name="updatedBlog" object="{blog}" arguments="{blog: blog}" >
-		
-		<f:form.hidden name="updatedBlog[__identity][name]" value="{blog.name}" />
-		
 		<label for="description">Description</label><br />
-		<f:form.textarea property="description" />
-		<br />
+		<f:form.textarea property="description" /><br />
 		<f:form.submit>Update</f:form.submit>
 	</f:form>
 </f:section>
