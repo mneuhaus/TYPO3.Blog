@@ -57,21 +57,22 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		}
 
 		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
-		$blog->setName('FLOW3');
+		$blog->setName('FLOW3' . time());
 		$blog->setDescription('A blog about FLOW3 development.');
 
-		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
-		$post->setAuthor('John Doe');
-		$post->setTitle('about persistence and lorem ipsum');
-		$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-		$post->setPublished(TRUE);
-		$post->setVotes(5);
+		for ($i=0; $i < 100; $i++) {
+			$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
+			$post->setAuthor('John Doe');
+			$post->setTitle('Example Post #' . $i);
+			$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+			$post->setPublished(TRUE);
+			$post->setVotes(5);
 
-		$this->postRepository->add($post);
-
-		$blog->addPost($post);
+			$this->postRepository->add($post);
+			$blog->addPost($post);
+		}
 		$this->blogRepository->add($blog);
-		$this->redirect('/blogs/');
+		$this->redirect('index', 'blog');
 	}
 
 }
