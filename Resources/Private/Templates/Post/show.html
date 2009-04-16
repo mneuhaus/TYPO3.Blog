@@ -33,7 +33,7 @@
 					<a name="comment"></a>
 				</div>
 				<div class="comment-info">
-					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" width="40" height="40" title="{comment.author}" />
+					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" title="{comment.author}" />
 
 					<span class="comment-author"><a href="mailto:{comment.emailAddress}">{comment.author}</a></span>
 					<span class="comment-date"><f3:format.date target="{post.date}" format="F m, Y" /></span>
@@ -51,7 +51,6 @@
 		<a name="commentform"></a>
 		<f3:form name="comment" method="post" controller="Comment" action="create" class="comment-form">
 			<h4>Add your own</h4>
-			<input type="hidden" name="postUUID" value="{post.identifier}" />
 			<label for="author">name <span class="required">(required)</span></label><br />
 			<f3:form.textbox id="author" property="name" />
 			<br />
@@ -59,7 +58,7 @@
 			<f3:form.textbox id="email" property="email" />
 			<br />
 			<label for="text">message <span class="required">(required)</span></label><br />
-			<f3:form.textarea id="text" property="content" class="tx-guestbook-form-textarea" rows="8" cols="46" />
+			<f3:form.textarea id="text" property="content" class="tx-guestbook-form-textarea" />
 			<br />
 			<f3:form.submit>Say it</f3:form.submit>
 		</f3:form>

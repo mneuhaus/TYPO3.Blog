@@ -45,12 +45,12 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 			return FALSE;
 		}
 		$matches = array();
-		preg_match('/^([0-9]{4})\/([0-9]{2})\/([0-9]{2})\/([a-zA-Z\-]+)/', $value, $matches);
+		preg_match('/^([0-9]{4})\/([0-9]{2})\/([0-9]{2})\/([a-zA-Z0-9\-]+)/', $value, $matches);
 		$this->value = array(
 			'__identity' => array(
-				'date' => new \DateTime($matches[3] . '/' . $matches[2] . '/' . $matches[1]),
-				'title' => $matches[4]
-		)
+				'date' => new \DateTime($matches[1] . '-' . $matches[2] . '-' . $matches[3]),
+				'title' => str_replace('-', ' ', $matches[4])
+			)
 		);
 		return TRUE;
 	}
@@ -69,7 +69,7 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	 */
 	protected function findValueToMatch($requestPath) {
 		$matches = array();
-		preg_match('/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/[a-zA-Z\-]+/', $requestPath, $matches);
+		preg_match('/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/[a-zA-Z0-9\-]+/', $requestPath, $matches);
 		return (count($matches) === 1) ? current($matches) : '';
 	}
 
