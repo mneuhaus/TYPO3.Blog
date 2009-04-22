@@ -1,25 +1,24 @@
-{namespace f3=F3\Fluid\ViewHelpers}
-<f3:layout name="default" />
+<f:layout name="default" />
 
-<f3:section name="contents">
+<f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">{blog.name}</h1></div>
-	<f3:if condition="{posts}">
-		<f3:then>
+	<f:if condition="{posts}">
+		<f:then>
 			<p class="bodytext">Here's a list of posts:</p>
 			<ul>
-				<f3:for each="{posts}" as="post">
+				<f:for each="{posts}" as="post">
 					<li>
 						<h3>
-							<f3:format.date target="{post.date}" format='l j. \o\f F Y' />
-							<f3:link action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f3:link>
+							<f:format.date date="{post.date}" format='l j. \o\f F Y' />
+							<f:actionLink action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:actionLink>
 						</h3>
-						<p class="bodytext"><f3:text.crop maxCharacters="100">{post.content}</f3:text.crop></p>
+						<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
 					</li>
-				</f3:for>
+				</f:for>
 			</ul>
-		</f3:then>
-		<f3:else>
+		</f:then>
+		<f:else>
 			<p>This blog currently doesn't contain any posts.</p>
-		</f3:else>
-	</f3:if>
-</f3:section>
+		</f:else>
+	</f:if>
+</f:section>

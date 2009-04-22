@@ -1,7 +1,7 @@
 <f:layout name="default" />
 
 <f:section name="contents">
-	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit blog "{blog.name}"</h1></div>
+	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Edit blog "<f:format.htmlEscape>{blog.name}</f:format.htmlEscape>"</h1></div>
 	<p class="bodytext">Enter information about your new blog below:</p>
 	<f:form method="post" action="update" name="updatedBlog" object="{blog}" arguments="{blog: blog}" >
 		<label for="description">Description</label><br />

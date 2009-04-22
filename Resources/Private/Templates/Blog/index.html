@@ -12,19 +12,19 @@
 			<ul>
 				<f:for each="{blogs}" as="blog">
 					<li>
-						<h3><f:link action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:link></h3>
+						<h3><f:actionLink action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:actionLink></h3>
 						<p>
-							{blog.description}
-							<f:link action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:link>
-							<f:link action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:link>
+							<f:format.nl2br><f:format.htmlEscape>{blog.description}</f:format.htmlEscape></f:format.nl2br>
+							<f:actionLink action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:actionLink>
+							<f:actionLink action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:actionLink>
 						</p>
 					</li>
 				</f:for>
 			</ul>
-			<p><f:link action="new">Create another blog</f:link></p>
+			<p><f:actionLink action="new">Create another blog</f:actionLink></p>
 		</f:then>
 		<f:else>
-			<p><strong><f:link action="new">Create your first blog</f:link></strong></p>
+			<p><strong><f:actionLink action="new">Create your first blog</f:actionLink></strong></p>
 		</f:else>
 	</f:if>
 </f:section>
