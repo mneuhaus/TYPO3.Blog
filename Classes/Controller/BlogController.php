@@ -84,9 +84,8 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
-#		$this->blogRepository->add($newBlog);
-		return $newBlog->getName();
-#		$this->redirect('index');
+		$this->blogRepository->add($newBlog);
+		$this->redirect('index');
 		//$this->forward('new', NULL, NULL, $this->request->getArguments());
 	}
 
