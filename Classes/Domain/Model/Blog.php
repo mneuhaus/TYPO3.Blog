@@ -38,7 +38,7 @@ class Blog implements \F3\FLOW3\Persistence\Aspect\DirtyMonitoringInterface {
 	 * The blog's name. Also acts as the identifier.
 	 *
 	 * @var string
-	 * @validate Alphanumeric, Length(minimum = 3, maximum = 50)
+	 * @validate Alphanumeric, StringLength(minimum = 3, maximum = 50)
 	 * @identity
 	 */
 	protected $name = '';
@@ -47,7 +47,7 @@ class Blog implements \F3\FLOW3\Persistence\Aspect\DirtyMonitoringInterface {
 	 * A short description of the blog
 	 *
 	 * @var string
-	 * @validate Text, Length(maximum = 150)
+	 * @validate Text, StringLength(maximum = 150)
 	 */
 	protected $description = '';
 
@@ -152,9 +152,6 @@ class Blog implements \F3\FLOW3\Persistence\Aspect\DirtyMonitoringInterface {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function getPosts() {
-		if (version_compare(PHP_VERSION, '5.3.0RC1', '<') === TRUE) {
-			throw new \Exception('getPosts only works with PHP 5.3.0RC1 or higher.');
-		}
 		if ($this->posts instanceof \F3\FLOW3\Persistence\LazyLoadingProxy) {
 			$this->posts->_loadRealInstance();
 		}

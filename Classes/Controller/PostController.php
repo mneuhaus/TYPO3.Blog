@@ -63,8 +63,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function indexAction(\F3\Blog\Domain\Model\Blog $blog) {
-#		$posts = $this->postRepository->findByBlog($blog); FIXME
-		$posts = $blog->getPosts();
+		$posts = $this->postRepository->findByBlog($blog);
 		$this->view->assign('blog', $blog);
 		$this->view->assign('posts', $posts);
 	}
@@ -78,6 +77,17 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function showAction(\F3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('post', $post);
+	}
+
+	/**
+	 * Displays a form for creating a new post
+	 *
+	 * @param F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
+	 * @return string An HTML form for creating a new post
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
+		$this->view->assign('newPost', $newPost);
 	}
 
 }

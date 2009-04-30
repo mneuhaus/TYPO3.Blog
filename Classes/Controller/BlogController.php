@@ -22,7 +22,7 @@ namespace F3\Blog\Controller;
  */
 
 /**
- * The blogs controller for the Blog package
+ * The Blog controller for the Blog package
  *
  * @package Blog
  * @subpackage Controller
@@ -39,8 +39,8 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $defaultViewObjectName = 'F3\Fluid\View\TemplateView';
 
 	/**
-	 * @inject
 	 * @var \F3\Blog\Domain\Model\BlogRepository
+	 * @inject
 	 */
 	protected $blogRepository;
 
@@ -67,7 +67,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * Displays a form for creating a new blog
-	 * (No code needed, it's all automatic - really!)
 	 *
 	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
@@ -85,8 +84,9 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
-		$this->blogRepository->add($newBlog);
-		$this->redirect('index');
+#		$this->blogRepository->add($newBlog);
+		return $newBlog->getName();
+#		$this->redirect('index');
 		//$this->forward('new', NULL, NULL, $this->request->getArguments());
 	}
 
@@ -94,7 +94,8 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Edits an existing blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show
+	 * @param \F3\Blog\Domain\Model\Blog $blog The original blog
+	 * @param string $foo
 	 * @return string Form for editing the existing blog
 	 * @author Robert Lemke <robert@typo3.org>
 	 */

@@ -73,6 +73,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		}
 		$this->blogRepository->add($blog);
 		$this->redirect('index', 'blog');
+		return 'done';
 	}
 
 }
