@@ -11,7 +11,7 @@
 <f:layout name="default" />
 <f:section name="contents">
 	<div class="news-single-item">
-		<div class="news-single-timedata"><f:format.date target="{post.date}" format="d.m.y H:i" /></div>
+		<div class="news-single-timedata"><f:format.date format="d.m.y H:i" />{post.date}</f:format.date></div>
 		<h2>{post.title}</h2>
 		<div class="news-single-category">
 			Tags:
@@ -35,8 +35,8 @@
 					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" title="{comment.author}" />
 
 					<span class="comment-author"><a href="mailto:{comment.emailAddress}">{comment.author}</a></span>
-					<span class="comment-date"><f:format.date target="{post.date}" format="F m, Y" /></span>
-					<span class="comment-time"><f:format.date target="{post.date}" format="H:i" /></span>
+					<span class="comment-date"><f:format.date format="F m, Y" />{post.date}</f:format.date></span>
+					<span class="comment-time"><f:format.date format="H:i" />{post.date}</f:format.date></span>
 				</div>
 				<div class="comment-text">
 					{comment.content}<!--  TODO: replace newlines here -->

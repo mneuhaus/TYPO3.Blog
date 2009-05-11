@@ -9,7 +9,7 @@
 				<f:for each="{posts}" as="post">
 					<li>
 						<h3>
-							<f:format.date date="{post.date}" format='l j. \o\f F Y' />
+							<f:format.date format='l j. \o\f F Y'>{post.date}</f:format.date>
 							<f:actionLink action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:actionLink>
 						</h3>
 						<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
