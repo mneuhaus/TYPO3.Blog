@@ -11,18 +11,18 @@
 <f:layout name="default" />
 <f:section name="contents">
 	<div class="news-single-item">
-		<div class="news-single-timedata"><f:format.date format="d.m.y H:i" />{post.date}</f:format.date></div>
+		<div class="news-single-timedata"><f:format.date format="d.m.y H:i">{post.date}</f:format.date></div>
 		<h2>{post.title}</h2>
 		<div class="news-single-category">
 			Tags:
 			<f:for each="{post.tags}" as="tag">
-				<f:link action="postsByTag" arguments="{ tag : tag }">{tag}</f:actionLink>
+				<f:actionLink action="postsByTag" arguments="{ tag : tag }">{tag}</f:actionLink>
 			</f:for>
 		</div>
 		<p class="news-single-author">{post.author}</p>
 		<p class="bodytext">{post.content}</p>
 		<hr class="clearer" />
-		<div class="news-single-backlink"><f:link action="index"><- Back</f:actionLink></div>
+		<div class="news-single-backlink"><f:actionLink action="index"><- Back</f:actionLink></div>
 	</div>
 	<div class="tx-veguestbook-pi1">
 		<h2>comments</h2>
@@ -35,8 +35,8 @@
 					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" title="{comment.author}" />
 
 					<span class="comment-author"><a href="mailto:{comment.emailAddress}">{comment.author}</a></span>
-					<span class="comment-date"><f:format.date format="F m, Y" />{post.date}</f:format.date></span>
-					<span class="comment-time"><f:format.date format="H:i" />{post.date}</f:format.date></span>
+					<span class="comment-date"><f:format.date format="F m, Y">{post.date}</f:format.date></span>
+					<span class="comment-time"><f:format.date format="H:i">{post.date}</f:format.date></span>
 				</div>
 				<div class="comment-text">
 					{comment.content}<!--  TODO: replace newlines here -->
@@ -48,7 +48,7 @@
 	<div class="tx-veguestbook-pi1">
 		<span class="tx-guestbook-form-error"></span>
 		<a name="commentform"></a>
-		<f:form name="comment" method="post" controller="Comment" action="create" class="comment-form">
+		<f:form name="comment" method="post" controllerName="Comment" actionName="create" class="comment-form">
 			<h4>Add your own</h4>
 			<label for="author">name <span class="required">(required)</span></label><br />
 			<f:form.textbox id="author" property="name" />
@@ -57,7 +57,7 @@
 			<f:form.textbox id="email" property="email" />
 			<br />
 			<label for="text">message <span class="required">(required)</span></label><br />
-			<f:form.textarea id="text" property="content" class="tx-guestbook-form-textarea" />
+			<f:form.textarea id="text" property="content" rows="5" cols="30" class="tx-guestbook-form-textarea" />
 			<br />
 			<f:form.submit>Say it</f:form.submit>
 		</f:form>
