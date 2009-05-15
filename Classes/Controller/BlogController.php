@@ -30,6 +30,7 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
+
 class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
@@ -43,6 +44,14 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @inject
 	 */
 	protected $blogRepository;
+
+	/**
+	 * Preliminary way to store flash messages (for demo purposes). Will be replaced
+	 * by a proper FlashMessageViewHelper
+	 * @var array
+	 * @see http://typo3.org/go/issue/2819
+	 */
+	protected $flashMessages = array();
 
 	/**
 	 * Index action for this controller. Displays a list of blogs.
@@ -71,8 +80,10 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
 	 * @author Robert Lemke <robert@typo3.org>
+	 * @validate $newBlog Raw
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $newBlog = NULL) {
+		$this->view->assign('errorMessage', implode('<br />', $this->flashMessages));
 		$this->view->assign('newBlog', $newBlog);
 	}
 
@@ -86,7 +97,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
 		$this->redirect('index');
-		//$this->forward('new', NULL, NULL, $this->request->getArguments());
 	}
 
 
@@ -125,6 +135,23 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function deleteAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->remove($blog);
 		$this->redirect('index');
+	}
+
+	/**
+	 * Error handling. This action is called if an action could not be called
+	 * due to validation errors of their arguments.
+	 *
+	 * @return void
+	 * @author Robert Lemke
+	 */
+	public function errorAction() {
+		$this->flashMessages = $this->argumentsMappingResults->getErrors();
+		switch ($this->actionMethodName) {
+			case 'createAction' :
+				$this->forward('new', NULL, NULL, $this->request->getArguments());
+			break;
+		}
+		return parent::errorAction();
 	}
 }
 ?>
