@@ -2,13 +2,16 @@
 
 <f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new blog</h1></div>
+	<f:if condition="{errorMessage}">
+		<p class="bodytext"><strong>{errorMessage}</strong></p>
+	</f:if>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f:form method="post" action="create" object="{newBlog}" name="newBlog">
+	<f:form method="post" actionName="create" object="{newBlog}" name="newBlog">
 		<label for="name">Name <span class="required">(required)</span></label><br />
 		<f:form.textbox property="name" />
 		<br />
 		<label for="description">Description</label><br />
-		<f:form.textarea property="description" />
+		<f:form.textarea property="description" rows="2" cols="40" />
 		<br />
 		<f:form.submit>Create</f:form.submit>
 	</f:form>
