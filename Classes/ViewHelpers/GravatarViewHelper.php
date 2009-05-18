@@ -29,7 +29,7 @@ namespace F3\Blog\ViewHelpers;
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  * @scope prototype
  */
-class GravatarViewHelper extends \F3\Fluid\Core\TagBasedViewHelper {
+class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 	/**
 	 * Initialize arguments
 	 *
