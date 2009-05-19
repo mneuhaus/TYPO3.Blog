@@ -34,12 +34,6 @@ namespace F3\Blog\Controller;
 class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * Use Fluid as the default template engine
-	 * @var string
-	 */
-	protected $defaultViewObjectName = 'F3\Fluid\View\TemplateView';
-
-	/**
 	 * @var \F3\Blog\Domain\Model\BlogRepository
 	 * @inject
 	 */
