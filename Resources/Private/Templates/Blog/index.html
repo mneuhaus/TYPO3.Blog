@@ -12,7 +12,7 @@
 			<ul>
 				<f:for each="{blogs}" as="blog">
 					<li>
-						<h3><f:actionLink action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:actionLink></h3>
+						<h3><f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:link.action></h3>
 						<p>
 							<f:format.nl2br><f:format.htmlEscape>{blog.description}</f:format.htmlEscape></f:format.nl2br>
 							<f:actionLink action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:actionLink>
@@ -21,10 +21,10 @@
 					</li>
 				</f:for>
 			</ul>
-			<p><f:actionLink action="new">Create another blog</f:actionLink></p>
+			<p><f:link.action action="new">Create another blog</f:link.action></p>
 		</f:then>
 		<f:else>
-			<p><strong><f:actionLink action="new">Create your first blog</f:actionLink></strong></p>
+			<p><strong><f:link.action action="new">Create your first blog</f:link.action></strong></p>
 		</f:else>
 	</f:if>
 </f:section>

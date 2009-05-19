@@ -6,7 +6,7 @@
 		<p class="bodytext"><strong>{errorMessage}</strong></p>
 	</f:if>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f:form method="post" actionName="create" object="{newBlog}" name="newBlog">
+	<f:form method="post" action="create" object="{newBlog}" name="newBlog">
 		<label for="name">Name <span class="required">(required)</span></label><br />
 		<f:form.textbox property="name" />
 		<br />
