@@ -2,9 +2,9 @@
 
 <f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new blog</h1></div>
-	<f:if condition="{errorMessage}">
-		<p class="bodytext"><strong>{errorMessage}</strong></p>
-	</f:if>
+	<f:for each="{flashMessages}" as="message">
+		<p class="bodytext"><strong>{message}</strong></p>
+	</f:for>
 	<p class="bodytext">Enter information about your new blog below:</p>
 	<f:form method="post" action="create" object="{newBlog}" name="newBlog">
 		<label for="name">Name <span class="required">(required)</span></label><br />

@@ -40,14 +40,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $blogRepository;
 
 	/**
-	 * Preliminary way to store flash messages (for demo purposes). Will be replaced
-	 * by a proper FlashMessageViewHelper
-	 * @var array
-	 * @see http://typo3.org/go/issue/2819
-	 */
-	protected $flashMessages = array();
-
-	/**
 	 * Index action for this controller. Displays a list of blogs.
 	 *
 	 * @return string The rendered view
@@ -77,7 +69,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @validate $newBlog Raw
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $newBlog = NULL) {
-		$this->view->assign('errorMessage', implode('<br />', $this->flashMessages));
 		$this->view->assign('newBlog', $newBlog);
 	}
 
@@ -90,6 +81,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
+		$this->queueFlashMessage('Your new blog was created.');
 		$this->redirect('index');
 	}
 
@@ -116,6 +108,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
 		$this->blogRepository->replace($blog, $updatedBlog);
+		$this->queueFlashMessage('Your blog has been updated.');
 		$this->redirect('index');
 	}
 
@@ -128,6 +121,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->remove($blog);
+		$this->queueFlashMessage('Your blog has been removed.');
 		$this->redirect('index');
 	}
 
@@ -139,7 +133,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke
 	 */
 	public function errorAction() {
-		$this->flashMessages = $this->argumentsMappingResults->getErrors();
+		$this->queueFlashMessage(implode('<br />', $this->argumentsMappingResults->getErrors()));
 		switch ($this->actionMethodName) {
 			case 'createAction' :
 				$this->forward('new', NULL, NULL, $this->request->getArguments());

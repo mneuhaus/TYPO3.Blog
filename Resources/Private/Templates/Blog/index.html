@@ -6,6 +6,9 @@
 		Please note that this example might be not fully functional at certain times because we're continuously working on it
 		and it has not yet been officially released.</p>
 
+	<f:for each="{flashMessages}" as="message">
+		<p class="bodytext"><strong>{message}</strong></p>
+	</f:for>
 	<f:if condition="{blogs}">
 		<f:then>
 			<p class="bodytext">Here is a list of blogs:</p>
