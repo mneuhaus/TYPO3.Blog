@@ -88,10 +88,13 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
+	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost) {
 		$blog->addPost($newPost);
+		$this->postRepository->add($newPost);
 		$this->pushFlashMessage('Your new post was created.');
+		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
 
 }
