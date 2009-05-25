@@ -18,8 +18,8 @@
 						<h3><f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:link.action></h3>
 						<p>
 							<f:format.nl2br>{blog.description}</f:format.nl2br>
-							<f:actionLink action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:actionLink>
-							<f:actionLink action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:actionLink>
+							<f:link.action action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:link.action>
+							<f:link.action action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:link.action>
 						</p>
 					</li>
 				</f:for>

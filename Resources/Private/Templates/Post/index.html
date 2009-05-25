@@ -10,7 +10,7 @@
 					<li>
 						<h3>
 							<f:format.date format='l j. \o\f F Y'>{post.date}</f:format.date>
-							<f:actionLink action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:actionLink>
+							<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
 						</h3>
 						<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
 					</li>
@@ -21,5 +21,5 @@
 			<p>This blog currently doesn't contain any posts.</p>
 		</f:else>
 	</f:if>
-	<f:actionLink action="new" controller="Post">create post</f:actionLink>
+	<f:link.action action="new" controller="Post">create post</f:link.action>
 </f:section>

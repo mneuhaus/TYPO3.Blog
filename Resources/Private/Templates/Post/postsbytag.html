@@ -6,19 +6,19 @@
 			<div class="news-list-item">
 				<h3>
 					<span class="news-list-date"><f:format.date target="{post.date}" format='l j. \o\f F Y' /></span>
-					<f:actionLink action="show" arguments="{postUUID : post.identifier}">{post.title}</f:actionLink>
+					<f:link.action action="show" arguments="{postUUID : post.identifier}">{post.title}</f:link.action>
 				</h3>
 				<p class="bodytext"><f:text.crop maxCharacters="100">{post.content}</f:text.crop></p>
 				<div class="news-list-category">
 					Tags:
 					<f:for each="{post.tags}" as="singleTag">
-						<f:actionLink action="postsByTag" arguments="{tag:singleTag}">{singleTag}</f:actionLink>&nbsp;
+						<f:link.action action="postsByTag" arguments="{tag:singleTag}">{singleTag}</f:link.action>&nbsp;
 					</f:for>
 				</div>
-				<div class="news-list-morelink"><f:actionLink action="show" arguments="{postUUID : post.identifier}">[read more >> ]</f:actionLink></div>
+				<div class="news-list-morelink"><f:link.action action="show" arguments="{postUUID : post.identifier}">[read more >> ]</f:link.action></div>
 				<hr class="clearer" />
 			</div>
 		</f:for>
 	</div>
-	<div class="news-single-backlink"><f:actionLink action="index">&lt;- Back to latest posts</f:actionLink></div>
+	<div class="news-single-backlink"><f:link.action action="index">&lt;- Back to latest posts</f:link.action></div>
 </f:section>
