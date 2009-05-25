@@ -45,11 +45,6 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $postRepository;
 
 	/**
-	 * @var \F3\Blog\Domain\Model\Blog
-	 */
-	protected $blog;
-
-	/**
 	 * List action for this controller. Displays latest posts
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show the posts of
@@ -76,12 +71,27 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Displays a form for creating a new post
 	 *
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
 	 * @param F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
+	public function newAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost = NULL) {
+		$this->view->assign('blog', $blog);
 		$this->view->assign('newPost', $newPost);
+	}
+
+	/**
+	 * Creates a new post
+	 *
+	 * @param F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
+	 * @param F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function createAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost) {
+		$blog->addPost($newPost);
+		$this->pushFlashMessage('Your new post was created.');
 	}
 
 }

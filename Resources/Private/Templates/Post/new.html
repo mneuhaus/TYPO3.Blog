@@ -3,7 +3,7 @@
 <f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new post</h1></div>
 	<f:form method="post" action="create" object="{newPost}" name="newPost">
-		<f:form.hidden property="blog" />
+		<f:form.hidden name="blog" value="{blog}" />
 		<label for="name">Author <span class="required">(required)</span></label><br />
 		<f:form.textbox property="author" /><br />
 		<label for="name">Title <span class="required">(required)</span></label><br />

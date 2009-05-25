@@ -81,10 +81,9 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
-		$this->queueFlashMessage('Your new blog was created.');
+		$this->pushFlashMessage('Your new blog was created.');
 		$this->redirect('index');
 	}
-
 
 	/**
 	 * Edits an existing blog
@@ -108,7 +107,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
 		$this->blogRepository->replace($blog, $updatedBlog);
-		$this->queueFlashMessage('Your blog has been updated.');
+		$this->pushFlashMessage('Your blog has been updated.');
 		$this->redirect('index');
 	}
 
@@ -121,7 +120,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->remove($blog);
-		$this->queueFlashMessage('Your blog has been removed.');
+		$this->pushFlashMessage('Your blog has been removed.');
 		$this->redirect('index');
 	}
 
@@ -133,7 +132,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke
 	 */
 	public function errorAction() {
-		$this->queueFlashMessage(implode('<br />', $this->argumentsMappingResults->getErrors()));
+		$this->pushFlashMessage(implode('<br />', $this->argumentsMappingResults->getErrors()));
 		switch ($this->actionMethodName) {
 			case 'createAction' :
 				$this->forward('new', NULL, NULL, $this->request->getArguments());
