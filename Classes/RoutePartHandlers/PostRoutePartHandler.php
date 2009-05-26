@@ -27,7 +27,7 @@ namespace F3\Blog\RoutePartHandlers;
  * @package FLOW3
  * @subpackage MVC
  * @version $Id$
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */
 class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {

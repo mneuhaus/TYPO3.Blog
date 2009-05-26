@@ -28,7 +28,7 @@ namespace F3\Blog\Domain\Model;
  * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope singleton
  */
 class BlogValidator extends \F3\FLOW3\Validation\Validator\AbstractValidator {

@@ -26,7 +26,7 @@ namespace F3\Blog\ViewHelpers;
  * @package
  * @subpackage
  * @version $Id:$
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */
 class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
