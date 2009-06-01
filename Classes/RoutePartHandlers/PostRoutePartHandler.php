@@ -3,29 +3,36 @@ declare(ENCODING = 'utf-8');
 namespace F3\Blog\RoutePartHandlers;
 
 /*                                                                        *
- * This script is part of the TYPO3 project - inspiring people to share!  *
+ * This script belongs to the FLOW3 package "Blog".                       *
  *                                                                        *
- * TYPO3 is free software; you can redistribute it and/or modify it under *
- * the terms of the GNU General Public License version 2 as published by  *
- * the Free Software Foundation.                                          *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License as published by the Free   *
+ * Software Foundation, either version 3 of the License, or (at your      *
+ * option) any later version.                                             *
  *                                                                        *
  * This script is distributed in the hope that it will be useful, but     *
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
  * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General      *
  * Public License for more details.                                       *
+ *                                                                        *
+ * You should have received a copy of the GNU General Public License      *
+ * along with the script.                                                 *
+ * If not, see http://www.gnu.org/licenses/gpl.html                       *
+ *                                                                        *
+ * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
 /**
- * @package FLOW3
- * @subpackage MVC
+ * @package Blog
+ * @subpackage RouteParthandlers
  * @version $Id$
  */
 
 /**
  * post route part handler
  *
- * @package FLOW3
- * @subpackage MVC
+ * @package Blog
+ * @subpackage RouteParthandlers
  * @version $Id$
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
@@ -48,7 +55,9 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 		preg_match('/^([0-9]{4})\/([0-9]{2})\/([0-9]{2})\/([a-zA-Z0-9\-]+)/', $value, $matches);
 		$this->value = array(
 			'__identity' => array(
-				'date' => new \DateTime($matches[1] . '-' . $matches[2] . '-' . $matches[3]),
+				// next line commented, as it currently doesn't work as it should:
+				// the date does not contain the time, so no match would be found...
+				//'date' => new \DateTime($matches[1] . '-' . $matches[2] . '-' . $matches[3]),
 				'title' => str_replace('-', ' ', $matches[4])
 			)
 		);

@@ -3,16 +3,23 @@ declare(ENCODING = 'utf-8');
 namespace F3\Blog\Controller;
 
 /*                                                                        *
- * This script is part of the TYPO3 project - inspiring people to share!  *
+ * This script belongs to the FLOW3 package "Blog".                       *
  *                                                                        *
- * TYPO3 is free software; you can redistribute it and/or modify it under *
- * the terms of the GNU General Public License version 2 as published by  *
- * the Free Software Foundation.                                          *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License as published by the Free   *
+ * Software Foundation, either version 3 of the License, or (at your      *
+ * option) any later version.                                             *
  *                                                                        *
  * This script is distributed in the hope that it will be useful, but     *
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
  * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General      *
  * Public License for more details.                                       *
+ *                                                                        *
+ * You should have received a copy of the GNU General Public License      *
+ * along with the script.                                                 *
+ * If not, see http://www.gnu.org/licenses/gpl.html                       *
+ *                                                                        *
+ * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
 /**
@@ -34,11 +41,9 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\MVC\View\Helper\URIHelper
-	 * @todo this should not be a _view_ helper obviously
-	 * @todo a global URIHelper has to be implemented which allows redirects too
+	 * @var \F3\FLOW3\MVC\Web\Routing\URIBuilder
 	 */
-	protected $URIHelper;
+	protected $URIBuilder;
 
 	/**
 	 * Initializes additional arguments for this controller
@@ -57,7 +62,7 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function initializeAction() {
-		$this->URIHelper->setRequest($this->request);
+		$this->URIBuilder->setRequest($this->request);
 	}
 
 	/**
