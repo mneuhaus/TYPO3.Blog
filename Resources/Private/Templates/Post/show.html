@@ -22,7 +22,7 @@
 		<p class="news-single-author">{post.author}</p>
 		<p class="bodytext">{post.content}</p>
 		<hr class="clearer" />
-		<div class="news-single-backlink"><f:link.action action="index"><- Back</f:link.action></div>
+		<div class="news-single-backlink"><f:link.action controller="post" action="index" arguments="{blog: post.blog}"><- Back</f:link.action></div>
 	</div>
 	<div class="tx-veguestbook-pi1">
 		<h2>comments</h2>
