@@ -54,7 +54,7 @@ class Comment {
 	/**
 	 * @var string
 	 */
-	protected $emailAddress;
+	protected $email;
 
 	/**
 	 * @var string
@@ -119,8 +119,8 @@ class Comment {
 	 * @return void
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function setEmailAddress($emailAddress) {
-		$this->emailAddress = $emailAddress;
+	public function setEmail($email) {
+		$this->email = $email;
 	}
 
 	/**
@@ -129,8 +129,8 @@ class Comment {
 	 * @return string
 	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function getEmailAddress() {
-		return $this->emailAddress;
+	public function getEmail() {
+		return $this->email;
 	}
 
 	/**
