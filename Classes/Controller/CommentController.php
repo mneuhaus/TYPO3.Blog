@@ -29,7 +29,7 @@ namespace F3\Blog\Controller;
  */
 
 /**
- * Comments controller for the Blog package
+ * Comments controller for the Post package
  *
  * @package Blog
  * @subpackage Controller
@@ -41,47 +41,41 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\MVC\Web\Routing\URIBuilder
+	 * @var \F3\Blog\Domain\Model\PostRepository
 	 */
-	protected $URIBuilder;
+	protected $postRepository;
 
 	/**
-	 * Initializes additional arguments for this controller
+	 * Creates a new comment
 	 *
+	 * @param F3\Post\Domain\Model\Post $post The post which will contain the new comment
+	 * @param F3\Post\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function initializeArguments() {
-		$this->arguments->addNewArgument('post', 'F3\Blog\Domain\Model\Post');
+	public function createAction(\F3\Post\Domain\Model\Post $post, \F3\Post\Domain\Model\Comment $newComment) {
+		$post->addComment($newComment);
+		$this->pushFlashMessage('Your new comment was created.');
+		$this->redirect('show', 'Post', NULL, array('blog' => $post->getBlog(), 'post' => $post));
 	}
 
 	/**
-	 * Initializes the current action
+	 * Error handling. This action is called if an action could not be called
+	 * due to validation errors of their arguments.
 	 *
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
+	 * @author Robert Lemke
 	 */
-	public function initializeAction() {
-		$this->URIBuilder->setRequest($this->request);
-	}
-
-	/**
-	 * Action that adds a comment to a blog post and redirects to single view
-	 *
-	 * @param \F3\Blog\Domain\Model\Comment $comment The comment to create
-	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
-	 */
-	public function createAction(\F3\Blog\Domain\Model\Comment $comment) {
-		$post = $this->arguments['post']->getValue();
-		if ($this->arguments['comment']->isValid() && $post !== NULL) {
-			$post->addComment($comment);
-			$this->redirect($this->request->getBaseURI() . $this->URIHelper->URIFor('show', array('post' => $post), 'Posts'));
-		} else {
-
+	public function errorAction() {
+		$this->pushFlashMessage(implode('<br />', $this->argumentsMappingResults->getErrors()));
+		switch ($this->actionMethodName) {
+			case 'createAction' :
+				$this->forward('show', 'Post', NULL, $this->request->getArguments());
+			break;
 		}
-
+		return parent::errorAction();
 	}
+
 }
 
 ?>

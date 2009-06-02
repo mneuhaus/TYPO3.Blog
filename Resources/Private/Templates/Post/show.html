@@ -45,22 +45,5 @@
 			</div>
 		</f:for>
 	</div>
-	<div class="tx-veguestbook-pi1">
-		<a name="commentform"></a>
-		<f:form name="comment" method="post" controllerName="Comment" action="create" class="comment-form">
-			<f:form.hidden name="post" value="{post}" />
-			<h4>Add your own</h4>
-			<label for="author">name <span class="required">(required)</span></label><br />
-			<f:form.textbox id="author" property="author" />
-			<br />
-			<label for="email">email <span class="required">(required)</span></label><br />
-			<f:form.textbox id="email" property="email" />
-			<br />
-			<label for="text">message <span class="required">(required)</span></label><br />
-			<f:form.textarea id="text" property="content" rows="5" cols="30" class="tx-guestbook-form-textarea" />
-			<br />
-			<f:form.submit>Say it</f:form.submit>
-		</f:form>
-	</div>
 </f:section>
 </html>
