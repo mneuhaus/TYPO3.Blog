@@ -82,6 +82,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
 	 * @author Robert Lemke <robert@typo3.org>
+	 * @validate $newPost Raw
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost = NULL) {
 		$this->view->assign('blog', $blog);
@@ -121,5 +122,4 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 		return parent::errorAction();
 	}
 }
-
 ?>

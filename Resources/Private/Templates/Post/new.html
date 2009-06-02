@@ -2,6 +2,9 @@
 
 <f:section name="contents">
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new post</h1></div>
+	<f:for each="{flashMessages}" as="message">
+		<p class="bodytext"><strong>{message}</strong></p>
+	</f:for>
 	<f:form method="post" action="create" object="{newPost}" name="newPost">
 		<f:form.hidden name="blog" value="{blog}" />
 		<label for="author">Author <span class="required">(required)</span></label><br />
