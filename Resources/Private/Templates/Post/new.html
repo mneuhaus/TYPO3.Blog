@@ -4,12 +4,12 @@
 	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new post</h1></div>
 	<f:form method="post" action="create" object="{newPost}" name="newPost">
 		<f:form.hidden name="blog" value="{blog}" />
-		<label for="name">Author <span class="required">(required)</span></label><br />
-		<f:form.textbox property="author" /><br />
-		<label for="name">Title <span class="required">(required)</span></label><br />
-		<f:form.textbox property="title" /><br />
+		<label for="author">Author <span class="required">(required)</span></label><br />
+		<f:form.textbox property="author" id="author" /><br />
+		<label for="title">Title <span class="required">(required)</span></label><br />
+		<f:form.textbox property="title" id="title" /><br />
 		<label for="content">Content</label><br />
-		<f:form.textarea property="content" rows="5" cols="40" />
+		<f:form.textarea property="content" rows="5" cols="40" id="content" />
 		<br />
 		<f:form.submit>Create</f:form.submit>
 	</f:form>
