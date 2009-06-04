@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain\Model;
+namespace F3\Blog\Domain\Repository;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -29,7 +29,7 @@ namespace F3\Blog\Domain\Model;
  */
 
 /**
- * A repository for Blog Posts
+ * A repository for Blogs
  *
  * @package Blog
  * @subpackage Domain
@@ -37,24 +37,26 @@ namespace F3\Blog\Domain\Model;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PostRepository extends \F3\FLOW3\Persistence\Repository {
+class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Persistence\ManagerInterface
+	 * @var \F3\Blog\Domain\Repository\PostRepository
 	 */
-	protected $persistenceManager;
+	protected $postRepository;
 
 	/**
-	 * Finds posts by the specified blog
+	 * Remove the blog's posts before removing the blog itself.
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
-	 * @return array The posts
-	 * @author Robert Lemke <robert@typo3.org>
+	 * @param \F3\Blog\Domain\Model\Blog
+	 * @return void
+	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
-		$query = $this->createQuery();
-		return $query->matching($query->equals('blog', $blog))->execute();
+	public function remove($blog) {
+		foreach ($blog->getPosts() as $post) {
+			$this->postRepository->remove($post);
+		}
+		parent::remove($blog);
 	}
 }
 ?>

@@ -42,13 +42,13 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Model\BlogRepository
+	 * @var \F3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Model\PostRepository
+	 * @var \F3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;
 
@@ -79,7 +79,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$blog->addPost($post);
 		}
 		$this->blogRepository->add($blog);
-		$this->redirect('index', 'blog');
+		#$this->redirect('index', 'blog');
 		return 'done';
 	}
 

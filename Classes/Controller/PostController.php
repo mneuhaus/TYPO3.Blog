@@ -41,13 +41,13 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Model\BlogRepository
+	 * @var \F3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Model\PostRepository
+	 * @var \F3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;
 

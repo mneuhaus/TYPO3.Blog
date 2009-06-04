@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain\Model;
+namespace F3\Blog\Domain\Validator;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -29,34 +29,35 @@ namespace F3\Blog\Domain\Model;
  */
 
 /**
- * A repository for Blogs
+ * A Blogvalidator
  *
  * @package Blog
  * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @scope singleton
  */
-class BlogRepository extends \F3\FLOW3\Persistence\Repository {
+class BlogValidator extends \F3\FLOW3\Validation\Validator\AbstractValidator {
 
 	/**
-	 * @inject
-	 * @var \F3\Blog\Domain\Model\PostRepository
-	 */
-	protected $postRepository;
-
-	/**
-	 * Remove the blog's posts before removing the blog itself.
+	 * If the given blog is valid
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog
+	 * @return boolean true
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function remove($blog) {
-		foreach ($blog->getPosts() as $post) {
-			$this->postRepository->remove($post);
+	public function isValid($blog) {
+		if (!$blog instanceof \F3\Blog\Domain\Model\Blog) {
+			$this->addError('The blog is not a blog', 1);
+			return FALSE;
 		}
-		parent::remove($blog);
+		if ($blog->getName() === 'FLOW3') {
+			$this->addError('"FLOW3" can\'t be used as a blog name.', 2);
+			return FALSE;
+		}
+		return TRUE;
 	}
+
 }
 ?>

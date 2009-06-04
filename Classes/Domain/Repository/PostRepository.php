@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Domain\Model;
+namespace F3\Blog\Domain\Repository;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -29,35 +29,32 @@ namespace F3\Blog\Domain\Model;
  */
 
 /**
- * A Blogvalidator
+ * A repository for Blog Posts
  *
  * @package Blog
  * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @scope singleton
  */
-class BlogValidator extends \F3\FLOW3\Validation\Validator\AbstractValidator {
+class PostRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
-	 * If the given blog is valid
+	 * @inject
+	 * @var \F3\FLOW3\Persistence\ManagerInterface
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * Finds posts by the specified blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog
-	 * @return boolean true
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @return array The posts
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function isValid($blog) {
-		if (!$blog instanceof \F3\Blog\Domain\Model\Blog) {
-			$this->addError('The blog is not a blog', 1);
-			return FALSE;
-		}
-		if ($blog->getName() === 'FLOW3') {
-			$this->addError('"FLOW3" can\'t be used as a blog name.', 2);
-			return FALSE;
-		}
-		return TRUE;
+	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
+		$query = $this->createQuery();
+		return $query->matching($query->equals('blog', $blog))->execute();
 	}
-
 }
 ?>

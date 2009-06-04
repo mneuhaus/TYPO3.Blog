@@ -40,7 +40,7 @@ namespace F3\Blog\Controller;
 class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @var \F3\Blog\Domain\Model\BlogRepository
+	 * @var \F3\Blog\Domain\Repository\BlogRepository
 	 * @inject
 	 */
 	protected $blogRepository;
