@@ -47,13 +47,12 @@ class Tag {
 	protected $name;
 
 	/**
-	 * Setter for name
+	 * Constructs this tag
 	 *
 	 * @param string $name
-	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setName($name) {
+	public function __construct($name) {
 		$this->name = $name;
 	}
 
