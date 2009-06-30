@@ -94,30 +94,30 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Edits an existing blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The original blog
-	 * @param string $foo
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to edit or the blog with updated properties
+	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog or NULL to use the blog
 	 * @return string Form for editing the existing blog
 	 * @author Robert Lemke <robert@typo3.org>
 	 * @validate $blog Raw
 	 */
-	public function editAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $originalBlog = NULL) {
-		if ($originalBlog === NULL) {
-			$originalBlog = $blog;
+	public function editAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $existingBlog = NULL) {
+		if ($existingBlog === NULL) {
+			$existingBlog = $blog;
 		}
 		$this->view->assign('blog', $blog);
-		$this->view->assign('originalBlog', $originalBlog);
+		$this->view->assign('existingBlog', $existingBlog);
 	}
 
 	/**
 	 * Updates an existing blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The existing, unmodified blog
-	 * @param \F3\Blog\Domain\Model\Blog $updatedBlog A clone of the original blog with the updated values already applied
+	 * @param \F3\Blog\Domain\Model\Blog $blog The modified blog
+	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $originalBlog) {
-		$this->blogRepository->replace($originalBlog, $blog);
+	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $existingBlog) {
+		$this->blogRepository->replace($existingBlog, $blog);
 		$this->pushFlashMessage('Your blog has been updated.');
 		$this->redirect('index');
 	}

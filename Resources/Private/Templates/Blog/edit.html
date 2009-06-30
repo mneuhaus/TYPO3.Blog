@@ -11,12 +11,12 @@
 		</div>
 	</f:form.errors>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f:form method="post" action="update" name="blog" object="{blog}" arguments="{originalBlog: originalBlog}" >
+	<f:form method="post" action="update" name="blog" object="{blog}" arguments="{existingBlog: existingBlog}" >
 		<!--
 			This fixes a problem with lost identity
 			after a clone of the blog object and forward. 
 		-->
-		<f:form.hidden name="blog" value="{originalBlog}" />
+		<f:form.hidden name="blog" value="{existingBlog}" />
 
 		<label for="description">Description</label><br />
 		<f:form.textarea property="description" rows="2" cols="40" /><br />
