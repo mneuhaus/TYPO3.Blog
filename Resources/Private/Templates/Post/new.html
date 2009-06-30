@@ -5,6 +5,11 @@
 	<f:for each="{flashMessages}" as="message">
 		<p class="bodytext"><strong>{message}</strong></p>
 	</f:for>
+	<f:form.errors for="newPost">
+		<div class="error">
+			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
 	<f:form method="post" action="create" object="{newPost}" name="newPost">
 		<f:form.hidden name="blog" value="{blog}" />
 		<label for="author">Author <span class="required">(required)</span></label><br />

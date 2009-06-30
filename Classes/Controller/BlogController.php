@@ -98,9 +98,14 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param string $foo
 	 * @return string Form for editing the existing blog
 	 * @author Robert Lemke <robert@typo3.org>
+	 * @validate $blog Raw
 	 */
-	public function editAction(\F3\Blog\Domain\Model\Blog $blog) {
+	public function editAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $originalBlog = NULL) {
+		if ($originalBlog === NULL) {
+			$originalBlog = $blog;
+		}
 		$this->view->assign('blog', $blog);
+		$this->view->assign('originalBlog', $originalBlog);
 	}
 
 	/**
@@ -111,8 +116,8 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
-		$this->blogRepository->replace($blog, $updatedBlog);
+	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $originalBlog) {
+		$this->blogRepository->replace($originalBlog, $blog);
 		$this->pushFlashMessage('Your blog has been updated.');
 		$this->redirect('index');
 	}
@@ -131,20 +136,21 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * Error handling. This action is called if an action could not be called
-	 * due to validation errors of their arguments.
+	 * Override getErrorFlashMessage to present
+	 * nice flash error messages.
 	 *
 	 * @return void
-	 * @author Robert Lemke
+	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
-	public function errorAction() {
-		$this->pushFlashMessage(implode('<br />', $this->argumentsMappingResults->getErrors()));
+	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {
+			case 'updateAction' :
+				return 'Could not update the blog:';
 			case 'createAction' :
-				$this->forward('new', NULL, NULL, $this->request->getArguments());
-			break;
+				return 'Could not create the new blog:';
+			default :
+				return parent::getErrorFlashMessage();
 		}
-		return parent::errorAction();
 	}
 }
 ?>

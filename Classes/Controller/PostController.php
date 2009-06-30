@@ -106,20 +106,19 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * Error handling. This action is called if an action could not be called
-	 * due to validation errors of their arguments.
+	 * Override getErrorFlashMessage to present
+	 * nice flash error messages.
 	 *
 	 * @return void
-	 * @author Robert Lemke
+	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
-	public function errorAction() {
-		$this->pushFlashMessage(implode('<br />', $this->argumentsMappingResults->getErrors()));
+	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {
 			case 'createAction' :
-				$this->forward('new', NULL, NULL, $this->request->getArguments());
-			break;
+				return 'Could not create the new post:';
+			default :
+				parent::getErrorFlashMessage();
 		}
-		return parent::errorAction();
 	}
 }
 ?>

@@ -5,8 +5,19 @@
 	<f:for each="{flashMessages}" as="message">
 		<p class="bodytext"><strong>{message}</strong></p>
 	</f:for>
+	<f:form.errors for="blog">
+		<div class="error">
+			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
 	<p class="bodytext">Enter information about your new blog below:</p>
-	<f:form method="post" action="update" name="updatedBlog" object="{blog}" arguments="{blog: blog}" >
+	<f:form method="post" action="update" name="blog" object="{blog}" arguments="{originalBlog: originalBlog}" >
+		<!--
+			This fixes a problem with lost identity
+			after a clone of the blog object and forward. 
+		-->
+		<f:form.hidden name="blog" value="{originalBlog}" />
+
 		<label for="description">Description</label><br />
 		<f:form.textarea property="description" rows="2" cols="40" /><br />
 		<f:form.submit>Update</f:form.submit>
