@@ -109,7 +109,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Override getErrorFlashMessage to present
 	 * nice flash error messages.
 	 *
-	 * @return void
+	 * @return string
 	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
 	protected function getErrorFlashMessage() {
@@ -117,7 +117,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 			case 'createAction' :
 				return 'Could not create the new post:';
 			default :
-				parent::getErrorFlashMessage();
+				return parent::getErrorFlashMessage();
 		}
 	}
 }
