@@ -23,17 +23,9 @@ namespace F3\Blog\Controller;
  *                                                                        */
 
 /**
- * @package Blog
- * @subpackage Controller
- * @version $Id$
- */
-
-/**
  * The setup controller for the Blog package, currently just setting up some
  * data to play with.
  *
- * @package Blog
- * @subpackage Controller
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -67,6 +59,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$blog->setName('FLOW3' . time());
 		$blog->setDescription('A blog about FLOW3 development.');
 
+		$tag = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', 'FooBar');
 		for ($i=0; $i < 100; $i++) {
 			$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
 			$post->setAuthor('John Doe');
@@ -74,6 +67,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
 			$post->setPublished(TRUE);
 			$post->setVotes(5);
+			$post->addTag($tag);
 
 			$this->postRepository->add($post);
 			$blog->addPost($post);

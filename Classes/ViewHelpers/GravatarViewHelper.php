@@ -23,17 +23,9 @@ namespace F3\Blog\ViewHelpers;
  *                                                                        */
 
 /**
- * @package Blog
- * @subpackage ViewHelpers
- * @version $Id:$
- */
-
-/**
  * A view helper to display a Gravatar
  *
- * @package Blog
- * @subpackage ViewHelpers
- * @version $Id:$
+ * @version $Id$
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */

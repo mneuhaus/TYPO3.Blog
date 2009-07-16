@@ -23,16 +23,8 @@ namespace F3\Blog\RoutePartHandlers;
  *                                                                        */
 
 /**
- * @package Blog
- * @subpackage RouteParthandlers
- * @version $Id$
- */
-
-/**
  * Blog route part handler
  *
- * @package Blog
- * @subpackage RouteParthandlers
  * @version $Id$
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype

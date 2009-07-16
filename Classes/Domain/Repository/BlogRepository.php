@@ -23,16 +23,8 @@ namespace F3\Blog\Domain\Repository;
  *                                                                        */
 
 /**
- * @package Blog
- * @subpackage Domain
- * @version $Id$
- */
-
-/**
  * A repository for Blogs
  *
- * @package Blog
- * @subpackage Domain
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
