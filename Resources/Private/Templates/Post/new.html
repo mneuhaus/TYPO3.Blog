@@ -17,7 +17,9 @@
 		<label for="title">Title <span class="required">(required)</span></label><br />
 		<f:form.textbox property="title" id="title" /><br />
 		<label for="content">Content</label><br />
-		<f:form.textarea property="content" rows="5" cols="40" id="content" />
+		<f:form.textarea property="content" rows="5" cols="40" id="content" /><br />
+		<label for="relatedPosts">Related Posts</label><br />
+		<f:form.select property="relatedPosts" options="{existingPosts}" optionLabelField="title" multiple="1" id="relatedPosts" /><br />
 		<br />
 		<f:form.submit>Create</f:form.submit>
 	</f:form>

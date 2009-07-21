@@ -21,6 +21,12 @@
 		</div>
 		<p class="news-single-author">{post.author}</p>
 		<p class="bodytext">{post.content}</p>
+		<div class="news-single-category">
+			Related Posts:
+			<f:for each="{post.relatedPosts}" as="relatedPost">
+				<f:link.action action="show" controller="Post" arguments="{post: relatedPost, blog: relatedPost.blog}">{relatedPost.title}</f:link.action>
+			</f:for>
+		</div>
 		<hr class="clearer" />
 		<div class="news-single-backlink"><f:link.action controller="post" action="index" arguments="{blog: post.blog}"><- Back</f:link.action></div>
 	</div>

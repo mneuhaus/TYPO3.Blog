@@ -84,6 +84,11 @@ class Post {
 	protected $published = FALSE;
 
 	/**
+	 * @var array<\F3\Blog\Domain\Model\Post>
+	 */
+	protected $relatedPosts = array();
+
+	/**
 	 * Constructs this post
 	 *
 	 * @author Robert Lemke <robert@typo3.org>
@@ -305,17 +310,26 @@ class Post {
 	}
 
 	/**
-	 * Returns this post as a formatted string
+	 * Sets the posts related to this post
 	 *
-	 * @return string
+	 * @param array $relatedPosts An array with Post objects
+	 * @return void
 	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function __toString() {
-		return $this->title . chr(10) .
-			' written on ' . $this->date->format('Y-m-d') . chr(10) .
-			' by ' . $this->author . chr(10) .
-			wordwrap($this->content, 70, chr(10)) . chr(10) .
-			implode(', ', $this->tags);
+	public function setRelatedPosts(array $relatedPosts) {
+		$this->relatedPosts = $relatedPosts;
 	}
+
+	/**
+	 * Returns the posts related to this post
+	 *
+	 * @return array An array of Post objects
+	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 */
+	public function getRelatedPosts() {
+		return $this->relatedPosts;
+	}
+
 }
+
 ?>
