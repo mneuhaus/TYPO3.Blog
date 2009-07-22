@@ -9,11 +9,14 @@
 		-->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<f:base />
-	<!-- <link href="{f:uri.resource('stylesheet_71e56952f4.css')}" type="text/css" rel="stylesheet" /> -->
-		<link rel="stylesheet" href="{f:uri.resource('Blog.css')}" type="text/css" media="all" />
 		<title>{blog.title} {stuff}</title>
+		<link rel="stylesheet" href="{f:uri.resource('Blog.css')}" type="text/css" media="all" />
+
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href='<f:uri.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}" absolute="TRUE"/>' />
+		<link rel='index' title='{blog.title}' href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
+		<link rel="canonical" href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
+
 		<meta name="generator" content="FLOW3" />
-	<!-- <script type="text/javascript" src="{f:uri.resource('javascript_f52d1a094f.js')}"></script> -->
 	</head>
 	<body>
 		<div id="header">
@@ -29,7 +32,7 @@
 					<h3>Recent Posts</h3>
 					<ul>
 						<f:for each="{recentPosts}" as="recentPost">
-							<li><f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{recentPost.title}</f:link.action></li>
+							<li><f:link.action action="show" controller="Post" arguments="{post: recentPost, blog: recentPost.blog}">{recentPost.title}</f:link.action></li>
 						</f:for>
 					</ul>
 				</f:if>	

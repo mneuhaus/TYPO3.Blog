@@ -46,7 +46,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->execute();
 	}
 
@@ -59,7 +59,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	public function findPrevious(\F3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
 		$posts = $query->matching($query->lessThan('date', $post->getDate()))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit(1)
 			->execute();
 		return (count($posts) == 0) ? NULL : current($posts);
@@ -74,7 +74,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	public function findNext(\F3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
 		$posts = $query->matching($query->greaterThan('date', $post->getDate()))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit(1)
 			->execute();
 		return (count($posts) == 0) ? NULL : current($posts);
@@ -86,10 +86,10 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @return array The posts
 	 */
-	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 2) {
+	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 5) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
 			->execute();
 	}
