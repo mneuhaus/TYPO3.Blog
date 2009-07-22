@@ -34,13 +34,22 @@ namespace F3\Blog\Domain\Model;
 class Blog {
 
 	/**
-	 * The blog's name. Also acts as the identifier.
+	 * The blog's identifier.
 	 *
 	 * @var string
 	 * @validate Alphanumeric, StringLength(minimum = 3, maximum = 50)
 	 * @identity
 	 */
-	protected $name = '';
+	protected $identifier = '';
+
+	/**
+	 * The blog's title.
+	 *
+	 * @var string
+	 * @validate Text, StringLength(minimum = 1, maximum = 80)
+	 * @identity
+	 */
+	protected $title = '';
 
 	/**
 	 * A short description of the blog
@@ -51,16 +60,9 @@ class Blog {
 	protected $description = '';
 
 	/**
-	 * The blog's logo
-	 *
-	 * @var string
-	 */
-	protected $logo;
-
-	/**
 	 * The posts contained in this blog
 	 *
-	 * @var \SplObjectStorage
+	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Post>
 	 * @lazy
 	 */
 	protected $posts;
@@ -68,39 +70,54 @@ class Blog {
 	/**
 	 * Constructs a new Blog
 	 *
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function __construct() {
 		$this->posts = new \SplObjectStorage();
 	}
 
 	/**
-	 * Sets this blog's name
+	 * Sets this blog's identifier
 	 *
-	 * @param string $name The blog's name
+	 * @param string $identifier The identifier
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setIdentifier($identifier) {
+		$this->identifier = $identifier;
 	}
 
 	/**
-	 * Returns the blog's name
+	 * Returns the blog's identifier
 	 *
-	 * @return string The blog's name
-	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @return string The blog's identifier
 	 */
-	public function getName() {
-		return $this->name;
+	public function getIdentifier() {
+		return $this->identifier;
+	}
+
+	/**
+	 * Sets this blog's title
+	 *
+	 * @param string $title The blog's title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+
+	/**
+	 * Returns the blog's title
+	 *
+	 * @return string The blog's title
+	 */
+	public function getTitle() {
+		return $this->title;
 	}
 
 	/**
 	 * Sets the description for the blog
 	 *
-	 * @param string $description
+	 * @param string $description The blog description or "tag line"
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
@@ -109,8 +126,7 @@ class Blog {
 	/**
 	 * Returns the description
 	 *
-	 * @return string
-	 * @author Robert Lemke <robert@typo3.org>
+	 * @return string The blog description
 	 */
 	public function getDescription() {
 		return $this->description;
@@ -121,7 +137,6 @@ class Blog {
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function addPost(\F3\Blog\Domain\Model\Post $post) {
 		$post->setBlog($this);
@@ -131,8 +146,7 @@ class Blog {
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return \SplObjectStorage
-	 * @author Robert Lemke <robert@typo3.org>
+	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Post> The posts of this blog
 	 */
 	public function getPosts() {
 		if ($this->posts instanceof \F3\FLOW3\Persistence\LazyLoadingProxy) {

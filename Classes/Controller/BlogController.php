@@ -41,7 +41,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Index action for this controller. Displays a list of blogs.
 	 *
 	 * @return string The rendered view
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function indexAction() {
 		$this->view->assign('blogs', $this->blogRepository->findAll());
@@ -52,7 +51,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show
 	 * @return string The rendered view of a single blog
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function showAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->view->assign('blog', $blog);
@@ -63,8 +61,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
-	 * @author Robert Lemke <robert@typo3.org>
-	 * @validate $newBlog Raw
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $newBlog = NULL) {
 		$this->view->assign('newBlog', $newBlog);
@@ -75,7 +71,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh Blog object which has not yet been added to the repository
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
@@ -89,7 +84,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to edit or the blog with updated properties
 	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog or NULL to use the blog
 	 * @return string Form for editing the existing blog
-	 * @author Robert Lemke <robert@typo3.org>
 	 * @validate $blog Raw
 	 */
 	public function editAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $existingBlog = NULL) {
@@ -106,7 +100,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Blog $blog The modified blog
 	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $existingBlog) {
 		$this->blogRepository->replace($existingBlog, $blog);
@@ -119,7 +112,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to delete
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->remove($blog);
@@ -132,7 +124,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * nice flash error messages.
 	 *
 	 * @return string
-	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {

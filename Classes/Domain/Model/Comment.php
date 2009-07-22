@@ -40,23 +40,25 @@ class Comment {
 
 	/**
 	 * @var string
+	 * @validate Text, StringLength(minimum = 3, maximum = 80)
 	 */
 	protected $author;
 
 	/**
 	 * @var string
+	 * @validate EmailAddressAddress
 	 */
-	protected $email;
+	protected $emailAddress;
 
 	/**
 	 * @var string
+	 * @validate Text, NotEmpty
 	 */
 	protected $content;
 
 	/**
 	 * Constructs this comment
 	 *
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __construct() {
 		$this->date = new \DateTime();
@@ -67,7 +69,6 @@ class Comment {
 	 *
 	 * @param \DateTime $date
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function setDate(\DateTime $date) {
 		$this->date = $date;
@@ -77,7 +78,6 @@ class Comment {
 	 * Getter for date
 	 *
 	 * @return \DateTime
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getDate() {
 		return $this->date;
@@ -88,7 +88,6 @@ class Comment {
 	 *
 	 * @param string $author
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function setAuthor($author) {
 		$this->author = $author;
@@ -98,31 +97,28 @@ class Comment {
 	 * Getter for author
 	 *
 	 * @return string
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getAuthor() {
 		return $this->author;
 	}
 
 	/**
-	 * Sets the authors email for this comment
+	 * Sets the authors email address for this comment
 	 *
-	 * @param string $emailAddress email of the author
+	 * @param string $emailAddress email address of the author
 	 * @return void
-	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function setEmail($email) {
-		$this->email = $email;
+	public function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
 	}
 
 	/**
-	 * Getter for authors email
+	 * Getter for authors email address
 	 *
 	 * @return string
-	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
-	public function getEmail() {
-		return $this->email;
+	public function getEmailAddress() {
+		return $this->emailAddress;
 	}
 
 	/**
@@ -130,7 +126,6 @@ class Comment {
 	 *
 	 * @param string $content
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function setContent($content) {
 		$this->content = $content;
@@ -140,21 +135,9 @@ class Comment {
 	 * Getter for content
 	 *
 	 * @return string
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getContent() {
 		return $this->content;
-	}
-
-	/**
-	 * Returns this comment as a formatted string
-	 *
-	 * @return string
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function __toString() {
-		return $this->author . ' (' . $this->email . ') said on ' . $this->date->format('Y-m-d') . ':' . chr(10) .
-			$this->content . chr(10);
 	}
 }
 ?>

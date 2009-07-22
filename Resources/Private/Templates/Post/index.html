@@ -1,25 +1,23 @@
-<f:layout name="default" />
+﻿<f:layout name="default" />
 
-<f:section name="contents">
-	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">{blog.name}</h1></div>
+<f:section name="mainbox">
 	<f:if condition="{posts}">
 		<f:then>
-			<p class="bodytext">Here's a list of posts:</p>
-			<ul>
+			<div class="navigation"></p>﻿<f:link.action action="new" controller="Post" arguments="{blog: blog}">Create a new post</f:link.action></div>
+			<ol class="posts">
 				<f:for each="{posts}" as="post">
-					<li>
-						<h3>
-							<f:format.date format='l j. \o\f F Y'>{post.date}</f:format.date>
+					<li class="post">
+						<h2>
 							<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
-						</h3>
-						<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
+						</h2>
+						<p class="metadata">Published on <f:format.date format='d.m.Y'>{post.date}</f:format.date> by {post.author}</p>
+						<p class="content"><f:format.crop maxCharacters="500">{post.content}</f:format.crop></p>
 					</li>
 				</f:for>
-			</ul>
+			</ol>
 		</f:then>
 		<f:else>
-			<p>This blog currently doesn't contain any posts.</p>
+			<p>This blog currently doesn't contain any posts. ﻿<f:link.action action="new" controller="Post" arguments="{blog: blog}">Create the first post</f:link.action></p>
 		</f:else>
 	</f:if>
-	﻿<f:link.action action="new" controller="Post" arguments="{blog: blog}">create post</f:link.action>
 </f:section>

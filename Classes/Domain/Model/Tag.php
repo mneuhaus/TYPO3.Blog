@@ -35,6 +35,7 @@ class Tag {
 
 	/**
 	 * @var string
+	 * @validate Alphanumeric, StringLength(minimum = 1, maximum = 20)
 	 */
 	protected $name;
 
@@ -42,7 +43,6 @@ class Tag {
 	 * Constructs this tag
 	 *
 	 * @param string $name
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __construct($name) {
 		$this->name = $name;
@@ -58,13 +58,12 @@ class Tag {
 	}
 
 	/**
-	 * Returns this tag as a formatted string
+	 * Returns this tag as a string
 	 *
 	 * @return string
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function __toString() {
-		return $this->getName();
+		return $this->name;
 	}
 }
 ?>

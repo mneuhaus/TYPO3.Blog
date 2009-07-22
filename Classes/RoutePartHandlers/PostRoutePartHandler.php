@@ -37,7 +37,6 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	 *
 	 * @param string $value The value (ie. part of the request path) to match. This string is rendered by findValueToMatch()
 	 * @return boolean TRUE if the request path formally matched
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	protected function matchValue($value) {
 		if (!parent::matchValue($value)) {
@@ -66,7 +65,6 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	 *
 	 * @param string $requestPath The request path acting as the subject for matching in this Route Part
 	 * @return string The post identifying part of the request path or an empty string if it doesn't match
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	protected function findValueToMatch($requestPath) {
 		$matches = array();
@@ -79,7 +77,6 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $value The Post object
 	 * @return boolean TRUE if the post could be resolved and stored in $this->value, otherwise FALSE.
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	protected function resolveValue($value) {
 		if (!$value instanceof \F3\Blog\Domain\Model\Post) return FALSE;

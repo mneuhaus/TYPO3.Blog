@@ -48,7 +48,6 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Index action for this controller
 	 *
 	 * @return string
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function indexAction() {
 		foreach ($this->blogRepository->findAll() as $blog) {

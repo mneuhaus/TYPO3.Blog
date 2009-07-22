@@ -42,11 +42,56 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @return array The posts
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
-		return $query->matching($query->equals('blog', $blog))->execute();
+		return $query->matching($query->equals('blog', $blog))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->execute();
+	}
+
+	/**
+	 * Finds the previous of the given post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post The reference post
+	 * @return \F3\Blog\Domain\Model\Post
+	 */
+	public function findPrevious(\F3\Blog\Domain\Model\Post $post) {
+		$query = $this->createQuery();
+		$posts = $query->matching($query->lessThan('date', $post->getDate()))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setLimit(1)
+			->execute();
+		return (count($posts) == 0) ? NULL : current($posts);
+	}
+
+	/**
+	 * Finds the post next to the given post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post The reference post
+	 * @return \F3\Blog\Domain\Model\Post
+	 */
+	public function findNext(\F3\Blog\Domain\Model\Post $post) {
+		$query = $this->createQuery();
+		$posts = $query->matching($query->greaterThan('date', $post->getDate()))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setLimit(1)
+			->execute();
+		return (count($posts) == 0) ? NULL : current($posts);
+	}
+
+	/**
+	 * Finds most recent posts by the specified blog
+	 *
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @return array The posts
+	 */
+	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 2) {
+		$query = $this->createQuery();
+		return $query->matching($query->equals('blog', $blog))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setLimit($limit)
+			->execute();
 	}
 }
 ?>

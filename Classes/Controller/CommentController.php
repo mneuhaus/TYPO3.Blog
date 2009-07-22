@@ -43,7 +43,6 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param F3\Post\Domain\Model\Post $post The post which will contain the new comment
 	 * @param F3\Post\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function createAction(\F3\Post\Domain\Model\Post $post, \F3\Post\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
@@ -56,7 +55,6 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * nice flash error messages.
 	 *
 	 * @return string
-	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {

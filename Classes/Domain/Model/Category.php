@@ -1,6 +1,6 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\RoutePartHandlers;
+namespace F3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -23,36 +23,41 @@ namespace F3\Blog\RoutePartHandlers;
  *                                                                        */
 
 /**
- * Blog route part handler
+ * A blog post category
  *
  * @version $Id$
+ * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
+ * @entity
  */
-class BlogRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
+class Category {
 
 	/**
-	 * While matching, converts the blog identifier into an identifer array
+	 * The category name
 	 *
-	 * @param string $value value to match, the blog identifier
-	 * @return boolean TRUE if value could be matched successfully, otherwise FALSE.
+	 * @var string
+	 * @validate Text, StringLength(minimum = 1, maximum = 80)
 	 */
-	protected function matchValue($value) {
-		if ($value === NULL || $value === '') return FALSE;
-		$this->value = array('__identity' => array('identifier' => $value));
-		return TRUE;
+	protected $name;
+
+	/**
+	 * Sets the category name
+	 *
+	 * @param string $name The category name
+	 * @return void
+	 */
+	public function setName($name) {
+		$this->name = $name;
 	}
 
 	/**
-	 * Resolves the identifier of the blog
+	 * Returns the category name
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $value The Blog object
-	 * @return boolean TRUE if the name of the blog could be resolved and stored in $this->value, otherwise FALSE.
+	 * @return string The category name
 	 */
-	protected function resolveValue($value) {
-		if (!$value instanceof \F3\Blog\Domain\Model\Blog) return FALSE;
-		$this->value = $value->getIdentifier();
-		return TRUE;
+	public function getName() {
+		return $this->name;
 	}
 }
 ?>

@@ -1,19 +1,22 @@
 <f:layout name="default" />
 
-<f:section name="contents">
-	<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Create a new blog</h1></div>
+<f:section name="mainbox">
+	<h2 class="flow3-firstHeader">Create a new blog</h2>
 	<f:for each="{flashMessages}" as="message">
-		<p class="bodytext"><strong>{message}</strong></p>
+		<p><strong>{message}</strong></p>
 	</f:for>
 	<f:form.errors for="newBlog">
 		<div class="error">
 			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
 		</div>
 	</f:form.errors>
-	<p class="bodytext">Enter information about your new blog below:</p>
+	<p>Enter information about your new blog below:</p>
 	<f:form method="post" action="create" object="{newBlog}" name="newBlog">
-		<label for="name">Name <span class="required">(required)</span></label><br />
-		<f:form.textbox property="name" id="name" />
+		<label for="identifier">Identifier <span class="required">(required)</span></label><br />
+		<f:form.textbox property="identifier" id="identifier" />
+		<br />
+		<label for="name">Title <span class="required">(required)</span></label><br />
+		<f:form.textbox property="title" id="title" />
 		<br />
 		<label for="description">Description</label><br />
 		<f:form.textarea property="description" rows="2" cols="40" id="description" />

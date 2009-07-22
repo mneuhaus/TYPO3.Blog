@@ -1,55 +1,17 @@
-<?xml version="1.0"?>
-<html xmlns="http://typo3.org/ns/html-base"
-		xmlns:xsi="http://typo3.org/ns/html-base"
-		xmlns:blog="http://typo3.org/ns/fluid/F3/Blog/ViewHelpers"
-		xsi:schemaLocation="http://typo3.org/ns/html-base
-			http://localhost/BlogExample/Public/Resources/Web/Fluid/Public/html-base.xsd
-			http://typo3.org/ns/fluid/F3/Blog/ViewHelpers
-			http://localhost/BlogExample/Public/Resources/Fluid/XSD/F3_Blog_ViewHelpers.xsd">
-	 <!-- Your content goes here -->
 {namespace blog=F3\Blog\ViewHelpers}
 <f:layout name="default" />
-<f:section name="contents">
-	<div class="news-single-item">
-		<div class="news-single-timedata"><f:format.date format="d.m.y H:i">{post.date}</f:format.date></div>
-		<h2>{post.title}</h2>
-		<div class="news-single-category">
-			Tags:
-			<f:for each="{post.tags}" as="tag">
-				<f:link.action action="postsByTag" arguments="{ tag : tag }">{tag}</f:link.action>
-			</f:for>
-		</div>
-		<p class="news-single-author">{post.author}</p>
-		<p class="bodytext">{post.content}</p>
-		<div class="news-single-category">
-			Related Posts:
-			<f:for each="{post.relatedPosts}" as="relatedPost">
-				<f:link.action action="show" controller="Post" arguments="{post: relatedPost, blog: relatedPost.blog}">{relatedPost.title}</f:link.action>
-			</f:for>
-		</div>
-		<hr class="clearer" />
-		<div class="news-single-backlink"><f:link.action controller="post" action="index" arguments="{blog: post.blog}"><- Back</f:link.action></div>
-	</div>
-	<div class="tx-veguestbook-pi1">
-		<h2>comments</h2>
-		<f:for each="{post.comments}" as="comment">
-			<div class="comment">
-				<div class="comment-header">
-					<a name="comment"></a>
-				</div>
-				<div class="comment-info">
-					<blog:gravatar email="{comment.emailAddress}" default="Resources/Packages/Blog/gravatar_default.gif" size="40" class="gravatar" title="{comment.author}" />
 
-					<span class="comment-author"><a href="mailto:{comment.emailAddress}">{comment.author}</a></span>
-					<span class="comment-date"><f:format.date format="F m, Y">{post.date}</f:format.date></span>
-					<span class="comment-time"><f:format.date format="H:i">{post.date}</f:format.date></span>
-				</div>
-				<div class="comment-text">
-					{comment.content}<!--  TODO: replace newlines here -->
-				</div>
-				<hr class="clear" />
-			</div>
-		</f:for>
+<f:section name="mainbox">
+	<div id="navigation">
+		<f:if condition="{previousPost}">
+			<span class="previous">« <f:link.action action="show" arguments="{post: previousPost, blog: post.blog}">{previousPost.title}</f:link.action></span>
+		</f:if>
+		<f:if condition="{nextPost}">
+			<span class="next"><f:link.action action="show" arguments="{post: nextPost, blog: post.blog}">{nextPost.title}</f:link.action> »</span>
+		</f:if>
+		<div class="clear"></div>
 	</div>
+	<h2>{post.title}</h2>
+	<p class="metadata">Published on <f:format.date format='d.m.Y'>{post.date}</f:format.date> by {post.author}</p>
+	<p class="content">{post.content}</p>
 </f:section>
-</html>

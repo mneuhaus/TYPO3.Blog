@@ -35,7 +35,6 @@ class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 	 * Initialize arguments
 	 *
 	 * @return void
-	 * @author Sebastian Kurfürst <sebastian@typo3.org>
 	 */
 	public function initializeArguments() {
 		$this->registerArgument('email', 'string', 'Gravatar Email', TRUE);
@@ -49,7 +48,6 @@ class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 	 * Render the link.
 	 *
 	 * @return string The rendered link
-	 * @author Sebastian Kurfürst <sebastian@typo3.org>
 	 */
 	public function render() {
 		$baseURI = $this->variableContainer->get('view')->getRequest()->getBaseURI();

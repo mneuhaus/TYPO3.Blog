@@ -42,7 +42,6 @@ class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function remove($blog) {
 		foreach ($blog->getPosts() as $post) {

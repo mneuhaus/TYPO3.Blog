@@ -1,35 +1,51 @@
-#main-nav {
-	background-color: #99011e;
-	border-color: #700016;
-}
-#main-nav ul {
-	border-color: #99011e;
-}
-#main-nav li a {
-	border-right: 1px solid #ffffff;
-	border-top: 1px solid #99011e;
-}
-#main-nav li a:hover {
-	background-color: #e56508;
-	border-top: 1px solid #e56508;
-}
-div#sub-nav-title {
-	background-color: #99011e;
-	border-color: #700016;
-}
-div#sub-nav {
-	border-color: #99011e;
+
+/*---------------------------------------------------------
+Cascading Style Sheets for the FLOW3 blog example
+-----------------------------------------------------------*/
+* {
+	margin:0;
+	padding:0;
 }
 
-h1.csc-firstHeader, h2.csc-firstHeader {
-	color: #700016;
+body {
+	background: #e9e9e9 none repeat scroll 0 0;
+	color: #515151;
+	padding: 0;
+	margin: 0;
+	min-width: 764px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 13px;
+	font-size-adjust: none;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: normal;
+	text-align: center;
+	font-stretch: normal;
+	font-style: normal;
 }
 
-a, a:visited {
-	color: #700016;
+img {
+	border: none;
 }
-a:hover {
-	color: #e56508;
+
+h2 {
+	font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 22px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	color: #282828;
+}
+
+h3 {
+	font-size: 15px;
+	font-weight: normal;
+}
+
+h2.flow3-firstHeader {
+	font-size: 25px;
+	color: #700016;
+	margin: 0 0 26px 0;
+	font-weight: normal;
 }
 
 .comment-header {
@@ -37,9 +53,143 @@ a:hover {
 	border-color: #700016;
 }
 
-/**
- * Form validation styles
- */
+input, select, option {
+	font-size: 13px;
+}
+
+p {
+	font-size: 13px;
+	line-height: 18px;
+	margin: 10px 0 16px 0;
+}
+
+a, a:visited {
+	color: #700016;
+	text-decoration: none;
+}
+a:hover {
+	color: #e56508;
+}
+
+th, td {
+	font-size: 13px;
+}
+
+div, ol, ul, li, img, form, select, input, table, td {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	width: 640px;
+	height: 100px;
+	background: #99011E none repeat scroll 0 0;
+	color: white;
+	border: 1px solid #dddddd;
+	border-bottom: 1px solid #700016;
+	margin: 0 auto;
+	padding: 50px;
+	text-align:left;
+}
+
+#header h1 {
+	font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	letter-spacing: -1px;
+	padding-top: 50px;
+}
+
+#header h1 a {
+	color: white;
+	text-decoration: none;
+}
+
+#header p.description {
+	font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #e56508;
+} 
+
+#maincontainer {
+	width: 640px;
+	background: white none repeat scroll 0 0;
+	border: 1px solid #dddddd;
+	margin: 0 auto;
+	padding: 20px 50px 40px 50px;
+	text-align:left;
+	position: relative;
+	min-height: 300px;
+}
+
+#mainbox {
+	width: 460px;
+	float: left;
+	position: relative;
+}
+
+li.post {
+	list-style-type: none;
+	list-style-image: none;
+}
+
+p.metadata {
+	font-size: 11px;
+	color: #8c8c8c;
+	margin: 0;
+}
+
+#navigation {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#navigation .next {
+	float: right;
+}
+
+#sidebox {
+	width: 160px;
+	float: left;
+	position: relative;
+	padding: 0 0 0 20px;
+	font-size: 11px;
+}
+
+#sidebox h3 {
+	margin-bottom: 4px;
+}
+
+#sidebox ul li {
+	list-style-image: none;
+	list-style-type: none;
+	margin-bottom: 4px;
+}
+
+.clear {
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+#footer {
+	width: 730px;
+	font-size: 11px;
+	text-align: right;
+	color: #282828;
+	clear: both;
+	margin: 0 auto;
+	padding: 10px 0 20px 0;
+}
+
+#footer a, #footer a:visited{
+	color: #282828;
+	font-weight: bold;
+}
+
+fieldset { border: none; padding: 0; margin: 0;}
+
+/*--------------- form validation ------------------*/
+
 input.f3-form-error {
 	border: 1px solid #8a1f11;
 }

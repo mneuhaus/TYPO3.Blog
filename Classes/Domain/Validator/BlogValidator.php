@@ -37,14 +37,13 @@ class BlogValidator extends \F3\FLOW3\Validation\Validator\AbstractValidator {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog
 	 * @return boolean true
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function isValid($blog) {
 		if (!$blog instanceof \F3\Blog\Domain\Model\Blog) {
 			$this->addError('The blog is not a blog', 1);
 			return FALSE;
 		}
-		if ($blog->getName() === 'FLOW3') {
+		if ($blog->getIdentifier() === 'FLOW3') {
 			$this->addError('"FLOW3" can\'t be used as a blog name.', 2);
 			return FALSE;
 		}

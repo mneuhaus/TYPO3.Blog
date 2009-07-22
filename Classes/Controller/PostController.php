@@ -48,12 +48,12 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show the posts of
 	 * @return string
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function indexAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$posts = $this->postRepository->findByBlog($blog);
 		$this->view->assign('blog', $blog);
 		$this->view->assign('posts', $posts);
+		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($blog));
 	}
 
 	/**
@@ -61,10 +61,13 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post The post to display
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function showAction(\F3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('post', $post);
+		$this->view->assign('blog', $post->getBlog());
+		$this->view->assign('previousPost', $this->postRepository->findPrevious($post));
+		$this->view->assign('nextPost', $this->postRepository->findNext($post));
+		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($post->getBlog()));
 	}
 
 	/**
@@ -73,7 +76,6 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
 	 * @param F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
-	 * @author Robert Lemke <robert@typo3.org>
 	 * @validate $newPost Raw
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost = NULL) {
@@ -88,8 +90,6 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
 	 * @param F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost) {
 		$blog->addPost($newPost);
@@ -103,7 +103,6 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * nice flash error messages.
 	 *
 	 * @return string
-	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {

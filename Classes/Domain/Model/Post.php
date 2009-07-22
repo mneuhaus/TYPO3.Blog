@@ -53,11 +53,6 @@ class Post {
 	protected $date;
 
 	/**
-	 * @var array
-	 */
-	protected $tags = array();
-
-	/**
 	 * @var string
 	 * @validate StringLength(minimum = 3, maximum = 50)
 	 */
@@ -65,37 +60,41 @@ class Post {
 
 	/**
 	 * @var string
+	 * FIXME validate HTML
 	 */
 	protected $content;
 
 	/**
-	 * @var integer
+	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Tag>
 	 */
-	protected $votes = 0;
+	protected $tags;
 
 	/**
-	 * @var array
+	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Category>
+	 * FIXME validate Count(atLeast = 1)
 	 */
-	protected $comments = array();
+	protected $categories;
 
 	/**
-	 * @var boolean
+	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Category>
 	 */
-	protected $published = FALSE;
+	protected $comments;
 
 	/**
-	 * @var array<\F3\Blog\Domain\Model\Post>
+	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Post>
 	 */
-	protected $relatedPosts = array();
+	protected $relatedPosts;
 
 	/**
 	 * Constructs this post
 	 *
-	 * @author Robert Lemke <robert@typo3.org>
-	 * @author Bastian Waidelich <bastian@typo3.org>
 	 */
 	public function __construct() {
 		$this->date = new \DateTime();
+		$this->tags = new \SplObjectStorage();
+		$this->categories = new \SplObjectStorage();
+		$this->comments = new \SplObjectStorage();
+		$this->relatedPosts = new \SplObjectStorage();
 	}
 
 	/**
@@ -112,7 +111,6 @@ class Post {
 	 * Returns the blog this post is part of
 	 *
 	 * @return \F3\Blog\Domain\Model\Blog The blog this post is part of
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function getBlog() {
 		return $this->blog;
@@ -123,7 +121,6 @@ class Post {
 	 *
 	 * @param string $title
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
@@ -133,7 +130,6 @@ class Post {
 	 * Getter for title
 	 *
 	 * @return string
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getTitle() {
 		return $this->title;
@@ -144,7 +140,6 @@ class Post {
 	 *
 	 * @param \DateTime $date
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function setDate(\DateTime $date) {
 		$this->date = $date;
@@ -153,9 +148,7 @@ class Post {
 	/**
 	 * Getter for date
 	 *
-	 *
 	 * @return \DateTime
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getDate() {
 		return $this->date;
@@ -164,12 +157,11 @@ class Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param array $tags One or more \F3\Blog\Domain\Model\Tag objects
+	 * @param \SplObjectStorage<\SplObjectStorage> $tags One or more \F3\Blog\Domain\Model\Tag objects
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function setTags(array $tags) {
-		$this->tags = $tags;
+	public function setTags(\SplObjectStorage $tags) {
+		$this->tags = clone $tags;
 	}
 
 	/**
@@ -177,20 +169,18 @@ class Post {
 	 *
 	 * @param \F3\Blog\Domain\Model\Tag $tag
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function addTag(\F3\Blog\Domain\Model\Tag $tag) {
-		$this->tags[] = $tag;
+		$this->tags->attach($tag);
 	}
 
 	/**
 	 * Getter for tags
 	 *
-	 * @return array holding \F3\Blog\Domain\Model\Tag objects
-	 * @author Matthias Hoermann <hoermann@saltation.de>
+	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Tag> The tags
 	 */
 	public function getTags() {
-		return $this->tags;
+		return clone $this->tags;
 	}
 
 	/**
@@ -198,7 +188,6 @@ class Post {
 	 *
 	 * @param string $author
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function setAuthor($author) {
 		$this->author = $author;
@@ -208,7 +197,6 @@ class Post {
 	 * Getter for author
 	 *
 	 * @return string
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getAuthor() {
 		return $this->author;
@@ -219,7 +207,6 @@ class Post {
 	 *
 	 * @param string $content
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function setContent($content) {
 		$this->content = $content;
@@ -229,42 +216,9 @@ class Post {
 	 * Getter for content
 	 *
 	 * @return string
-	 * @author Matthias Hoermann <hoermann@saltation.de>
 	 */
 	public function getContent() {
 		return $this->content;
-	}
-
-	/**
-	 * Sets the votes for this post
-	 *
-	 * @param integer $votes
-	 * @return void
-	 * @author Matthias Hoermann <hoermann@saltation.de>
-	 */
-	public function setVotes($votes) {
-		$this->votes = $votes;
-	}
-
-	/**
-	 * Getter for votes
-	 *
-	 * @return integer
-	 * @author Matthias Hoermann <hoermann@saltation.de>
-	 */
-	public function getVotes() {
-		return $this->votes;
-	}
-
-	/**
-	 * Setter for the comments to this post
-	 *
-	 * @param array $comments an array of \F3\Blog\Domain\Model\Comment instances
-	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
-	 */
-	public function setComments(array $comments) {
-		$this->comments = $comments;
 	}
 
 	/**
@@ -272,62 +226,37 @@ class Post {
 	 *
 	 * @param \F3\Blog\Domain\Model\Comment $comment
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function addComment(\F3\Blog\Domain\Model\Comment $comment) {
-		$this->comments[] = $comment;
+		$this->comments->attach($comment);
 	}
 
 	/**
 	 * Returns the comments to this post
 	 *
 	 * @return array of \F3\Blog\Domain\Model\Comment
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function getComments() {
 		return $this->comments;
 	}
 
 	/**
-	 * Sets the published/unpublished state for this post
-	 *
-	 * @param boolean $published
-	 * @return void
-	 * @author Matthias Hoermann <hoermann@saltation.de>
-	 */
-	public function setPublished($published) {
-		$this->published = $published;
-	}
-
-	/**
-	 * Getter for published/unpublished state of this post
-	 *
-	 * @return boolean
-	 * @author Matthias Hoermann <hoermann@saltation.de>
-	 */
-	public function getPublished() {
-		return $this->published;
-	}
-
-	/**
 	 * Sets the posts related to this post
 	 *
-	 * @param array $relatedPosts An array with Post objects
+	 * @param \SplObjectStorage<\F3\Blog\Domain\Model\Post> $relatedPosts The related posts
 	 * @return void
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
-	public function setRelatedPosts(array $relatedPosts) {
-		$this->relatedPosts = $relatedPosts;
+	public function setRelatedPosts(\SplObjectStorage $relatedPosts) {
+		$this->relatedPosts = clone $relatedPosts;
 	}
 
 	/**
 	 * Returns the posts related to this post
 	 *
-	 * @return array An array of Post objects
-	 * @author Karsten Dambekalns <karsten@typo3.org>
+	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Post> The related posts
 	 */
 	public function getRelatedPosts() {
-		return $this->relatedPosts;
+		return clone $this->relatedPosts;
 	}
 
 }
