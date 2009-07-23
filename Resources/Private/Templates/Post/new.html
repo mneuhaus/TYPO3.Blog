@@ -19,7 +19,7 @@
 		<label for="content">Content</label><br />
 		<f:form.textarea property="content" rows="5" cols="40" id="content" /><br />
 		
-		<f:if condition="{relatedPosts}">
+		<f:if condition="{existingPosts}">
 			<label for="relatedPosts">Related Posts</label><br />
 			<f:form.select property="relatedPosts" options="{existingPosts}" optionLabelField="title" multiple="1" id="relatedPosts" /><br />
 			<br />
