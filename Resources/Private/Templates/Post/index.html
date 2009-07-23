@@ -13,15 +13,7 @@
 						<h2>
 							<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
 						</h2>
-						<p class="metadata">
-							Published on <f:format.date format='d.m.Y'>{post.date}</f:format.date> by {post.author}
-							<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}" section="comments"><img src="{f:uri.resource('Icons/FamFamFam/comments.png')}" title="Comments"/>
-								<f:if condition="{post.numberOfComments} > 0">
-									<f:then>{post.numberOfComments} comments</f:then>
-									<f:else>No comments</f:else>
-								</f:if>
-							</f:link.action>	
-						</p>
+						<f:render partial="/postMetadata" arguments="{post: post}"/>
 						<p class="content"><f:format.crop maxCharacters="500">{post.content}</f:format.crop> <f:link.action action='show' arguments='{post: post, blog: post.blog}'>More</f:link.action></p>
 					</li>
 				</f:for>

@@ -12,6 +12,13 @@
 		<div class="clear"></div>
 	</div>
 	<h2>{post.title}</h2>
-	<p class="metadata">Published on <f:format.date format='d.m.Y'>{post.date}</f:format.date> by {post.author}</p>
+	<f:render partial="/postMetadata" arguments="{post: post}"/>
 	<p class="content">{post.content}</p>
+	<if condition="{post.numberOfComments}">
+		<ol class="comments">
+			<f:for each="{post.comments}" as="comment">
+				<li>{comment.title}</li>
+			</f:for>
+		</ol>
+	</if>
 </f:section>
