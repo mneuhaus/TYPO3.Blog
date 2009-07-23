@@ -155,6 +155,12 @@ p.metadata {
 	font-size: 11px;
 }
 
+#sidebox .feed-button {
+	float: right;
+	position: relative;
+	left: 30px;
+}
+
 #sidebox h3 {
 	margin-bottom: 4px;
 }

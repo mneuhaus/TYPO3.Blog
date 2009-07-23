@@ -241,6 +241,15 @@ class Post {
 	}
 
 	/**
+	 * Returns the number of comments
+	 *
+	 * @return integer The number of comments
+	 */
+	public function getNumberOfComments() {
+		return count($this->comments);
+	}
+
+	/**
 	 * Sets the posts related to this post
 	 *
 	 * @param \SplObjectStorage<\F3\Blog\Domain\Model\Post> $relatedPosts The related posts

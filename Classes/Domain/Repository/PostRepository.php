@@ -41,12 +41,14 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 * Finds posts by the specified blog
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param integer $limit The number of posts to return at max
 	 * @return array The posts
 	 */
-	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
+	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setLimit($limit)
 			->execute();
 	}
 
@@ -84,6 +86,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 * Finds most recent posts by the specified blog
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param integer $limit The number of posts to return at max
 	 * @return array The posts
 	 */
 	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 5) {

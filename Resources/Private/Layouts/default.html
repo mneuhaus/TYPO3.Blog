@@ -28,6 +28,9 @@
 		<div id="maincontainer">
 			<div id="mainbox"><f:render section="mainbox" /></div>
 			<div id="sidebox">
+				<f:if condition="{blog}">
+					<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}"><img src="{f:uri.resource('SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
+				</f:if>
 				<f:if condition="{recentPosts}">
 					<h3>Recent Posts</h3>
 					<ul>
