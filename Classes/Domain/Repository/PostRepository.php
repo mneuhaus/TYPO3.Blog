@@ -76,7 +76,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	public function findNext(\F3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
 		$posts = $query->matching($query->greaterThan('date', $post->getDate()))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
 			->setLimit(1)
 			->execute();
 		return (count($posts) == 0) ? NULL : current($posts);
