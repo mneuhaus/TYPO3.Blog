@@ -46,7 +46,7 @@ class Comment {
 
 	/**
 	 * @var string
-	 * @validate EmailAddressAddress
+	 * @validate EmailAddress
 	 */
 	protected $emailAddress;
 

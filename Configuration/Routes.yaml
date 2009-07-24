@@ -6,8 +6,19 @@
 
 
 --
+  name: 'Comment actions 1'
+  uriPattern:    'blogs/{blog}/posts/{post}/comments/{@action}'
+  defaults:
+    @package:    Blog
+    @controller: Comment
+    @format:     html
+  routeParts:
+    blog:
+      handler: F3\Blog\RoutePartHandlers\BlogRoutePartHandler
+
+--
   name: 'Post'
-  uriPattern:    'blogs/{blog}/{post}(.{@format})'
+  uriPattern:    'blogs/{blog}/{post}.{@format}'
   defaults:
     @package:    Blog
     @controller: Post
@@ -21,7 +32,7 @@
 
 --
   name: 'Posts'
-  uriPattern:    'blogs/{blog}/posts(.{@format})'
+  uriPattern:    'blogs/{blog}/posts.{@format}'
   defaults:
     @package:    Blog
     @controller: Post
@@ -76,7 +87,7 @@
 
 --
   name: 'Blogs'
-  uriPattern: '(blogs)'
+  uriPattern: '(blogs.html)'
   defaults:
     @package:    Blog
     @controller: Blog

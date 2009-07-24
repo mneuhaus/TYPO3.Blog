@@ -48,11 +48,6 @@ h2.flow3-firstHeader {
 	font-weight: normal;
 }
 
-.comment-header {
-	background-color: #99011e;
-	border-color: #700016;
-}
-
 input, select, option {
 	font-size: 13px;
 }
@@ -78,6 +73,32 @@ th, td {
 div, ol, ul, li, img, form, select, input, table, td {
 	margin: 0;
 	padding: 0;
+}
+
+.form li {
+	display: inline;
+	float: left;
+	margin: 10px 10px 0 0;
+	padding: 0;
+}
+
+.form input {
+	clear: both;
+	border: 1px solid #dddddd;
+	height: 20px;
+	width: 220px;
+}
+
+.form input.submit {
+	width: auto;
+	height: auto;
+	padding: 4px;
+	font-weight: bold;
+}
+
+.form textarea {
+	border: 1px solid #dddddd;
+	width: 460px;
 }
 
 #header {
@@ -127,15 +148,43 @@ div, ol, ul, li, img, form, select, input, table, td {
 	position: relative;
 }
 
-li.post {
+li.post, li.comment {
 	list-style-type: none;
 	list-style-image: none;
 }
 
-p.metadata {
+li.post p.metadata {
 	font-size: 11px;
 	color: #8c8c8c;
 	margin: 0;
+}
+
+ol.commentlist {
+	clear: both;
+	margin-bottom: 10px;
+}
+
+li.comment {
+	clear: both;
+}
+
+li.comment p.metadata {
+	background-color: #d7d7d7;
+	border-bottom: 1px solid #999999;
+	padding: 1px 8px;
+	margin: 10px 0 0 0;
+}
+
+li.comment p.content {
+	background-color: #efefef;
+	padding: 8px;
+	margin: 0;
+	min-height: 73px;
+}
+
+.comment img.gravatar {
+	float: left;
+	margin: 4px 10px 4px 0;
 }
 
 #navigation {
@@ -229,4 +278,8 @@ ul.errors {
 }
 .success a {
 	color:#264409;
+}
+
+.required {
+	color:#8a1f11;
 }

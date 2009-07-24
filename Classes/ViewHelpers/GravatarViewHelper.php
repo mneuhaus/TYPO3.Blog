@@ -32,11 +32,17 @@ namespace F3\Blog\ViewHelpers;
 class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 
 	/**
+	 * @var string
+	 */
+	protected $tagName = 'img';
+
+	/**
 	 * Initialize arguments
 	 *
 	 * @return void
 	 */
 	public function initializeArguments() {
+		parent::initializeArguments();
 		$this->registerArgument('email', 'string', 'Gravatar Email', TRUE);
 		$this->registerArgument('default', 'string', 'Default URL if no gravatar was found');
 		$this->registerArgument('size', 'Integer', 'Size of the gravatar');
@@ -50,7 +56,7 @@ class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 	 * @return string The rendered link
 	 */
 	public function render() {
-		$baseURI = $this->variableContainer->get('view')->getRequest()->getBaseURI();
+		$baseURI = $this->controllerContext->getRequest()->getBaseURI();
 		$gravatarURI = 'http://www.gravatar.com/avatar/' . md5((string)$this->arguments['email']);
 		$uriParts = array();
 		if ($this->arguments['default']) {
@@ -62,8 +68,9 @@ class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 		if (count($uriParts)) {
 			$gravatarURI .= '?' . implode('&', $uriParts);
 		}
-		$out = '<img src="' . $gravatarURI . '"' . $this->renderTagAttributes() . ' />';
-		return $out;
+
+		$this->tag->addAttribute('src', $gravatarURI);
+		return $this->tag->render();
 	}
 }
 

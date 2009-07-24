@@ -23,7 +23,7 @@ namespace F3\Blog\Controller;
  *                                                                        */
 
 /**
- * Comments controller for the Post package
+ * Comments controller for the Blog package
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -32,19 +32,13 @@ namespace F3\Blog\Controller;
 class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @inject
-	 * @var \F3\Blog\Domain\Model\PostRepository
-	 */
-	protected $postRepository;
-
-	/**
 	 * Creates a new comment
 	 *
-	 * @param F3\Post\Domain\Model\Post $post The post which will contain the new comment
-	 * @param F3\Post\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
+	 * @param F3\Blog\Domain\Model\Post $post The post which will contain the new comment
+	 * @param F3\Blog\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
 	 * @return void
 	 */
-	public function createAction(\F3\Post\Domain\Model\Post $post, \F3\Post\Domain\Model\Comment $newComment) {
+	public function createAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
 		$this->pushFlashMessage('Your new comment was created.');
 		$this->redirect('show', 'Post', NULL, array('blog' => $post->getBlog(), 'post' => $post));

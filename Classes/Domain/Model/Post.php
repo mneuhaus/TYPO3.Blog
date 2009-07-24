@@ -76,7 +76,7 @@ class Post {
 	protected $categories;
 
 	/**
-	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Category>
+	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Comment>
 	 */
 	protected $comments;
 
