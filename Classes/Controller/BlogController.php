@@ -47,16 +47,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * Shows a single blog
-	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show
-	 * @return string The rendered view of a single blog
-	 */
-	public function showAction(\F3\Blog\Domain\Model\Blog $blog) {
-		$this->view->assign('blog', $blog);
-	}
-
-	/**
 	 * Displays a form for creating a new blog
 	 *
 	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
