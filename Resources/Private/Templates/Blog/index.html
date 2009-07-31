@@ -15,7 +15,7 @@
 			<ul>
 				<f:for each="{blogs}" as="blog">
 					<li>
-						<h3><f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.name}</f:link.action></h3>
+						<h3><f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.title}</f:link.action></h3>
 						<p>
 							<f:format.nl2br>{blog.description}</f:format.nl2br>
 							<f:link.action action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:link.action>

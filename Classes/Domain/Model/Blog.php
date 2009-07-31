@@ -47,7 +47,6 @@ class Blog {
 	 *
 	 * @var string
 	 * @validate Text, StringLength(minimum = 1, maximum = 80)
-	 * @identity
 	 */
 	protected $title = '';
 

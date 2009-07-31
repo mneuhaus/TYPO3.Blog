@@ -1,7 +1,7 @@
 <f:layout name="default" />
 
 <f:section name="mainbox">
-	<div class="flow3-header flow3-header-n1"><h1 class="flow3-firstHeader">Edit blog "{blog.name}"</h1></div>
+	<div class="flow3-header flow3-header-n1"><h1 class="flow3-firstHeader">Edit blog "{blog.title}"</h1></div>
 	<f:for each="{flashMessages}" as="message">
 		<p class="bodytext"><strong>{message}</strong></p>
 	</f:for>
@@ -12,14 +12,12 @@
 	</f:form.errors>
 	<p class="bodytext">Enter information about your new blog below:</p>
 	<f:form method="post" action="update" name="blog" object="{blog}" arguments="{existingBlog: existingBlog}" >
-		<!--
-			This fixes a problem with lost identity
-			after a clone of the blog object and forward. 
-		-->
-		<f:form.hidden name="blog" value="{existingBlog}" />
-
+		<label for="name">Title <span class="required">(required)</span></label><br />
+		<f:form.textbox property="title" id="title" />
+		<br />
 		<label for="description">Description</label><br />
-		<f:form.textarea property="description" rows="2" cols="40" /><br />
+		<f:form.textarea property="description" rows="2" cols="40" id="description" />
+		<br />
 		<f:form.submit>Update</f:form.submit>
 	</f:form>
 </f:section>
