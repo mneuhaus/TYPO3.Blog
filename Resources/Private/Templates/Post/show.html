@@ -7,7 +7,7 @@
 			<span class="previous">« <f:link.action action="show" arguments="{post: previousPost, blog: post.blog}">{previousPost.title}</f:link.action></span>
 		</f:if>
 		<f:if condition="{nextPost}">
-			<span class="next"><f:link.action action="show" arguments="{post: nextPost, blog: post.blog}">{nextPost.title}</f:link.action> »</span>
+			<span class="next"><f:link.action action="show" arguments="{post: nextPost, blog: post.blog}">{nextPost.title}</f:link.action></span>
 		</f:if>
 		<div class="clear"></div>
 	</div>
@@ -19,6 +19,18 @@
 	<h2>{post.title}</h2>
 	<f:render partial="/postMetadata" arguments="{post: post}"/>
 	<p class="content">{post.content}</p>
+	<f:if condition="{post.relatedPosts}">
+		<a name="relatedposts"></a>
+		<div class="relatedposts">
+			<h3>Related Posts</h3>
+			<ul class="relatedpostslist">
+				<f:for each="{post.relatedPosts}" as="relatedPost">
+					<li><f:link.action action="show" arguments="{post: relatedPost, blog: relatedPost.blog}">{relatedPost.title}</f:link.action></li>
+				</f:for>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</f:if>
 	<a name="comments"></a>
 	<div class="comments">
 		<f:if condition="{post.numberOfComments}">
@@ -27,7 +39,7 @@
 				<f:for each="{post.comments}" as="comment" reverse="TRUE">
 					<li class="comment">
 						<p class="metadata"><img src="{f:uri.resource('Icons/FamFamFam/user_comment.png')}" title="Comment"/> {comment.author} | <f:format.date format='d.m.Y'>{comment.date}</f:format.date></p>
-						<blog:gravatar email="{comment.emailAddress}" default="{uri.resource('gravatar_default.gif')}" class="gravatar" />
+						<blog:gravatar email="{comment.emailAddress}" default="{f:uri.resource('gravatar_default.gif')}" class="gravatar" />
 						<p class="content"><f:format.nl2br>{comment.content}</f:format.nl2br></p>
 					</li>
 				</f:for>

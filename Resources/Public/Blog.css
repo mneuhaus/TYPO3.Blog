@@ -159,6 +159,19 @@ li.post p.metadata {
 	margin: 0;
 }
 
+ul.relatedpostslist {
+	clear: both;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	background-color: #efefef;
+	padding: 8px;
+}
+
+ul.relatedpostslist li {
+	list-style-type:square;
+	margin-left:15px;
+}
+
 ol.commentlist {
 	clear: both;
 	margin-bottom: 10px;
