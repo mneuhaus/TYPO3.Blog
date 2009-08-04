@@ -1,17 +1,17 @@
-<f:layout name="default" />
+<f:layout name="master" />
 
 <f:section name="mainbox">
-	<div class="flow3-header flow3-header-n1"><h1 class="flow3-firstHeader">Edit blog "{blog.title}"</h1></div>
+	<div class="flow3-header flow3-header-n1"><h1 class="flow3-firstHeader">Edit blog "{existingBlog.title}"</h1></div>
 	<f:for each="{flashMessages}" as="message">
 		<p class="bodytext"><strong>{message}</strong></p>
 	</f:for>
-	<f:form.errors for="blog">
+	<f:form.errors for="updatedBlog">
 		<div class="error">
 			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
 		</div>
 	</f:form.errors>
-	<p class="bodytext">Enter information about your new blog below:</p>
-	<f:form method="post" action="update" name="blog" object="{blog}" arguments="{existingBlog: existingBlog}" >
+	<p class="bodytext">Update the information below:</p>
+	<f:form method="post" action="update" name="updatedBlog" object="{updatedBlog}" arguments="{existingBlog: existingBlog}" >
 		<label for="name">Title <span class="required">(required)</span></label><br />
 		<f:form.textbox property="title" id="title" />
 		<br />

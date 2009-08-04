@@ -71,28 +71,30 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Edits an existing blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to edit or the blog with updated properties
-	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog or NULL to use the blog
+	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog
+	 * @param \F3\Blog\Domain\Model\Blog $updatedBlog The modified, updated blog or NULL if the existing blog should be cloned
 	 * @return string Form for editing the existing blog
-	 * @validate $blog Raw
+	 * @validate $updatedBlog Raw
 	 */
-	public function editAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $existingBlog = NULL) {
-		if ($existingBlog === NULL) {
-			$existingBlog = $blog;
+	public function editAction(\F3\Blog\Domain\Model\Blog $existingBlog, \F3\Blog\Domain\Model\Blog $updatedBlog = NULL) {
+		if ($updatedBlog === NULL) {
+			$updatedBlog = clone $existingBlog;
 		}
-		$this->view->assign('blog', $blog);
+
 		$this->view->assign('existingBlog', $existingBlog);
+		$this->view->assign('updatedBlog', $updatedBlog);
 	}
 
 	/**
 	 * Updates an existing blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The modified blog
 	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog
+	 * @param \F3\Blog\Domain\Model\Blog $updatedBlog The updated blog
 	 * @return void
+	 * @validate $updatedBlog Raw
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Blog $existingBlog) {
-		$this->blogRepository->replace($existingBlog, $blog);
+	public function updateAction(\F3\Blog\Domain\Model\Blog $existingBlog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
+		$this->blogRepository->replace($existingBlog, $updatedBlog);
 		$this->pushFlashMessage('Your blog has been updated.');
 		$this->redirect('index');
 	}

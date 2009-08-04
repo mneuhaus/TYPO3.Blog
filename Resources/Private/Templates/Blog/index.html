@@ -1,11 +1,7 @@
-<f:layout name="default" />
+<f:layout name="master" />
 
 <f:section name="mainbox">
 	<h1 class="flow3-firstHeader">Welcome to the FLOW3 Blog Example</h1>
-	<p class="bodytext">This installation serves as a demonstration for basic development techniques used in FLOW3 applications.
-		Please note that this example might be not fully functional at certain times because we're continuously working on it
-		and it has not yet been officially released.</p>
-
 	<f:for each="{flashMessages}" as="message">
 		<p class="bodytext"><strong>{message}</strong></p>
 	</f:for>
@@ -18,7 +14,7 @@
 						<h3><f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.title}</f:link.action></h3>
 						<p>
 							<f:format.nl2br>{blog.description}</f:format.nl2br>
-							<f:link.action action="edit" controller="Blog" arguments="{blog : blog}">Edit</f:link.action>
+							<f:link.action action="edit" controller="Blog" arguments="{existingBlog : blog}">Edit</f:link.action>
 							<f:link.action action="delete" controller="Blog" arguments="{blog : blog}">Delete</f:link.action>
 						</p>
 					</li>
