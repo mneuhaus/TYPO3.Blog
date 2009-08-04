@@ -48,7 +48,7 @@ h2.flow3-firstHeader {
 	font-weight: normal;
 }
 
-input, select, option {
+input, select, option, textarea {
 	font-size: 13px;
 }
 
@@ -75,28 +75,33 @@ div, ol, ul, li, img, form, select, input, table, td {
 	padding: 0;
 }
 
-.form li {
+form li {
 	display: inline;
 	float: left;
 	margin: 10px 10px 0 0;
 	padding: 0;
 }
 
-.form input {
+form input {
 	clear: both;
 	border: 1px solid #dddddd;
 	height: 20px;
 	width: 220px;
 }
 
-.form input.submit {
+form input[type=submit] {
 	width: auto;
 	height: auto;
 	padding: 4px;
 	font-weight: bold;
 }
 
-.form textarea {
+form textarea {
+	border: 1px solid #dddddd;
+	width: 460px;
+}
+
+form select {
 	border: 1px solid #dddddd;
 	width: 460px;
 }

@@ -12,6 +12,7 @@
 	</f:form.errors>
 	<p class="bodytext">Update the information below:</p>
 	<f:form method="post" action="update" name="updatedBlog" object="{updatedBlog}" arguments="{existingBlog: existingBlog}" >
+		<f:form.hidden property="identifier" />
 		<label for="name">Title <span class="required">(required)</span></label><br />
 		<f:form.textbox property="title" id="title" />
 		<br />

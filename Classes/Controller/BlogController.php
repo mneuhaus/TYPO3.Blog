@@ -78,7 +78,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function editAction(\F3\Blog\Domain\Model\Blog $existingBlog, \F3\Blog\Domain\Model\Blog $updatedBlog = NULL) {
 		if ($updatedBlog === NULL) {
-			$updatedBlog = clone $existingBlog;
+			$updatedBlog = $existingBlog;
 		}
 
 		$this->view->assign('existingBlog', $existingBlog);
@@ -91,7 +91,6 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Blog $existingBlog The existing unmodified blog
 	 * @param \F3\Blog\Domain\Model\Blog $updatedBlog The updated blog
 	 * @return void
-	 * @validate $updatedBlog Raw
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $existingBlog, \F3\Blog\Domain\Model\Blog $updatedBlog) {
 		$this->blogRepository->replace($existingBlog, $updatedBlog);
