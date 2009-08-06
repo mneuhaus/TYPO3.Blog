@@ -51,6 +51,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
+	 * @dontvalidate $newBlog
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $newBlog = NULL) {
 		$this->view->assign('newBlog', $newBlog);

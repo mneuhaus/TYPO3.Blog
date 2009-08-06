@@ -76,7 +76,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
 	 * @param F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
-	 * @validate $newPost Raw
+	 * @dontvalidate $newPost
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost = NULL) {
 		$this->view->assign('blog', $blog);
