@@ -21,7 +21,7 @@
 	<body>
 		<div id="header">
 			<f:if condition="{blog}">
-				<h1 class="title"><f:link.action action="index" controller="Post" arguments="{blog: blog}">{blog.title}</f:link.action></h1>
+				<h1 class="title"><f:link.action action="index" controller="Post" arguments="{blog: blog}">{blog.title}&nbsp;</f:link.action></h1>
 				<p class="description">{blog.description}</p>
 			</f:if>
 		</div>
