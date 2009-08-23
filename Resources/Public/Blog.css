@@ -184,6 +184,7 @@ ol.commentlist {
 
 li.comment {
 	clear: both;
+	background-color: #efefef;
 }
 
 li.comment p.metadata {
@@ -194,9 +195,9 @@ li.comment p.metadata {
 }
 
 li.comment p.content {
-	background-color: #efefef;
 	padding: 8px;
 	margin: 0;
+	margin-left:41px;
 	min-height: 73px;
 }
 
