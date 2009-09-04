@@ -13,7 +13,7 @@
 						<h2>
 							<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
 						</h2>
-						<f:render partial="postMetadata" arguments="{post: post}"/>
+						<f:render partial="postMetaData" arguments="{post: post}"/>
 						<p class="content"><f:format.crop maxCharacters="500">{post.content}</f:format.crop> <f:link.action action='show' arguments='{post: post, blog: post.blog}'>More</f:link.action></p>
 					</li>
 				</f:for>
