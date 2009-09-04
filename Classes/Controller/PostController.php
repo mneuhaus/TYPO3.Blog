@@ -74,7 +74,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Displays a form for creating a new post
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
-	 * @param F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
+	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
 	 * @dontvalidate $newPost
 	 */
@@ -87,8 +87,8 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Creates a new post
 	 *
-	 * @param F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
-	 * @param F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
+	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
 	 * @return void
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost) {
@@ -98,8 +98,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * Override getErrorFlashMessage to present
-	 * nice flash error messages.
+	 * Override getErrorFlashMessage to present nice flash error messages.
 	 *
 	 * @return string
 	 */

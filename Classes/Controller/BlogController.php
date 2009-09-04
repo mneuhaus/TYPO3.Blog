@@ -49,7 +49,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Displays a form for creating a new blog
 	 *
-	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
+	 * @param \F3\Blog\Domain\Model\Blog $newBlog A fresh blog object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new blog
 	 * @dontvalidate $newBlog
 	 */
@@ -60,7 +60,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Creates a new blog
 	 *
-	 * @param F3\Blog\Domain\Model\Blog $newBlog A fresh Blog object which has not yet been added to the repository
+	 * @param \F3\Blog\Domain\Model\Blog $newBlog A fresh Blog object which has not yet been added to the repository
 	 * @return void
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
@@ -105,8 +105,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * Override getErrorFlashMessage to present
-	 * nice flash error messages.
+	 * Override getErrorFlashMessage to present nice flash error messages.
 	 *
 	 * @return string
 	 */

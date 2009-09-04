@@ -34,8 +34,8 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Creates a new comment
 	 *
-	 * @param F3\Blog\Domain\Model\Post $post The post which will contain the new comment
-	 * @param F3\Blog\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
+	 * @param \F3\Blog\Domain\Model\Post $post The post which will contain the new comment
+	 * @param \F3\Blog\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
 	 * @return void
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment) {
@@ -45,8 +45,7 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * Override getErrorFlashMessage to present
-	 * nice flash error messages.
+	 * Override getErrorFlashMessage to present nice flash error messages.
 	 *
 	 * @return string
 	 */
