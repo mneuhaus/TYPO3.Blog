@@ -52,7 +52,7 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {
 			case 'createAction' :
-				return 'Could not create the new comment:';
+				return 'Could not create the new comment.';
 			default :
 				return parent::getErrorFlashMessage();
 		}

@@ -60,14 +60,17 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Action that displays one single post
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post The post to display
+	 * @param \F3\Blog\Domain\Model\Comment $newComment If the comment form as has been submitted but the comment was not valid, this argument is used for displaying the entered values again
+	 * @dontvalidate $newComment
 	 * @return void
 	 */
-	public function showAction(\F3\Blog\Domain\Model\Post $post) {
+	public function showAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment = NULL) {
 		$this->view->assign('post', $post);
 		$this->view->assign('blog', $post->getBlog());
 		$this->view->assign('previousPost', $this->postRepository->findPrevious($post));
 		$this->view->assign('nextPost', $this->postRepository->findNext($post));
 		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($post->getBlog()));
+		$this->view->assign('newComment', $newComment);
 	}
 
 	/**

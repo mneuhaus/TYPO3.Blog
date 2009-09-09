@@ -32,18 +32,6 @@ namespace F3\Blog\RoutePartHandlers;
 class BlogRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 
 	/**
-	 * While matching, converts the blog identifier into an identifer array
-	 *
-	 * @param string $value value to match, the blog identifier
-	 * @return boolean TRUE if value could be matched successfully, otherwise FALSE.
-	 */
-	protected function matchValue($value) {
-		if ($value === NULL || $value === '') return FALSE;
-		$this->value = array('__identity' => array('identifier' => $value));
-		return TRUE;
-	}
-
-	/**
 	 * Resolves the identifier of the blog
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $value The Blog object
@@ -52,6 +40,18 @@ class BlogRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	protected function resolveValue($value) {
 		if (!$value instanceof \F3\Blog\Domain\Model\Blog) return FALSE;
 		$this->value = $value->getIdentifier();
+		return TRUE;
+	}
+
+	/**
+	 * While matching, converts the blog identifier into an identifer array
+	 *
+	 * @param string $value value to match, the blog identifier
+	 * @return boolean TRUE if value could be matched successfully, otherwise FALSE.
+	 */
+	protected function matchValue($value) {
+		if ($value === NULL || $value === '') return FALSE;
+		$this->value = array('__identity' => array('identifier' => $value));
 		return TRUE;
 	}
 }

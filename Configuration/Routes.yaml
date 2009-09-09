@@ -43,7 +43,7 @@
       handler: F3\Blog\RoutePartHandlers\BlogRoutePartHandler
 
 --
-  name: 'Post actions 1'
+  name: 'Post actions 2'
   uriPattern:    'blogs/{blog}/posts/{post}/{@action}'
   defaults:
     @package:    Blog
@@ -56,7 +56,7 @@
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 --
-  name: 'Post actions 2'
+  name: 'Post actions 1'
   uriPattern:    'blogs/{blog}/posts/{@action}'
   defaults:
     @package:    Blog
@@ -67,7 +67,7 @@
       handler: F3\Blog\RoutePartHandlers\BlogRoutePartHandler
 
 --
-  name: 'Blog actions 1'
+  name: 'Blog actions 2'
   uriPattern: 'blogs/{blog}/{@action}'
   defaults:
     @package:    Blog
@@ -78,7 +78,7 @@
       handler: F3\Blog\RoutePartHandlers\BlogRoutePartHandler
 
 --
-  name: 'Blog actions 2'
+  name: 'Blog actions 1'
   uriPattern: 'blogs/{@action}'
   defaults:
     @package:    Blog
