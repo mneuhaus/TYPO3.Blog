@@ -12,7 +12,9 @@
 		<title>{blog.title} {stuff}</title>
 		<link rel="stylesheet" href="{f:uri.resource('Blog.css')}" type="text/css" media="all" />
 
-		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href='<f:uri.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}" absolute="TRUE"/>' />
+		<f:if condition="{blog}">
+			<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href='<f:uri.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}" absolute="TRUE"/>' />
+		</f:if>
 		<link rel='index' title='{blog.title}' href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
 		<link rel="canonical" href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
 

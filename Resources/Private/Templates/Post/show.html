@@ -4,10 +4,10 @@
 <f:section name="mainbox">
 	<div id="navigation">
 		<f:if condition="{previousPost}">
-			<span class="previous">« <f:link.action action="show" arguments="{post: previousPost, blog: post.blog}">{previousPost.title}</f:link.action></span>
+			<span class="previous">&laquo; <f:link.action action="show" arguments="{post: previousPost, blog: previousPost.blog}">{previousPost.title}</f:link.action></span>
 		</f:if>
 		<f:if condition="{nextPost}">
-			<span class="next"><f:link.action action="show" arguments="{post: nextPost, blog: post.blog}">{nextPost.title}</f:link.action> »</span>
+			<span class="next"><f:link.action action="show" arguments="{post: nextPost, blog: nextPost.blog}">{nextPost.title}</f:link.action> &raquo;</span>
 		</f:if>
 		<div class="clear"></div>
 	</div>
@@ -52,7 +52,7 @@
 				<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
 			</div>
 		</f:form.errors>
-		<f:form method="post" action="create" controllerName="Comment" object="{newComment}" name="newComment" class="form newcomment">
+		<f:form method="post" action="create" controller="Comment" object="{newComment}" name="newComment" class="form newcomment">
 			<f:form.hidden name="blog" value="{post.blog}" />
 			<f:form.hidden name="post" value="{post}" />
 			<ul>
