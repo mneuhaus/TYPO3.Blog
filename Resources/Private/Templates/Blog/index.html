@@ -2,9 +2,7 @@
 
 <f:section name="mainbox">
 	<h1 class="flow3-firstHeader">Welcome to the FLOW3 Blog Example</h1>
-	<f:for each="{flashMessages}" as="message">
-		<p class="bodytext"><strong>{message}</strong></p>
-	</f:for>
+	<f:renderFlashMessages />
 	<f:if condition="{blogs}">
 		<f:then>
 			<p class="bodytext">Here is a list of blogs:</p>

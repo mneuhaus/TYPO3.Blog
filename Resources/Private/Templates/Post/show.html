@@ -12,9 +12,7 @@
 		<div class="clear"></div>
 	</div>
 
-	<f:for each="{flashMessages}" as="message">
-		<p class="bodytext"><strong>{message}</strong></p>
-	</f:for>
+	<f:renderFlashMessages />
 
 	<h2>{post.title}</h2>
 	<f:render partial="/postMetaData" arguments="{post: post}"/>

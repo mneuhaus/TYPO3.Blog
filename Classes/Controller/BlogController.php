@@ -65,7 +65,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $newBlog) {
 		$this->blogRepository->add($newBlog);
-		$this->pushFlashMessage('Your new blog was created.');
+		$this->flashMessages->add('Your new blog was created.');
 		$this->redirect('index');
 	}
 
@@ -88,7 +88,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->update($blog);
-		$this->pushFlashMessage('Your blog has been updated.');
+		$this->flashMessages->add('Your blog has been updated.');
 		$this->redirect('index');
 	}
 
@@ -100,7 +100,7 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->remove($blog);
-		$this->pushFlashMessage('Your blog has been removed.');
+		$this->flashMessages->add('Your blog has been removed.');
 		$this->redirect('index');
 	}
 
