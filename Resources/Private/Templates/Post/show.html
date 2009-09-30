@@ -16,7 +16,7 @@
 
 	<h2>{post.title}</h2>
 	<f:render partial="/postMetaData" arguments="{post: post}"/>
-	<p class="content">{post.content}</p>
+	<p class="content"><f:format.nl2br>{post.content}</f:format.nl2br></p>
 	<f:if condition="{post.relatedPosts}">
 		<a name="relatedposts"></a>
 		<div class="relatedposts">

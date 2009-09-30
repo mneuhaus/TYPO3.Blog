@@ -1,7 +1,7 @@
 ﻿<f:layout name="master" />
 
 <f:section name="mainbox">
-	<f:renderFlashMessages />
+	<f:renderFlashMessages class="flashmessages" />
 	<f:if condition="{posts}">
 		<f:then>
 			<div id="navigation">
@@ -21,7 +21,7 @@
 			</ol>
 		</f:then>
 		<f:else>
-			<p>This blog currently doesn't contain any posts. ﻿<f:link.action action="new" controller="Post" arguments="{blog: blog}">Create the first post</f:link.action></p>
+			<p>This blog currently doesn't contain any posts. <f:link.action action="new" controller="Post" arguments="{blog: blog}">Create the first post</f:link.action></p>
 		</f:else>
 	</f:if>
 </f:section>

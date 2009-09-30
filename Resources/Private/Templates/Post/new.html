@@ -2,7 +2,7 @@
 
 <f:section name="mainbox">
 	<h2 class="flow3-firstHeader">Create a new post</h2>
-	<f:renderFlashMessages />
+	<f:renderFlashMessages class="flashmessages"/>
 	<f:form.errors for="newPost">
 		<div class="error">
 			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
@@ -22,6 +22,6 @@
 			<f:form.select property="relatedPosts" options="{existingPosts}" optionLabelField="title" multiple="1" size="4" id="relatedPosts" /><br />
 			<br />
 		</f:if>
-		<f:form.submit>Create</f:form.submit>
+		<f:form.submit value="Submit post"/>
 	</f:form>
 </f:section>
