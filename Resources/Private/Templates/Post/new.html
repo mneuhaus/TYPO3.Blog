@@ -2,7 +2,7 @@
 
 <f:section name="mainbox">
 	<h2 class="flow3-firstHeader">Create a new post</h2>
-	<f:renderFlashMessages class="flashmessages"/>
+	<f:flashMessages class="flashmessages"/>
 	<f:form.errors for="newPost">
 		<div class="error">
 			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>

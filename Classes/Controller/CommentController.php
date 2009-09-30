@@ -40,7 +40,7 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
-		$this->flashMessages->add('Your new comment was created.');
+		$this->flashMessageContainer->add('Your new comment was created.');
 		$this->redirect('show', 'Post', NULL, array('blog' => $post->getBlog(), 'post' => $post));
 	}
 

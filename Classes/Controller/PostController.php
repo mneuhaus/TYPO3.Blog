@@ -96,7 +96,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost) {
 		$blog->addPost($newPost);
-		$this->flashMessages->add('Your new post was created.');
+		$this->flashMessageContainer->add('Your new post was created.');
 		$this->redirect('index', NULL, NULL, array('blog' => $blog));
 	}
 
