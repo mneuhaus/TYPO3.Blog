@@ -50,29 +50,51 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @return string
 	 */
 	public function indexAction() {
-		foreach ($this->blogRepository->findAll() as $blog) {
-			$this->blogRepository->remove($blog);
+		$this->blogRepository->removeAll();
+
+		$blogCount = $postCount = $commentCount = 0;
+		$startTime = microtime(TRUE);
+		foreach (range(1, rand(1, 5)) as $b) {
+			$blogCount++;
+			$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
+			$blog->setIdentifier('blog' . $b);
+			$blog->setTitle(ucwords(\F3\Faker\Lorem::sentence(3)));
+			$blog->setDescription(\F3\Faker\Lorem::sentence());
+			$this->blogRepository->add($blog);
+
+			$tags = array();
+			foreach (range(0, rand(3, 5)) as $i) {
+				$tags[] = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', \F3\Faker\Lorem::words(1));
+			}
+
+			foreach (range(1, rand(15, 25)) as $i) {
+				$postCount++;
+				$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
+				$post->setAuthor(\F3\Faker\Name::fullName());
+				$post->setTitle(trim(\F3\Faker\Lorem::sentence(2), '.'));
+				$post->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(5)));
+				for ($j = 0; $j < rand(0, 5); $j++) {
+					$post->addTag($tags[array_rand($tags)]);
+				}
+				$post->setDate(\F3\Faker\Date::random('- 500 days', '+0 seconds'));
+				for ($j = 0; $j < rand(0, 10); $j++) {
+					$commentCount++;
+					$comment = $this->objectFactory->create('F3\Blog\Domain\Model\Comment');
+					$comment->setAuthor(\F3\Faker\Name::fullName());
+					$comment->setEmailAddress(\F3\Faker\Internet::email());
+					$comment->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(2)));
+					$comment->setDate(\F3\Faker\Date::random('+ 10 minutes', '+ 6 weeks', $post->getDate()));
+					$post->addComment($comment);
+				}
+
+				$blog->addPost($post);
+			}
 		}
+		$endTime = microtime(TRUE);
 
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
-		$blog->setIdentifier('FLOW3' . time());
-		$blog->setTitle('FLOW3' . time());
-		$blog->setDescription('A blog about FLOW3 development.');
-		$this->blogRepository->add($blog);
-
-		$tag = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', 'FooBar');
-		for ($i=1; $i <= 100; $i++) {
-			$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
-			$post->setAuthor('John Doe');
-			$post->setTitle('Example Post ' . $i);
-			$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-			$post->addTag($tag);
-			$post->setDate(new \DateTime('now +' . $i . ' seconds', new \DateTimeZone('UTC')));
-
-			$blog->addPost($post);
-		}
-		#$this->redirect('index', 'blog');
-		return 'done';
+		return '<p>Done, created ' . $blogCount . ' blogs, ' . $postCount . ' posts, ' . $commentCount . ' comments.</p>' .
+		'<p>Peak memory usage was ~' . floor(memory_get_peak_usage()/1024/1024) . ' MByte.<br />' .
+		'Data generation took ' . round(($endTime - $startTime), 4) . ' seconds.</p>';
 	}
 
 }

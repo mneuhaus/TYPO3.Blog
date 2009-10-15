@@ -157,7 +157,7 @@ class Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param \SplObjectStorage<\SplObjectStorage> $tags One or more \F3\Blog\Domain\Model\Tag objects
+	 * @param \SplObjectStorage<\F3\Blog\Domain\Model\Tag> $tags One or more \F3\Blog\Domain\Model\Tag objects
 	 * @return void
 	 */
 	public function setTags(\SplObjectStorage $tags) {

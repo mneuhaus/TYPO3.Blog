@@ -143,6 +143,16 @@ class Blog {
 	}
 
 	/**
+	 * Removes a post from this blog
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @return void
+	 */
+	public function detachPost(\F3\Blog\Domain\Model\Post $post) {
+		$this->posts->detach($post);
+	}
+
+	/**
 	 * Returns all posts in this blog
 	 *
 	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Post> The posts of this blog
