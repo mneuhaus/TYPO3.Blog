@@ -10,13 +10,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<f:base />
 		<title>{blog.title} {stuff}</title>
-		<link rel="stylesheet" href="{f:uri.resource('Blog.css')}" type="text/css" media="all" />
+		<link rel="stylesheet" href="{f:uri.resource(path: 'Blog.css')}" type="text/css" media="all" />
 
 		<f:if condition="{blog}">
 			<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href='<f:uri.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}" absolute="TRUE"/>' />
+			<link rel='index' title='{blog.title}' href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
+			<link rel="canonical" href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
 		</f:if>
-		<link rel='index' title='{blog.title}' href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
-		<link rel="canonical" href='<f:uri.action action="index" controller="Post" arguments="{blog: blog}" absolute="TRUE"/>' />
 
 		<meta name="generator" content="FLOW3" />
 	</head>
@@ -31,7 +31,7 @@
 			<div id="mainbox"><f:render section="mainbox" /></div>
 			<div id="sidebox">
 				<f:if condition="{blog}">
-					<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}"><img src="{f:uri.resource('Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
+					<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml" arguments="{blog: blog}"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
 				</f:if>
 				<f:if condition="{recentPosts}">
 					<h3>Recent Posts</h3>
@@ -44,6 +44,6 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div id="footer"><a href="http://flow3.typo3.org">Powered by FLOW3 <img src="{f:uri.resource('FLOW3-Logo-11px.png')}" width="11" height="11" /></a></div>
+		<div id="footer"><a href="http://flow3.typo3.org">Powered by FLOW3 <img src="{f:uri.resource(path: 'FLOW3-Logo-11px.png')}" width="11" height="11" /></a></div>
 	</body>
 </html>
