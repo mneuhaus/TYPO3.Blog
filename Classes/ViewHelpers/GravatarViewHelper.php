@@ -25,6 +25,15 @@ namespace F3\Blog\ViewHelpers;
 /**
  * A view helper to display a Gravatar
  *
+ * = Examples =
+ *
+ * <code title="Simple">
+ * <blog:gravatar email="{emailAddress}" default="http://domain.com/gravatar_default.gif" class="gravatar" />
+ * </code>
+ *
+ * Output:
+ * <img class="gravatar" src="http://www.gravatar.com/avatar/<hash>?d=http%3A%2F%2Fdomain.com%2Fgravatar_default.gif" />
+ *
  * @version $Id$
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
@@ -56,20 +65,20 @@ class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 	 * @return string The rendered link
 	 */
 	public function render() {
-		$baseURI = $this->controllerContext->getRequest()->getBaseURI();
-		$gravatarURI = 'http://www.gravatar.com/avatar/' . md5((string)$this->arguments['email']);
+		$baseUri = $this->controllerContext->getRequest()->getBaseUri();
+		$gravatarUri = 'http://www.gravatar.com/avatar/' . md5((string)$this->arguments['email']);
 		$uriParts = array();
 		if ($this->arguments['default']) {
-			$uriParts[] = 'd=' . urlencode($baseURI . $this->arguments['default']);
+			$uriParts[] = 'd=' . urlencode($baseUri . $this->arguments['default']);
 		}
 		if ($this->arguments['size']) {
 			$uriParts[] = 's=' . $this->arguments['size'];
 		}
 		if (count($uriParts)) {
-			$gravatarURI .= '?' . implode('&', $uriParts);
+			$gravatarUri .= '?' . implode('&', $uriParts);
 		}
 
-		$this->tag->addAttribute('src', $gravatarURI);
+		$this->tag->addAttribute('src', $gravatarUri);
 		return $this->tag->render();
 	}
 }
