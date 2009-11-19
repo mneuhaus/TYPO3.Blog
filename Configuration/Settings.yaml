@@ -4,7 +4,3 @@
 
 # $Id$
 
-# How many entries to show for the "latest posts" view (maximum).
-Blog:
-  latestView:
-    maxItems: 5

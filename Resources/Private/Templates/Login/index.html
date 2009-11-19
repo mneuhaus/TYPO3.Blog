@@ -1,0 +1,14 @@
+<f:layout name="admin" />
+
+<f:section name="mainbox">
+	<f:flashMessages class="flashmessages" />
+	<div id="loginscreen">
+		<h2>Authentication required</h2>
+		<p>Please login to proceed.</p>
+		<form action="flow3/authenticate" method="post" name="loginform">
+			<p><label for="username">Username:</label> <input type="text" id="username" name="F3\FLOW3\Security\Authentication\Token\UsernamePassword::username" value="" tabindex="1" /></p>
+			<p><label for="password">Password:</label> <input type="password" id="password" name="F3\FLOW3\Security\Authentication\Token\UsernamePassword::password" value="" tabindex="2" /></p>
+			<p><input type="submit" id="cancel" name="cancelbutton" value="Cancel" tabindex="3" /> <input type="submit" id="loginbutton" name="submitlogin" value="Login" tabindex="3" /></p>
+		</form>
+	</div>
+</f:section>

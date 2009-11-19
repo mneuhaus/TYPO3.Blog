@@ -49,5 +49,19 @@ class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 		}
 		parent::remove($blog);
 	}
+
+	/**
+	 * Finds the active blog.
+	 *
+	 * As of now only one Blog is supported anyway so we just assume that only one
+	 * Blog object resides in the Blog Repository.
+	 *
+	 * @return \F3\Blog\Domain\Model\Blog The active blog or FALSE if none exists
+	 */
+	public function findActive() {
+		$query = $this->createQuery();
+		$result = $query->setLimit(1)->execute();
+		return current($result);
+	}
 }
 ?>

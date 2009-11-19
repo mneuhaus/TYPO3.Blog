@@ -1,9 +1,9 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\RoutePartHandlers;
+namespace F3\Blog\Controller;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "Blog".                       *
+ * This script belongs to the FLOW3 package "TYPO3".                      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -23,52 +23,27 @@ namespace F3\Blog\RoutePartHandlers;
  *                                                                        */
 
 /**
- * Blog route part handler
+ * A controller which allows for logging into the backend
  *
- * @version $Id$
+ * @version $Id: LoginController.php 2817 2009-07-16 14:32:53Z k-fish $
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @scope prototype
  */
-class BlogRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
+class LoginController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @var array
+	 * @var string
 	 */
-	protected $settings;
+	protected $defaultViewObjectName = 'F3\Fluid\View\TemplateView';
 
 	/**
-	 * Injects settings of the Blog package
+	 * Default action for this controller
 	 *
-	 * @param array $settings
-	 * @return void
+	 * @return string Some login form
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function injectSettings(array $settings) {
-		$this->settings = $settings;
-	}
-
-	/**
-	 * Resolves the identifier of the blog
-	 *
-	 * @param \F3\Blog\Domain\Model\Blog $value The Blog object
-	 * @return boolean TRUE if the name of the blog could be resolved and stored in $this->value, otherwise FALSE.
-	 */
-	protected function resolveValue($value) {
-		if (!$value instanceof \F3\Blog\Domain\Model\Blog) return FALSE;
-		$this->value = $value->getIdentifier();
-		return TRUE;
-	}
-
-	/**
-	 * While matching, converts the blog identifier into an identifer array
-	 *
-	 * @param string $value value to match, the blog identifier
-	 * @return boolean TRUE if value could be matched successfully, otherwise FALSE.
-	 */
-	protected function matchValue($value) {
-var_dump($this->settings);
-		if ($value === NULL || $value === '') return FALSE;
-		$this->value = array('__identity' => array('identifier' => $value));
-		return TRUE;
+	public function indexAction() {
+		$this->view->assign('title', 'Login');
 	}
 }
+
 ?>

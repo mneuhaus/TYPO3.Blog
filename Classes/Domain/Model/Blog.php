@@ -34,15 +34,6 @@ namespace F3\Blog\Domain\Model;
 class Blog {
 
 	/**
-	 * The blog's identifier.
-	 *
-	 * @var string
-	 * @validate Alphanumeric, StringLength(minimum = 3, maximum = 50)
-	 * @identity
-	 */
-	protected $identifier = '';
-
-	/**
 	 * The blog's title.
 	 *
 	 * @var string
@@ -72,25 +63,6 @@ class Blog {
 	 */
 	public function __construct() {
 		$this->posts = new \SplObjectStorage();
-	}
-
-	/**
-	 * Sets this blog's identifier
-	 *
-	 * @param string $identifier The identifier
-	 * @return void
-	 */
-	public function setIdentifier($identifier) {
-		$this->identifier = $identifier;
-	}
-
-	/**
-	 * Returns the blog's identifier
-	 *
-	 * @return string The blog's identifier
-	 */
-	public function getIdentifier() {
-		return $this->identifier;
 	}
 
 	/**
@@ -140,16 +112,6 @@ class Blog {
 	public function addPost(\F3\Blog\Domain\Model\Post $post) {
 		$post->setBlog($this);
 		$this->posts->attach($post);
-	}
-
-	/**
-	 * Removes a post from this blog
-	 *
-	 * @param \F3\Blog\Domain\Model\Post $post
-	 * @return void
-	 */
-	public function detachPost(\F3\Blog\Domain\Model\Post $post) {
-		$this->posts->detach($post);
 	}
 
 	/**

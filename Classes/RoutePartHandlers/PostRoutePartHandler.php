@@ -57,7 +57,7 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 
 	/**
 	 * Checks if the remaining request path starts with the path signature of a post, which
-	 * is: YYYY/MM/DD/TITLE eg. 2009/03/09/My-First-Blog-Entry
+	 * is: YYYY/MM/DD/TITLE eg. 2009/03/09/my-first-blog-entry
 	 *
 	 * If the request path matches this pattern, the matching part is returned as the "value
 	 * to match" for further processing in matchValue(). The remaining part of the requestPath
@@ -68,7 +68,7 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	 */
 	protected function findValueToMatch($requestPath) {
 		$matches = array();
-		preg_match('/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/[a-zA-Z0-9\-]+/', $requestPath, $matches);
+		preg_match('/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}\/[a-z0-9\-]+/', $requestPath, $matches);
 		return (count($matches) === 1) ? current($matches) : '';
 	}
 
@@ -81,7 +81,7 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	protected function resolveValue($value) {
 		if (!$value instanceof \F3\Blog\Domain\Model\Post) return FALSE;
 		$this->value = $value->getDate()->format('Y/m/d/');
-		$this->value .= str_replace(' ', '-', $value->getTitle());
+		$this->value .= strtolower(str_replace(' ', '-', $value->getTitle()));
 		return TRUE;
 	}
 }

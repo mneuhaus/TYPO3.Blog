@@ -38,22 +38,38 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $blogRepository;
 
 	/**
+	 * @var blog
+	 */
+	protected $blog;
+
+	/**
 	 * @inject
 	 * @var \F3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;
 
 	/**
+	 * Initializes any action.
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+		$this->blog = $this->blogRepository->findActive();
+		if ($this->blog === FALSE) {
+			$this->redirect('index', 'Setup');
+		}
+	}
+
+	/**
 	 * List action for this controller. Displays latest posts
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog to show the posts of
 	 * @return string
 	 */
-	public function indexAction(\F3\Blog\Domain\Model\Blog $blog) {
-		$posts = $this->postRepository->findByBlog($blog);
-		$this->view->assign('blog', $blog);
+	public function indexAction() {
+		$posts = $this->postRepository->findByBlog($this->blog);
+		$this->view->assign('blog', $this->blog);
 		$this->view->assign('posts', $posts);
-		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($blog));
+		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($this->blog));
 	}
 
 	/**
@@ -76,28 +92,26 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Displays a form for creating a new post
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
 	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
 	 * @dontvalidate $newPost
 	 */
-	public function newAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost = NULL) {
-		$this->view->assign('blog', $blog);
-		$this->view->assign('existingPosts', $this->postRepository->findByBlog($blog));
+	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
+		$this->view->assign('blog', $this->blog);
+		$this->view->assign('existingPosts', $this->postRepository->findByBlog($this->blog));
 		$this->view->assign('newPost', $newPost);
 	}
 
 	/**
 	 * Creates a new post
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog which will contain the new post
 	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
 	 * @return void
 	 */
-	public function createAction(\F3\Blog\Domain\Model\Blog $blog, \F3\Blog\Domain\Model\Post $newPost) {
-		$blog->addPost($newPost);
+	public function createAction(\F3\Blog\Domain\Model\Post $newPost) {
+		$this->blog->addPost($newPost);
 		$this->flashMessageContainer->add('Your new post was created.');
-		$this->redirect('index', NULL, NULL, array('blog' => $blog));
+		$this->redirect('index');
 	}
 
 	/**
