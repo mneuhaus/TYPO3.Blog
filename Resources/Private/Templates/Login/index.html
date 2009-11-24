@@ -5,10 +5,20 @@
 	<div id="loginscreen">
 		<h2>Authentication required</h2>
 		<p>Please login to proceed.</p>
-		<form action="flow3/authenticate" method="post" name="loginform">
-			<p><label for="username">Username:</label> <input type="text" id="username" name="F3\FLOW3\Security\Authentication\Token\UsernamePassword::username" value="" tabindex="1" /></p>
-			<p><label for="password">Password:</label> <input type="password" id="password" name="F3\FLOW3\Security\Authentication\Token\UsernamePassword::password" value="" tabindex="2" /></p>
-			<p><input type="submit" id="cancel" name="cancelbutton" value="Cancel" tabindex="3" /> <input type="submit" id="loginbutton" name="submitlogin" value="Login" tabindex="3" /></p>
-		</form>
+		<f:form action="authenticate" method="post">
+			<fieldset>
+				<div class="row username">
+					<label id="usernameLabel" for="username" class="placeholder"><span>Username</span></label>
+					<f:form.textbox name="F3\FLOW3\Security\Authentication\Token\UsernamePassword::username" tabindex="1" />
+				</div>
+			
+				<div class="row password">
+					<label id="passwordLabel" for="password" class="placeholder"><span>Password</span></label>
+					<f:form.password  name="F3\FLOW3\Security\Authentication\Token\UsernamePassword::password" tabindex="2" />
+				</div>
+
+				<f:form.submit value="Login" />
+			</fieldset>
+		</f:form>
 	</div>
 </f:section>

@@ -104,27 +104,10 @@
     @action:     index
 
 --
-  name: 'Login'
-  uriPattern: 'admin/login'
+  name: 'Authentication'
+  uriPattern: 'admin/authentication(/{@action})'
   defaults:
     @package:    Blog
     @controller: Login
     @format:     html
-
---
-  name: 'Authenticate with action'
-  uriPattern: 'flow3/authenticate/{@action}'
-  defaults:
-    '@package':    'FLOW3'
-    '@subpackage': 'Security\Authentication'
-    '@controller': 'Authentication'
-
---
-  name: 'Authenticate'
-  uriPattern: 'flow3/authenticate'
-  defaults:
-    '@package':    'FLOW3'
-    '@subpackage': 'Security\Authentication'
-    '@controller': 'Authentication'
-    '@action':     'authenticate'
-
+    @action:     index

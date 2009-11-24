@@ -31,18 +31,35 @@ namespace F3\Blog\Controller;
 class LoginController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @var string
+	 * @inject
+	 * @var \F3\FLOW3\Security\Authentication\ManagerInterface
 	 */
-	protected $defaultViewObjectName = 'F3\Fluid\View\TemplateView';
+	protected $authenticationManager;
 
 	/**
-	 * Default action for this controller
 	 *
-	 * @return string Some login form
-	 * @author Robert Lemke <robert@typo3.org>
+	 *
+	 * @return string
 	 */
 	public function indexAction() {
-		$this->view->assign('title', 'Login');
+
+	}
+
+	/**
+	 *
+	 * @return void
+	 */
+	public function authenticateAction() {
+		$this->authenticationManager->authenticate();
+	}
+
+	/**
+	 *
+	 * @return void
+	 * @author Andreas Förthner <andreas.foerthner@netlogix.de>
+	 */
+	public function logoutAction() {
+		$this->authenticationManager->logout();
 	}
 }
 

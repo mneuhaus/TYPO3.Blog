@@ -102,7 +102,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 		$account->setAccountIdentifier('robert');
 		$account->setCredentialsSource($credentials);
-		$account->setAuthenticationProviderName('BlogProvider');
+		$account->setAuthenticationProviderName('DefaultProvider');
 		$account->setRoles($roles);
 
 		$this->accountRepository->add($account);
