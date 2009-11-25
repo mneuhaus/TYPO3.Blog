@@ -1,10 +1,9 @@
 <f:layout name="admin" />
 
 <f:section name="mainbox">
-	<f:flashMessages class="flashmessages" />
 	<div id="loginscreen">
 		<h2>Authentication required</h2>
-		<p>Please login to proceed.</p>
+		<p><f:flashMessages class="flashmessages" /></p>
 		<f:form action="authenticate" method="post">
 			<fieldset>
 				<div class="row username">

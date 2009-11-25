@@ -46,11 +46,22 @@ class LoginController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
+	 * Authenticates an account by invoking the Provider based Authentication Manager.
+	 *
+	 * On successful authentication redirects to the list of posts, otherwise returns
+	 * to the login screen.
 	 *
 	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	public function authenticateAction() {
-		$this->authenticationManager->authenticate();
+		try {
+			$this->authenticationManager->authenticate();
+			$this->redirect('index', 'Post');
+		} catch (\F3\FLOW3\Security\Exception\AuthenticationRequired $exception) {
+			$this->flashMessageContainer->add('Wrong username or password.');
+			throw $exception;
+		}
 	}
 
 	/**
@@ -60,6 +71,8 @@ class LoginController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function logoutAction() {
 		$this->authenticationManager->logout();
+		$this->flashMessageContainer->add('Successfully logged out.');
+		$this->redirect('index', 'Post');
 	}
 }
 
