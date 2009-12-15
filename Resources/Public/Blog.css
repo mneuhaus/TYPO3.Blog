@@ -29,7 +29,7 @@ img {
 }
 
 h2 {
-	font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	font-size: 22px;
 	font-weight: normal;
 	letter-spacing: -1px;
@@ -119,7 +119,7 @@ form select {
 }
 
 #header h1 {
-	font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	font-size: 30px;
 	letter-spacing: -1px;
 	padding-top: 50px;
@@ -131,7 +131,7 @@ form select {
 }
 
 #header p.description {
-	font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	color: #e56508;
 } 

@@ -65,7 +65,6 @@ class BlogRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	 * @return boolean TRUE if value could be matched successfully, otherwise FALSE.
 	 */
 	protected function matchValue($value) {
-var_dump($this->settings);
 		if ($value === NULL || $value === '') return FALSE;
 		$this->value = array('__identity' => array('identifier' => $value));
 		return TRUE;
