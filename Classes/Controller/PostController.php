@@ -95,6 +95,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
 	 * @dontvalidate $newPost
+	 * @dontverifyrequesthash
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
 		$this->view->assign('blog', $this->blog);
@@ -106,6 +107,7 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Creates a new post
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
+	 * @dontverifyrequesthash
 	 * @return void
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Post $newPost) {
