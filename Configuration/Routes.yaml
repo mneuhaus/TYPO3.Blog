@@ -12,6 +12,9 @@
     @package:    Blog
     @controller: Comment
     @format:     html
+  routeParts:
+    post:
+      handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 --
   name: 'Post'
