@@ -32,7 +32,7 @@ class LoginController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\Authentication\ManagerInterface
+	 * @var \F3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
@@ -58,7 +58,7 @@ class LoginController extends \F3\FLOW3\MVC\Controller\ActionController {
 		try {
 			$this->authenticationManager->authenticate();
 			$this->redirect('index', 'Post');
-		} catch (\F3\FLOW3\Security\Exception\AuthenticationRequired $exception) {
+		} catch (\F3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
 			$this->flashMessageContainer->add('Wrong username or password.');
 			throw $exception;
 		}

@@ -33,7 +33,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Persistence\ManagerInterface
+	 * @var \F3\FLOW3\Persistence\PersistenceManagerInterface
 	 */
 	protected $persistenceManager;
 
