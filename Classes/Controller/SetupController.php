@@ -40,12 +40,6 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Repository\PostRepository
-	 */
-	protected $postRepository;
-
-	/**
-	 * @inject
 	 * @var \F3\Party\Domain\Repository\AccountRepository
 	 */
 	protected $accountRepository;

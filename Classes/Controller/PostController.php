@@ -95,7 +95,6 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
 	 * @dontvalidate $newPost
-	 * @dontverifyrequesthash
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
 		$this->view->assign('blog', $this->blog);
@@ -107,7 +106,6 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Creates a new post
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
-	 * @dontverifyrequesthash
 	 * @return void
 	 */
 	public function createAction(\F3\Blog\Domain\Model\Post $newPost) {
@@ -116,6 +114,34 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->redirect('index');
 	}
 
+	/**
+	 * Displays a form for editing an existing post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
+	 * @dontvalidate $post
+	 * @return string An HTML form for editing a post
+	 */
+	public function editAction(\F3\Blog\Domain\Model\Post $post) {
+		$this->view->assign('blog', $this->blog);
+			// Don't display the post we're editing in the recent posts selector:
+		$existingPosts = $this->postRepository->findByBlog($this->blog);
+		unset($existingPosts[array_search($post, $existingPosts)]);
+		$this->view->assign('existingPosts', $existingPosts);
+		$this->view->assign('post', $post);
+	}
+
+	/**
+	 * Updates an existing post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post A not yet persisted clone of the original post containing the modifications
+	 * @return void
+	 */
+	public function updateAction(\F3\Blog\Domain\Model\Post $post) {
+		$this->postRepository->update($post);
+		$this->flashMessageContainer->add('Your post has been updated.');
+		$this->redirect('index');
+	}
+	
 	/**
 	 * Override getErrorFlashMessage to present nice flash error messages.
 	 *

@@ -1,15 +1,15 @@
 <f:layout name="master" />
 
 <f:section name="mainbox">
-	<h2 class="flow3-firstHeader">Create a new post</h2>
+	<h2 class="flow3-firstHeader">Edit post</h2>
 	<f:flashMessages class="flashmessages"/>
-	<f:form.errors for="newPost">
+	<f:form.errors for="post">
 		<div class="error">
-			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+			<strong>{error.propertyName}</strong>:
+			<f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
 		</div>
 	</f:form.errors>
-	<f:form method="post" action="create" object="{newPost}" name="newPost" enctype="multipart/form-data">
-		<f:form.hidden name="blog" value="{blog}" />
+	<f:form method="post" action="update" object="{post}" name="post" enctype="multipart/form-data">
 		<label for="author">Author</label><br />
 		<f:form.textbox property="author" id="author" /><br />
 		<label for="title">Title</label><br />
@@ -21,6 +21,6 @@
 			<f:form.select property="relatedPosts" options="{existingPosts}" optionLabelField="title" multiple="1" size="4" id="relatedPosts" /><br />
 			<br />
 		</f:if>
-		<f:form.submit value="Submit post"/>
+		<f:form.submit value="Update"/>
 	</f:form>
 </f:section>
