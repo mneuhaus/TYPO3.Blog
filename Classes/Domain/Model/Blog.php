@@ -130,9 +130,6 @@ class Blog {
 	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Post> The posts of this blog
 	 */
 	public function getPosts() {
-		if ($this->posts instanceof \F3\FLOW3\Persistence\LazyLoadingProxy) {
-			$this->posts->_loadRealInstance();
-		}
 		return clone $this->posts;
 	}
 
