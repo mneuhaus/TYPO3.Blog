@@ -69,7 +69,7 @@ class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
 		$gravatarUri = 'http://www.gravatar.com/avatar/' . md5((string)$this->arguments['email']);
 		$uriParts = array();
 		if ($this->arguments['default']) {
-			$uriParts[] = 'd=' . urlencode($baseUri . $this->arguments['default']);
+			$uriParts[] = 'd=' . urlencode($this->arguments['default']);
 		}
 		if ($this->arguments['size']) {
 			$uriParts[] = 's=' . $this->arguments['size'];
