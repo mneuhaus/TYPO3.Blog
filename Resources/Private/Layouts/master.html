@@ -31,7 +31,7 @@
 					<h3>Recent Posts</h3>
 					<ul>
 						<f:for each="{recentPosts}" as="recentPost">
-							<li><f:link.action action="show" controller="Post" arguments="{post: recentPost, blog: recentPost.blog}">{recentPost.title}</f:link.action></li>
+							<li><f:link.action action="show" controller="Post" arguments="{post: recentPost}">{recentPost.title}</f:link.action></li>
 						</f:for>
 					</ul>
 				</f:if>	

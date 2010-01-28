@@ -5,112 +5,112 @@
 # $Id$
 
 
---
+-
   name: 'Comment actions 1'
   uriPattern:    'posts/{post}/comments/{@action}'
   defaults:
-    @package:    Blog
-    @controller: Comment
-    @format:     html
+    '@package':    Blog
+    '@controller': Comment
+    '@fomat':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
---
+-
   name: 'Post'
-  uriPattern:    'posts/{post}.{@format}'
+  uriPattern:    'posts/{post}.{@fomat}'
   defaults:
-    @package:    Blog
-    @controller: Post
-    @action:     show
-    @format:     html
+    '@package':    Blog
+    '@controller': Post
+    '@action':     show
+    '@fomat':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
---
+-
   name: 'Post actions 2'
   uriPattern:    'posts/{post}/{@action}'
   defaults:
-    @package:    Blog
-    @controller: Post
-    @format:     html
+    '@package':    Blog
+    '@controller': Post
+    '@fomat':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
---
+-
   name: 'Post actions 1'
   uriPattern:    'posts/{@action}'
   defaults:
-    @package:    Blog
-    @controller: Post
-    @format:     html
+    '@package':    Blog
+    '@controller': Post
+    '@fomat':     html
 
---
+-
   name: 'Post index'
   uriPattern:    '(posts)'
   defaults:
-    @package:    Blog
-    @controller: Post
-    @action:     index
-    @format:     html
+    '@package':    Blog
+    '@controller': Post
+    '@action':     index
+    '@fomat':     html
 
---
+-
   name: 'Post index with format'
-  uriPattern:    'posts.{@format}'
+  uriPattern:    'posts.{@fomat}'
   defaults:
-    @package:    Blog
-    @controller: Post
-    @format:     html
-    @action:     index
+    '@package':    Blog
+    '@controller': Post
+    '@fomat':     html
+    '@action':     index
 
---
+-
   name: 'Posts Feed'
-  uriPattern:    'feeds/posts.{@format}'
+  uriPattern:    'feeds/posts.{@fomat}'
   defaults:
-    @package:    Blog
-    @controller: Post
-    @action:     index
+    '@package':    Blog
+    '@controller': Post
+    '@action':     index
 
---
+-
   name: 'Blog actions 2'
   uriPattern: 'admin/blogs/{blog}/{@action}'
   defaults:
-    @package:    Blog
-    @controller: Blog
-    @format:     html
+    '@package':    Blog
+    '@controller': Blog
+    '@fomat':     html
 
---
+-
   name: 'Blog actions 1'
   uriPattern: 'admin/blogs/{@action}'
   defaults:
-    @package:    Blog
-    @controller: Blog
-    @format:     html
+    '@package':    Blog
+    '@controller': Blog
+    '@fomat':     html
 
---
+-
   name: 'Admin'
   uriPattern: 'admin'
   defaults:
-    @package:    Blog
-    @controller: Administration
-    @format:     html
+    '@package':    Blog
+    '@controller': Administration
+    '@fomat':     html
 
---
+-
   name: 'Setup'
   uriPattern: 'admin/setup(/{@action})'
   defaults:
-    @package:    Blog
-    @controller: Setup
-    @format:     html
-    @action:     index
+    '@package':    Blog
+    '@controller': Setup
+    '@fomat':     html
+    '@action':     index
 
---
+-
   name: 'Authentication'
   uriPattern: 'admin/authentication(/{@action})'
   defaults:
-    @package:    Blog
-    @controller: Login
-    @format:     html
-    @action:     index
+    '@package':    Blog
+    '@controller': Login
+    '@fomat':     html
+    '@action':     index

@@ -2,6 +2,9 @@
 
 <f:section name="mainbox">
 	<f:flashMessages class="flashmessages" />
+	<f:if condition="{tag}">
+		<h2>Posts tagged with &quot;{tag.name}&quot;:</h2>
+	</f:if>
 	<f:if condition="{posts}">
 		<f:then>
 			<div id="navigation">

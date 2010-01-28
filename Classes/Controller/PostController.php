@@ -63,10 +63,17 @@ class PostController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * List action for this controller. Displays latest posts
 	 *
+	 * @param string $tag The tag to display posts for
 	 * @return string
 	 */
-	public function indexAction() {
-		$posts = $this->postRepository->findByBlog($this->blog);
+	public function indexAction($tag = NULL) {
+		if ($tag === NULL) {
+			$posts = $this->postRepository->findByBlog($this->blog);
+		} else {
+			$tag = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', $tag);
+			$posts = $this->postRepository->findByTagAndBlog($tag, $this->blog);
+			$this->view->assign('tag', $tag);
+		}
 		$this->view->assign('blog', $this->blog);
 		$this->view->assign('posts', $posts);
 		$this->view->assign('recentPosts', $this->postRepository->findRecentByBlog($this->blog));

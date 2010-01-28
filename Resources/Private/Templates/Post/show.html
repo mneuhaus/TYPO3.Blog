@@ -4,10 +4,10 @@
 <f:section name="mainbox">
 	<div id="navigation">
 		<f:if condition="{previousPost}">
-			<span class="previous">&laquo; <f:link.action action="show" arguments="{post: previousPost, blog: previousPost.blog}">{previousPost.title}</f:link.action></span>
+			<span class="previous">&laquo; <f:link.action action="show" arguments="{post: previousPost}">{previousPost.title}</f:link.action></span>
 		</f:if>
 		<f:if condition="{nextPost}">
-			<span class="next"><f:link.action action="show" arguments="{post: nextPost, blog: nextPost.blog}">{nextPost.title}</f:link.action> &raquo;</span>
+			<span class="next"><f:link.action action="show" arguments="{post: nextPost}">{nextPost.title}</f:link.action> &raquo;</span>
 		</f:if>
 		<div class="clear"></div>
 	</div>
@@ -26,7 +26,7 @@
 			<h3>Related Posts</h3>
 			<ul class="relatedpostslist">
 				<f:for each="{post.relatedPosts}" as="relatedPost">
-					<li><f:link.action action="show" arguments="{post: relatedPost, blog: relatedPost.blog}">{relatedPost.title}</f:link.action></li>
+					<li><f:link.action action="show" arguments="{post: relatedPost}">{relatedPost.title}</f:link.action></li>
 				</f:for>
 			</ul>
 		</div>

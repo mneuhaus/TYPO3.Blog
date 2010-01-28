@@ -53,6 +53,27 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	}
 
 	/**
+	 * Finds posts by the specified blog
+	 *
+	 * @param \F3\Blog\Domain\Model\Tag $tag
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param integer $limit The number of posts to return at max
+	 * @return array The posts
+	 */
+	public function findByTagAndBlog(\F3\Blog\Domain\Model\Tag $tag, \F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
+		$query = $this->createQuery();
+		return $query->matching(
+				$query->logicalAnd(
+					$query->equals('blog', $blog),
+					$query->contains('tags', $tag)
+				)
+			)
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setLimit($limit)
+			->execute();
+	}
+
+	/**
 	 * Finds the previous of the given post
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post The reference post
