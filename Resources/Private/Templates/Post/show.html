@@ -18,7 +18,9 @@
 	<f:render partial="/postMetaData" arguments="{post: post}"/>
 	<p class="content"><f:format.nl2br>{post.content}</f:format.nl2br></p>
 	<f:if condition="{post.image.originalResource}">
-		<img src="{f:uri.resource(resource: post.image.originalResource, title: post.image.title)}" style="max-width: 100%" alt="{post.image.title}" />
+
+	<img src="{f:uri.resource(resource: post.image.originalResource, title: post.image.title)}" style="max-width: 100%" alt="{post.image.title}" />
+
 	</f:if>
 	<f:if condition="{post.relatedPosts}">
 		<a name="relatedposts"></a>
