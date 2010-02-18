@@ -114,3 +114,12 @@
     '@controller': Login
     '@fomat':     html
     '@action':     index
+
+-
+  name: 'Test'
+  uriPattern: 'test(/{@action})'
+  defaults:
+    '@package':    Blog
+    '@controller': Test
+    '@fomat':     html
+    '@action':     index

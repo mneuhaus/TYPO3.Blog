@@ -40,7 +40,7 @@ class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Remove the blog's posts before removing the blog itself.
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog
+	 * @param \F3\Blog\Domain\Model\Blog $blog
 	 * @return void
 	 */
 	public function remove($blog) {
