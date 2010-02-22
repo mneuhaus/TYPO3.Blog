@@ -11,19 +11,17 @@
   defaults:
     '@package':    Blog
     '@controller': Comment
-    '@fomat':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
   name: 'Post'
-  uriPattern:    'posts/{post}.{@fomat}'
+  uriPattern:    'posts/{post}.{@format}'
   defaults:
     '@package':    Blog
     '@controller': Post
     '@action':     show
-    '@fomat':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
@@ -34,7 +32,6 @@
   defaults:
     '@package':    Blog
     '@controller': Post
-    '@fomat':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
@@ -45,7 +42,6 @@
   defaults:
     '@package':    Blog
     '@controller': Post
-    '@fomat':     html
 
 -
   name: 'Post index'
@@ -54,40 +50,30 @@
     '@package':    Blog
     '@controller': Post
     '@action':     index
-    '@fomat':     html
 
 -
   name: 'Post index with format'
-  uriPattern:    'posts.{@fomat}'
+  uriPattern:    'posts.{@format}'
   defaults:
     '@package':    Blog
     '@controller': Post
-    '@fomat':     html
     '@action':     index
 
 -
   name: 'Posts Feed'
-  uriPattern:    'feeds/posts.{@fomat}'
+  uriPattern:    'feeds/posts.{@format}'
   defaults:
     '@package':    Blog
     '@controller': Post
     '@action':     index
 
 -
-  name: 'Blog actions 2'
-  uriPattern: 'admin/blogs/{blog}/{@action}'
-  defaults:
-    '@package':    Blog
-    '@controller': Blog
-    '@fomat':     html
-
--
   name: 'Blog actions 1'
-  uriPattern: 'admin/blogs/{@action}'
+  uriPattern: 'admin/blog(/{@action})'
   defaults:
     '@package':    Blog
     '@controller': Blog
-    '@fomat':     html
+    '@action':     edit
 
 -
   name: 'Admin'
@@ -95,7 +81,6 @@
   defaults:
     '@package':    Blog
     '@controller': Administration
-    '@fomat':     html
 
 -
   name: 'Setup'
@@ -103,7 +88,6 @@
   defaults:
     '@package':    Blog
     '@controller': Setup
-    '@fomat':     html
     '@action':     index
 
 -
@@ -112,14 +96,4 @@
   defaults:
     '@package':    Blog
     '@controller': Login
-    '@fomat':     html
-    '@action':     index
-
--
-  name: 'Test'
-  uriPattern: 'test(/{@action})'
-  defaults:
-    '@package':    Blog
-    '@controller': Test
-    '@fomat':     html
     '@action':     index

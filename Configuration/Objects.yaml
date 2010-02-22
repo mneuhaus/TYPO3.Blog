@@ -9,7 +9,7 @@ F3\Blog\RoutePartHandlers\PostRoutePartHandler:
   properties:
     mappingCache:
       object:
-        factoryClassName: F3\FLOW3\Cache\CacheManager
+        factoryObjectName: F3\FLOW3\Cache\CacheManager
         factoryMethodName: getCache
         arguments:
           1: value: Blog_PostRoutePartHandler_MappingCache

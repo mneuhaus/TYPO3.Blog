@@ -1,0 +1,19 @@
+<f:layout name="master" />
+
+<f:section name="mainbox">
+	<h2 class="flow3-firstHeader">Edit blog</h2>
+	<f:flashMessages class="flashmessages"/>
+	<f:form.errors for="blog">
+		<div class="error">
+			<strong>{error.propertyName}</strong>:
+			<f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
+	<f:form method="blog" action="update" object="{blog}" name="blog" enctype="multipart/form-data">
+		<label for="title">Title</label><br />
+		<f:form.textbox property="title" id="title" /><br />
+		<label for="description">Description</label><br />
+		<f:form.textbox property="description" id="description" /><br />
+		<f:form.submit value="Update"/>
+	</f:form>
+</f:section>

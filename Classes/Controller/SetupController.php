@@ -88,7 +88,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
 
 		$roles = array(
-			$this->objectFactory->create('F3\FLOW3\Security\ACL\Role', 'Editor'),
+			$this->objectFactory->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
 		);
 
 		$this->authenticationManager->logout();
@@ -100,6 +100,72 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$account->setRoles($roles);
 
 		$this->accountRepository->add($account);
+
+		$this->redirect('index', 'Post');
+	}
+
+	/**
+	 * Sets up a a blog with a lot of posts and comments which is a nice test bed
+	 * for profiling.
+	 *
+	 * @return void
+	 */
+	public function profilingSetupAction() {
+		$this->blogRepository->removeAll();
+
+		$postCount = 250;
+		$commentCount = 0;
+
+		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
+		$blog->setTitle(ucwords(\F3\Faker\Lorem::sentence(3)));
+		$blog->setDescription(\F3\Faker\Lorem::sentence(8));
+		$this->blogRepository->add($blog);
+
+		$tags = array();
+		foreach (range(0, 5) as $i) {
+			$tags[] = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', \F3\Faker\Lorem::words(1));
+		}
+
+		foreach (range(1, $postCount) as $i) {
+			$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
+			$post->setAuthor(\F3\Faker\Name::fullName());
+			$post->setTitle(trim(\F3\Faker\Lorem::sentence(3), '.'));
+			$post->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(5)));
+			for ($j = 0; $j < 3; $j++) {
+				$post->addTag($tags[array_rand($tags)]);
+			}
+			$post->setDate(\F3\Faker\Date::random('- 500 days', '+0 seconds'));
+			for ($j = 0; $j < rand(0, 10); $j++) {
+				$comment = $this->objectFactory->create('F3\Blog\Domain\Model\Comment');
+				$comment->setAuthor(\F3\Faker\Name::fullName());
+				$comment->setEmailAddress(\F3\Faker\Internet::email());
+				$comment->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(2)));
+				$comment->setDate(\F3\Faker\Date::random('+ 10 minutes', '+ 6 weeks', $post->getDate()));
+				$post->addComment($comment);
+				$commentCount++;
+			}
+
+			$blog->addPost($post);
+		}
+
+		$account = $this->objectFactory->create('F3\Party\Domain\Model\Account');
+		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
+
+		$roles = array(
+			$this->objectFactory->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
+		);
+
+		$this->authenticationManager->logout();
+		$this->accountRepository->removeAll();
+
+		$account->setAccountIdentifier('robert');
+		$account->setCredentialsSource($credentials);
+		$account->setAuthenticationProviderName('DefaultProvider');
+		$account->setRoles($roles);
+
+		$this->accountRepository->add($account);
+
+		return '<p>Done, created 1 blog, ' . $postCount . ' posts, ' . $commentCount . ' comments.</p>';
 
 		$this->redirect('index', 'Post');
 	}

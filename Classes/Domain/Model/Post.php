@@ -159,6 +159,15 @@ class Post {
 		return $this->date;
 	}
 
+	public function getImage() {
+		return $this->image;
+	}
+
+	public function setImage(\F3\Blog\Domain\Model\Image $image) {
+		$this->image = $image;
+	}
+
+
 	/**
 	 * Setter for tags
 	 *
@@ -224,25 +233,6 @@ class Post {
 	 */
 	public function getContent() {
 		return $this->content;
-	}
-
-	/**
-	 * Sets the image for this post
-	 *
-	 * @param \F3\Blog\Domain\Model\Image $image
-	 * @return void
-	 */
-	public function setImage(\F3\Blog\Domain\Model\Image $image) {
-		$this->image = $image;
-	}
-
-	/**
-	 * Getter for image
-	 *
-	 * @return \F3\Blog\Domain\Model\Image
-	 */
-	public function getImage() {
-		return $this->image;
 	}
 
 	/**
