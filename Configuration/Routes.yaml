@@ -80,7 +80,7 @@
   uriPattern: 'admin'
   defaults:
     '@package':    Blog
-    '@controller': Administration
+    '@controller': Admin
 
 -
   name: 'Setup'

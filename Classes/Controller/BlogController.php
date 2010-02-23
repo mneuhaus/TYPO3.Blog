@@ -80,8 +80,10 @@ class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function updateAction(\F3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->update($blog);
+var_dump($blog->FLOW3_Persistence_isClone());
 		$this->flashMessageContainer->add('Your blog details have been updated.');
-		$this->redirect('index', 'Post');
+		return 'x';
+		$this->redirect('edit', 'Blog');
 	}
 }
 ?>

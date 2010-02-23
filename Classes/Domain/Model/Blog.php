@@ -50,6 +50,21 @@ class Blog {
 	protected $description = '';
 
 	/**
+	 * A short blurb about the blog or author
+	 * 
+	 * @var string
+	 * @validate Text, StringLength(maximum = 400)
+	 */
+	protected $blurb = '';
+
+	/**
+	 * A picture of the author
+	 * 
+	 * @var \F3\FLOW3\Resource\Resource
+	 */
+	protected $authorPicture;
+
+	/**
 	 * The posts contained in this blog
 	 *
 	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Post>
@@ -102,6 +117,44 @@ class Blog {
 	public function getDescription() {
 		return $this->description;
 	}
+
+	/**
+	 * Returns the blurb of this blog
+	 *
+	 * @return string
+	 */
+	public function getBlurb() {
+		return $this->blurb;
+	}
+
+	/**
+	 * Sets the blurb for this blog
+	 *
+	 * @param string $blurb
+	 */
+	public function setBlurb($blurb) {
+		$this->blurb = $blurb;
+	}
+
+	/**
+	 * Returns the author's picture
+	 *
+	 * @return F3\FLOW3\Resource\Resource
+	 */
+	public function getAuthorPicture() {
+		return $this->authorPicture;
+	}
+
+	/**
+	 * Sets the author's picture
+	 *
+	 * @param F3\FLOW3\Resource\Resource $authorPicture
+	 * @return void
+	 */
+	public function setAuthorPicture(\F3\FLOW3\Resource\Resource $authorPicture) {
+		$this->authorPicture = $authorPicture;
+	}
+
 
 	/**
 	 * Adds a post to this blog
