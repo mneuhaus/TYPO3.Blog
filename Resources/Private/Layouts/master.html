@@ -10,7 +10,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<f:base />
 		<title>{blog.title} {stuff}</title>
-		<link rel="stylesheet" href="../../Public/Blog.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="{f:uri.resource(path: 'Blog.css')}" type="text/css" media="all" />
 
 		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href='<f:uri.action action="index" controller="Post" format="rss.xml"/>' />
 		<link rel='index' title='{blog.title}' href='<f:uri.action action="index" controller="Post"/>' />
@@ -26,7 +26,7 @@
 		<div id="maincontainer">
 			<div id="mainbox"><f:render section="mainbox" /></div>
 			<div id="sidebox">
-				<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml"><img src="../../Public/Icons/SubscribeFeed.png" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
+				<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
 				<f:if condition="{recentPosts}">
 					<h3>Recent Posts</h3>
 					<ul>
@@ -34,10 +34,11 @@
 							<li><f:link.action action="show" controller="Post" arguments="{post: recentPost}">{recentPost.title}</f:link.action></li>
 						</f:for>
 					</ul>
-				</f:if>	
+				</f:if>
+				<p><f:link.action controller="Admin">Login</f:link.action></p>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div id="footer"><a href="http://flow3.typo3.org">Powered by FLOW3 <img src="../../Public/FLOW3-Logo-11px.png" width="11" height="11" /></a></div>
+		<div id="footer"><a href="http://flow3.typo3.org">Powered by FLOW3 <img src="{f:uri.resource(path: 'FLOW3-Logo-11px.png')}" width="11" height="11" /></a></div>
 	</body>
 </html>
