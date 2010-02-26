@@ -12,6 +12,7 @@ resources:
   setupController: 'class(F3\Blog\Controller\SetupController)'
   blogController: 'class(F3\Blog\Controller\BlogController)'
   adminController: 'class(F3\Blog\Controller\AdminController)'
+  accountController: 'class(F3\Blog\Controller\AccountController)'
 roles:
   Editor: []
 acls:
@@ -20,3 +21,4 @@ acls:
     commentEditorMethods: ACCESS_GRANT
     blogController: ACCESS_GRANT
     adminController: ACCESS_GRANT
+    accountController: ACCESS_GRANT

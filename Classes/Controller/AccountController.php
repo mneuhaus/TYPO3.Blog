@@ -3,7 +3,7 @@ declare(ENCODING = 'utf-8');
 namespace F3\Blog\Controller;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "TYPO3".                      *
+ * This script belongs to the FLOW3 package "Blog".                       *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -23,12 +23,19 @@ namespace F3\Blog\Controller;
  *                                                                        */
 
 /**
- * A controller which allows for logging into the backend
+ * The account controller for the Blog package
  *
- * @version $Id: LoginController.php 2817 2009-07-16 14:32:53Z k-fish $
+ * @version $Id$
+ * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LoginController extends \F3\Blog\Controller\AbstractBaseController {
+class AccountController extends \F3\Blog\Controller\AbstractBaseController {
+
+	/**
+	 * @inject
+	 * @var \F3\Party\Domain\Repository\AccountRepository
+	 */
+	protected $accountRepository;
 
 	/**
 	 * @inject
@@ -37,43 +44,51 @@ class LoginController extends \F3\Blog\Controller\AbstractBaseController {
 	protected $authenticationManager;
 
 	/**
-	 *
+	 * @inject
+	 * @var F3\FLOW3\Security\ContextHolderInterface
+	 */
+	protected $securityContextHolder;
+
+	/**
+	 * List action for this controller.
 	 *
 	 * @return string
 	 */
 	public function indexAction() {
-
+		$this->forward('edit');
 	}
 
 	/**
-	 * Authenticates an account by invoking the Provider based Authentication Manager.
+	 * Displays a form for setting a new password and / or username
 	 *
-	 * On successful authentication redirects to the list of posts, otherwise returns
-	 * to the login screen.
-	 *
-	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
+	 * @return string An HTML form for editing the account properties
 	 */
-	public function authenticateAction() {
-		try {
-			$this->authenticationManager->authenticate();
-			$this->redirect('index', 'Admin');
-		} catch (\F3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
-			$this->flashMessageContainer->add('Wrong username or password.');
-			throw $exception;
+	public function editAction() {
+		$activeTokens = $this->securityContextHolder->getContext()->getAuthenticationTokens();
+		foreach ($activeTokens as $token) {
+			if ($token->isAuthenticated()) {
+				$account = $token->getAccount();
+				$this->view->assign('account', $account);
+			}
 		}
 	}
 
 	/**
+	 * Updates the account properties
 	 *
+	 * @param F3\Party\Domain\Model\Account $account
+	 * @param string $password
 	 * @return void
-	 * @author Andreas Förthner <andreas.foerthner@netlogix.de>
 	 */
-	public function logoutAction() {
-		$this->authenticationManager->logout();
-		$this->flashMessageContainer->add('Successfully logged out.');
-		$this->redirect('index', 'Post');
+	public function updateAction(\F3\Party\Domain\Model\Account $account, $password = '') {
+		if ($password != '') {
+			$salt = substr(md5(uniqid(rand(), TRUE)), 0, rand(6, 10));
+			$account->setCredentialsSource(md5(md5($password) . $salt) . ',' . $salt);
+		}
+
+		$this->accountRepository->update($account);
+		$this->flashMessageContainer->add('Your account details have been updated.');
+		$this->redirect('index', 'Admin');
 	}
 }
-
 ?>

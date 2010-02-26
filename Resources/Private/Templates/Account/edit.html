@@ -1,0 +1,19 @@
+<f:layout name="master" />
+
+<f:section name="mainbox">
+	<h2 class="flow3-firstHeader">Edit blog</h2>
+	<f:flashMessages class="flashmessages"/>
+	<f:form.errors for="account">
+		<div class="error">
+			<strong>{error.propertyName}</strong>:
+			<f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
+	<f:form action="update" object="{account}" name="account">
+		<label>Username</label><br />
+		<f:form.textbox property="accountIdentifier" id="accountIdentifier" /><br />
+		<label for="password">New password</label><br />
+		<f:form.password name="password" id="password" /><br />
+		<f:form.submit value="Update"/>
+	</f:form>
+</f:section>

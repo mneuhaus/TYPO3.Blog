@@ -94,7 +94,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->authenticationManager->logout();
 		$this->accountRepository->removeAll();
 
-		$account->setAccountIdentifier('robert');
+		$account->setAccountIdentifier('editor');
 		$account->setCredentialsSource($credentials);
 		$account->setAuthenticationProviderName('DefaultProvider');
 		$account->setRoles($roles);
@@ -111,6 +111,10 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @return void
 	 */
 	public function profilingSetupAction() {
+		if ($this->blogRepository->findActive() !== FALSE) {
+			$this->redirect('index', 'Post');
+		}
+
 		$this->blogRepository->removeAll();
 
 		$postCount = 250;
@@ -170,21 +174,6 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->redirect('index', 'Post');
 	}
 
-	/**
-	 * Sets up an existing blog
-	 *
-	 * @return void
-	 */
-	public function modifySetupAction() {
-		$blog = $this->blogRepository->findActive();
-		if ($blog === FALSE) {
-			$this->redirect('index', 'Post');
-		}
-
-			// Modify existing blog is not yet implemented
-
-		$this->redirect('index', 'Post');
-	}
 }
 
 ?>

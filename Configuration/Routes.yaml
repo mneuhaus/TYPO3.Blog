@@ -68,6 +68,14 @@
     '@action':     index
 
 -
+  name: 'Account actions'
+  uriPattern: 'admin/account(/{@action})'
+  defaults:
+    '@package':    Blog
+    '@controller': Account
+    '@action':     edit
+
+-
   name: 'Blog actions 1'
   uriPattern: 'admin/blog(/{@action})'
   defaults:

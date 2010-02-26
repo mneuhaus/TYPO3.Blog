@@ -29,30 +29,7 @@ namespace F3\Blog\Controller;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class BlogController extends \F3\FLOW3\MVC\Controller\ActionController {
-
-	/**
-	 * @inject
-	 * @var \F3\Blog\Domain\Repository\BlogRepository
-	 */
-	protected $blogRepository;
-
-	/**
-	 * @var blog
-	 */
-	protected $blog;
-
-	/**
-	 * Initializes any action.
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		$this->blog = $this->blogRepository->findActive();
-		if ($this->blog === FALSE) {
-			$this->redirect('index', 'Setup');
-		}
-	}
+class BlogController extends \F3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * List action for this controller.
