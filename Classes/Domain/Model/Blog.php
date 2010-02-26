@@ -65,6 +65,14 @@ class Blog {
 	protected $authorPicture;
 
 	/**
+	 * Twitter username - if any
+	 *
+	 * @validate Text, StringLength(maximum = 80)
+	 * @var string
+	 */
+	protected $twitterUsername;
+
+	/**
 	 * The posts contained in this blog
 	 *
 	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Post>
@@ -155,6 +163,23 @@ class Blog {
 		$this->authorPicture = $authorPicture;
 	}
 
+	/**
+	 * Returns the Twitter username
+	 *
+	 * @return string
+	 */
+	public function getTwitterUsername() {
+		return $this->twitterUsername;
+	}
+
+	/**
+	 * Sets the Twitter username
+	 *
+	 * @param string $twitterUsername
+	 */
+	public function setTwitterUsername($twitterUsername) {
+		$this->twitterUsername = $twitterUsername;
+	}
 
 	/**
 	 * Adds a post to this blog

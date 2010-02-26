@@ -41,6 +41,51 @@
 						</f:for>
 					</ul>
 				</f:if>
+				<f:if condition="{blog.twitterUsername}">
+					<div class="twitter">
+						<script>
+							window.onload = function() {
+								var twitterUsername = '{blog.twitterUsername}';
+								var url = 'http://twitter.com/statuses/user_timeline/' + twitterUsername + '.json?count=2&callback=twitterCallback';
+								var script = document.createElement('script');
+								script.setAttribute('src', url);
+								document.body.appendChild(script);
+							}
+							function twitterCallback(obj) {
+								var t_time = document.getElementById('tweet-time');
+								var t_status = document.getElementById('tweet-status');
+								var html = "";
+								for (var i=0 ; i<3 && i<obj.length ; i++) {
+									t_time.innerHTML = "Sent "+prettyDate(obj[i].created_at);
+									t_time.setAttribute("style","color: #999999");
+									t_status.innerHTML = obj[i].text;
+								}
+								elem.innerHTML = html;
+							}
+							function prettyDate(time){
+								var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+								diff = (((new Date()).getTime() - date.getTime()) / 1000),
+								day_diff = Math.floor(diff / 86400);
+
+								if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+									return;
+
+								return day_diff == 0 && (
+								diff < 60 && "just now" ||
+									diff < 120 && "1 minute ago" ||
+									diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+									diff < 7200 && "1 hour ago" ||
+									diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+									day_diff == 1 && "Yesterday" ||
+									day_diff < 7 && day_diff + " days ago" ||
+									day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+							}
+						</script>
+						<h3>Latest Tweet</h3>
+						<p><span id="tweet-status"></span><br /><span id="tweet-time"></span><br />
+						<a href="http://twitter.com/{blog.twitterUsername}">Follow me on Twitter</a></p>
+					</div>
+				</f:if>
 			</div>
 			<div class="clear"></div>
 		</div>
