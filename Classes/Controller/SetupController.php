@@ -94,7 +94,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->authenticationManager->logout();
 		$this->accountRepository->removeAll();
 
-		$account->setAccountIdentifier('editor');
+		$account->setAccountIdentifier('robert');
 		$account->setCredentialsSource($credentials);
 		$account->setAuthenticationProviderName('DefaultProvider');
 		$account->setRoles($roles);
