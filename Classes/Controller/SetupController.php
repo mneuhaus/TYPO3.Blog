@@ -51,6 +51,12 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $authenticationManager;
 
 	/**
+	 * @inject
+	 * @var F3\FLOW3\Security\ContextHolderInterface
+	 */
+	protected $securityContextHolder;
+
+	/**
 	 *
 	 * @return unknown_type
 	 */
@@ -65,7 +71,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function initialSetupAction() {
 		if ($this->blogRepository->findActive() !== FALSE) {
-			$this->redirect('index', 'Post');
+#			$this->redirect('index', 'Post');
 		}
 
 		$this->blogRepository->removeAll();
@@ -94,14 +100,20 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->authenticationManager->logout();
 		$this->accountRepository->removeAll();
 
-		$account->setAccountIdentifier('robert');
+		$account->setAccountIdentifier('editor');
 		$account->setCredentialsSource($credentials);
 		$account->setAuthenticationProviderName('DefaultProvider');
 		$account->setRoles($roles);
 
 		$this->accountRepository->add($account);
 
-		$this->redirect('index', 'Post');
+		$authenticationTokens = $this->securityContextHolder->getContext()->getAuthenticationTokensOfType('F3\FLOW3\Security\Authentication\Token\UsernamePassword');
+		if (count($authenticationTokens) === 1) {
+			$authenticationTokens[0]->setAccount($account);
+			$authenticationTokens[0]->setAuthenticationStatus(\F3\FLOW3\Security\Authentication\TokenInterface::AUTHENTICATION_SUCCESSFUL);
+		}
+
+		$this->redirect('edit', 'Account');
 	}
 
 	/**
