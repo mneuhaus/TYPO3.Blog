@@ -16,8 +16,9 @@
 		<f:form.textbox property="description" id="description" /><br />
 		<label for="blurb">Blurb</label><br />
 		<f:form.textarea property="blurb" rows="5" cols="40" id="blurb" /><br />
-<!--		<label for="authorPicture">Author picture</label><br />
-		<f:form.upload property="authorPicture" /><br /> -->
+		<img src="{f:uri.resource(resource: blog.authorPicture)}" style="max-width: 60px; float:right;" />
+		<label for="authorPicture">Author picture</label><br />
+		<f:form.upload property="authorPicture" /><br />
 		<f:form.submit value="Update"/>
 	</f:form>
 </f:section>

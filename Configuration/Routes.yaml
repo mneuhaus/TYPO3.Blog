@@ -16,6 +16,14 @@
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
+  name: 'Posts Feed'
+  uriPattern:    'feeds/posts.{@format}'
+  defaults:
+    '@package':    Blog
+    '@controller': Post
+    '@action':     index
+
+-
   name: 'Post'
   uriPattern:    'posts/{post}.{@format}'
   defaults:
@@ -54,14 +62,6 @@
 -
   name: 'Post index with format'
   uriPattern:    'posts.{@format}'
-  defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     index
-
--
-  name: 'Posts Feed'
-  uriPattern:    'feeds/posts.{@format}'
   defaults:
     '@package':    Blog
     '@controller': Post

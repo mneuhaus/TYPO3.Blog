@@ -9,7 +9,7 @@
 		-->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<f:base />
-		<title>{blog.title} {stuff}</title>
+		<title>{blog.title}</title>
 		<link rel="stylesheet" href="{f:uri.resource(path: 'Blog.css')}" type="text/css" media="all" />
 
 		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href='<f:uri.action action="index" controller="Post" format="rss.xml"/>' />
@@ -26,6 +26,12 @@
 		<div id="maincontainer">
 			<div id="mainbox"><f:render section="mainbox" /></div>
 			<div id="sidebox">
+				<div class="blurb">
+					<f:if condition="{blog.authorPicture}">
+						<img src="{f:uri.resource(resource: blog.authorPicture)}" />
+					</f:if>
+					{blog.blurb}
+				</div>
 				<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
 				<f:if condition="{recentPosts}">
 					<h3>Recent Posts</h3>
@@ -35,10 +41,19 @@
 						</f:for>
 					</ul>
 				</f:if>
-				<p><f:link.action controller="Admin">Login</f:link.action></p>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div id="footer"><a href="http://flow3.typo3.org">Powered by FLOW3 <img src="{f:uri.resource(path: 'FLOW3-Logo-11px.png')}" width="11" height="11" /></a></div>
+		<div id="footer">
+			<f:security.ifAuthenticated>
+				<f:then>
+					<f:link.action controller="Admin">Administration</f:link.action>
+				</f:then>
+				<f:else>
+					<f:link.action controller="Admin">Login</f:link.action>
+				</f:else>
+			</f:security.ifAuthenticated>
+			| <a href="http://flow3.typo3.org">Powered by FLOW3 <img src="{f:uri.resource(path: 'FLOW3-Logo-11px.png')}" width="11" height="11" /></a>
+		</div>
 	</body>
 </html>
