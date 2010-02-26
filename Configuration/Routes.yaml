@@ -89,6 +89,7 @@
   defaults:
     '@package':    Blog
     '@controller': Admin
+    '@action':     index
 
 -
   name: 'Setup'
