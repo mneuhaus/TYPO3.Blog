@@ -127,6 +127,18 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	}
 	
 	/**
+	 * Deletes an existing post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post The post to remove
+	 * @return void
+	 */
+	public function deleteAction(\F3\Blog\Domain\Model\Post $post) {
+		$this->postRepository->remove($post);
+		$this->flashMessageContainer->add('The post has been deleted.');
+		$this->redirect('index');
+	}
+
+	/**
 	 * Override getErrorFlashMessage to present nice flash error messages.
 	 *
 	 * @return string

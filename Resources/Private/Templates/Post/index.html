@@ -20,6 +20,7 @@
 							<f:link.action action="show" controller="Post" arguments="{post: post}">{post.title}</f:link.action>
 							<f:security.ifHasRole role="Editor">
 								<f:link.action action="edit" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_edit.png')}" title="Edit post" /></f:link.action>
+								<f:link.action onClick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
 							</f:security.ifHasRole>
 						</h2>
 						<f:render partial="postMetaData" arguments="{post: post}"/>
