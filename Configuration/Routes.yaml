@@ -36,20 +36,22 @@
 
 -
   name: 'Post actions 2'
-  uriPattern:    'posts/{post}/{@action}'
+  uriPattern:    'posts/{post}(/{@action})'
   defaults:
     '@package':    Blog
     '@controller': Post
+    '@action':     show
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
   name: 'Post actions 1'
-  uriPattern:    'posts/{@action}'
+  uriPattern:    'posts(/{@action})'
   defaults:
     '@package':    Blog
     '@controller': Post
+    '@action':     index
 
 -
   name: 'Post index'

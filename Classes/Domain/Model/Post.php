@@ -60,7 +60,7 @@ class Post {
 
 	/**
 	 * @var string
-	 * FIXME validate HTML
+	 * @validate Raw
 	 */
 	protected $content;
 
@@ -159,14 +159,23 @@ class Post {
 		return $this->date;
 	}
 
+	/**
+	 * Getter for image
+	 *
+	 * @return F3\Blog\Domain\Model\Image
+	 */
 	public function getImage() {
 		return $this->image;
 	}
 
+	/**
+	 * Setter for image
+	 *
+	 * @param F3\Blog\Domain\Model\Image $image
+	 */
 	public function setImage(\F3\Blog\Domain\Model\Image $image) {
 		$this->image = $image;
 	}
-
 
 	/**
 	 * Setter for tags

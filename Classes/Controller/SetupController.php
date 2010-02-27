@@ -81,14 +81,14 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$blog->setDescription('A blog about Foo, Bar and Baz.');
 		$this->blogRepository->add($blog);
 
-		$tag = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', 'FooBar');
-		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
-		$post->setAuthor('John Doe');
-		$post->setTitle('Example Post');
-		$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-		$post->addTag($tag);
+#		$tag = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', 'FooBar');
+#		$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
+#		$post->setAuthor('John Doe');
+#		$post->setTitle('Example Post');
+#		$post->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+#		$post->addTag($tag);
 
-		$blog->addPost($post);
+#		$blog->addPost($post);
 
 		$account = $this->objectFactory->create('F3\Party\Domain\Model\Account');
 		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
