@@ -46,7 +46,6 @@ class BlogController extends \F3\Blog\Controller\AbstractBaseController {
 	 * @return string An HTML form for editing the blog properties
 	 */
 	public function editAction() {
-		$this->view->assign('blog', $this->blog);
 	}
 
 	/**

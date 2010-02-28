@@ -1,0 +1,19 @@
+﻿<f:layout name="master" />
+
+<f:section name="mainbox">
+	<h2 class="flow3-firstHeader">Manage Categories</h2>
+	<f:flashMessages class="flashmessages" />
+	<f:if condition="{categories}">
+		<ul class="categories">
+			<f:for each="{categories}" as="category">
+				<li class="category">
+					<f:link.action action="show" controller="Category" arguments="{category: category}">{category.name}</f:link.action>
+					<f:link.action action="edit" arguments="{category: category}" controller="Category"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_edit.png')}" title="Edit category" /></f:link.action>
+					<f:link.action onClick="return confirm('Really delete this category?');" action="delete" arguments="{category: category}" controller="Category"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete category" /></f:link.action>
+			</f:for>
+		</ul>
+		<br />
+	</f:if>
+	<f:link.action action="new" controller="Category">Create new category</f:link.action>
+
+</f:section>

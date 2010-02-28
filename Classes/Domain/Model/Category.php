@@ -59,5 +59,14 @@ class Category {
 	public function getName() {
 		return $this->name;
 	}
+	
+	/**
+	 * Returns the category name
+	 * 
+	 * @return string The category name
+	 */
+	public function __toString() {
+		return $this->name;
+	}
 }
 ?>

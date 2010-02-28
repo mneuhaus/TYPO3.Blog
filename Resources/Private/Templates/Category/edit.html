@@ -1,0 +1,17 @@
+<f:layout name="master" />
+
+<f:section name="mainbox">
+	<h2 class="flow3-firstHeader">Edit category "{category.name}"</h2>
+	<f:flashMessages class="flashmessages"/>
+	<f:form.errors for="category">
+		<div class="error">
+			<strong>{error.propertyName}</strong>:
+			<f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
+	<f:form action="update" object="{category}" name="category">
+		<label>Name</label><br />
+		<f:form.textbox property="name" /><br />
+		<f:form.submit value="Update"/>
+	</f:form>
+</f:section>

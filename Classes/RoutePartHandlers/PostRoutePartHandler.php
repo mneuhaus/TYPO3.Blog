@@ -49,7 +49,7 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 				// next line commented, as it currently doesn't work as it should:
 				// the date does not contain the time, so no match would be found...
 				//'date' => new \DateTime($matches[1] . '-' . $matches[2] . '-' . $matches[3]),
-				'title' => str_replace('-', ' ', $matches[4])
+				'linkTitle' => $matches[4]
 			)
 		);
 		return TRUE;
@@ -81,7 +81,7 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	protected function resolveValue($value) {
 		if (!$value instanceof \F3\Blog\Domain\Model\Post) return FALSE;
 		$this->value = $value->getDate()->format('Y/m/d/');
-		$this->value .= strtolower(str_replace(' ', '-', $value->getTitle()));
+		$this->value .= $value->getLinkTitle();
 		return TRUE;
 	}
 }

@@ -32,12 +32,6 @@ namespace F3\Blog\Domain\Repository;
 class PostRepository extends \F3\FLOW3\Persistence\Repository {
 
 	/**
-	 * @inject
-	 * @var \F3\FLOW3\Persistence\PersistenceManagerInterface
-	 */
-	protected $persistenceManager;
-
-	/**
 	 * Finds posts by the specified blog
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
@@ -53,7 +47,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	}
 
 	/**
-	 * Finds posts by the specified blog
+	 * Finds posts by the specified tag and blog
 	 *
 	 * @param \F3\Blog\Domain\Model\Tag $tag
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
@@ -117,5 +111,18 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 			->setLimit($limit)
 			->execute();
 	}
+
+	/**
+	 * Removes a post from the post repository and its associated blog.
+	 *
+	 * @param object $object The object to remove
+	 * @return void
+	 * @author Robert Lemke <robert@typo3.org>
+	 */
+	public function remove($object) {
+		parent::remove($object);
+		$object->getBlog()->removePost($object);
+	}
+
 }
 ?>

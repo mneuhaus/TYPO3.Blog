@@ -34,27 +34,34 @@ namespace F3\Blog\Domain\Model;
 class Post {
 
 	/**
-	 * @var \F3\Blog\Domain\Model\Blog
+	 * @var F3\Blog\Domain\Model\Blog
 	 * @identity
 	 */
 	protected $blog;
 
 	/**
 	 * @var string
-	 * @validate StringLength(minimum = 3, maximum = 50)
+	 * @validate StringLength(minimum = 1, maximum = 100)
 	 * @identity
 	 */
 	protected $title;
 
 	/**
-	 * @var \DateTime
+	 * @var string
+	 * @validate RegularExpression(regularExpression = "/^[a-z0-9\-]{1,100}$/")
+	 * @identity
+	 */
+	protected $linkTitle = '';
+
+	/**
+	 * @var DateTime
 	 * @identity
 	 */
 	protected $date;
 
 	/**
 	 * @var string
-	 * @validate StringLength(minimum = 3, maximum = 50)
+	 * @validate StringLength(minimum = 1, maximum = 50)
 	 */
 	protected $author;
 
@@ -65,20 +72,19 @@ class Post {
 	protected $content;
 
 	/**
-	 * @var \F3\Blog\Domain\Model\Image
+	 * @var F3\Blog\Domain\Model\Image
 	 */
 	protected $image;
 
 	/**
-	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Tag>
+	 * @var SplObjectStorage<\F3\Blog\Domain\Model\Tag>
 	 */
 	protected $tags;
 
 	/**
-	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Category>
-	 * FIXME validate Count(atLeast = 1)
+	 * @var F3\Blog\Domain\Model\Category
 	 */
-	protected $categories;
+	protected $category;
 
 	/**
 	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Comment>
@@ -97,7 +103,6 @@ class Post {
 	public function __construct() {
 		$this->date = new \DateTime();
 		$this->tags = new \SplObjectStorage();
-		$this->categories = new \SplObjectStorage();
 		$this->comments = new \SplObjectStorage();
 		$this->relatedPosts = new \SplObjectStorage();
 	}
@@ -129,6 +134,9 @@ class Post {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+		if ($this->linkTitle === '') {
+			$this->linkTitle = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '', str_replace(' ', '-', $title)));
+		}
 	}
 
 	/**
@@ -138,6 +146,28 @@ class Post {
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+
+	/**
+	 * Setter for link title
+	 *
+	 * @param string $linkTitle
+	 * @return void
+	 */
+	public function setLinkTitle($linkTitle) {
+		$this->linkTitle = $linkTitle;
+	}
+
+	/**
+	 * Getter for link title
+	 *
+	 * @return string
+	 */
+	public function getLinkTitle() {
+		if ($this->linkTitle === '') {
+			$this->linkTitle = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '', str_replace(' ', '-', $this->title)));
+		}
+		return $this->linkTitle;
 	}
 
 	/**
@@ -290,6 +320,25 @@ class Post {
 	public function getRelatedPosts() {
 		return clone $this->relatedPosts;
 	}
+
+	/**
+	 * Getter for category
+	 *
+	 * @return F3\Blog\Domain\Model\Category
+	 */
+	public function getCategory() {
+		return $this->category;
+	}
+
+	/**
+	 * Setter for category
+	 *
+	 * @param F3\Blog\Domain\Model\Category $category
+	 */
+	public function setCategory(\F3\Blog\Domain\Model\Category $category) {
+		$this->category = $category;
+	}
+
 
 }
 

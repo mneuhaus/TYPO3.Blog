@@ -38,6 +38,12 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	protected $postRepository;
 
 	/**
+	 * @inject
+	 * @var \F3\Blog\Domain\Repository\CategoryRepository
+	 */
+	protected $categoryRepository;
+
+	/**
 	 * List action for this controller. Displays latest posts
 	 *
 	 * @param string $tag The tag to display posts for
@@ -83,6 +89,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
 		$this->view->assign('blog', $this->blog);
 		$this->view->assign('existingPosts', $this->postRepository->findByBlog($this->blog));
+		$this->view->assign('categories', $this->categoryRepository->findAll());
 		$this->view->assign('newPost', $newPost);
 	}
 
@@ -111,6 +118,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		$existingPosts = $this->postRepository->findByBlog($this->blog);
 		unset($existingPosts[array_search($post, $existingPosts)]);
 		$this->view->assign('existingPosts', $existingPosts);
+		$this->view->assign('categories', $this->categoryRepository->findAll());
 		$this->view->assign('post', $post);
 	}
 
@@ -147,6 +155,8 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		switch ($this->actionMethodName) {
 			case 'createAction' :
 				return 'Could not create the new post:';
+			case 'updateAction' :
+				return 'Could not update the post:';
 			default :
 				return parent::getErrorFlashMessage();
 		}

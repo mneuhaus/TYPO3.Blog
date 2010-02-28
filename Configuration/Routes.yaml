@@ -70,6 +70,29 @@
     '@action':     index
 
 -
+  name: 'Category actions 2'
+  uriPattern:    'categories/{category}/{@action}'
+  defaults:
+    '@package':    Blog
+    '@controller': Category
+
+-
+  name: 'Category actions 1'
+  uriPattern:    'categories(/{@action})'
+  defaults:
+    '@package':    Blog
+    '@controller': Category
+    '@action':     index
+
+-
+  name: 'Category index'
+  uriPattern:    '(categories)'
+  defaults:
+    '@package':    Blog
+    '@controller': Category
+    '@action':     index
+
+-
   name: 'Account actions'
   uriPattern: 'admin/account(/{@action})'
   defaults:
