@@ -7,18 +7,19 @@
 # @version $Id$
 
 resources:
-  postEditorMethods: 'method(F3\Blog\Controller\PostController->(new|create|edit|update|delete)Action())'
-  commentEditorMethods: 'method(F3\Blog\Controller\CommentController->(edit|update|delete)Action())'
-  setupController: 'class(F3\Blog\Controller\SetupController)'
-  blogController: 'class(F3\Blog\Controller\BlogController)'
-  adminController: 'class(F3\Blog\Controller\AdminController)'
-  accountController: 'class(F3\Blog\Controller\AccountController)'
+  methods:
+    F3_Blog_PostEditorMethods: 'method(F3\Blog\Controller\PostController->(new|create|edit|update|delete)Action())'
+    F3_Blog_CommentEditorMethods: 'method(F3\Blog\Controller\CommentController->(edit|update|delete)Action())'
+    F3_Blog_SetupController: 'class(F3\Blog\Controller\SetupController)'
+    F3_Blog_BlogController: 'class(F3\Blog\Controller\BlogController)'
+    F3_Blog_AdminController: 'class(F3\Blog\Controller\AdminController)'
+    F3_Blog_AccountController: 'class(F3\Blog\Controller\AccountController)'
 roles:
   Editor: []
 acls:
   Editor:
-    postEditorMethods: ACCESS_GRANT
-    commentEditorMethods: ACCESS_GRANT
-    blogController: ACCESS_GRANT
-    adminController: ACCESS_GRANT
-    accountController: ACCESS_GRANT
+    F3_Blog_PostEditorMethods: GRANT
+    F3_Blog_CommentEditorMethods: GRANT
+    F3_Blog_BlogController: GRANT
+    F3_Blog_AdminController: GRANT
+    F3_Blog_AccountController: GRANT
