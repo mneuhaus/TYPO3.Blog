@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">>
 	<channel>
 		<title>{blog.title}</title>
 		<link><f:uri.action action="index" controller="Post" absolute="TRUE"/></link>
+		<atom:link href="{f:uri.action(action: 'index', controller: 'Post', absolute: 'TRUE')}" rel="self" type="application/rss+xml" />
 		<description>{blog.description}</description>
 		<language>en-us</language>
 		<generator>FLOW3</generator>
@@ -10,8 +11,8 @@
 			<item>
 				<title>{post.title}</title>
 				<link><f:uri.action action="show" controller="Post" arguments="{post: post}" absolute="TRUE"/></link>
-				<description>{post.content}</description>
-				<pubDate><f:format.date format='D, d m Y H:i:s e'>{post.date}</f:format.date></pubDate>
+				<description><f:escape type="entities">{@post.content}</f:escape></description>
+				<pubDate><f:format.date format='r'>{post.date}</f:format.date></pubDate>
 				<guid><f:uri.action action="show" controller="Post" arguments="{post: post}" absolute="TRUE"/></guid>
 			</item>
 		</f:for>
