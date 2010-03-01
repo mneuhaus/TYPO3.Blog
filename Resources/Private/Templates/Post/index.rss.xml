@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>{blog.title}</title>
 		<link><f:uri.action action="index" controller="Post" absolute="TRUE"/></link>
-		<atom:link href="{f:uri.action(action: 'index', controller: 'Post', absolute: 'TRUE')}" rel="self" type="application/rss+xml" />
+		<atom:link href="{f:uri.action(action: 'index', controller: 'Post', format: 'rss.xml' absolute: 'TRUE')}" rel="self" type="application/rss+xml" />
 		<description>{blog.description}</description>
 		<language>en-us</language>
 		<generator>FLOW3</generator>
