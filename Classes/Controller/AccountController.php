@@ -45,9 +45,9 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var F3\FLOW3\Security\ContextHolderInterface
+	 * @var F3\FLOW3\Security\Context
 	 */
-	protected $securityContextHolder;
+	protected $securityContext;
 
 	/**
 	 * List action for this controller.
@@ -64,7 +64,7 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 	 * @return string An HTML form for editing the account properties
 	 */
 	public function editAction() {
-		$activeTokens = $this->securityContextHolder->getContext()->getAuthenticationTokens();
+		$activeTokens = $this->securityContext->getAuthenticationTokens();
 		foreach ($activeTokens as $token) {
 			if ($token->isAuthenticated()) {
 				$account = $token->getAccount();

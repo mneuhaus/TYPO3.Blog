@@ -52,9 +52,9 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var F3\FLOW3\Security\ContextHolderInterface
+	 * @var F3\FLOW3\Security\Context
 	 */
-	protected $securityContextHolder;
+	protected $securityContext;
 
 	/**
 	 *
@@ -107,7 +107,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 		$this->accountRepository->add($account);
 
-		$authenticationTokens = $this->securityContextHolder->getContext()->getAuthenticationTokensOfType('F3\FLOW3\Security\Authentication\Token\UsernamePassword');
+		$authenticationTokens = $this->securityContext->getAuthenticationTokensOfType('F3\FLOW3\Security\Authentication\Token\UsernamePassword');
 		if (count($authenticationTokens) === 1) {
 			$authenticationTokens[0]->setAccount($account);
 			$authenticationTokens[0]->setAuthenticationStatus(\F3\FLOW3\Security\Authentication\TokenInterface::AUTHENTICATION_SUCCESSFUL);
