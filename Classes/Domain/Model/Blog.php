@@ -34,6 +34,12 @@ namespace F3\Blog\Domain\Model;
 class Blog {
 
 	/**
+	 * @inject
+	 * @var \F3\Blog\Domain\Repository\PostRepository
+	 */
+	protected $postRepository;
+
+	/**
 	 * The blog's title.
 	 *
 	 * @var string
@@ -70,7 +76,7 @@ class Blog {
 	 * @validate Text, StringLength(maximum = 80)
 	 * @var string
 	 */
-	protected $twitterUsername;
+	protected $twitterUsername = '';
 
 	/**
 	 * The posts contained in this blog
@@ -199,6 +205,7 @@ class Blog {
 	 * @return void
 	 */
 	public function removePost(\F3\Blog\Domain\Model\Post $post) {
+		$this->postRepository->remove($post);
 		$this->posts->detach($post);
 	}
 

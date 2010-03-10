@@ -112,17 +112,5 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 			->execute();
 	}
 
-	/**
-	 * Removes a post from the post repository and its associated blog.
-	 *
-	 * @param object $object The object to remove
-	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
-	 */
-	public function remove($object) {
-		parent::remove($object);
-		$object->getBlog()->removePost($object);
-	}
-
 }
 ?>

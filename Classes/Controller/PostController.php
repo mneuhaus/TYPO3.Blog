@@ -53,7 +53,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		if ($tag === NULL) {
 			$posts = $this->postRepository->findByBlog($this->blog);
 		} else {
-			$tag = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', $tag);
+			$tag = $this->objectManager->create('F3\Blog\Domain\Model\Tag', $tag);
 			$posts = $this->postRepository->findByTagAndBlog($tag, $this->blog);
 			$this->view->assign('tag', $tag);
 		}
@@ -141,7 +141,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 * @return void
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Post $post) {
-		$this->postRepository->remove($post);
+		$post->getBlog()->removePost($post);
 		$this->flashMessageContainer->add('The post has been deleted.');
 		$this->redirect('index');
 	}
