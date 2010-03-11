@@ -40,7 +40,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Party\Domain\Repository\AccountRepository
+	 * @var \F3\FLOW3\Security\AccountRepository
 	 */
 	protected $accountRepository;
 
@@ -81,7 +81,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$blog->setDescription('A blog about Foo, Bar and Baz.');
 		$this->blogRepository->add($blog);
 
-		$account = $this->objectFactory->create('F3\Party\Domain\Model\Account');
+		$account = $this->objectFactory->create('F3\FLOW3\Security\Account');
 		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
 
 		$roles = array(
@@ -155,7 +155,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$blog->addPost($post);
 		}
 
-		$account = $this->objectFactory->create('F3\Party\Domain\Model\Account');
+		$account = $this->objectFactory->create('F3\FLOW3\Security\Account');
 		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
 
 		$roles = array(

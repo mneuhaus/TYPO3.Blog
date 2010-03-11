@@ -33,7 +33,7 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var \F3\Party\Domain\Repository\AccountRepository
+	 * @var \F3\FLOW3\Security\AccountRepository
 	 */
 	protected $accountRepository;
 
@@ -76,11 +76,11 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates the account properties
 	 *
-	 * @param F3\Party\Domain\Model\Account $account
+	 * @param F3\FLOW3\Security\Account $account
 	 * @param string $password
 	 * @return void
 	 */
-	public function updateAction(\F3\Party\Domain\Model\Account $account, $password = '') {
+	public function updateAction(\F3\FLOW3\Security\Account $account, $password = '') {
 		if ($password != '') {
 			$salt = substr(md5(uniqid(rand(), TRUE)), 0, rand(6, 10));
 			$account->setCredentialsSource(md5(md5($password) . $salt) . ',' . $salt);
