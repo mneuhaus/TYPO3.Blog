@@ -9,7 +9,7 @@
 				<li class="category">
 					<f:link.action action="show" controller="Category" arguments="{category: category}">{category.name}</f:link.action>
 					<f:link.action action="edit" arguments="{category: category}" controller="Category"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_edit.png')}" title="Edit category" /></f:link.action>
-					<f:link.action onClick="return confirm('Really delete this category?');" action="delete" arguments="{category: category}" controller="Category"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete category" /></f:link.action>
+					<f:link.action onclick="return confirm('Really delete this category?');" action="delete" arguments="{category: category}" controller="Category"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete category" /></f:link.action>
 			</f:for>
 		</ul>
 		<br />
