@@ -22,7 +22,7 @@
 		</f:security.ifHasRole>
 	</h2>
 	<f:render partial="/postMetaData" arguments="{post: post}"/>
-		<p class="content"><f:format.crop maxCharacters="1000000">{@post.content}</f:format.crop></p>
+		<p class="content"><f:format.crop maxCharacters="1000000">{f:raw(value: post.content)}</f:format.crop></p>
 	<f:if condition="{post.image.originalResource}">
 		<p><img src="{f:uri.resource(resource: post.image.originalResource, title: post.image.title)}" style="max-width: 100%" alt="{post.image.title}" /></p>
 	</f:if>

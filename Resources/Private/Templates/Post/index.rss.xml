@@ -11,7 +11,7 @@
 			<item>
 				<title>{post.title}</title>
 				<link><f:uri.action action="show" controller="Post" arguments="{post: post}" absolute="TRUE"/></link>
-				<description><f:escape type="entities">{@post.content}</f:escape></description>
+				<description><f:escape type="entities">{f:raw(value: post.content)}</f:escape></description>
 				<pubDate><f:format.date format='r'>{post.date}</f:format.date></pubDate>
 				<guid><f:uri.action action="show" controller="Post" arguments="{post: post}" absolute="TRUE"/></guid>
 			</item>

@@ -25,7 +25,7 @@
 							</f:security.ifHasRole>
 						</h2>
 						<f:render partial="postMetaData" arguments="{post: post}"/>
-						<p class="content"><blog:readMore>{@post.content}</blog:readMore> <f:link.action action='show' arguments='{post: post}'>Read more</f:link.action></p>
+						<p class="content"><blog:readMore>{f:raw(value: post.content)}</blog:readMore> <f:link.action action='show' arguments='{post: post}'>Read more</f:link.action></p>
 					</li>
 				</f:for>
 			</ol>
