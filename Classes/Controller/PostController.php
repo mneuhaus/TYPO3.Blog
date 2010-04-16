@@ -67,6 +67,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post The post to display
 	 * @param \F3\Blog\Domain\Model\Comment $newComment If the comment form as has been submitted but the comment was not valid, this argument is used for displaying the entered values again
+	 * @dontvalidate $post
 	 * @dontvalidate $newComment
 	 * @return void
 	 */

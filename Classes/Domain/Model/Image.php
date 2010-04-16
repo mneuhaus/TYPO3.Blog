@@ -35,7 +35,7 @@ class Image {
 
 	/**
 	 * @var string
-	 * @validate StringLength(minimum = 3, maximum = 50)
+	 * @validate StringLength(maximum = 100)
 	 */
 	protected $title;
 
