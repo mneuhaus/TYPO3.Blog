@@ -1,5 +1,5 @@
 {namespace blog=F3\Blog\ViewHelpers}
-<f:layout name="master" />
+<f:layout name="Master" />
 
 <f:section name="mainbox">
 	<div id="navigation">
@@ -21,7 +21,7 @@
 			<f:link.action onclick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
 		</f:security.ifHasRole>
 	</h2>
-	<f:render partial="/postMetaData" arguments="{post: post}"/>
+	<f:render partial="/PostMetaData" arguments="{post: post}"/>
 		<p class="content"><f:format.crop maxCharacters="1000000">{f:raw(value: post.content)}</f:format.crop></p>
 	<f:if condition="{post.image.originalResource}">
 		<p><img src="{f:uri.resource(resource: post.image.originalResource, title: post.image.title)}" style="max-width: 100%" alt="{post.image.title}" /></p>

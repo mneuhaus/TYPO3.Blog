@@ -76,16 +76,16 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 		$this->blogRepository->removeAll();
 
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
+		$blog = $this->objectManager->create('F3\Blog\Domain\Model\Blog');
 		$blog->setTitle('My Blog');
 		$blog->setDescription('A blog about Foo, Bar and Baz.');
 		$this->blogRepository->add($blog);
 
-		$account = $this->objectFactory->create('F3\FLOW3\Security\Account');
+		$account = $this->objectManager->create('F3\FLOW3\Security\Account');
 		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
 
 		$roles = array(
-			$this->objectFactory->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
+			$this->objectManager->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
 		);
 
 		$this->authenticationManager->logout();
@@ -123,18 +123,18 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$postCount = 250;
 		$commentCount = 0;
 
-		$blog = $this->objectFactory->create('F3\Blog\Domain\Model\Blog');
+		$blog = $this->objectManager->create('F3\Blog\Domain\Model\Blog');
 		$blog->setTitle(ucwords(\F3\Faker\Lorem::sentence(3)));
 		$blog->setDescription(\F3\Faker\Lorem::sentence(8));
 		$this->blogRepository->add($blog);
 
 		$tags = array();
 		foreach (range(0, 5) as $i) {
-			$tags[] = $this->objectFactory->create('F3\Blog\Domain\Model\Tag', \F3\Faker\Lorem::words(1));
+			$tags[] = $this->objectManager->create('F3\Blog\Domain\Model\Tag', \F3\Faker\Lorem::words(1));
 		}
 
 		foreach (range(1, $postCount) as $i) {
-			$post = $this->objectFactory->create('F3\Blog\Domain\Model\Post');
+			$post = $this->objectManager->create('F3\Blog\Domain\Model\Post');
 			$post->setAuthor(\F3\Faker\Name::fullName());
 			$post->setTitle(trim(\F3\Faker\Lorem::sentence(3), '.'));
 			$post->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(5)));
@@ -143,7 +143,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			}
 			$post->setDate(\F3\Faker\Date::random('- 500 days', '+0 seconds'));
 			for ($j = 0; $j < rand(0, 10); $j++) {
-				$comment = $this->objectFactory->create('F3\Blog\Domain\Model\Comment');
+				$comment = $this->objectManager->create('F3\Blog\Domain\Model\Comment');
 				$comment->setAuthor(\F3\Faker\Name::fullName());
 				$comment->setEmailAddress(\F3\Faker\Internet::email());
 				$comment->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(2)));
@@ -155,11 +155,11 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$blog->addPost($post);
 		}
 
-		$account = $this->objectFactory->create('F3\FLOW3\Security\Account');
+		$account = $this->objectManager->create('F3\FLOW3\Security\Account');
 		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
 
 		$roles = array(
-			$this->objectFactory->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
+			$this->objectManager->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
 		);
 
 		$this->authenticationManager->logout();
