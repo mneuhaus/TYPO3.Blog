@@ -15,6 +15,8 @@ roles:
   Editor: []
 acls:
   Editor:
-    F3_Blog_PostEditorMethods: GRANT
-    F3_Blog_CommentEditorMethods: GRANT
-    F3_Blog_RestrictedControllers: GRANT
+    methods:
+      F3_Blog_PostEditorMethods: GRANT
+      F3_Blog_CommentEditorMethods: GRANT
+      F3_Blog_RestrictedControllers: GRANT
+
