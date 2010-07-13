@@ -38,7 +38,7 @@ namespace F3\Blog\ViewHelpers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */
-class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\TagBasedViewHelper {
+class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
 
 	/**
 	 * @var string
