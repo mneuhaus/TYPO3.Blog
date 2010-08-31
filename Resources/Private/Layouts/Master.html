@@ -46,7 +46,7 @@
 						<script>
 							window.onload = function() {
 								var twitterUsername = '{blog.twitterUsername}';
-								var url = 'http://twitter.com/statuses/user_timeline/' + twitterUsername + '.json?count=2&callback=twitterCallback';
+								var url = 'http://api.twitter.com/1/statuses/user_timeline.json?screen_name=' + twitterUsername + '&count=1&include_rts=true&callback=twitterCallback';
 								var script = document.createElement('script');
 								script.setAttribute('src', url);
 								document.body.appendChild(script);
