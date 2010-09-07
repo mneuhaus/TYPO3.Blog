@@ -60,8 +60,7 @@ class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 	 */
 	public function findActive() {
 		$query = $this->createQuery();
-		$result = $query->setLimit(1)->execute();
-		return current($result);
+		return $query->setLimit(1)->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_OBJECT);
 	}
 }
 ?>
