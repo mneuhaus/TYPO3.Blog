@@ -36,7 +36,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
-	 * @return array The posts
+	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
 	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
@@ -52,7 +52,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 * @param \F3\Blog\Domain\Model\Tag $tag
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
-	 * @return array The posts
+	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
 	public function findByTagAndBlog(\F3\Blog\Domain\Model\Tag $tag, \F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
@@ -75,11 +75,10 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 */
 	public function findPrevious(\F3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
-		$posts = $query->matching($query->lessThan('date', $post->getDate()))
+		return $query->matching($query->lessThan('date', $post->getDate()))
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit(1)
-			->execute();
-		return (count($posts) == 0) ? NULL : current($posts);
+			->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_OBJECT);
 	}
 
 	/**
@@ -90,11 +89,10 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 */
 	public function findNext(\F3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
-		$posts = $query->matching($query->greaterThan('date', $post->getDate()))
+		return $query->matching($query->greaterThan('date', $post->getDate()))
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
 			->setLimit(1)
-			->execute();
-		return (count($posts) == 0) ? NULL : current($posts);
+			->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_OBJECT);
 	}
 
 	/**
@@ -102,7 +100,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
-	 * @return array The posts
+	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
 	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 5) {
 		$query = $this->createQuery();
@@ -110,6 +108,28 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
 			->execute();
+	}
+
+	/**
+	 * Finds most recent posts by the specified blog excluding the given post
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $postToExclude Post to exclude from result
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param integer $limit The number of posts to return at max
+	 * @return array All posts of the given $blog except for $postToExclude
+	 */
+	public function findRemainingByBlog(\F3\Blog\Domain\Model\Post $postToExclude, \F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
+		$query = $this->createQuery();
+		$posts = $query->matching(
+				$query->logicalAnd(
+					$query->equals('blog', $blog)
+				)
+			)
+			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setLimit($limit)
+			->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_ARRAY);
+		unset($posts[array_search($postToExclude, $posts)]);
+		return $posts;
 	}
 
 }
