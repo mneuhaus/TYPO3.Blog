@@ -77,8 +77,8 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 		$query = $this->createQuery();
 		return $query->matching($query->lessThan('date', $post->getDate()))
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
-			->setLimit(1)
-			->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_OBJECT);
+			->execute()
+			->getFirst();
 	}
 
 	/**
@@ -91,8 +91,8 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 		$query = $this->createQuery();
 		return $query->matching($query->greaterThan('date', $post->getDate()))
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
-			->setLimit(1)
-			->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_OBJECT);
+			->execute()
+			->getFirst();
 	}
 
 	/**
@@ -127,7 +127,8 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 			)
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
-			->execute(\F3\FLOW3\Persistence\QueryInterface::FETCH_ARRAY);
+			->execute()
+			->toArray();
 		unset($posts[array_search($postToExclude, $posts)]);
 		return $posts;
 	}
