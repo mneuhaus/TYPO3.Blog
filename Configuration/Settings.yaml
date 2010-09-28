@@ -2,5 +2,13 @@
 # Settings Configuration for the Blog package                            #
 #                                                                        #
 
-# $Id$
-
+FLOW3:
+  security:
+    authentication:
+      authenticationStrategy: oneToken
+      providers:
+        DefaultProvider:
+          providerClass: PersistedUsernamePasswordProvider
+          entryPoint:
+            webRedirect:
+              uri: admin/authentication

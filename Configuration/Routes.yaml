@@ -11,6 +11,7 @@
   defaults:
     '@package':    Blog
     '@controller': Comment
+    '@format':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
@@ -22,6 +23,7 @@
     '@package':    Blog
     '@controller': Post
     '@action':     index
+    '@format':     html
 
 -
   name: 'Post'
@@ -30,6 +32,7 @@
     '@package':    Blog
     '@controller': Post
     '@action':     show
+    '@format':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
@@ -41,6 +44,7 @@
     '@package':    Blog
     '@controller': Post
     '@action':     show
+    '@format':     html
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
@@ -52,6 +56,7 @@
     '@package':    Blog
     '@controller': Post
     '@action':     index
+    '@format':     html
 
 -
   name: 'Post index'
@@ -60,6 +65,7 @@
     '@package':    Blog
     '@controller': Post
     '@action':     index
+    '@format':     html
 
 -
   name: 'Post index with format'
@@ -68,6 +74,7 @@
     '@package':    Blog
     '@controller': Post
     '@action':     index
+    '@format':     html
 
 -
   name: 'Category actions 2'
@@ -75,6 +82,7 @@
   defaults:
     '@package':    Blog
     '@controller': Category
+    '@format':     html
 
 -
   name: 'Category actions 1'
@@ -83,6 +91,7 @@
     '@package':    Blog
     '@controller': Category
     '@action':     index
+    '@format':     html
 
 -
   name: 'Category index'
@@ -91,6 +100,7 @@
     '@package':    Blog
     '@controller': Category
     '@action':     index
+    '@format':     html
 
 -
   name: 'Account actions'
@@ -99,6 +109,7 @@
     '@package':    Blog
     '@controller': Account
     '@action':     edit
+    '@format':     html
 
 -
   name: 'Blog actions 1'
@@ -107,6 +118,7 @@
     '@package':    Blog
     '@controller': Blog
     '@action':     edit
+    '@format':     html
 
 -
   name: 'Admin'
@@ -115,6 +127,7 @@
     '@package':    Blog
     '@controller': Admin
     '@action':     index
+    '@format':     html
 
 -
   name: 'Setup'
@@ -123,6 +136,7 @@
     '@package':    Blog
     '@controller': Setup
     '@action':     index
+    '@format':     html
 
 -
   name: 'Authentication'
@@ -131,3 +145,4 @@
     '@package':    Blog
     '@controller': Login
     '@action':     index
+    '@format':     html
