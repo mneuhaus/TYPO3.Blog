@@ -25,7 +25,6 @@ namespace F3\Blog\ViewHelpers;
 /**
  * This view helper crops the text of a blog post in a meaningful way.
  *
- * @version $Id$
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  * @api
@@ -50,7 +49,7 @@ class ReadMoreViewHelper extends \F3\Fluid\Core\ViewHelper\AbstractViewHelper {
 		if ($jumpPosition !== FALSE && $jumpPosition < 200) {
 			return substr($stringToTruncate, 0, $jumpPosition + 3);
 		}
-		
+
 		if (strlen($stringToTruncate) > 200) {
 			return substr($stringToTruncate, 0, 200) . ' ...';
 		} else {

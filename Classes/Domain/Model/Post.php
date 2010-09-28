@@ -25,8 +25,6 @@ namespace F3\Blog\Domain\Model;
 /**
  * A blog post
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  * @entity
@@ -282,6 +280,16 @@ class Post {
 	 */
 	public function addComment(\F3\Blog\Domain\Model\Comment $comment) {
 		$this->comments->attach($comment);
+	}
+
+	/**
+	 * Removes a comment from this post
+	 *
+	 * @param \F3\Blog\Domain\Model\Comment $comment
+	 * @return void
+	 */
+	public function removeComment(\F3\Blog\Domain\Model\Comment $comment) {
+		$this->comments->detach($comment);
 	}
 
 	/**

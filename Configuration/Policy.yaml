@@ -4,8 +4,6 @@
 # This file contains the security policy configuration for the           #
 # Blog package                                                           #
 
-# @version $Id$
-
 resources:
   methods:
     F3_Blog_PostEditorMethods: 'method(F3\Blog\Controller\PostController->(new|create|edit|update|delete)Action())'

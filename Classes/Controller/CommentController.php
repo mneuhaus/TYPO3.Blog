@@ -25,8 +25,6 @@ namespace F3\Blog\Controller;
 /**
  * Comments controller for the Blog package
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
@@ -41,6 +39,18 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function createAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
 		$this->flashMessageContainer->add('Your new comment was created.');
+		$this->redirect('show', 'Post', NULL, array('post' => $post));
+	}
+
+	/**
+	 * Removes a comment
+	 *
+	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @param \F3\Blog\Domain\Model\Comment $comment
+	 * @return void
+	 */
+	public function deleteAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $comment) {
+		$post->removeComment($comment);
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
 

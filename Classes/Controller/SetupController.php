@@ -26,8 +26,6 @@ namespace F3\Blog\Controller;
  * The setup controller for the Blog package, currently just setting up some
  * data to play with.
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {

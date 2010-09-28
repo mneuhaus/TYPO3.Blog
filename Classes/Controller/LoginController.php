@@ -25,7 +25,6 @@ namespace F3\Blog\Controller;
 /**
  * A controller which allows for logging into the backend
  *
- * @version $Id: LoginController.php 2817 2009-07-16 14:32:53Z k-fish $
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class LoginController extends \F3\Blog\Controller\AbstractBaseController {

@@ -25,8 +25,6 @@ namespace F3\Blog\Controller;
 /**
  * The account controller for the Blog package
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class AccountController extends \F3\Blog\Controller\AbstractBaseController {

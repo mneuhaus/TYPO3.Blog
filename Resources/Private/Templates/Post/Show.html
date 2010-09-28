@@ -45,7 +45,12 @@
 			<ol class="commentlist">
 				<f:for each="{post.comments}" as="comment" reverse="TRUE">
 					<li class="comment">
-						<p class="metadata"><img src="{f:uri.resource(path: 'Icons/FamFamFam/user_comment.png')}" title="Comment" /> {comment.author} | <f:format.date format='d.m.Y'>{comment.date}</f:format.date></p>
+						<p class="metadata">
+							<img src="{f:uri.resource(path: 'Icons/FamFamFam/user_comment.png')}" title="Comment" /> {comment.author} | <f:format.date format='d.m.Y'>{comment.date}</f:format.date>
+							<f:security.ifHasRole role="Editor">
+								| <f:link.action onclick="return confirm('Really delete this comment?');" action="delete" arguments="{post: post, comment: comment}" controller="Comment"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
+							</f:security.ifHasRole>
+						</p>
 						<blog:gravatar email="{comment.emailAddress}" default="{f:uri.resource(path: 'gravatar_default.gif')}" class="gravatar" />
 						<p class="content"><f:format.nl2br>{comment.content}</f:format.nl2br></p>
 					</li>

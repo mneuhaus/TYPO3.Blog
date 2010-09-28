@@ -25,8 +25,6 @@ namespace F3\Blog\Domain\Model;
 /**
  * A blog
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  * @entity
@@ -57,7 +55,7 @@ class Blog {
 
 	/**
 	 * A short blurb about the blog or author
-	 * 
+	 *
 	 * @var string
 	 * @validate Text, StringLength(maximum = 400)
 	 */
@@ -65,7 +63,7 @@ class Blog {
 
 	/**
 	 * A picture of the author
-	 * 
+	 *
 	 * @var \F3\FLOW3\Resource\Resource
 	 */
 	protected $authorPicture;

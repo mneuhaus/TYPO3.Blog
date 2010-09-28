@@ -25,8 +25,6 @@ namespace F3\Blog\Controller;
 /**
  * The posts controller for the Blog package
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class PostController extends \F3\Blog\Controller\AbstractBaseController {
@@ -133,7 +131,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		$this->flashMessageContainer->add('Your post has been updated.');
 		$this->redirect('index');
 	}
-	
+
 	/**
 	 * Deletes an existing post
 	 *

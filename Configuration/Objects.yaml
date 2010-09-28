@@ -2,9 +2,6 @@
 # Object Configuration for the Blog                                        #
 #                                                                          #
 
-# @package Blog
-# @version $Id$
-
 F3\Blog\RoutePartHandlers\PostRoutePartHandler:
   properties:
     mappingCache:

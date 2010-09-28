@@ -25,8 +25,6 @@ namespace F3\Blog\Domain\Model;
 /**
  * A blog post comment
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  * @entity

@@ -25,8 +25,6 @@ namespace F3\Blog\Domain\Model;
 /**
  * An image
  *
- * @version $Id: Post.php 3327 2009-10-15 16:49:13Z k-fish $
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  * @entity

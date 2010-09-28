@@ -25,8 +25,6 @@ namespace F3\Blog\Domain\Model;
 /**
  * A blog post category
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  * @entity
@@ -59,10 +57,10 @@ class Category {
 	public function getName() {
 		return $this->name;
 	}
-	
+
 	/**
 	 * Returns the category name
-	 * 
+	 *
 	 * @return string The category name
 	 */
 	public function __toString() {
