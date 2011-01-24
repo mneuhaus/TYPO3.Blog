@@ -59,7 +59,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @return unknown_type
 	 */
 	public function indexAction() {
-		$this->forward($this->blogRepository->findActive() === FALSE ? 'initialSetup' : 'modifySetup');
+		$this->forward($this->blogRepository->findActive() === NULL ? 'initialSetup' : 'modifySetup');
 	}
 
 	/**
@@ -68,7 +68,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @return void
 	 */
 	public function initialSetupAction() {
-		if ($this->blogRepository->findActive() !== FALSE) {
+		if ($this->blogRepository->findActive() !== NULL) {
 			$this->redirect('index', 'Post');
 		}
 
@@ -106,13 +106,22 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
+	 * Modify setup (to be coded)
+	 *
+	 * @return void
+	 */
+	public function modifySetupAction() {
+		throw new \LogicException('No modify action coded yet', 1295879094);
+	}
+
+	/**
 	 * Sets up a a blog with a lot of posts and comments which is a nice test bed
 	 * for profiling.
 	 *
 	 * @return void
 	 */
 	public function profilingSetupAction() {
-		if ($this->blogRepository->findActive() !== FALSE) {
+		if ($this->blogRepository->findActive() !== NULL) {
 			$this->redirect('index', 'Post');
 		}
 

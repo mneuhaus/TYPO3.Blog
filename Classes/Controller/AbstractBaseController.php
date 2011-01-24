@@ -50,7 +50,7 @@ abstract class AbstractBaseController extends \F3\FLOW3\MVC\Controller\ActionCon
 	 */
 	protected function initializeView(\F3\FLOW3\MVC\View\ViewInterface $view) {
 		$this->blog = $this->blogRepository->findActive();
-		if ($this->blog === FALSE) {
+		if ($this->blog === NULL) {
 			$this->redirect('index', 'Setup');
 		}
 		$view->assign('blog', $this->blog);
