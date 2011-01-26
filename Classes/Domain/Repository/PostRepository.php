@@ -22,6 +22,8 @@ namespace F3\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use \F3\FLOW3\Persistence\QueryInterface;
+
 /**
  * A repository for Blog Posts
  *
@@ -39,7 +41,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
 			->execute();
 	}
@@ -60,7 +62,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 					$query->contains('tags', $tag)
 				)
 			)
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
 			->execute();
 	}
@@ -103,7 +105,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 5) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
 			->execute();
 	}
@@ -118,11 +120,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 */
 	public function findRemainingByBlog(\F3\Blog\Domain\Model\Post $postToExclude, \F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
 		$query = $this->createQuery();
-		$posts = $query->matching(
-				$query->logicalAnd(
-					$query->equals('blog', $blog)
-				)
-			)
+		$posts = $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->setLimit($limit)
 			->execute()

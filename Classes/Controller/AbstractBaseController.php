@@ -32,12 +32,12 @@ abstract class AbstractBaseController extends \F3\FLOW3\MVC\Controller\ActionCon
 
 	/**
 	 * @inject
-	 * @var F3\Blog\Domain\Repository\BlogRepository
+	 * @var \F3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @var F3\Blog\Domain\Model\Blog
+	 * @var \F3\Blog\Domain\Model\Blog
 	 */
 	protected $blog;
 

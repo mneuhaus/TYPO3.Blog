@@ -32,10 +32,7 @@ namespace F3\Blog\Domain\Model;
 class Blog {
 
 	/**
-	 * @inject
-	 * @var \F3\Blog\Domain\Repository\PostRepository
 	 */
-	protected $postRepository;
 
 	/**
 	 * The blog's title.
@@ -203,7 +200,6 @@ class Blog {
 	 * @return void
 	 */
 	public function removePost(\F3\Blog\Domain\Model\Post $post) {
-		$this->postRepository->remove($post);
 		$this->posts->detach($post);
 	}
 

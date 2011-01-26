@@ -14,6 +14,16 @@
 		</ul>
 		<br />
 	</f:if>
-	<f:link.action action="new" controller="Category">Create new category</f:link.action>
+
+	<f:form.errors for="newCategory">
+		<div class="error">
+			<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
+		</div>
+	</f:form.errors>
+	<f:form method="post" action="create" object="{newCategory}" name="newCategory">
+		<label>Name</label><br />
+		<f:form.textbox property="name" /><br />
+		<f:form.submit value="Add category"/>
+	</f:form>
 
 </f:section>

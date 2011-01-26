@@ -113,7 +113,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 */
 	public function editAction(\F3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('blog', $this->blog);
-			// Don't display the post we're editing in the recent posts selector:
+			// Don't display the post we're editing in the related posts selector:
 		$existingPosts = $this->postRepository->findRemainingByBlog($post, $this->blog);
 		$this->view->assign('existingPosts', $existingPosts);
 		$this->view->assign('categories', $this->categoryRepository->findAll());
@@ -140,6 +140,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 */
 	public function deleteAction(\F3\Blog\Domain\Model\Post $post) {
 		$post->getBlog()->removePost($post);
+		$this->postRepository->remove($post);
 		$this->flashMessageContainer->add('The post has been deleted.');
 		$this->redirect('index');
 	}

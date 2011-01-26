@@ -45,17 +45,6 @@ class CategoryController extends \F3\Blog\Controller\AbstractBaseController {
 	}
 
 	/**
-	 * Displays a form for creating a new category
-	 *
-	 * @param \F3\Blog\Domain\Model\Category $newCategory A fresh category object taken as a basis for the rendering
-	 * @return string An HTML form for creating a new category
-	 * @dontvalidate $newCategory
-	 */
-	public function newAction(\F3\Blog\Domain\Model\Category $newCategory = NULL) {
-		$this->view->assign('newCategory', $newCategory);
-	}
-
-	/**
 	 * Creates a new category
 	 *
 	 * @param \F3\Blog\Domain\Model\Category $newCategory A fresh category object which has not yet been added to the repository

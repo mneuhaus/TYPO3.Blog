@@ -70,7 +70,7 @@ class Post {
 	protected $content;
 
 	/**
-	 * @var F3\Blog\Domain\Model\Image
+	 * @var \F3\Blog\Domain\Model\Image
 	 */
 	protected $image;
 
@@ -201,8 +201,11 @@ class Post {
 	 *
 	 * @param F3\Blog\Domain\Model\Image $image
 	 */
-	public function setImage(\F3\Blog\Domain\Model\Image $image) {
-		$this->image = $image;
+	public function setImage(\F3\Blog\Domain\Model\Image $image = NULL) {
+			// work around property mapper delivering an empty Image
+		if ($image === NULL || $image->getOriginalResource() !== NULL) {
+			$this->image = $image;
+		}
 	}
 
 	/**
@@ -346,7 +349,6 @@ class Post {
 	public function setCategory(\F3\Blog\Domain\Model\Category $category) {
 		$this->category = $category;
 	}
-
 
 }
 

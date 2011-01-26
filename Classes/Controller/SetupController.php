@@ -44,6 +44,12 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
+	 * @var  \F3\FLOW3\Security\AccountFactory
+	 */
+	protected $accountFactory;
+
+	/**
+	 * @inject
 	 * @var \F3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
@@ -56,7 +62,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 *
-	 * @return unknown_type
+	 * @return void
 	 */
 	public function indexAction() {
 		$this->forward($this->blogRepository->findActive() === NULL ? 'initialSetup' : 'modifySetup');
@@ -79,21 +85,10 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$blog->setDescription('A blog about Foo, Bar and Baz.');
 		$this->blogRepository->add($blog);
 
-		$account = $this->objectManager->create('F3\FLOW3\Security\Account');
-		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
-
-		$roles = array(
-			$this->objectManager->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
-		);
-
 		$this->authenticationManager->logout();
 		$this->accountRepository->removeAll();
 
-		$account->setAccountIdentifier('editor');
-		$account->setCredentialsSource($credentials);
-		$account->setAuthenticationProviderName('DefaultProvider');
-		$account->setRoles($roles);
-
+		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
 		$this->accountRepository->add($account);
 
 		$authenticationTokens = $this->securityContext->getAuthenticationTokensOfType('F3\FLOW3\Security\Authentication\Token\UsernamePassword');
@@ -109,6 +104,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * Modify setup (to be coded)
 	 *
 	 * @return void
+	 * @throws \LogicException
 	 */
 	public function modifySetupAction() {
 		throw new \LogicException('No modify action coded yet', 1295879094);
@@ -162,26 +158,14 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 			$blog->addPost($post);
 		}
 
-		$account = $this->objectManager->create('F3\FLOW3\Security\Account');
-		$credentials = md5(md5('joh316') . 'someSalt') . ',someSalt';
-
-		$roles = array(
-			$this->objectManager->create('F3\FLOW3\Security\Policy\Role', 'Editor'),
-		);
-
 		$this->authenticationManager->logout();
 		$this->accountRepository->removeAll();
 
-		$account->setAccountIdentifier('robert');
-		$account->setCredentialsSource($credentials);
-		$account->setAuthenticationProviderName('DefaultProvider');
-		$account->setRoles($roles);
-
+		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
 		$this->accountRepository->add($account);
 
-		return '<p>Done, created 1 blog, ' . $postCount . ' posts, ' . $commentCount . ' comments.</p>';
-
-		$this->redirect('index', 'Post');
+		return '<p>Done, created 1 blog, ' . $postCount . ' posts, ' . $commentCount . ' comments.</p>' .
+				'<p><a href="' . $this->uriBuilder->uriFor('index', array(), 'Post') . '">to the post index...</a></p>';
 	}
 
 }
