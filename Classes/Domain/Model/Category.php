@@ -32,10 +32,20 @@ namespace F3\Blog\Domain\Model;
 class Category {
 
 	/**
+	 * This ID is only for the ORM.
+	 *
+	 * @var integer
+	 * @Id
+	 * @GeneratedValue
+	 */
+	protected $id;
+
+	/**
 	 * The category name
 	 *
 	 * @var string
 	 * @validate Text, StringLength(minimum = 1, maximum = 80)
+	 * @Column(length="80")
 	 */
 	protected $name;
 

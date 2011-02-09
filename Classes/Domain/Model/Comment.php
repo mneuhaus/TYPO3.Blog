@@ -32,13 +32,31 @@ namespace F3\Blog\Domain\Model;
 class Comment {
 
 	/**
+	 * This ID is only for the ORM.
+	 *
+	 * @var integer
+	 * @Id
+	 * @GeneratedValue
+	 */
+	protected $id;
+
+	/**
 	 * @var \DateTime
+	 * @identity
 	 */
 	protected $date;
 
 	/**
+	 * @var \F3\Blog\Domain\Model\Post
+	 * @ManyToOne(inversedBy="comments")
+	 */
+	protected $post;
+
+	/**
 	 * @var string
 	 * @validate Text, StringLength(minimum = 3, maximum = 80)
+	 * @identity
+	 * @Column(length="80")
 	 */
 	protected $author;
 
@@ -51,6 +69,7 @@ class Comment {
 	/**
 	 * @var string
 	 * @validate Text, NotEmpty
+	 * @Column(type="text")
 	 */
 	protected $content;
 
@@ -70,6 +89,14 @@ class Comment {
 	 */
 	public function setDate(\DateTime $date) {
 		$this->date = $date;
+	}
+
+	/**
+	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @return void
+	 */
+	public function setPost(\F3\Blog\Domain\Model\Post $post) {
+		$this->post = $post;
 	}
 
 	/**
@@ -137,5 +164,7 @@ class Comment {
 	public function getContent() {
 		return $this->content;
 	}
+
 }
+
 ?>

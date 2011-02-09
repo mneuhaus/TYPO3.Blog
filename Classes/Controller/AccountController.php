@@ -67,6 +67,7 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 			if ($token->isAuthenticated()) {
 				$account = $token->getAccount();
 				$this->view->assign('account', $account);
+				break;
 			}
 		}
 	}

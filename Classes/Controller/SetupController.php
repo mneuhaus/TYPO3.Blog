@@ -44,7 +44,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var  \F3\FLOW3\Security\AccountFactory
+	 * @var \F3\FLOW3\Security\AccountFactory
 	 */
 	protected $accountFactory;
 

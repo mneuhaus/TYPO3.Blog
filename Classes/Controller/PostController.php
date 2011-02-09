@@ -114,7 +114,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	public function editAction(\F3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('blog', $this->blog);
 			// Don't display the post we're editing in the related posts selector:
-		$existingPosts = $this->postRepository->findRemainingByBlog($post, $this->blog);
+		$existingPosts = $this->postRepository->findRecentExceptThis($post);
 		$this->view->assign('existingPosts', $existingPosts);
 		$this->view->assign('categories', $this->categoryRepository->findAll());
 		$this->view->assign('post', $post);

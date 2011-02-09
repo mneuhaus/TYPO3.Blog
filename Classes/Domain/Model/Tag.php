@@ -32,10 +32,28 @@ namespace F3\Blog\Domain\Model;
 class Tag {
 
 	/**
+	 * This ID is only for the ORM.
+	 *
+	 * @var integer
+	 * @Id
+	 * @GeneratedValue
+	 */
+	protected $id;
+
+	/**
 	 * @var string
 	 * @validate Alphanumeric, StringLength(minimum = 1, maximum = 20)
+	 * @Column(length="20")
 	 */
 	protected $name;
+
+	/**
+	 * The posts tagged with this tag
+	 *
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
+	 * @ManyToMany(mappedBy="tags")
+	 */
+	protected $posts;
 
 	/**
 	 * Constructs this tag
@@ -44,6 +62,7 @@ class Tag {
 	 */
 	public function __construct($name) {
 		$this->name = $name;
+		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**

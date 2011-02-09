@@ -111,22 +111,29 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	}
 
 	/**
-	 * Finds most recent posts by the specified blog excluding the given post
+	 * Finds most recent posts excluding the given post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $postToExclude Post to exclude from result
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param \F3\Blog\Domain\Model\Post $post Post to exclude from result
 	 * @param integer $limit The number of posts to return at max
-	 * @return array All posts of the given $blog except for $postToExclude
+	 * @return array All posts of the $post's blog except for $post
 	 */
-	public function findRemainingByBlog(\F3\Blog\Domain\Model\Post $postToExclude, \F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
+	public function findRecentExceptThis(\F3\Blog\Domain\Model\Post $post, $limit = 20) {
 		$query = $this->createQuery();
-		$posts = $query->matching($query->equals('blog', $blog))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
-			->setLimit($limit)
-			->execute()
-			->toArray();
-		unset($posts[array_search($postToExclude, $posts)]);
+		$posts = $query->matching($query->equals('blog', $post->getBlog()))
+				->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+				->setLimit($limit)
+				->execute()
+				->toArray();
+		unset($posts[array_search($post, $posts)]);
 		return $posts;
+
+
+			// this is an alternative way of doing this when extending the Doctrine 2
+			// specific repository and using DQL.
+		return $this->entityManager
+			->createQuery('SELECT p FROM \F3\Blog\Domain\Model\Post p WHERE p.blog = :blog AND NOT p = :excludedPost ORDER BY p.date DESC')
+			->setMaxResults($limit)
+			->execute(array('blog' => $post->getBlog(), 'excludedPost' => $post));
 	}
 
 }

@@ -32,8 +32,18 @@ namespace F3\Blog\Domain\Model;
 class Post {
 
 	/**
-	 * @var F3\Blog\Domain\Model\Blog
 	 * @identity
+	 * This ID is only for the ORM.
+	 *
+	 * @var integer
+	 * @Id
+	 * @GeneratedValue
+	 */
+	protected $id;
+
+	/**
+	 * @var \F3\Blog\Domain\Model\Blog
+	 * @ManyToOne(inversedBy="posts")
 	 */
 	protected $blog;
 
@@ -41,6 +51,7 @@ class Post {
 	 * @var string
 	 * @validate StringLength(minimum = 1, maximum = 100)
 	 * @identity
+	 * @Column(length="100")
 	 */
 	protected $title;
 
@@ -48,61 +59,72 @@ class Post {
 	 * @var string
 	 * @validate RegularExpression(regularExpression = "/^[a-z0-9\-]{1,100}$/")
 	 * @identity
+	 * @Column(length="100")
 	 */
 	protected $linkTitle = '';
 
 	/**
-	 * @var DateTime
 	 * @identity
+	 * @var \DateTime
 	 */
 	protected $date;
 
 	/**
 	 * @var string
 	 * @validate StringLength(minimum = 1, maximum = 50)
+	 * @Column(length="50")
 	 */
 	protected $author;
 
 	/**
 	 * @var string
+	 * @column(type="text")
 	 * @validate Raw
 	 */
 	protected $content;
 
 	/**
 	 * @var \F3\Blog\Domain\Model\Image
+	 * @ManyToOne(cascade={"all"})
 	 */
 	protected $image;
 
 	/**
-	 * @var SplObjectStorage<\F3\Blog\Domain\Model\Tag>
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Tag>
+	 * @ManyToMany(inversedBy="posts")
 	 */
 	protected $tags;
 
 	/**
 	 * @var F3\Blog\Domain\Model\Category
+	 * @ManyToOne
 	 */
 	protected $category;
 
 	/**
-	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Comment>
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Comment>
+	 * @OneToMany(mappedBy="post", cascade={"all"}, orphanRemoval="true")
 	 */
 	protected $comments;
 
 	/**
-	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Post>
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
+	 * @ManyToMany
+	 * @JoinTable(name="related_posts",
+	 *   joinColumns={@joinColumn(name="post_id", referencedColumnName="id")},
+	 *   inverseJoinColumns={@joinColumn(name="related_id", referencedColumnName="id")}
+	 * )
 	 */
 	protected $relatedPosts;
 
 	/**
 	 * Constructs this post
-	 *
 	 */
 	public function __construct() {
 		$this->date = new \DateTime();
-		$this->tags = new \SplObjectStorage();
-		$this->comments = new \SplObjectStorage();
-		$this->relatedPosts = new \SplObjectStorage();
+		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->relatedPosts = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**
@@ -211,10 +233,10 @@ class Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param \SplObjectStorage<\F3\Blog\Domain\Model\Tag> $tags One or more \F3\Blog\Domain\Model\Tag objects
+	 * @param \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Tag> $tags The tags
 	 * @return void
 	 */
-	public function setTags(\SplObjectStorage $tags) {
+	public function setTags(\Doctrine\Common\Collections\ArrayCollection $tags) {
 		$this->tags = clone $tags;
 	}
 
@@ -225,13 +247,13 @@ class Post {
 	 * @return void
 	 */
 	public function addTag(\F3\Blog\Domain\Model\Tag $tag) {
-		$this->tags->attach($tag);
+		$this->tags->add($tag);
 	}
 
 	/**
 	 * Getter for tags
 	 *
-	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Tag> The tags
+	 * @return \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Tag> The tags
 	 */
 	public function getTags() {
 		return clone $this->tags;
@@ -282,7 +304,8 @@ class Post {
 	 * @return void
 	 */
 	public function addComment(\F3\Blog\Domain\Model\Comment $comment) {
-		$this->comments->attach($comment);
+		$comment->setPost($this);
+		$this->comments->add($comment);
 	}
 
 	/**
@@ -292,13 +315,13 @@ class Post {
 	 * @return void
 	 */
 	public function removeComment(\F3\Blog\Domain\Model\Comment $comment) {
-		$this->comments->detach($comment);
+		$this->comments->removeElement($comment);
 	}
 
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return array of \F3\Blog\Domain\Model\Comment
+	 * @return \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Comment>
 	 */
 	public function getComments() {
 		return $this->comments;
@@ -316,17 +339,17 @@ class Post {
 	/**
 	 * Sets the posts related to this post
 	 *
-	 * @param \SplObjectStorage<\F3\Blog\Domain\Model\Post> $relatedPosts The related posts
+	 * @param \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post> $relatedPosts The related posts
 	 * @return void
 	 */
-	public function setRelatedPosts(\SplObjectStorage $relatedPosts) {
+	public function setRelatedPosts(\Doctrine\Common\Collections\ArrayCollection $relatedPosts) {
 		$this->relatedPosts = clone $relatedPosts;
 	}
 
 	/**
 	 * Returns the posts related to this post
 	 *
-	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Post> The related posts
+	 * @return \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post> The related posts
 	 */
 	public function getRelatedPosts() {
 		return clone $this->relatedPosts;

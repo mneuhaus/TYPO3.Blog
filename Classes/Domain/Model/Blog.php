@@ -32,13 +32,20 @@ namespace F3\Blog\Domain\Model;
 class Blog {
 
 	/**
+	 * This ID is only for the ORM.
+	 *
+	 * @var integer
+	 * @Id
+	 * @GeneratedValue
 	 */
+	protected $id;
 
 	/**
 	 * The blog's title.
 	 *
 	 * @var string
 	 * @validate Text, StringLength(minimum = 1, maximum = 80)
+	 * @Column(length="80")
 	 */
 	protected $title = '';
 
@@ -47,6 +54,7 @@ class Blog {
 	 *
 	 * @var string
 	 * @validate Text, StringLength(maximum = 150)
+	 * @Column(length="150")
 	 */
 	protected $description = '';
 
@@ -54,6 +62,7 @@ class Blog {
 	 * A short blurb about the blog or author
 	 *
 	 * @var string
+	 * @Column(type="text", length="400")
 	 * @validate Text, StringLength(maximum = 400)
 	 */
 	protected $blurb = '';
@@ -62,6 +71,7 @@ class Blog {
 	 * A picture of the author
 	 *
 	 * @var \F3\FLOW3\Resource\Resource
+	 * @ManyToOne(cascade={"all"})
 	 */
 	protected $authorPicture;
 
@@ -70,14 +80,16 @@ class Blog {
 	 *
 	 * @validate Text, StringLength(maximum = 80)
 	 * @var string
+	 * @Column(length="80")
 	 */
 	protected $twitterUsername = '';
 
 	/**
 	 * The posts contained in this blog
 	 *
-	 * @var \SplObjectStorage<\F3\Blog\Domain\Model\Post>
 	 * @lazy
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
+	 * @OneToMany(mappedBy="blog",cascade={"all"})
 	 */
 	protected $posts;
 
@@ -86,7 +98,7 @@ class Blog {
 	 *
 	 */
 	public function __construct() {
-		$this->posts = new \SplObjectStorage();
+		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**
@@ -190,7 +202,7 @@ class Blog {
 	 */
 	public function addPost(\F3\Blog\Domain\Model\Post $post) {
 		$post->setBlog($this);
-		$this->posts->attach($post);
+		$this->posts->add($post);
 	}
 
 	/**
@@ -200,7 +212,7 @@ class Blog {
 	 * @return void
 	 */
 	public function removePost(\F3\Blog\Domain\Model\Post $post) {
-		$this->posts->detach($post);
+		$this->posts->removeElement($post);
 	}
 
 	/**
