@@ -3,12 +3,7 @@
 <f:section name="mainbox">
 	<h2 class="flow3-firstHeader">Your Account</h2>
 	<f:flashMessages class="flashmessages"/>
-	<f:form.errors for="account">
-		<div class="error">
-			<strong>{error.propertyName}</strong>:
-			<f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
-		</div>
-	</f:form.errors>
+	<f:render partial="FormErrors" arguments="{for: 'account'}" />
 	<f:form action="update" object="{account}" name="account">
 		<label for="accountIdentifier">Username</label><br />
 		<f:form.textbox property="accountIdentifier" id="accountIdentifier" /><br />

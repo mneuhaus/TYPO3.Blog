@@ -60,7 +60,6 @@ class CategoryController extends \F3\Blog\Controller\AbstractBaseController {
 	 * Displays a form for editing an existing category
 	 *
 	 * @param \F3\Blog\Domain\Model\Category $category An existing category object taken as a basis for the rendering
-	 * @dontvalidate $category
 	 * @return string An HTML form for editing a category
 	 */
 	public function editAction(\F3\Blog\Domain\Model\Category $category) {

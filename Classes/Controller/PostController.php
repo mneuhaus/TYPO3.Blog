@@ -87,28 +87,22 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Displays a form for creating a new post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh post object taken as a basis for the rendering
 	 * @return string An HTML form for creating a new post
-	 * @dontvalidate $newPost
 	 */
-	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
-		if ($newPost === NULL) {
-			$activeTokens = $this->securityContext->getAuthenticationTokens();
-			foreach ($activeTokens as $token) {
-				if ($token->isAuthenticated()) {
-					$account = $token->getAccount();
-					break;
-				}
-			}
-			$newPost = $this->objectManager->create('F3\Blog\Domain\Model\Post');
-			$newPost->setAuthor($account->getParty()->getName()->getFullName());
-		}
+	public function newAction() {
+		$account = $this->findCurrentAccount();
+		$newPost = new \F3\Blog\Domain\Model\Post();
+		$newPost->setAuthor($account->getParty()->getName()->getFullName());
+
 		$this->view->assign('blog', $this->blog);
 		$this->view->assign('existingPosts', $this->postRepository->findByBlog($this->blog));
 		$this->view->assign('categories', $this->categoryRepository->findAll());
 		$this->view->assign('newPost', $newPost);
 	}
 
+	public function initializeCreateAction() {
+		$this->arguments['newPost']->getPropertyMappingConfiguration()->allowCreationForSubProperty('image');
+	}
 	/**
 	 * Creates a new post
 	 *
@@ -125,7 +119,6 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 * Displays a form for editing an existing post
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
-	 * @dontvalidate $post
 	 * @return string An HTML form for editing a post
 	 */
 	public function editAction(\F3\Blog\Domain\Model\Post $post) {
@@ -135,6 +128,11 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		$this->view->assign('existingPosts', $existingPosts);
 		$this->view->assign('categories', $this->categoryRepository->findAll());
 		$this->view->assign('post', $post);
+	}
+
+	public function initializeUpdateAction() {
+		$this->arguments['post']->getPropertyMappingConfiguration()->allowModificationForSubProperty('image');
+		$this->arguments['post']->getPropertyMappingConfiguration()->allowCreationForSubProperty('image');
 	}
 
 	/**
@@ -175,6 +173,18 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 				return 'Could not update the post:';
 			default :
 				return parent::getErrorFlashMessage();
+		}
+	}
+
+	/**
+	 * @return \F3\FLOW3\Security\Account
+	 */
+	protected function findCurrentAccount() {
+		$activeTokens = $this->securityContext->getAuthenticationTokens();
+		foreach ($activeTokens as $token) {
+			if ($token->isAuthenticated()) {
+				return $token->getAccount();
+			}
 		}
 	}
 }
