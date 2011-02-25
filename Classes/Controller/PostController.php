@@ -42,6 +42,12 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	protected $categoryRepository;
 
 	/**
+	 * @inject
+	 * @var \F3\FLOW3\Security\Context
+	 */
+	protected $securityContext;
+
+	/**
 	 * List action for this controller. Displays latest posts
 	 *
 	 * @param string $tag The tag to display posts for
@@ -86,6 +92,17 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 * @dontvalidate $newPost
 	 */
 	public function newAction(\F3\Blog\Domain\Model\Post $newPost = NULL) {
+		if ($newPost === NULL) {
+			$activeTokens = $this->securityContext->getAuthenticationTokens();
+			foreach ($activeTokens as $token) {
+				if ($token->isAuthenticated()) {
+					$account = $token->getAccount();
+					break;
+				}
+			}
+			$newPost = $this->objectManager->create('F3\Blog\Domain\Model\Post');
+			$newPost->setAuthor($account->getParty()->getName()->getFullName());
+		}
 		$this->view->assign('blog', $this->blog);
 		$this->view->assign('existingPosts', $this->postRepository->findByBlog($this->blog));
 		$this->view->assign('categories', $this->categoryRepository->findAll());

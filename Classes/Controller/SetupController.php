@@ -44,6 +44,12 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
+	 * @var \F3\Party\Domain\Repository\PersonRepository
+	 */
+	protected $personRepository;
+
+	/**
+	 * @inject
 	 * @var \F3\FLOW3\Security\AccountFactory
 	 */
 	protected $accountFactory;
@@ -90,6 +96,12 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
 		$this->accountRepository->add($account);
+
+		$personName = $this->objectManager->create('F3\Party\Domain\Model\PersonName', '', 'First', '', 'Last');
+		$person = $this->objectManager->create('F3\Party\Domain\Model\Person');
+		$person->setName($personName);
+		$person->addAccount($account);
+		$this->personRepository->add($person);
 
 		$authenticationTokens = $this->securityContext->getAuthenticationTokensOfType('F3\FLOW3\Security\Authentication\Token\UsernamePassword');
 		if (count($authenticationTokens) === 1) {
