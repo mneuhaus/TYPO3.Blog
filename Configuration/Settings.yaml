@@ -10,5 +10,5 @@ FLOW3:
         DefaultProvider:
           providerClass: PersistedUsernamePasswordProvider
           entryPoint:
-            webRedirect:
+            WebRedirect:
               uri: admin/authentication
