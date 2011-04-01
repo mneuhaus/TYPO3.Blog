@@ -73,6 +73,15 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 	}
 
 	/**
+	 * @return void
+	 */
+	public function initializeUpdateAction() {
+		$this->arguments['account']->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('party', 'F3\Party\Domain\Model\Person');
+		$this->arguments['account']->getPropertyMappingConfiguration()->allowModificationForSubProperty('party');
+		$this->arguments['account']->getPropertyMappingConfiguration()->allowModificationForSubProperty('party.name');
+	}
+
+	/**
 	 * Updates the account properties
 	 *
 	 * @param F3\FLOW3\Security\Account $account

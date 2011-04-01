@@ -59,11 +59,7 @@
 			<div class="clear"></div>
 		</f:if>
 		<h3>Leave a reply</h3>
-		<f:form.errors for="newComment">
-			<div class="error">
-				<strong>{error.propertyName}</strong>: <f:for each="{error.errors}" as="errorDetail">{errorDetail.message}</f:for>
-			</div>
-		</f:form.errors>
+		<f:render partial="FormErrors" arguments="{for: 'newComment'}" />
 		<f:form action="create" arguments="{post: post}" controller="Comment" object="{newComment}" name="newComment" class="form newcomment">
 			<ul>
 				<li><f:form.textbox id="comment.author" property="author" /></li>
