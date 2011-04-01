@@ -38,11 +38,10 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 * @param integer $limit The number of posts to return at max
 	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
-	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
+	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
-			->setLimit($limit)
 			->execute();
 	}
 
