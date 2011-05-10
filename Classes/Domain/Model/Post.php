@@ -100,9 +100,7 @@ class Post {
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
 	 * @ManyToMany
-	 * @JoinTable(name="related_posts",
-	 *   joinColumns={@joinColumn(name="post_id", referencedColumnName="id")},
-	 *   inverseJoinColumns={@joinColumn(name="related_id", referencedColumnName="id")}
+	 * @JoinTable(inverseJoinColumns={@joinColumn(name="related_id")}
 	 * )
 	 */
 	protected $relatedPosts;

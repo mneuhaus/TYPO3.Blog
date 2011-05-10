@@ -78,7 +78,6 @@ class Blog {
 	/**
 	 * The posts contained in this blog
 	 *
-	 * @lazy
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
 	 * @OneToMany(mappedBy="blog",cascade={"all"})
 	 */
