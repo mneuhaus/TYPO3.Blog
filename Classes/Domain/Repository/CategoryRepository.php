@@ -29,5 +29,10 @@ namespace F3\Blog\Domain\Repository;
  */
 class CategoryRepository extends \F3\FLOW3\Persistence\Repository {
 
+	/**
+	 * @var array
+	 */
+	protected $defaultOrderings = array('name' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING);
+
 }
 ?>
