@@ -34,6 +34,7 @@ class AdminController extends \F3\Blog\Controller\AbstractBaseController {
 	 *
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
+	 * @skipCsrfProtection
 	 */
 	public function indexAction() {
 	}

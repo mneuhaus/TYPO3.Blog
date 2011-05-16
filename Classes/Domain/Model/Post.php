@@ -32,16 +32,6 @@ namespace F3\Blog\Domain\Model;
 class Post {
 
 	/**
-	 * @identity
-	 * This ID is only for the ORM.
-	 *
-	 * @var integer
-	 * @Id
-	 * @GeneratedValue
-	 */
-	protected $id;
-
-	/**
 	 * @var \F3\Blog\Domain\Model\Blog
 	 * @ManyToOne(inversedBy="posts")
 	 */

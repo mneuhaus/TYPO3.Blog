@@ -32,15 +32,6 @@ namespace F3\Blog\Domain\Model;
 class Image {
 
 	/**
-	 * This ID is only for the ORM.
-	 *
-	 * @var integer
-	 * @Id
-	 * @GeneratedValue
-	 */
-	protected $id;
-
-	/**
 	 * @var string
 	 * @validate StringLength(maximum = 100)
 	 * @Column(length="100")
