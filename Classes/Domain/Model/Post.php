@@ -94,6 +94,7 @@ class Post {
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Comment>
 	 * @OneToMany(mappedBy="post", cascade={"all"}, orphanRemoval="true")
+	 * @OrderBy({"date" = "DESC"})
 	 */
 	protected $comments;
 
