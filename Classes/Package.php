@@ -31,6 +31,17 @@ use \F3\FLOW3\Package\Package as BasePackage;
  */
 class Package extends BasePackage {
 
+	/**
+	 * Invokes custom PHP code directly after the package manager has been initialized.
+	 *
+	 * @param \F3\FLOW3\Core\Bootstrap $bootstrap The current bootstrap
+	 * @return void
+	 */
+	public function boot(\F3\FLOW3\Core\Bootstrap $bootstrap) {
+		$dispatcher = $bootstrap->getSignalSlotDispatcher();
+		$dispatcher->connect('F3\Blog\Controller\CommentController', 'commentCreated', 'F3\Blog\Service\Notification', 'sendNewCommentNotification');
+	}
+
 }
 
 ?>

@@ -1,9 +1,9 @@
 <?php
 declare(ENCODING = 'utf-8');
-namespace F3\Blog\Controller;
+namespace F3\Blog\Service;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "Blog".                       *
+ * This script belongs to the FLOW3 package "Blog".                      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -23,56 +23,42 @@ namespace F3\Blog\Controller;
  *                                                                        */
 
 /**
- * A controller which allows for logging into the backend
+ * A notification service
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LoginController extends \F3\Blog\Controller\AbstractBaseController {
+class Notification {
 
 	/**
-	 * @inject
-	 * @var \F3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @var array
 	 */
-	protected $authenticationManager;
+	protected $settings;
 
 	/**
-	 *
-	 *
-	 * @return string
-	 */
-	public function indexAction() {
-
-	}
-
-	/**
-	 * Authenticates an account by invoking the Provider based Authentication Manager.
-	 *
-	 * On successful authentication redirects to the list of posts, otherwise returns
-	 * to the login screen.
-	 *
+	 * @param array $settings
 	 * @return void
-	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function authenticateAction() {
-		try {
-			$this->authenticationManager->authenticate();
-			$this->redirect('index', 'Admin');
-		} catch (\F3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
-			$this->flashMessageContainer->add('Wrong username or password.');
-			throw $exception;
-		}
+	public function injectSettings(array $settings) {
+		$this->settings = $settings;
 	}
 
 	/**
-	 *
+	 * @param \F3\Blog\Domain\Model\Comment $comment
+	 * @param \F3\Blog\Domain\Model\Post $post
 	 * @return void
-	 * @author Andreas Förthner <andreas.foerthner@netlogix.de>
 	 */
-	public function logoutAction() {
-		$this->authenticationManager->logout();
-		$this->flashMessageContainer->add('Successfully logged out.');
-		$this->redirect('index', 'Post');
+	public function sendNewCommentNotification(\F3\Blog\Domain\Model\Comment $comment, \F3\Blog\Domain\Model\Post $post) {
+		if ($this->settings['notifications']['to']['email'] === '') return;
+
+		$mail = new \F3\SwiftMailer\Message();
+		$mail
+			->setFrom(array($comment->getEmailAddress() => $comment->getAuthor()))
+			->setTo(array($this->settings['notifications']['to']['email'] => $this->settings['notifications']['to']['name']))
+			->setSubject('New comment on blog post "' . $post->getTitle() . '"')
+			->setBody($comment->getContent())
+			->send();
 	}
+
 }
 
 ?>
