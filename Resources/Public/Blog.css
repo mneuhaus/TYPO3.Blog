@@ -288,6 +288,20 @@ ul.flashmessages {
 	font-weight: bold;
 }
 
+/*--------------- pagination ------------------*/
+
+ul.f3-widget-paginator {
+    list-style-type: none;
+}
+
+ul.f3-widget-paginator li {
+    display: block;
+    float:left;
+    padding: 4px 6px;
+    margin: 4px;
+    border: solid 1px #ccc;
+}
+
 /*--------------- form validation ------------------*/
 
 input.f3-form-error {
