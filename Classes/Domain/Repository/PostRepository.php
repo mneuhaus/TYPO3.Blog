@@ -50,10 +50,9 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \F3\Blog\Domain\Model\Tag $tag
 	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
-	 * @param integer $limit The number of posts to return at max
 	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
-	public function findByTagAndBlog(\F3\Blog\Domain\Model\Tag $tag, \F3\Blog\Domain\Model\Blog $blog, $limit = 20) {
+	public function findByTagAndBlog(\F3\Blog\Domain\Model\Tag $tag, \F3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
 		return $query->matching(
 				$query->logicalAnd(
@@ -62,7 +61,25 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 				)
 			)
 			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
-			->setLimit($limit)
+			->execute();
+	}
+
+	/**
+	 * Finds posts by the specified category and blog
+	 *
+	 * @param \F3\Blog\Domain\Model\Category $category
+	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
+	 */
+	public function findByCategoryAndBlog(\F3\Blog\Domain\Model\Category $category, \F3\Blog\Domain\Model\Blog $blog) {
+		$query = $this->createQuery();
+		return $query->matching(
+				$query->logicalAnd(
+					$query->equals('blog', $blog),
+					$query->equals('category', $category)
+				)
+			)
+			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
 			->execute();
 	}
 
