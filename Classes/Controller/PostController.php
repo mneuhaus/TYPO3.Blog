@@ -51,15 +51,20 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 * List action for this controller. Displays latest posts
 	 *
 	 * @param string $tag The tag to display posts for
-	 * @return string
+	 * @param string $category The category to display posts for
+	 * @return void
 	 */
-	public function indexAction($tag = NULL) {
-		if ($tag === NULL) {
+	public function indexAction($tag = NULL, $category = NULL) {
+		if ($tag === NULL && $category === NULL) {
 			$posts = $this->postRepository->findByBlog($this->blog);
-		} else {
-			$tag = $this->objectManager->create('F3\Blog\Domain\Model\Tag', $tag);
+		} elseif ($tag !== NULL) {
+			$tag = new \F3\Blog\Domain\Model\Tag($tag);
 			$posts = $this->postRepository->findByTagAndBlog($tag, $this->blog);
 			$this->view->assign('tag', $tag);
+		} else {
+			$category = $this->categoryRepository->findOneByName($category);
+			$posts = $this->postRepository->findByCategoryAndBlog($category, $this->blog);
+			$this->view->assign('category', $category);
 		}
 		$this->view->assign('blog', $this->blog);
 		$this->view->assign('posts', $posts);
@@ -87,7 +92,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Displays a form for creating a new post
 	 *
-	 * @return string An HTML form for creating a new post
+	 * @return void
 	 */
 	public function newAction() {
 		$account = $this->findCurrentAccount();
@@ -100,9 +105,15 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		$this->view->assign('newPost', $newPost);
 	}
 
+	/**
+	 * Set property mapper configuration for post creation
+	 *
+	 * @return void
+	 */
 	public function initializeCreateAction() {
 		$this->arguments['newPost']->getPropertyMappingConfiguration()->allowCreationForSubProperty('image');
 	}
+
 	/**
 	 * Creates a new post
 	 *
@@ -119,7 +130,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 * Displays a form for editing an existing post
 	 *
 	 * @param \F3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
-	 * @return string An HTML form for editing a post
+	 * @return void
 	 */
 	public function editAction(\F3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('blog', $this->blog);
@@ -130,6 +141,11 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		$this->view->assign('post', $post);
 	}
 
+	/**
+	 * Set property mapper configuration for post update
+	 *
+	 * @return void
+	 */
 	public function initializeUpdateAction() {
 		$this->arguments['post']->getPropertyMappingConfiguration()->allowModificationForSubProperty('image');
 		$this->arguments['post']->getPropertyMappingConfiguration()->allowCreationForSubProperty('image');

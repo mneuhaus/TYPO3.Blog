@@ -12,3 +12,9 @@ FLOW3:
           entryPoint:
             WebRedirect:
               uri: admin/authentication
+
+Blog:
+  notifications:
+    to:
+      email: ''
+      name: 'Blog Admin'

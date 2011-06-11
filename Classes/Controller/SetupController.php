@@ -67,26 +67,18 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $securityContext;
 
 	/**
-	 *
-	 * @return void
-	 */
-	public function indexAction() {
-		$this->forward($this->blogRepository->findActive() === NULL ? 'initialSetup' : 'modifySetup');
-	}
-
-	/**
 	 * Sets up a fresh blog and creates a new user account.
 	 *
 	 * @return void
 	 */
-	public function initialSetupAction() {
+	public function indexAction() {
 		if ($this->blogRepository->findActive() !== NULL) {
 			$this->redirect('index', 'Post');
 		}
 
 		$this->blogRepository->removeAll();
 
-		$blog = $this->objectManager->create('F3\Blog\Domain\Model\Blog');
+		$blog = new \F3\Blog\Domain\Model\Blog();
 		$blog->setTitle('My Blog');
 		$blog->setDescription('A blog about Foo, Bar and Baz.');
 		$this->blogRepository->add($blog);
@@ -97,8 +89,8 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
 		$this->accountRepository->add($account);
 
-		$personName = $this->objectManager->create('F3\Party\Domain\Model\PersonName', '', 'First', '', 'Last');
-		$person = $this->objectManager->create('F3\Party\Domain\Model\Person');
+		$personName = new \F3\Party\Domain\Model\PersonName('', 'First', '', 'Last');
+		$person = new \F3\Party\Domain\Model\Person();
 		$person->setName($personName);
 		$person->addAccount($account);
 		$this->personRepository->add($person);
@@ -110,74 +102,6 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		}
 
 		$this->redirect('edit', 'Account');
-	}
-
-	/**
-	 * Modify setup (to be coded)
-	 *
-	 * @return void
-	 * @throws \LogicException
-	 */
-	public function modifySetupAction() {
-		throw new \LogicException('No modify action coded yet', 1295879094);
-	}
-
-	/**
-	 * Sets up a a blog with a lot of posts and comments which is a nice test bed
-	 * for profiling.
-	 *
-	 * @return void
-	 */
-	public function profilingSetupAction() {
-		if ($this->blogRepository->findActive() !== NULL) {
-			$this->redirect('index', 'Post');
-		}
-
-		$this->blogRepository->removeAll();
-
-		$postCount = 250;
-		$commentCount = 0;
-
-		$blog = $this->objectManager->create('F3\Blog\Domain\Model\Blog');
-		$blog->setTitle(ucwords(\F3\Faker\Lorem::sentence(3)));
-		$blog->setDescription(\F3\Faker\Lorem::sentence(8));
-		$this->blogRepository->add($blog);
-
-		$tags = array();
-		foreach (range(0, 5) as $i) {
-			$tags[] = $this->objectManager->create('F3\Blog\Domain\Model\Tag', \F3\Faker\Lorem::words(1));
-		}
-
-		foreach (range(1, $postCount) as $i) {
-			$post = $this->objectManager->create('F3\Blog\Domain\Model\Post');
-			$post->setAuthor(\F3\Faker\Name::fullName());
-			$post->setTitle(trim(\F3\Faker\Lorem::sentence(3), '.'));
-			$post->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(5)));
-			for ($j = 0; $j < 3; $j++) {
-				$post->addTag($tags[array_rand($tags)]);
-			}
-			$post->setDate(\F3\Faker\Date::random('- 500 days', '+0 seconds'));
-			for ($j = 0; $j < rand(0, 10); $j++) {
-				$comment = $this->objectManager->create('F3\Blog\Domain\Model\Comment');
-				$comment->setAuthor(\F3\Faker\Name::fullName());
-				$comment->setEmailAddress(\F3\Faker\Internet::email());
-				$comment->setContent(implode(chr(10),\F3\Faker\Lorem::paragraphs(2)));
-				$comment->setDate(\F3\Faker\Date::random('+ 10 minutes', '+ 6 weeks', $post->getDate()));
-				$post->addComment($comment);
-				$commentCount++;
-			}
-
-			$blog->addPost($post);
-		}
-
-		$this->authenticationManager->logout();
-		$this->accountRepository->removeAll();
-
-		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
-		$this->accountRepository->add($account);
-
-		return '<p>Done, created 1 blog, ' . $postCount . ' posts, ' . $commentCount . ' comments.</p>' .
-				'<p><a href="' . $this->uriBuilder->uriFor('index', array(), 'Post') . '">to the post index...</a></p>';
 	}
 
 }

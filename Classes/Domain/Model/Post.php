@@ -81,12 +81,12 @@ class Post {
 
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Tag>
-	 * @ManyToMany(inversedBy="posts")
+	 * @ManyToMany(inversedBy="posts", cascade={"all"})
 	 */
 	protected $tags;
 
 	/**
-	 * @var F3\Blog\Domain\Model\Category
+	 * @var \F3\Blog\Domain\Model\Category
 	 * @ManyToOne
 	 */
 	protected $category;
@@ -94,6 +94,7 @@ class Post {
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Comment>
 	 * @OneToMany(mappedBy="post", cascade={"all"}, orphanRemoval="true")
+	 * @OrderBy({"date" = "DESC"})
 	 */
 	protected $comments;
 

@@ -80,6 +80,7 @@ class Blog {
 	 *
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
 	 * @OneToMany(mappedBy="blog",cascade={"all"})
+	 * @OrderBy({"date" = "DESC"})
 	 */
 	protected $posts;
 
