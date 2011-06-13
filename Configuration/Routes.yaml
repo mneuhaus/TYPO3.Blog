@@ -102,3 +102,13 @@
     '@package':    'Blog'
     '@controller': 'Login'
     '@action':     'index'
+
+-
+  name: 'Fallback rule'
+  uriPattern:    ''
+  defaults:
+    '@package':    'Blog'
+    '@controller': 'Post'
+    '@action':     'index'
+    '@format':     'html'
+
