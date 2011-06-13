@@ -2,132 +2,103 @@
 # Default subroutes configuration for the Blog package                   #
 #                                                                        #
 
-# $Id$
-
-
 -
   name: 'Comment actions 1'
   uriPattern:    'posts/{post}/comments/{@action}'
   defaults:
-    '@package':    Blog
-    '@controller': Comment
+    '@package':    'Blog'
+    '@controller': 'Comment'
+    '@format':     'html'
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
   name: 'Posts Feed'
-  uriPattern:    'feeds/posts.{@format}'
+  uriPattern:    'feeds/posts.rss.xml'
   defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     index
+    '@package':    'Blog'
+    '@controller': 'Post'
+    '@action':     'index'
+    '@format':     'rss.xml'
 
 -
-  name: 'Post'
-  uriPattern:    'posts/{post}.{@format}'
-  defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     show
-  routeParts:
-    post:
-      handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
-
--
-  name: 'Post actions 2'
+  name: 'Single Post Actions'
   uriPattern:    'posts/{post}(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     show
+    '@package':    'Blog'
+    '@controller': 'Post'
+    '@action':     'show'
+    '@format':     'html'
   routeParts:
     post:
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
-  name: 'Post actions 1'
+  name: 'General Posts Actions'
   uriPattern:    'posts(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     index
+    '@package':    'Blog'
+    '@controller': 'Post'
+    '@action':     'index'
+    '@format':     'html'
 
 -
-  name: 'Post index'
-  uriPattern:    '(posts)'
-  defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     index
-
--
-  name: 'Post index with format'
-  uriPattern:    'posts.{@format}'
-  defaults:
-    '@package':    Blog
-    '@controller': Post
-    '@action':     index
-
--
-  name: 'Category actions 2'
+  name: 'Single Category Actions'
   uriPattern:    'categories/{category}/{@action}'
   defaults:
-    '@package':    Blog
-    '@controller': Category
+    '@package':    'Blog'
+    '@controller': 'Category'
+    '@format':     'html'
 
 -
-  name: 'Category actions 1'
+  name: 'General Category Actions'
   uriPattern:    'categories(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Category
-    '@action':     index
-
--
-  name: 'Category index'
-  uriPattern:    '(categories)'
-  defaults:
-    '@package':    Blog
-    '@controller': Category
-    '@action':     index
+    '@package':    'Blog'
+    '@controller': 'Category'
+    '@action':     'index'
+    '@format':     'html'
 
 -
   name: 'Account actions'
   uriPattern: 'admin/account(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Account
-    '@action':     edit
+    '@package':    'Blog'
+    '@controller': 'Account'
+    '@action':     'edit'
+    '@format':     'html'
 
 -
-  name: 'Blog actions 1'
+  name: 'Blog actions'
   uriPattern: 'admin/blog(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Blog
-    '@action':     edit
+    '@package':    'Blog'
+    '@controller': 'Blog'
+    '@action':     'edit'
+    '@format':     'html'
 
 -
-  name: 'Admin'
+  name: 'Admin Overview'
   uriPattern: 'admin'
   defaults:
-    '@package':    Blog
-    '@controller': Admin
-    '@action':     index
+    '@package':    'Blog'
+    '@controller': 'Admin'
+    '@action':     'index'
+    '@format':     'html'
 
 -
   name: 'Setup'
   uriPattern: 'admin/setup(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Setup
-    '@action':     index
+    '@package':    'Blog'
+    '@controller': 'Setup'
+    '@action':     'index'
 
 -
-  name: 'Authentication'
+  name: 'Authentication Actions'
   uriPattern: 'admin/authentication(/{@action})'
   defaults:
-    '@package':    Blog
-    '@controller': Login
-    '@action':     index
+    '@package':    'Blog'
+    '@controller': 'Login'
+    '@action':     'index'
