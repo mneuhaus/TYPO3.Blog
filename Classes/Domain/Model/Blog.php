@@ -49,6 +49,23 @@ class Blog {
 	protected $description = '';
 
 	/**
+	 * A longer description of the blog, mainly used in the meta tag for search engines
+	 *
+	 * @var string
+	 * @validate Text, StringLength(maximum = 255)
+	 */
+	protected $fullDescription = '';
+
+	/**
+	 * A comma separated list of keywords, to be used in the meta information
+	 *
+	 * @var string
+	 * @validate Text, StringLength(maximum = 255)
+	 * @Column(length="255")
+	 */
+	protected $keywords = '';
+
+	/**
 	 * A short blurb about the blog or author
 	 *
 	 * @var string
@@ -73,6 +90,15 @@ class Blog {
 	 * @Column(length="80")
 	 */
 	protected $twitterUsername = '';
+
+	/**
+	 * Google Analytics account number - if any
+	 *
+	 * @validate Text, StringLength(maximum = 20)
+	 * @var string
+	 * @Column(length="20")
+	 */
+	protected $googleAnalyticsAccountNumber = '';
 
 	/**
 	 * The posts contained in this blog
@@ -150,7 +176,7 @@ class Blog {
 	/**
 	 * Returns the author's picture
 	 *
-	 * @return F3\FLOW3\Resource\Resource
+	 * @return \F3\FLOW3\Resource\Resource
 	 */
 	public function getAuthorPicture() {
 		return $this->authorPicture;
@@ -159,7 +185,7 @@ class Blog {
 	/**
 	 * Sets the author's picture
 	 *
-	 * @param F3\FLOW3\Resource\Resource $authorPicture
+	 * @param \F3\FLOW3\Resource\Resource $authorPicture
 	 * @return void
 	 */
 	public function setAuthorPicture(\F3\FLOW3\Resource\Resource $authorPicture) {
@@ -212,6 +238,63 @@ class Blog {
 	 */
 	public function getPosts() {
 		return clone $this->posts;
+	}
+
+	/**
+	 * Sets the full description text
+	 *
+	 * @param string $fullDescription
+	 * @return void
+	 */
+	public function setFullDescription($fullDescription) {
+		$this->fullDescription = $fullDescription;
+	}
+
+	/**
+	 * Returns the full description
+	 *
+	 * @return string
+	 */
+	public function getFullDescription() {
+		return $this->fullDescription;
+	}
+
+	/**
+	 * Sets the Google Analytics account number
+	 *
+	 * @param string $googleAnalyticsAccountNumber
+	 * @return void
+	 */
+	public function setGoogleAnalyticsAccountNumber($googleAnalyticsAccountNumber) {
+		$this->googleAnalyticsAccountNumber = $googleAnalyticsAccountNumber;
+	}
+
+	/**
+	 * Returns the Google Analytics account number
+	 *
+	 * @return string
+	 */
+	public function getGoogleAnalyticsAccountNumber() {
+		return $this->googleAnalyticsAccountNumber;
+	}
+
+	/**
+	 * Set the keywords for this blog
+	 *
+	 * @param string $keywords
+	 * @return void
+	 */
+	public function setKeywords($keywords) {
+		$this->keywords = $keywords;
+	}
+
+	/**
+	 * Returns the keywords of this blog
+	 *
+	 * @return string
+	 */
+	public function getKeywords() {
+		return $this->keywords;
 	}
 
 }

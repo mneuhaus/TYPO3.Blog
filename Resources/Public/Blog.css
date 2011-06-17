@@ -28,7 +28,7 @@ img {
 	border: none;
 }
 
-h2 {
+h1, h2 {
 	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	font-size: 22px;
 	font-weight: normal;
@@ -118,21 +118,23 @@ form select {
 	text-align:left;
 }
 
-#header h1 {
+#header h1, #header h3 {
 	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	font-size: 30px;
 	letter-spacing: -1px;
 	padding-top: 50px;
 }
 
-#header h1 a {
+#header h1 a, #header h3 a {
 	color: white;
 	text-decoration: none;
 }
 
-#header p.description {
+#header h2.description {
 	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	font-size: 16px;
+    font-size: 16px;
+    line-height: 18px;
+    margin: 10px 0 16px 0;
 	color: #e56508;
 }
 

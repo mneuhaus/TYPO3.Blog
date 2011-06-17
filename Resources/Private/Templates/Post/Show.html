@@ -14,13 +14,10 @@
 
 	<f:flashMessages class="flashmessages" />
 
-	<h2>
-		{post.title}
-		<f:security.ifHasRole role="Editor">
+	<h1>{post.title}<f:security.ifHasRole role="Editor">
 			<f:link.action action="edit" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_edit.png')}" title="Edit post" /></f:link.action>
 			<f:link.action onclick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
-		</f:security.ifHasRole>
-	</h2>
+		</f:security.ifHasRole></h1>
 	<f:render partial="/PostMetaData" arguments="{post: post}"/>
 		<p class="content"><f:format.crop maxCharacters="1000000">{f:raw(value: post.content)}</f:format.crop></p>
 	<f:if condition="{post.image.originalResource}">

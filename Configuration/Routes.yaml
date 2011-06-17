@@ -35,6 +35,15 @@
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
+  name: 'Posts of a specific category'
+  uriPattern:    'posts/category/{category}'
+  defaults:
+    '@package':    'Blog'
+    '@controller': 'Post'
+    '@action':     'index'
+    '@format':     'html'
+
+-
   name: 'General Posts Actions'
   uriPattern:    'posts(/{@action})'
   defaults:
