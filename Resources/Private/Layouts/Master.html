@@ -20,7 +20,7 @@
 		<meta name="language" content="en">
 		<f:if condition="{blog.fullDescription}">
 			<f:if condition="{post}">
-				<f:then><meta name="description" content="{post.category.name} » {post.content -> f:format.crop(maxCharacters: 250, append:' ...')}"></f:then>
+				<f:then><meta name="description" content="{post.category.name} » {post.content -> f:escape(type: 'text') -> f:format.crop(maxCharacters: 250, append:' ...')}"></f:then>
 				<f:else><meta name="description" content="{blog.fullDescription}"></f:else>
 			</f:if>
 		</f:if>
