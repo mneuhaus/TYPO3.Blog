@@ -18,24 +18,18 @@
 		<meta name="generator" content="FLOW3">
 		<meta name="robots" content="index, follow, noodp">
 		<meta name="language" content="en">
-		<f:if condition="{blog.fullDescription}"><meta name="description" content="{blog.fullDescription}"></f:if>
+		<f:if condition="{blog.fullDescription}">
+			<f:if condition="{post}">
+				<f:then><meta name="description" content="{post.category.name} » {post.content -> f:format.crop(maxCharacters: 250, append:' ...')}"></f:then>
+				<f:else><meta name="description" content="{blog.fullDescription}"></f:else>
+			</f:if>
+		</f:if>
 		<f:if condition="{blog.keywords}"><meta name="keywords" content="{blog.keywords}"></f:if>
 
 		<link rel="stylesheet" href="{f:uri.resource(path: 'Blog.css')}" type="text/css" media="all" />
 		<link rel="alternate" type="application/rss+xml" title="{blog.title} RSS Feed" href="{f:uri.action(action: 'index', controller: 'Post', format: 'rss.xml', absolute: 'true')}" />
 		<link rel='index' title='{blog.title} Posts' href="{f:uri.action(action: 'index', controller: 'Post', format: 'html', absolute: 'true')}" />
 		<f:if condition="{post}"><link rel="canonical" href="{f:uri.action(action: 'show', controller: 'Post', arguments: {post: post}, format: 'html', absolute: 'true')}"></f:if>
-		<f:if condition="{blog.googleAnalyticsAccountNumber}"><script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', '{blog.googleAnalyticsAccountNumber}']);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script></f:if>
 	</head>
 	<body>
 		<div id="header">
@@ -122,5 +116,18 @@
 			</f:security.ifAuthenticated>
 			| <a href="http://flow3.typo3.org">Powered by FLOW3 <img src="{f:uri.resource(path: 'FLOW3-Logo-11px.png')}" width="11" height="11" /></a>
 		</div>
+		<f:if condition="{blog.googleAnalyticsAccountNumber}"><script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', '{blog.googleAnalyticsAccountNumber}']);
+			_gaq.push(['_trackPageview']);
+			_gaq.push(['_trackPageLoadTime']);
+			_gaq.push(['_gat._anonymizeIp']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script></f:if>
 	</body>
 </html>

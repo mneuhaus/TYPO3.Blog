@@ -14,15 +14,6 @@
       handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
-  name: 'Posts Feed'
-  uriPattern:    'feeds/posts.rss.xml'
-  defaults:
-    '@package':    'Blog'
-    '@controller': 'Post'
-    '@action':     'index'
-    '@format':     'rss.xml'
-
--
   name: 'Single Post Actions'
   uriPattern:    'posts/{post}(/{@action})'
   defaults:
@@ -51,6 +42,15 @@
     '@controller': 'Post'
     '@action':     'index'
     '@format':     'html'
+
+-
+  name: 'Posts Feed'
+  uriPattern:    'feeds/posts.rss.xml'
+  defaults:
+    '@package':    'Blog'
+    '@controller': 'Post'
+    '@action':     'index'
+    '@format':     'rss.xml'
 
 -
   name: 'Single Category Actions'
