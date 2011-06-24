@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>{blog.title} – {blog.description}</title>
+		<title>{blog.title -> f:format.stripTags() -> f:format.htmlspecialchars()} – {blog.description -> f:format.stripTags() -> f:format.htmlspecialchars()}</title>
 		<link><f:uri.action action="index" controller="Post" absolute="TRUE"/></link>
 		<atom:link href="{f:uri.action(action: 'index', controller: 'Post', format: 'rss.xml' absolute: 'TRUE')}" rel="self" type="application/rss+xml" />
-		<description>{blog.fullDescription}</description>
+		<description>{blog.fullDescription -> f:format.stripTags() -> f:format.htmlspecialchars()}}</description>
 		<language>en-us</language>
 		<generator>FLOW3</generator>
 		<f:for each="{posts}" as="post">
 			<item>
-				<title><f:escape type="entities">{post.title}</f:escape></title>
+				<title>{post.title -> f:format.stripTags() -> f:format.htmlspecialchars()}</title>
 				<link><f:uri.action action="show" controller="Post" arguments="{post: post}" absolute="TRUE"/></link>
-				<description><f:escape type="entities">{f:format.raw(value: post.content)}</f:escape></description>
+				<description>{post.content -> f:format.stripTags() -> f:format.htmlspecialchars()}</description>
 				<pubDate><f:format.date format='r'>{post.date}</f:format.date></pubDate>
 				<guid><f:uri.action action="show" controller="Post" arguments="{post: post}" absolute="TRUE"/></guid>
 			</item>
