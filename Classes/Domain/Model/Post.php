@@ -67,7 +67,7 @@ class Post {
 
 	/**
 	 * @var string
-	 * @column(type="text")
+	 * @Column(type="text")
 	 * @validate Raw
 	 */
 	protected $content;
@@ -100,8 +100,7 @@ class Post {
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
 	 * @ManyToMany
-	 * @JoinTable(inverseJoinColumns={@joinColumn(name="related_id")}
-	 * )
+	 * @JoinTable(inverseJoinColumns={@joinColumn(name="related_id")})
 	 */
 	protected $relatedPosts;
 
