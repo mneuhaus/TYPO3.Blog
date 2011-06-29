@@ -39,6 +39,9 @@ h1, h2 {
 h3 {
 	font-size: 15px;
 	font-weight: normal;
+	color: #282828;
+	margin: 12px 0 12px 0;
+	padding: 0;
 }
 
 h2.flow3-firstHeader {
@@ -66,14 +69,27 @@ a:hover {
 	color: #e56508;
 }
 
-th, td {
-	font-size: 13px;
-}
-
-div, ol, ul, li, img, form, select, input, table, td {
+div, ol, li, li, img, form, select, input, table {
 	margin: 0;
 	padding: 0;
 }
+
+th, td {
+	margin: 0;
+	padding:  2px;
+	font-size: 12px;
+	text-align: left;
+	vertical-align: top;
+	border-top: 1px solid #dddddd;
+	line-height: 16px;
+}
+
+ul li {
+	margin-left: 18px;
+	list-style-type: square;
+	line-height: 18px;
+}
+
 
 form li {
 	display: inline;
