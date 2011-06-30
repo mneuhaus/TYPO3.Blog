@@ -17,7 +17,6 @@
 		<meta charset="utf-8">
 		<meta name="generator" content="FLOW3">
 		<meta name="robots" content="index, follow, noodp">
-		<meta name="language" content="en">
 		<f:if condition="{blog.fullDescription}">
 			<f:if condition="{post}">
 				<f:then><meta name="description" content="{post.category.name} » {post.content -> f:escape(type: 'text') -> f:format.crop(maxCharacters: 250, append:' ...')}"></f:then>
@@ -28,7 +27,6 @@
 
 		<link rel="stylesheet" href="{f:uri.resource(path: 'Blog.css')}" type="text/css" media="all" />
 		<link rel="alternate" type="application/rss+xml" title="{blog.title} RSS Feed" href="{f:uri.action(action: 'index', controller: 'Post', format: 'rss.xml', absolute: 'true')}" />
-		<link rel='index' title='{blog.title} Posts' href="{f:uri.action(action: 'index', controller: 'Post', format: 'html', absolute: 'true')}" />
 		<f:if condition="{post}"><link rel="canonical" href="{f:uri.action(action: 'show', controller: 'Post', arguments: {post: post}, format: 'html', absolute: 'true')}"></f:if>
 	</head>
 	<body>

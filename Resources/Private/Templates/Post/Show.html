@@ -4,10 +4,10 @@
 <f:section name="mainbox">
 	<div id="navigation">
 		<f:if condition="{previousPost}">
-			<span class="previous">&laquo; <f:link.action action="show" arguments="{post: previousPost}">{previousPost.title}</f:link.action></span>
+			<span class="previous">&laquo; <f:link.action action="show" arguments="{post: previousPost}" rel="prev">{previousPost.title}</f:link.action></span>
 		</f:if>
 		<f:if condition="{nextPost}">
-			<span class="next"><f:link.action action="show" arguments="{post: nextPost}">{nextPost.title}</f:link.action> &raquo;</span>
+			<span class="next"><f:link.action action="show" arguments="{post: nextPost}" rel="next">{nextPost.title}</f:link.action> &raquo;</span>
 		</f:if>
 		<div class="clear"></div>
 	</div>
@@ -24,8 +24,7 @@
 		<p><img src="{f:uri.resource(resource: post.image.originalResource)}" style="max-width: 100%" alt="{post.image.title}" /></p>
 	</f:if>
 	<f:if condition="{post.relatedPosts}">
-		<a name="relatedposts"></a>
-		<div class="relatedposts">
+		<div id="relatedposts" class="relatedposts">
 			<h3>Related Posts</h3>
 			<ul class="relatedpostslist">
 				<f:for each="{post.relatedPosts}" as="relatedPost">
@@ -35,8 +34,7 @@
 		</div>
 		<div class="clear"></div>
 	</f:if>
-	<a name="comments"></a>
-	<div class="comments">
+	<div id="comments" class="comments">
 		<f:if condition="{post.numberOfComments}">
 			<h3>Comments</h3>
 			<ol class="commentlist">
