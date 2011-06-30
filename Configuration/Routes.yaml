@@ -35,6 +35,18 @@
     '@format':     'html'
 
 -
+  name: 'Posts Pagination'
+  uriPattern:    'posts/page/{@widget_0.currentPage}'
+  defaults:
+    '@package':    'TYPO3.Blog'
+    '@controller': 'Post'
+    '@action':     'index'
+    '@format':     'html'
+    '@widget_0':
+      '@controller':  ''
+      '@package':     ''
+
+-
   name: 'General Posts Actions'
   uriPattern:    'posts(/{@action})'
   defaults:

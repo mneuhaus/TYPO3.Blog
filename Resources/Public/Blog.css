@@ -308,11 +308,11 @@ ul.flashmessages {
 
 /*--------------- pagination ------------------*/
 
-ul.f3-widget-paginator {
+ul.typo3-widget-paginator {
     list-style-type: none;
 }
 
-ul.f3-widget-paginator li {
+ul.typo3-widget-paginator li {
     display: block;
     float:left;
     padding: 4px 6px;
@@ -322,7 +322,7 @@ ul.f3-widget-paginator li {
 
 /*--------------- form validation ------------------*/
 
-input.f3-form-error {
+input.typo3-form-error {
 	border: 1px solid #8a1f11;
 }
 ul.errors {
