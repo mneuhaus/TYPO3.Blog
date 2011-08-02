@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Model;
+namespace TYPO3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -38,7 +38,7 @@ class Image {
 	protected $title;
 
 	/**
-	 * @var \F3\FLOW3\Resource\Resource
+	 * @var \TYPO3\FLOW3\Resource\Resource
 	 * @ManyToOne(cascade={"all"})
 	 * validate NotEmpty
 	 */
@@ -68,17 +68,17 @@ class Image {
 	/**
 	 * Sets the original resource
 	 *
-	 * @param \F3\FLOW3\Resource\Resource $originalResource
+	 * @param \TYPO3\FLOW3\Resource\Resource $originalResource
 	 * @return void
 	 */
-	public function setOriginalResource(\F3\FLOW3\Resource\Resource $originalResource) {
+	public function setOriginalResource(\TYPO3\FLOW3\Resource\Resource $originalResource) {
 		$this->originalResource = $originalResource;
 	}
 
 	/**
 	 * Returns the original resource
 	 *
-	 * @return \F3\FLOW3\Resource\Resource $originalResource
+	 * @return \TYPO3\FLOW3\Resource\Resource $originalResource
 	 */
 	public function getOriginalResource() {
 		return $this->originalResource;

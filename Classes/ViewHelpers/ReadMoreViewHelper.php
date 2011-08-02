@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\ViewHelpers;
+namespace TYPO3\Blog\ViewHelpers;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                      *
@@ -28,7 +28,7 @@ namespace F3\Blog\ViewHelpers;
  * @scope prototype
  * @api
  */
-class ReadMoreViewHelper extends \F3\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ReadMoreViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Render the read more text

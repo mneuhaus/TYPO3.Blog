@@ -6,30 +6,30 @@
   name: 'Comment actions 1'
   uriPattern:    'posts/{post}/comments/{@action}'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Comment'
     '@format':     'html'
   routeParts:
     post:
-      handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
+      handler: TYPO3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
   name: 'Single Post Actions'
   uriPattern:    'posts/{post}(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'show'
     '@format':     'html'
   routeParts:
     post:
-      handler: F3\Blog\RoutePartHandlers\PostRoutePartHandler
+      handler: TYPO3\Blog\RoutePartHandlers\PostRoutePartHandler
 
 -
   name: 'Posts of a specific category'
   uriPattern:    'posts/category/{category}'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
     '@format':     'html'
@@ -38,7 +38,7 @@
   name: 'General Posts Actions'
   uriPattern:    'posts(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
     '@format':     'html'
@@ -47,7 +47,7 @@
   name: 'Posts Feed'
   uriPattern:    'feeds/posts.rss.xml'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
     '@format':     'rss.xml'
@@ -56,7 +56,7 @@
   name: 'Single Category Actions'
   uriPattern:    'categories/{category}/{@action}'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Category'
     '@format':     'html'
 
@@ -64,7 +64,7 @@
   name: 'General Category Actions'
   uriPattern:    'categories(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Category'
     '@action':     'index'
     '@format':     'html'
@@ -73,7 +73,7 @@
   name: 'Account actions'
   uriPattern: 'admin/account(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Account'
     '@action':     'edit'
     '@format':     'html'
@@ -82,7 +82,7 @@
   name: 'Blog actions'
   uriPattern: 'admin/blog(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Blog'
     '@action':     'edit'
     '@format':     'html'
@@ -91,7 +91,7 @@
   name: 'Admin Overview'
   uriPattern: 'admin'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Admin'
     '@action':     'index'
     '@format':     'html'
@@ -100,7 +100,7 @@
   name: 'Setup'
   uriPattern: 'admin/setup(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Setup'
     '@action':     'index'
 
@@ -108,7 +108,7 @@
   name: 'Authentication Actions'
   uriPattern: 'admin/authentication(/{@action})'
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Login'
     '@action':     'index'
 
@@ -116,7 +116,7 @@
   name: 'Fallback rule'
   uriPattern:    ''
   defaults:
-    '@package':    'Blog'
+    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
     '@format':     'html'

@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Model;
+namespace TYPO3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *

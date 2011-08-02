@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\ViewHelpers;
+namespace TYPO3\Blog\ViewHelpers;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -36,7 +36,7 @@ namespace F3\Blog\ViewHelpers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */
-class GravatarViewHelper extends \F3\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
+class GravatarViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
 
 	/**
 	 * @var string

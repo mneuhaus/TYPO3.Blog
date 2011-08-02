@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,23 +26,23 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AccountController extends \F3\Blog\Controller\AbstractBaseController {
+class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\AccountRepository
+	 * @var \TYPO3\FLOW3\Security\AccountRepository
 	 */
 	protected $accountRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
 	/**
 	 * @inject
-	 * @var F3\FLOW3\Security\Context
+	 * @var TYPO3\FLOW3\Security\Context
 	 */
 	protected $securityContext;
 
@@ -75,7 +75,7 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 	 * @return void
 	 */
 	public function initializeUpdateAction() {
-		$this->arguments['account']->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('party', 'F3\Party\Domain\Model\Person');
+		$this->arguments['account']->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('party', 'TYPO3\Party\Domain\Model\Person');
 		$this->arguments['account']->getPropertyMappingConfiguration()->allowModificationForSubProperty('party');
 		$this->arguments['account']->getPropertyMappingConfiguration()->allowModificationForSubProperty('party.name');
 	}
@@ -83,11 +83,11 @@ class AccountController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates the account properties
 	 *
-	 * @param F3\FLOW3\Security\Account $account
+	 * @param TYPO3\FLOW3\Security\Account $account
 	 * @param string $password
 	 * @return void
 	 */
-	public function updateAction(\F3\FLOW3\Security\Account $account, $password = '') {
+	public function updateAction(\TYPO3\FLOW3\Security\Account $account, $password = '') {
 		if ($password != '') {
 			$salt = substr(md5(uniqid(rand(), TRUE)), 0, rand(6, 10));
 			$account->setCredentialsSource(md5(md5($password) . $salt) . ',' . $salt);

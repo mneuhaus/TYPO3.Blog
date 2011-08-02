@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Repository;
+namespace TYPO3\Blog\Domain\Repository;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -21,23 +21,23 @@ namespace F3\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \F3\FLOW3\Persistence\QueryInterface;
+use \TYPO3\FLOW3\Persistence\QueryInterface;
 
 /**
  * A repository for Blog Posts
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PostRepository extends \F3\FLOW3\Persistence\Repository {
+class PostRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
 	/**
 	 * Finds posts by the specified blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
-	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
-	public function findByBlog(\F3\Blog\Domain\Model\Blog $blog) {
+	public function findByBlog(\TYPO3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
@@ -47,11 +47,11 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Finds posts by the specified tag and blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Tag $tag
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
-	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
+	 * @param \TYPO3\Blog\Domain\Model\Tag $tag
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
-	public function findByTagAndBlog(\F3\Blog\Domain\Model\Tag $tag, \F3\Blog\Domain\Model\Blog $blog) {
+	public function findByTagAndBlog(\TYPO3\Blog\Domain\Model\Tag $tag, \TYPO3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
 		return $query->matching(
 				$query->logicalAnd(
@@ -66,11 +66,11 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Finds posts by the specified category and blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Category $category
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
-	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
+	 * @param \TYPO3\Blog\Domain\Model\Category $category
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
-	public function findByCategoryAndBlog(\F3\Blog\Domain\Model\Category $category, \F3\Blog\Domain\Model\Blog $blog) {
+	public function findByCategoryAndBlog(\TYPO3\Blog\Domain\Model\Category $category, \TYPO3\Blog\Domain\Model\Blog $blog) {
 		$query = $this->createQuery();
 		return $query->matching(
 				$query->logicalAnd(
@@ -85,13 +85,13 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Finds the previous of the given post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post The reference post
-	 * @return \F3\Blog\Domain\Model\Post
+	 * @param \TYPO3\Blog\Domain\Model\Post $post The reference post
+	 * @return \TYPO3\Blog\Domain\Model\Post
 	 */
-	public function findPrevious(\F3\Blog\Domain\Model\Post $post) {
+	public function findPrevious(\TYPO3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
 		return $query->matching($query->lessThan('date', $post->getDate()))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('date' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 			->execute()
 			->getFirst();
 	}
@@ -99,13 +99,13 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Finds the post next to the given post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post The reference post
-	 * @return \F3\Blog\Domain\Model\Post
+	 * @param \TYPO3\Blog\Domain\Model\Post $post The reference post
+	 * @return \TYPO3\Blog\Domain\Model\Post
 	 */
-	public function findNext(\F3\Blog\Domain\Model\Post $post) {
+	public function findNext(\TYPO3\Blog\Domain\Model\Post $post) {
 		$query = $this->createQuery();
 		return $query->matching($query->greaterThan('date', $post->getDate()))
-			->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
+			->setOrderings(array('date' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING))
 			->execute()
 			->getFirst();
 	}
@@ -113,11 +113,11 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Finds most recent posts by the specified blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog The blog the post must refer to
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog The blog the post must refer to
 	 * @param integer $limit The number of posts to return at max
-	 * @return \F3\FLOW3\Persistence\QueryResultProxy The posts
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultProxy The posts
 	 */
-	public function findRecentByBlog(\F3\Blog\Domain\Model\Blog $blog, $limit = 5) {
+	public function findRecentByBlog(\TYPO3\Blog\Domain\Model\Blog $blog, $limit = 5) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('blog', $blog))
 			->setOrderings(array('date' => QueryInterface::ORDER_DESCENDING))
@@ -128,14 +128,14 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 	/**
 	 * Finds most recent posts excluding the given post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post Post to exclude from result
+	 * @param \TYPO3\Blog\Domain\Model\Post $post Post to exclude from result
 	 * @param integer $limit The number of posts to return at max
 	 * @return array All posts of the $post's blog except for $post
 	 */
-	public function findRecentExceptThis(\F3\Blog\Domain\Model\Post $post, $limit = 20) {
+	public function findRecentExceptThis(\TYPO3\Blog\Domain\Model\Post $post, $limit = 20) {
 		$query = $this->createQuery();
 		$posts = $query->matching($query->equals('blog', $post->getBlog()))
-				->setOrderings(array('date' => \F3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
+				->setOrderings(array('date' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING))
 				->setLimit($limit)
 				->execute()
 				->toArray();
@@ -146,7 +146,7 @@ class PostRepository extends \F3\FLOW3\Persistence\Repository {
 			// this is an alternative way of doing this when extending the Doctrine 2
 			// specific repository and using DQL.
 		return $this->entityManager
-			->createQuery('SELECT p FROM \F3\Blog\Domain\Model\Post p WHERE p.blog = :blog AND NOT p = :excludedPost ORDER BY p.date DESC')
+			->createQuery('SELECT p FROM \TYPO3\Blog\Domain\Model\Post p WHERE p.blog = :blog AND NOT p = :excludedPost ORDER BY p.date DESC')
 			->setMaxResults($limit)
 			->execute(array('blog' => $post->getBlog(), 'excludedPost' => $post));
 	}

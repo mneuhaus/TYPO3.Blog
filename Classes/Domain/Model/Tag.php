@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Model;
+namespace TYPO3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -40,7 +40,7 @@ class Tag {
 	/**
 	 * The posts tagged with this tag
 	 *
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Post>
 	 * @ManyToMany(mappedBy="tags")
 	 */
 	protected $posts;

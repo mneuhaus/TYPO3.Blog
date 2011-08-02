@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                 *
@@ -27,27 +27,27 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-abstract class AbstractBaseController extends \F3\FLOW3\MVC\Controller\ActionController {
+abstract class AbstractBaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Repository\BlogRepository
+	 * @var \TYPO3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @var \F3\Blog\Domain\Model\Blog
+	 * @var \TYPO3\Blog\Domain\Model\Blog
 	 */
 	protected $blog;
 
 	/**
 	 * Initializes the view before invoking an action method.
 	 *
-	 * @param \F3\FLOW3\MVC\View\ViewInterface $view The view to be initialized
+	 * @param \TYPO3\FLOW3\MVC\View\ViewInterface $view The view to be initialized
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	protected function initializeView(\F3\FLOW3\MVC\View\ViewInterface $view) {
+	protected function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
 		$this->blog = $this->blogRepository->findActive();
 		if ($this->blog === NULL) {
 			$this->redirect('index', 'Setup');

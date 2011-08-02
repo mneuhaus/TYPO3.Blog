@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Model;
+namespace TYPO3\Blog\Domain\Model;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -77,7 +77,7 @@ class Blog {
 	/**
 	 * A picture of the author
 	 *
-	 * @var \F3\FLOW3\Resource\Resource
+	 * @var \TYPO3\FLOW3\Resource\Resource
 	 * @ManyToOne(cascade={"all"})
 	 */
 	protected $authorPicture;
@@ -103,7 +103,7 @@ class Blog {
 	/**
 	 * The posts contained in this blog
 	 *
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\F3\Blog\Domain\Model\Post>
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Post>
 	 * @OneToMany(mappedBy="blog",cascade={"all"})
 	 * @OrderBy({"date" = "DESC"})
 	 */
@@ -176,7 +176,7 @@ class Blog {
 	/**
 	 * Returns the author's picture
 	 *
-	 * @return \F3\FLOW3\Resource\Resource
+	 * @return \TYPO3\FLOW3\Resource\Resource
 	 */
 	public function getAuthorPicture() {
 		return $this->authorPicture;
@@ -185,10 +185,10 @@ class Blog {
 	/**
 	 * Sets the author's picture
 	 *
-	 * @param \F3\FLOW3\Resource\Resource $authorPicture
+	 * @param \TYPO3\FLOW3\Resource\Resource $authorPicture
 	 * @return void
 	 */
-	public function setAuthorPicture(\F3\FLOW3\Resource\Resource $authorPicture) {
+	public function setAuthorPicture(\TYPO3\FLOW3\Resource\Resource $authorPicture) {
 		$this->authorPicture = $authorPicture;
 	}
 
@@ -213,10 +213,10 @@ class Blog {
 	/**
 	 * Adds a post to this blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @param \TYPO3\Blog\Domain\Model\Post $post
 	 * @return void
 	 */
-	public function addPost(\F3\Blog\Domain\Model\Post $post) {
+	public function addPost(\TYPO3\Blog\Domain\Model\Post $post) {
 		$post->setBlog($this);
 		$this->posts->add($post);
 	}
@@ -224,17 +224,17 @@ class Blog {
 	/**
 	 * Removes a post from this blog
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @param \TYPO3\Blog\Domain\Model\Post $post
 	 * @return void
 	 */
-	public function removePost(\F3\Blog\Domain\Model\Post $post) {
+	public function removePost(\TYPO3\Blog\Domain\Model\Post $post) {
 		$this->posts->removeElement($post);
 	}
 
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return \SplObjectStorage<\F3\Blog\Domain\Model\Post> The posts of this blog
+	 * @return \SplObjectStorage<\TYPO3\Blog\Domain\Model\Post> The posts of this blog
 	 */
 	public function getPosts() {
 		return clone $this->posts;

@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,7 +26,7 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AdminController extends \F3\Blog\Controller\AbstractBaseController {
+class AdminController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * Displays an administration overview.

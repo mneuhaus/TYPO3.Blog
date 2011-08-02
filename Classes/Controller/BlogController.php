@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,7 +26,7 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class BlogController extends \F3\Blog\Controller\AbstractBaseController {
+class BlogController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * List action for this controller.
@@ -48,10 +48,10 @@ class BlogController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates the blog properties
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog  A not yet persisted clone of the original blog containing the modifications
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog  A not yet persisted clone of the original blog containing the modifications
 	 * @return void
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Blog $blog) {
+	public function updateAction(\TYPO3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->update($blog);
 		$this->flashMessageContainer->add('Your blog details have been updated.');
 		$this->redirect('edit', 'Blog');

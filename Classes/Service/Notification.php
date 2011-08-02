@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Service;
+namespace TYPO3\Blog\Service;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                      *
@@ -42,14 +42,14 @@ class Notification {
 	}
 
 	/**
-	 * @param \F3\Blog\Domain\Model\Comment $comment
-	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @param \TYPO3\Blog\Domain\Model\Comment $comment
+	 * @param \TYPO3\Blog\Domain\Model\Post $post
 	 * @return void
 	 */
-	public function sendNewCommentNotification(\F3\Blog\Domain\Model\Comment $comment, \F3\Blog\Domain\Model\Post $post) {
+	public function sendNewCommentNotification(\TYPO3\Blog\Domain\Model\Comment $comment, \TYPO3\Blog\Domain\Model\Post $post) {
 		if ($this->settings['notifications']['to']['email'] === '') return;
 
-		$mail = new \F3\SwiftMailer\Message();
+		$mail = new \TYPO3\SwiftMailer\Message();
 		$mail
 			->setFrom(array($comment->getEmailAddress() => $comment->getAuthor()))
 			->setTo(array($this->settings['notifications']['to']['email'] => $this->settings['notifications']['to']['name']))

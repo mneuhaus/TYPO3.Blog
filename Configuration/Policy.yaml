@@ -6,15 +6,15 @@
 
 resources:
   methods:
-    F3_Blog_PostEditorMethods: 'method(F3\Blog\Controller\PostController->(new|create|edit|update|delete)Action())'
-    F3_Blog_CommentEditorMethods: 'method(F3\Blog\Controller\CommentController->(edit|update|delete)Action())'
-    F3_Blog_RestrictedControllers: 'class(F3\Blog\Controller\(Blog|Admin|Account|Category)Controller)'
+    TYPO3_Blog_PostEditorMethods: 'method(TYPO3\Blog\Controller\PostController->(new|create|edit|update|delete)Action())'
+    TYPO3_Blog_CommentEditorMethods: 'method(TYPO3\Blog\Controller\CommentController->(edit|update|delete)Action())'
+    TYPO3_Blog_RestrictedControllers: 'class(TYPO3\Blog\Controller\(Blog|Admin|Account|Category)Controller)'
 roles:
   Editor: []
 acls:
   Editor:
     methods:
-      F3_Blog_PostEditorMethods: GRANT
-      F3_Blog_CommentEditorMethods: GRANT
-      F3_Blog_RestrictedControllers: GRANT
+      TYPO3_Blog_PostEditorMethods: GRANT
+      TYPO3_Blog_CommentEditorMethods: GRANT
+      TYPO3_Blog_RestrictedControllers: GRANT
 

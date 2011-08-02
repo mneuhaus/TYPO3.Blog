@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,16 +26,16 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
+class CommentController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * Creates a new comment
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post The post which will contain the new comment
-	 * @param \F3\Blog\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
+	 * @param \TYPO3\Blog\Domain\Model\Post $post The post which will contain the new comment
+	 * @param \TYPO3\Blog\Domain\Model\Comment $newComment A fresh Comment object which has not yet been added to the repository
 	 * @return void
 	 */
-	public function createAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment) {
+	public function createAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
 		$this->flashMessageContainer->add('Your new comment was created.');
 		$this->emitCommentCreated($newComment, $post);
@@ -45,11 +45,11 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Removes a comment
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post
-	 * @param \F3\Blog\Domain\Model\Comment $comment
+	 * @param \TYPO3\Blog\Domain\Model\Post $post
+	 * @param \TYPO3\Blog\Domain\Model\Comment $comment
 	 * @return void
 	 */
-	public function deleteAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $comment) {
+	public function deleteAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $comment) {
 		$post->removeComment($comment);
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
@@ -69,12 +69,12 @@ class CommentController extends \F3\FLOW3\MVC\Controller\ActionController {
 	}
 
 	/**
-	 * @param \F3\Blog\Domain\Model\Comment $comment
-	 * @param \F3\Blog\Domain\Model\Post $post
+	 * @param \TYPO3\Blog\Domain\Model\Comment $comment
+	 * @param \TYPO3\Blog\Domain\Model\Post $post
 	 * @return void
 	 * @signal
 	 */
-	protected function emitCommentCreated(\F3\Blog\Domain\Model\Comment $comment, \F3\Blog\Domain\Model\Post $post) {}
+	protected function emitCommentCreated(\TYPO3\Blog\Domain\Model\Comment $comment, \TYPO3\Blog\Domain\Model\Post $post) {}
 }
 
 ?>

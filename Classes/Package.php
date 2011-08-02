@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog;
+namespace TYPO3\Blog;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -21,7 +21,7 @@ namespace F3\Blog;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \F3\FLOW3\Package\Package as BasePackage;
+use \TYPO3\FLOW3\Package\Package as BasePackage;
 
 /**
  * The Blog Package
@@ -33,12 +33,12 @@ class Package extends BasePackage {
 	/**
 	 * Invokes custom PHP code directly after the package manager has been initialized.
 	 *
-	 * @param \F3\FLOW3\Core\Bootstrap $bootstrap The current bootstrap
+	 * @param \TYPO3\FLOW3\Core\Bootstrap $bootstrap The current bootstrap
 	 * @return void
 	 */
-	public function boot(\F3\FLOW3\Core\Bootstrap $bootstrap) {
+	public function boot(\TYPO3\FLOW3\Core\Bootstrap $bootstrap) {
 		$dispatcher = $bootstrap->getSignalSlotDispatcher();
-		$dispatcher->connect('F3\Blog\Controller\CommentController', 'commentCreated', 'F3\Blog\Service\Notification', 'sendNewCommentNotification');
+		$dispatcher->connect('TYPO3\Blog\Controller\CommentController', 'commentCreated', 'TYPO3\Blog\Service\Notification', 'sendNewCommentNotification');
 	}
 
 }

@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\RoutePartHandlers;
+namespace TYPO3\Blog\RoutePartHandlers;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -27,7 +27,7 @@ namespace F3\Blog\RoutePartHandlers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */
-class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
+class PostRoutePartHandler extends \TYPO3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 
 	/**
 	 * Splits the given value into the date and title of the post and sets this
@@ -73,11 +73,11 @@ class PostRoutePartHandler extends \F3\FLOW3\MVC\Web\Routing\DynamicRoutePart {
 	/**
 	 * Resolves the name of the post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $value The Post object
+	 * @param \TYPO3\Blog\Domain\Model\Post $value The Post object
 	 * @return boolean TRUE if the post could be resolved and stored in $this->value, otherwise FALSE.
 	 */
 	protected function resolveValue($value) {
-		if (!$value instanceof \F3\Blog\Domain\Model\Post) return FALSE;
+		if (!$value instanceof \TYPO3\Blog\Domain\Model\Post) return FALSE;
 		$this->value = $value->getDate()->format('Y/m/d/');
 		$this->value .= $value->getLinkTitle();
 		return TRUE;

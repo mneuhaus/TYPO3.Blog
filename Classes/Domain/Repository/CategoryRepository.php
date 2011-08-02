@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Repository;
+namespace TYPO3\Blog\Domain\Repository;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,12 +26,12 @@ namespace F3\Blog\Domain\Repository;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CategoryRepository extends \F3\FLOW3\Persistence\Repository {
+class CategoryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
 	/**
 	 * @var array
 	 */
-	protected $defaultOrderings = array('name' => \F3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING);
+	protected $defaultOrderings = array('name' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING);
 
 }
 ?>

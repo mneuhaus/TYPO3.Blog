@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -27,41 +27,41 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
+class SetupController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Repository\BlogRepository
+	 * @var \TYPO3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\AccountRepository
+	 * @var \TYPO3\FLOW3\Security\AccountRepository
 	 */
 	protected $accountRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\Party\Domain\Repository\PersonRepository
+	 * @var \TYPO3\Party\Domain\Repository\PersonRepository
 	 */
 	protected $personRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\AccountFactory
+	 * @var \TYPO3\FLOW3\Security\AccountFactory
 	 */
 	protected $accountFactory;
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
 	/**
 	 * @inject
-	 * @var F3\FLOW3\Security\Context
+	 * @var TYPO3\FLOW3\Security\Context
 	 */
 	protected $securityContext;
 
@@ -77,7 +77,7 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 		$this->blogRepository->removeAll();
 
-		$blog = new \F3\Blog\Domain\Model\Blog();
+		$blog = new \TYPO3\Blog\Domain\Model\Blog();
 		$blog->setTitle('My Blog');
 		$blog->setDescription('A blog about Foo, Bar and Baz.');
 		$this->blogRepository->add($blog);
@@ -88,16 +88,16 @@ class SetupController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
 		$this->accountRepository->add($account);
 
-		$personName = new \F3\Party\Domain\Model\PersonName('', 'First', '', 'Last');
-		$person = new \F3\Party\Domain\Model\Person();
+		$personName = new \TYPO3\Party\Domain\Model\PersonName('', 'First', '', 'Last');
+		$person = new \TYPO3\Party\Domain\Model\Person();
 		$person->setName($personName);
 		$person->addAccount($account);
 		$this->personRepository->add($person);
 
-		$authenticationTokens = $this->securityContext->getAuthenticationTokensOfType('F3\FLOW3\Security\Authentication\Token\UsernamePassword');
+		$authenticationTokens = $this->securityContext->getAuthenticationTokensOfType('TYPO3\FLOW3\Security\Authentication\Token\UsernamePassword');
 		if (count($authenticationTokens) === 1) {
 			$authenticationTokens[0]->setAccount($account);
-			$authenticationTokens[0]->setAuthenticationStatus(\F3\FLOW3\Security\Authentication\TokenInterface::AUTHENTICATION_SUCCESSFUL);
+			$authenticationTokens[0]->setAuthenticationStatus(\TYPO3\FLOW3\Security\Authentication\TokenInterface::AUTHENTICATION_SUCCESSFUL);
 		}
 
 		$this->redirect('edit', 'Account');

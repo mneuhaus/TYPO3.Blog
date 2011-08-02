@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,11 +26,11 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LoginController extends \F3\Blog\Controller\AbstractBaseController {
+class LoginController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
@@ -56,7 +56,7 @@ class LoginController extends \F3\Blog\Controller\AbstractBaseController {
 		try {
 			$this->authenticationManager->authenticate();
 			$this->redirect('index', 'Admin');
-		} catch (\F3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
+		} catch (\TYPO3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
 			$this->flashMessageContainer->add('Wrong username or password.');
 			throw $exception;
 		}

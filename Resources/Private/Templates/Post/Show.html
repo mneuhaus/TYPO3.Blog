@@ -1,4 +1,4 @@
-{namespace blog=F3\Blog\ViewHelpers}
+{namespace blog=TYPO3\Blog\ViewHelpers}
 <f:layout name="Master" />
 
 <f:section name="mainbox">
@@ -19,7 +19,7 @@
 			<f:link.action onclick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
 		</f:security.ifHasRole></h1>
 	<f:render partial="/PostMetaData" arguments="{post: post}"/>
-		<p class="content"><f:format.crop maxCharacters="1000000">{f:raw(value: post.content)}</f:format.crop></p>
+		<p class="content"><f:format.crop maxCharacters="1000000">{f:format.raw(value: post.content)}</f:format.crop></p>
 	<f:if condition="{post.image.originalResource}">
 		<p><img src="{f:uri.resource(resource: post.image.originalResource)}" style="max-width: 100%" alt="{post.image.title}" /></p>
 	</f:if>

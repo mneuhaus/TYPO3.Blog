@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,23 +26,23 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PostController extends \F3\Blog\Controller\AbstractBaseController {
+class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Repository\PostRepository
+	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Repository\CategoryRepository
+	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
 	/**
 	 * @inject
-	 * @var \F3\FLOW3\Security\Context
+	 * @var \TYPO3\FLOW3\Security\Context
 	 */
 	protected $securityContext;
 
@@ -57,7 +57,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 		if ($tag === NULL && $category === NULL) {
 			$posts = $this->postRepository->findByBlog($this->blog);
 		} elseif ($tag !== NULL) {
-			$tag = new \F3\Blog\Domain\Model\Tag($tag);
+			$tag = new \TYPO3\Blog\Domain\Model\Tag($tag);
 			$posts = $this->postRepository->findByTagAndBlog($tag, $this->blog);
 			$this->view->assign('tag', $tag);
 		} else {
@@ -73,13 +73,13 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Action that displays one single post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post The post to display
-	 * @param \F3\Blog\Domain\Model\Comment $newComment If the comment form as has been submitted but the comment was not valid, this argument is used for displaying the entered values again
+	 * @param \TYPO3\Blog\Domain\Model\Post $post The post to display
+	 * @param \TYPO3\Blog\Domain\Model\Comment $newComment If the comment form as has been submitted but the comment was not valid, this argument is used for displaying the entered values again
 	 * @dontvalidate $post
 	 * @dontvalidate $newComment
 	 * @return void
 	 */
-	public function showAction(\F3\Blog\Domain\Model\Post $post, \F3\Blog\Domain\Model\Comment $newComment = NULL) {
+	public function showAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $newComment = NULL) {
 		$this->view->assign('post', $post);
 		$this->view->assign('blog', $post->getBlog());
 		$this->view->assign('previousPost', $this->postRepository->findPrevious($post));
@@ -95,7 +95,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	 */
 	public function newAction() {
 		$account = $this->findCurrentAccount();
-		$newPost = new \F3\Blog\Domain\Model\Post();
+		$newPost = new \TYPO3\Blog\Domain\Model\Post();
 		$newPost->setAuthor($account->getParty()->getName()->getFullName());
 
 		$this->view->assign('blog', $this->blog);
@@ -116,10 +116,10 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Creates a new post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
+	 * @param \TYPO3\Blog\Domain\Model\Post $newPost A fresh Post object which has not yet been added to the repository
 	 * @return void
 	 */
-	public function createAction(\F3\Blog\Domain\Model\Post $newPost) {
+	public function createAction(\TYPO3\Blog\Domain\Model\Post $newPost) {
 		$this->blog->addPost($newPost);
 		$this->flashMessageContainer->add('Your new post was created.');
 		$this->redirect('index');
@@ -128,10 +128,10 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Displays a form for editing an existing post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
+	 * @param \TYPO3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
 	 * @return void
 	 */
-	public function editAction(\F3\Blog\Domain\Model\Post $post) {
+	public function editAction(\TYPO3\Blog\Domain\Model\Post $post) {
 		$this->view->assign('blog', $this->blog);
 			// Don't display the post we're editing in the related posts selector:
 		$existingPosts = $this->postRepository->findRecentExceptThis($post);
@@ -153,10 +153,10 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates an existing post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post A not yet persisted clone of the original post containing the modifications
+	 * @param \TYPO3\Blog\Domain\Model\Post $post A not yet persisted clone of the original post containing the modifications
 	 * @return void
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Post $post) {
+	public function updateAction(\TYPO3\Blog\Domain\Model\Post $post) {
 		$this->postRepository->update($post);
 		$this->flashMessageContainer->add('Your post has been updated.');
 		$this->redirect('index');
@@ -165,10 +165,10 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Deletes an existing post
 	 *
-	 * @param \F3\Blog\Domain\Model\Post $post The post to remove
+	 * @param \TYPO3\Blog\Domain\Model\Post $post The post to remove
 	 * @return void
 	 */
-	public function deleteAction(\F3\Blog\Domain\Model\Post $post) {
+	public function deleteAction(\TYPO3\Blog\Domain\Model\Post $post) {
 		$post->getBlog()->removePost($post);
 		$this->postRepository->remove($post);
 		$this->flashMessageContainer->add('The post has been deleted.');
@@ -192,7 +192,7 @@ class PostController extends \F3\Blog\Controller\AbstractBaseController {
 	}
 
 	/**
-	 * @return \F3\FLOW3\Security\Account
+	 * @return \TYPO3\FLOW3\Security\Account
 	 */
 	protected function findCurrentAccount() {
 		$activeTokens = $this->securityContext->getAuthenticationTokens();

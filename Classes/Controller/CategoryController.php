@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Controller;
+namespace TYPO3\Blog\Controller;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,11 +26,11 @@ namespace F3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CategoryController extends \F3\Blog\Controller\AbstractBaseController {
+class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var F3\Blog\Domain\Repository\CategoryRepository
+	 * @var TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
@@ -46,10 +46,10 @@ class CategoryController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Creates a new category
 	 *
-	 * @param \F3\Blog\Domain\Model\Category $newCategory A fresh category object which has not yet been added to the repository
+	 * @param \TYPO3\Blog\Domain\Model\Category $newCategory A fresh category object which has not yet been added to the repository
 	 * @return void
 	 */
-	public function createAction(\F3\Blog\Domain\Model\Category $newCategory) {
+	public function createAction(\TYPO3\Blog\Domain\Model\Category $newCategory) {
 		$this->categoryRepository->add($newCategory);
 		$this->flashMessageContainer->add('Your new category was created.');
 		$this->redirect('index');
@@ -58,20 +58,20 @@ class CategoryController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Displays a form for editing an existing category
 	 *
-	 * @param \F3\Blog\Domain\Model\Category $category An existing category object taken as a basis for the rendering
+	 * @param \TYPO3\Blog\Domain\Model\Category $category An existing category object taken as a basis for the rendering
 	 * @return string An HTML form for editing a category
 	 */
-	public function editAction(\F3\Blog\Domain\Model\Category $category) {
+	public function editAction(\TYPO3\Blog\Domain\Model\Category $category) {
 		$this->view->assign('category', $category);
 	}
 
 	/**
 	 * Updates an existing category
 	 *
-	 * @param \F3\Blog\Domain\Model\Category $category A not yet persisted clone of the original category containing the modifications
+	 * @param \TYPO3\Blog\Domain\Model\Category $category A not yet persisted clone of the original category containing the modifications
 	 * @return void
 	 */
-	public function updateAction(\F3\Blog\Domain\Model\Category $category) {
+	public function updateAction(\TYPO3\Blog\Domain\Model\Category $category) {
 		$this->categoryRepository->update($category);
 		$this->flashMessageContainer->add('Your category has been updated.');
 		$this->redirect('index');
@@ -80,10 +80,10 @@ class CategoryController extends \F3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Deletes an existing category
 	 *
-	 * @param \F3\Blog\Domain\Model\Category $category The category to remove
+	 * @param \TYPO3\Blog\Domain\Model\Category $category The category to remove
 	 * @return void
 	 */
-	public function deleteAction(\F3\Blog\Domain\Model\Category $category) {
+	public function deleteAction(\TYPO3\Blog\Domain\Model\Category $category) {
 		$this->categoryRepository->remove($category);
 		$this->flashMessageContainer->add('The category has been deleted.');
 		$this->redirect('index');

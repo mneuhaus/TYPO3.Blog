@@ -1,5 +1,5 @@
 <?php
-namespace F3\Blog\Domain\Repository;
+namespace TYPO3\Blog\Domain\Repository;
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "Blog".                       *
@@ -26,18 +26,18 @@ namespace F3\Blog\Domain\Repository;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class BlogRepository extends \F3\FLOW3\Persistence\Repository {
+class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
 	/**
 	 * @inject
-	 * @var \F3\Blog\Domain\Repository\PostRepository
+	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;
 
 	/**
 	 * Remove the blog's posts before removing the blog itself.
 	 *
-	 * @param \F3\Blog\Domain\Model\Blog $blog
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog
 	 * @return void
 	 */
 	public function remove($blog) {
@@ -53,7 +53,7 @@ class BlogRepository extends \F3\FLOW3\Persistence\Repository {
 	 * As of now only one Blog is supported anyway so we just assume that only one
 	 * Blog object resides in the Blog Repository.
 	 *
-	 * @return \F3\Blog\Domain\Model\Blog The active blog or FALSE if none exists
+	 * @return \TYPO3\Blog\Domain\Model\Blog The active blog or FALSE if none exists
 	 */
 	public function findActive() {
 		$query = $this->createQuery();

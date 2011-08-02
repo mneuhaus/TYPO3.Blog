@@ -1,4 +1,4 @@
-{namespace blog=F3\Blog\ViewHelpers}
+{namespace blog=TYPO3\Blog\ViewHelpers}
 ﻿<f:layout name="Master" />
 
 <f:section name="mainbox">
@@ -29,7 +29,7 @@
 								</f:security.ifHasRole>
 							</h2>
 							<f:render partial="PostMetaData" arguments="{post: post}"/>
-							<p class="content"><blog:readMore>{f:raw(value: post.content)}</blog:readMore> <f:link.action action='show' arguments='{post: post}'>Read more</f:link.action></p>
+							<p class="content"><blog:readMore>{f:format.raw(value: post.content)}</blog:readMore> <f:link.action action='show' arguments='{post: post}'>Read more</f:link.action></p>
 						</li>
 					</f:for>
 				</ol>

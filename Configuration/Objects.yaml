@@ -2,11 +2,11 @@
 # Object Configuration for the Blog                                        #
 #                                                                          #
 
-F3\Blog\RoutePartHandlers\PostRoutePartHandler:
+TYPO3\Blog\RoutePartHandlers\PostRoutePartHandler:
   properties:
     mappingCache:
       object:
-        factoryObjectName: F3\FLOW3\Cache\CacheManager
+        factoryObjectName: TYPO3\FLOW3\Cache\CacheManager
         factoryMethodName: getCache
         arguments:
           1: value: Blog_PostRoutePartHandler_MappingCache

@@ -2,19 +2,20 @@
 # Settings Configuration for the Blog package                            #
 #                                                                        #
 
-FLOW3:
-  security:
-    authentication:
-      authenticationStrategy: oneToken
-      providers:
-        DefaultProvider:
-          providerClass: PersistedUsernamePasswordProvider
-          entryPoint:
-            WebRedirect:
-              uri: admin/authentication
+TYPO3:
+  FLOW3:
+    security:
+      authentication:
+        authenticationStrategy: oneToken
+        providers:
+          DefaultProvider:
+            providerClass: PersistedUsernamePasswordProvider
+            entryPoint:
+              WebRedirect:
+                uri: admin/authentication
 
-Blog:
-  notifications:
-    to:
-      email: ''
-      name: 'Blog Admin'
+  Blog:
+    notifications:
+      to:
+        email: ''
+        name: 'Blog Admin'
