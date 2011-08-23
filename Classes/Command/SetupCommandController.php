@@ -67,15 +67,47 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 	protected $authenticationManager;
 
 	/**
+	 * Create an editor account
+	 *
+	 * Creates a new account which has editor rights.
+	 *
+	 * @param string $identifier Account identifier, aka "user name"
+	 * @param string $password Plain text password for the new account
+	 * @param string $firstName First name of the account's holder
+	 * @param string $lastName Last name of the account's holder
+	 * @return void
+	 */
+	public function createAccountCommand($identifier, $password, $firstName, $lastName) {
+		$this->authenticationManager->logout();
+		$account = $this->accountFactory->createAccountWithPassword($identifier, $password, array('Editor'));
+		$this->accountRepository->add($account);
+
+		$personName = new \TYPO3\Party\Domain\Model\PersonName('', $firstName, $lastName);
+		$person = new \TYPO3\Party\Domain\Model\Person();
+		$person->setName($personName);
+		$person->addAccount($account);
+		$this->personRepository->add($person);
+
+		return "The new account was created.";
+	}
+
+	/**
+	 * Create dummy posts and comments
+	 *
+	 * WARNING: Deletes all existing data!
+	 *
 	 * Sets up a a blog with a lot of posts and comments which is a nice test bed
 	 * for profiling.
 	 *
-	 * @param integer $postCount
-	 * @param integer $tagCount
-	 * @param integer $categoryCount
+	 * @param integer $postCount Number of posts to generate
+	 * @param integer $tagCount Number of tags to generate
+	 * @param integer $categoryCount Number of categories to generate
 	 * @return string
 	 */
 	public function profilingDataCommand($postCount = 250, $tagCount = 5, $categoryCount = 5) {
+		if (!class_exists('TYPO3\Faker\Lorem')) {
+			return "The required package TYPO3.Faker is not active.";
+		}
 		$this->blogRepository->removeAll();
 
 		$commentCount = 0;
