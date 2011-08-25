@@ -45,12 +45,12 @@
 
 -
   name: 'Posts Feed'
-  uriPattern:    'feeds/posts.rss.xml'
+  uriPattern:    'feeds/posts.atom.xml'
   defaults:
     '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
-    '@format':     'rss.xml'
+    '@format':     'atom.xml'
 
 -
   name: 'Single Category Actions'

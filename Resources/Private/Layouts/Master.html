@@ -26,7 +26,7 @@
 		<f:if condition="{blog.keywords}"><meta name="keywords" content="{blog.keywords}"></f:if>
 
 		<link rel="stylesheet" href="{f:uri.resource(path: 'Blog.css')}" type="text/css" media="all" />
-		<link rel="alternate" type="application/rss+xml" title="{blog.title} RSS Feed" href="{f:uri.action(action: 'index', controller: 'Post', format: 'rss.xml', absolute: 'true')}" />
+		<link rel="alternate" type="application/atom+xml" title="{blog.title} Atom Feed" href="{f:uri.action(action: 'index', controller: 'Post', format: 'atom.xml', absolute: 'true')}" />
 		<f:if condition="{post}"><link rel="canonical" href="{f:uri.action(action: 'show', controller: 'Post', arguments: {post: post}, format: 'html', absolute: 'true')}"></f:if>
 	</head>
 	<body>
@@ -46,7 +46,7 @@
 					</f:if>
 					{blog.blurb}
 				</div>
-				<div class="feed-button"><f:link.action action="index" controller="Post" format="rss.xml"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
+				<div class="feed-button"><f:link.action action="index" controller="Post" format="atom.xml"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
 				<f:if condition="{recentPosts}">
 					<h3>Recent Posts</h3>
 					<ul>
