@@ -48,7 +48,7 @@ class BlogController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates the blog properties
 	 *
-	 * @param \TYPO3\Blog\Domain\Model\Blog $blog  A not yet persisted clone of the original blog containing the modifications
+	 * @param \TYPO3\Blog\Domain\Model\Blog $blog  Blog containing the modifications
 	 * @return void
 	 */
 	public function updateAction(\TYPO3\Blog\Domain\Model\Blog $blog) {

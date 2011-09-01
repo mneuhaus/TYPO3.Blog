@@ -153,7 +153,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates an existing post
 	 *
-	 * @param \TYPO3\Blog\Domain\Model\Post $post A not yet persisted clone of the original post containing the modifications
+	 * @param \TYPO3\Blog\Domain\Model\Post $post Post containing the modifications
 	 * @return void
 	 */
 	public function updateAction(\TYPO3\Blog\Domain\Model\Post $post) {

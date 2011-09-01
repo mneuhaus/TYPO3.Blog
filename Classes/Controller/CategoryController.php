@@ -68,7 +68,7 @@ class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	/**
 	 * Updates an existing category
 	 *
-	 * @param \TYPO3\Blog\Domain\Model\Category $category A not yet persisted clone of the original category containing the modifications
+	 * @param \TYPO3\Blog\Domain\Model\Category $category Category containing the modifications
 	 * @return void
 	 */
 	public function updateAction(\TYPO3\Blog\Domain\Model\Category $category) {
