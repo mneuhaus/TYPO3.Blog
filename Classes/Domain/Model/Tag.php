@@ -40,7 +40,7 @@ class Tag {
 	/**
 	 * The posts tagged with this tag
 	 *
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Post>
+	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
 	 * @ManyToMany(mappedBy="tags")
 	 */
 	protected $posts;

@@ -79,7 +79,7 @@ class Post {
 	protected $image;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Tag>
+	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Tag>
 	 * @ManyToMany(inversedBy="posts", cascade={"all"})
 	 */
 	protected $tags;
@@ -91,14 +91,14 @@ class Post {
 	protected $category;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Comment>
+	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Comment>
 	 * @OneToMany(mappedBy="post", cascade={"all"}, orphanRemoval="true")
 	 * @OrderBy({"date" = "DESC"})
 	 */
 	protected $comments;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Post>
+	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
 	 * @ManyToMany
 	 * @JoinTable(inverseJoinColumns={@joinColumn(name="related_id")})
 	 */
@@ -220,10 +220,10 @@ class Post {
 	/**
 	 * Setter for tags
 	 *
-	 * @param \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Tag> $tags The tags
+	 * @param \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Tag> $tags The tags
 	 * @return void
 	 */
-	public function setTags(\Doctrine\Common\Collections\ArrayCollection $tags) {
+	public function setTags(\Doctrine\Common\Collections\Collection $tags) {
 		$this->tags = clone $tags;
 	}
 
@@ -240,7 +240,7 @@ class Post {
 	/**
 	 * Getter for tags
 	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Tag> The tags
+	 * @return \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Tag> The tags
 	 */
 	public function getTags() {
 		return clone $this->tags;
@@ -308,7 +308,7 @@ class Post {
 	/**
 	 * Returns the comments to this post
 	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Comment>
+	 * @return \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Comment>
 	 */
 	public function getComments() {
 		return $this->comments;
@@ -326,17 +326,17 @@ class Post {
 	/**
 	 * Sets the posts related to this post
 	 *
-	 * @param \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Post> $relatedPosts The related posts
+	 * @param \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post> $relatedPosts The related posts
 	 * @return void
 	 */
-	public function setRelatedPosts(\Doctrine\Common\Collections\ArrayCollection $relatedPosts) {
+	public function setRelatedPosts(\Doctrine\Common\Collections\Collection $relatedPosts) {
 		$this->relatedPosts = clone $relatedPosts;
 	}
 
 	/**
 	 * Returns the posts related to this post
 	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Blog\Domain\Model\Post> The related posts
+	 * @return \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post> The related posts
 	 */
 	public function getRelatedPosts() {
 		return clone $this->relatedPosts;
