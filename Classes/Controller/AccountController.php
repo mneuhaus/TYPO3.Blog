@@ -47,6 +47,12 @@ class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	protected $securityContext;
 
 	/**
+	 * @var \TYPO3\FLOW3\Security\Cryptography\HashService
+	 * @inject
+	 */
+	protected $hashService;
+
+	/**
 	 * List action for this controller.
 	 *
 	 * @return string
@@ -89,8 +95,7 @@ class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 */
 	public function updateAction(\TYPO3\FLOW3\Security\Account $account, $password = '') {
 		if ($password != '') {
-			$salt = substr(md5(uniqid(rand(), TRUE)), 0, rand(6, 10));
-			$account->setCredentialsSource(md5(md5($password) . $salt) . ',' . $salt);
+			$account->setCredentialsSource($this->hashService->hashPassword($password));
 		}
 
 		$this->accountRepository->update($account);
