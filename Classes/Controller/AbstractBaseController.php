@@ -36,6 +36,12 @@ abstract class AbstractBaseController extends \TYPO3\FLOW3\MVC\Controller\Action
 	protected $blogRepository;
 
 	/**
+	 * @inject
+	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
+	 */
+	protected $postRepository;
+
+	/**
 	 * @var \TYPO3\Blog\Domain\Model\Blog
 	 */
 	protected $blog;

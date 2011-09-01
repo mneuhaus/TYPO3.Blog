@@ -74,13 +74,13 @@ class Post {
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Image
-	 * @ManyToOne(cascade={"all"})
+	 * @ManyToOne
 	 */
 	protected $image;
 
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Tag>
-	 * @ManyToMany(inversedBy="posts", cascade={"all"})
+	 * @ManyToMany(inversedBy="posts")
 	 */
 	protected $tags;
 
@@ -92,7 +92,7 @@ class Post {
 
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Comment>
-	 * @OneToMany(mappedBy="post", cascade={"all"}, orphanRemoval="true")
+	 * @OneToMany(mappedBy="post")
 	 * @OrderBy({"date" = "DESC"})
 	 */
 	protected $comments;

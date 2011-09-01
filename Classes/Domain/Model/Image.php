@@ -39,7 +39,7 @@ class Image {
 
 	/**
 	 * @var \TYPO3\FLOW3\Resource\Resource
-	 * @ManyToOne(cascade={"all"})
+	 * @ManyToOne
 	 * validate NotEmpty
 	 */
 	protected $originalResource;

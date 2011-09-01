@@ -30,12 +30,6 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @inject
-	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
-	 */
-	protected $postRepository;
-
-	/**
-	 * @inject
 	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
@@ -120,7 +114,9 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * @return void
 	 */
 	public function createAction(\TYPO3\Blog\Domain\Model\Post $newPost) {
+		$this->postRepository->add($newPost);
 		$this->blog->addPost($newPost);
+		$this->blogRepository->update($this->blog);
 		$this->flashMessageContainer->add('Your new post was created.');
 		$this->redirect('index');
 	}
@@ -169,8 +165,9 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * @return void
 	 */
 	public function deleteAction(\TYPO3\Blog\Domain\Model\Post $post) {
-		$post->getBlog()->removePost($post);
 		$this->postRepository->remove($post);
+		$post->getBlog()->removePost($post);
+		$this->blogRepository->update($this->blog);
 		$this->flashMessageContainer->add('The post has been deleted.');
 		$this->redirect('index');
 	}

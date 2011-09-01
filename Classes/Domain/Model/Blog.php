@@ -78,7 +78,7 @@ class Blog {
 	 * A picture of the author
 	 *
 	 * @var \TYPO3\FLOW3\Resource\Resource
-	 * @ManyToOne(cascade={"all"})
+	 * @ManyToOne
 	 */
 	protected $authorPicture;
 
@@ -104,14 +104,13 @@ class Blog {
 	 * The posts contained in this blog
 	 *
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
-	 * @OneToMany(mappedBy="blog",cascade={"all"})
+	 * @OneToMany(mappedBy="blog")
 	 * @OrderBy({"date" = "DESC"})
 	 */
 	protected $posts;
 
 	/**
 	 * Constructs a new Blog
-	 *
 	 */
 	public function __construct() {
 		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
@@ -234,10 +233,10 @@ class Blog {
 	/**
 	 * Returns all posts in this blog
 	 *
-	 * @return \SplObjectStorage<\TYPO3\Blog\Domain\Model\Post> The posts of this blog
+	 * @return \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post> The posts of this blog
 	 */
 	public function getPosts() {
-		return clone $this->posts;
+		return $this->posts;
 	}
 
 	/**

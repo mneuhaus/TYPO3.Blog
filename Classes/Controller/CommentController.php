@@ -26,7 +26,7 @@ namespace TYPO3\Blog\Controller;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CommentController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
+class CommentController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * Creates a new comment
@@ -37,6 +37,7 @@ class CommentController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
+		$this->postRepository->update($post);
 		$this->flashMessageContainer->add('Your new comment was created.');
 		$this->emitCommentCreated($newComment, $post);
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
@@ -51,6 +52,7 @@ class CommentController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function deleteAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $comment) {
 		$post->removeComment($comment);
+		$this->postRepository->update($post);
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
 

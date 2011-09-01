@@ -35,6 +35,12 @@ class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	protected $postRepository;
 
 	/**
+	 * @inject
+	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
+	 */
+	protected $categoryRepository;
+
+	/**
 	 * Remove the blog's posts before removing the blog itself.
 	 *
 	 * @param \TYPO3\Blog\Domain\Model\Blog $blog
@@ -45,6 +51,17 @@ class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 			$this->postRepository->remove($post);
 		}
 		parent::remove($blog);
+	}
+
+	/**
+	 * Remove all posts before removing all posts
+	 *
+	 * @return void
+	 */
+	public function removeAll() {
+		$this->categoryRepository->removeAll();
+		$this->postRepository->removeAll();
+		parent::removeAll();
 	}
 
 	/**
