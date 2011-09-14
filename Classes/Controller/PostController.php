@@ -124,6 +124,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * Displays a form for editing an existing post
 	 *
 	 * @param \TYPO3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
+	 * @ignorevalidation $post
 	 * @return void
 	 */
 	public function editAction(\TYPO3\Blog\Domain\Model\Post $post) {

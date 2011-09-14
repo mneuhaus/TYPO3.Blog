@@ -53,7 +53,7 @@ class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	}
 
 	/**
-	 * Remove all posts before removing all posts
+	 * Remove all posts before removing all blogs
 	 *
 	 * @return void
 	 */
@@ -67,7 +67,7 @@ class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	 * Finds the active blog.
 	 *
 	 * As of now only one Blog is supported anyway so we just assume that only one
-	 * Blog object resides in the Blog Repository.
+	 * Blog object resides in the BlogRepository.
 	 *
 	 * @return \TYPO3\Blog\Domain\Model\Blog The active blog or FALSE if none exists
 	 */
