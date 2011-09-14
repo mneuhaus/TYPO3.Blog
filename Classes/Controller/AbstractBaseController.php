@@ -25,7 +25,6 @@ namespace TYPO3\Blog\Controller;
  * An action controller with base functionality for all action controllers of
  * the Blog package.
  *
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
 abstract class AbstractBaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 

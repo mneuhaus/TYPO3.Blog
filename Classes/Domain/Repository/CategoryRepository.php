@@ -24,7 +24,6 @@ namespace TYPO3\Blog\Domain\Repository;
 /**
  * A repository for Categories
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CategoryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 

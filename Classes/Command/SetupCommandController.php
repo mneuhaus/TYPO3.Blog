@@ -25,7 +25,6 @@ namespace TYPO3\Blog\Command;
  * The setup controller for the Blog package, for setting up some
  * data to play with.
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope singleton
  */
 class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandController {

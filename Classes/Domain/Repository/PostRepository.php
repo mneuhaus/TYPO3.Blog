@@ -26,7 +26,6 @@ use \TYPO3\FLOW3\Persistence\QueryInterface;
 /**
  * A repository for Blog Posts
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class PostRepository extends \TYPO3\FLOW3\Persistence\Repository {
 

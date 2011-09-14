@@ -24,7 +24,6 @@ namespace TYPO3\Blog\ViewHelpers;
 /**
  * This view helper crops the text of a blog post in a meaningful way.
  *
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  * @api
  */

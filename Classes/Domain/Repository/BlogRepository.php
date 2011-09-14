@@ -24,7 +24,6 @@ namespace TYPO3\Blog\Domain\Repository;
 /**
  * A repository for Blogs
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 

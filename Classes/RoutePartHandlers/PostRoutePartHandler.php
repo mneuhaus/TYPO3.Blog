@@ -24,7 +24,6 @@ namespace TYPO3\Blog\RoutePartHandlers;
 /**
  * post route part handler
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  */
 class PostRoutePartHandler extends \TYPO3\FLOW3\MVC\Web\Routing\DynamicRoutePart {

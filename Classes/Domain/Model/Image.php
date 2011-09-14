@@ -24,7 +24,6 @@ namespace TYPO3\Blog\Domain\Model;
 /**
  * An image
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @scope prototype
  * @entity
  */

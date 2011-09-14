@@ -24,7 +24,6 @@ namespace TYPO3\Blog\Controller;
 /**
  * The posts controller for the Blog package
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
