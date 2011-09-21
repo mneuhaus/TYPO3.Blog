@@ -33,6 +33,7 @@ class Category {
 	 * The category name
 	 *
 	 * @var string
+	 * @identity
 	 * @validate Text, StringLength(minimum = 1, maximum = 80)
 	 * @Column(length="80")
 	 */

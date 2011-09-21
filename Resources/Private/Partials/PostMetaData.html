@@ -12,8 +12,8 @@
 		</f:if>
 	</f:link.action>
 	<br />
-	<f:if condition="{post.category}">Filed under: <f:link.action action="index" controller="Post" arguments="{category: post.category.name}" format="html">{post.category}</f:link.action></f:if>
+	<f:if condition="{post.category}">Filed under: <f:link.action action="index" controller="Post" arguments="{category: post.category}" format="html">{post.category}</f:link.action></f:if>
 	<f:if condition="{post.tags}">
-		| Tags: <f:for each="{post.tags}" as="tag"><f:link.action action="index" controller="Post" arguments="{tag: tag.name}" >{tag.name}</f:link.action> </f:for>
+		| Tags: <f:for each="{post.tags}" as="tag"><f:link.action action="index" controller="Post" arguments="{tag: tag}" >{tag.name}</f:link.action> </f:for>
 	</f:if>
 </p>

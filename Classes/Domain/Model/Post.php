@@ -44,14 +44,6 @@ class Post {
 	protected $title;
 
 	/**
-	 * @var string
-	 * @validate RegularExpression(regularExpression = "/^[a-z0-9\-]{1,100}$/")
-	 * @identity
-	 * @Column(length="100")
-	 */
-	protected $linkTitle = '';
-
-	/**
 	 * @identity
 	 * @var \DateTime
 	 */
@@ -140,9 +132,6 @@ class Post {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
-		if ($this->linkTitle === '') {
-			$this->linkTitle = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '', str_replace(' ', '-', $title)));
-		}
 	}
 
 	/**
@@ -152,28 +141,6 @@ class Post {
 	 */
 	public function getTitle() {
 		return $this->title;
-	}
-
-	/**
-	 * Setter for link title
-	 *
-	 * @param string $linkTitle
-	 * @return void
-	 */
-	public function setLinkTitle($linkTitle) {
-		$this->linkTitle = $linkTitle;
-	}
-
-	/**
-	 * Getter for link title
-	 *
-	 * @return string
-	 */
-	public function getLinkTitle() {
-		if ($this->linkTitle === '') {
-			$this->linkTitle = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '', str_replace(' ', '-', $this->title)));
-		}
-		return $this->linkTitle;
 	}
 
 	/**

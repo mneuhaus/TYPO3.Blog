@@ -9,15 +9,13 @@
 		<f:form.textbox property="author" id="author" /><br />
 		<label for="title">Title</label><br />
 		<f:form.textbox property="title" id="title" /><br />
-		<label for="title">Link title</label><br />
-		<f:form.textbox property="linkTitle" id="linkTitle" /><br />
 		<label for="content">Content</label><br />
 		<f:form.textarea property="content" rows="5" cols="40" id="content" /><br />
 
 		<f:if condition="{post.image.originalResource}"><img src="{f:uri.resource(resource: post.image.originalResource)}" style="max-width: 60px; float:right;" /></f:if>
 		<label for="image">Image resource</label><br />
 		<f:form.textbox property="image.title" />
-		<f:form.upload property="image.originalResource" />
+		<f:form.upload property="image.originalResource" id="image" />
 
 		<f:if condition="{categories}">
 			<label for="category">Category</label><br />

@@ -10,14 +10,12 @@
 		<f:form.textbox property="author" id="author" /><br />
 		<label for="title">Title</label><br />
 		<f:form.textbox property="title" id="title" /><br />
-		<label for="title">Link title (optional)</label><br />
-		<f:form.textbox property="linkTitle" id="linkTitle" /><br />
 		<label for="content">Content</label><br />
 		<f:form.textarea property="content" rows="5" cols="40" id="content" /><br />
 
 		<label for="image">Image resource</label><br />
 		<f:form.textbox property="image.title" value="My image title" />
-		<f:form.upload property="image.originalResource" />
+		<f:form.upload property="image.originalResource" id="image" />
 
 		<f:if condition="{categories}">
 			<label for="category">Category</label><br />

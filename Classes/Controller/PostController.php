@@ -42,19 +42,17 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	/**
 	 * List action for this controller. Displays latest posts
 	 *
-	 * @param string $tag The tag to display posts for
-	 * @param string $category The category to display posts for
+	 * @param \TYPO3\Blog\Domain\Model\Tag $tag The tag to display posts for
+	 * @param \TYPO3\Blog\Domain\Model\Category $category The category to display posts for
 	 * @return void
 	 */
-	public function indexAction($tag = NULL, $category = NULL) {
+	public function indexAction(\TYPO3\Blog\Domain\Model\Tag $tag = NULL, \TYPO3\Blog\Domain\Model\Category $category = NULL) {
 		if ($tag === NULL && $category === NULL) {
 			$posts = $this->postRepository->findByBlog($this->blog);
 		} elseif ($tag !== NULL) {
-			$tag = new \TYPO3\Blog\Domain\Model\Tag($tag);
 			$posts = $this->postRepository->findByTagAndBlog($tag, $this->blog);
 			$this->view->assign('tag', $tag);
 		} else {
-			$category = $this->categoryRepository->findOneByName($category);
 			$posts = $this->postRepository->findByCategoryAndBlog($category, $this->blog);
 			$this->view->assign('category', $category);
 		}

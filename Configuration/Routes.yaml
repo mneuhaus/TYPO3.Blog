@@ -3,45 +3,76 @@
 #                                                                        #
 
 -
-  name: 'Comment actions 1'
+  name: 'Comment actions'
   uriPattern:    'posts/{post}/comments/{@action}'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Comment'
-    '@format':     'html'
   routeParts:
     post:
-      handler: TYPO3\Blog\RoutePartHandlers\PostRoutePartHandler
+      objectType: TYPO3\Blog\Domain\Model\Post
+      uriPattern: '{date:Y}/{date:m}/{date:d}/{title}'
 
 -
   name: 'Single Post Actions'
-  uriPattern:    'posts/{post}(/{@action})'
+  uriPattern:    'posts/{post}'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'show'
-    '@format':     'html'
   routeParts:
     post:
-      handler: TYPO3\Blog\RoutePartHandlers\PostRoutePartHandler
+      objectType: TYPO3\Blog\Domain\Model\Post
+      uriPattern: '{date:Y}/{date:m}/{date:d}/{title}'
+
+-
+  name: 'Single Post Actions'
+  uriPattern:    'posts/{post}/{@action}'
+  defaults:
+    '@controller': 'Post'
+    '@action':     'show'
+  routeParts:
+    post:
+      objectType: TYPO3\Blog\Domain\Model\Post
+      uriPattern: '{date:Y}/{date:m}/{date:d}/{title}'
 
 -
   name: 'Posts of a specific category'
   uriPattern:    'posts/category/{category}'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
-    '@format':     'html'
+  routeParts:
+    category:
+      objectType: TYPO3\Blog\Domain\Model\Category
 
+-
+  name: 'Posts of a specific tag'
+  uriPattern:    'posts/tag/{tag}'
+  defaults:
+    '@controller': 'Post'
+    '@action':     'index'
+  routeParts:
+    tag:
+      objectType: TYPO3\Blog\Domain\Model\Tag
+      uriPattern: '{name}'
+
+
+# Note: Pagination needs some special care due to the way widgets currently build URIs
 -
   name: 'Posts Pagination'
   uriPattern:    'posts/page/{@widget_0.currentPage}'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
-    '@format':     'html'
+    '@widget_0':
+      '@controller':  ''
+      '@package':     ''
+
+-
+  name: 'Posts Pagination - First page'
+  uriPattern:    'posts'
+  defaults:
+    '@controller': 'Post'
+    '@action':     'index'
     '@widget_0':
       '@controller':  ''
       '@package':     ''
@@ -50,16 +81,13 @@
   name: 'General Posts Actions'
   uriPattern:    'posts(/{@action})'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
-    '@format':     'html'
 
 -
   name: 'Posts Feed'
   uriPattern:    'feeds/posts.atom.xml'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
     '@format':     'atom.xml'
@@ -68,51 +96,43 @@
   name: 'Single Category Actions'
   uriPattern:    'categories/{category}/{@action}'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Category'
-    '@format':     'html'
+  routeParts:
+    category:
+      objectType: TYPO3\Blog\Domain\Model\Category
 
 -
   name: 'General Category Actions'
   uriPattern:    'categories(/{@action})'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Category'
     '@action':     'index'
-    '@format':     'html'
 
 -
   name: 'Account actions'
   uriPattern: 'admin/account(/{@action})'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Account'
     '@action':     'edit'
-    '@format':     'html'
 
 -
   name: 'Blog actions'
   uriPattern: 'admin/blog(/{@action})'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Blog'
     '@action':     'edit'
-    '@format':     'html'
 
 -
   name: 'Admin Overview'
   uriPattern: 'admin'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Admin'
     '@action':     'index'
-    '@format':     'html'
 
 -
   name: 'Setup'
   uriPattern: 'admin/setup(/{@action})'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Setup'
     '@action':     'index'
 
@@ -120,7 +140,6 @@
   name: 'Authentication Actions'
   uriPattern: 'admin/authentication(/{@action})'
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Login'
     '@action':     'index'
 
@@ -128,8 +147,5 @@
   name: 'Fallback rule'
   uriPattern:    ''
   defaults:
-    '@package':    'TYPO3.Blog'
     '@controller': 'Post'
     '@action':     'index'
-    '@format':     'html'
-
