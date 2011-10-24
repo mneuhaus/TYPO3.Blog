@@ -116,7 +116,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 		$this->postRepository->add($newPost);
 		$this->blog->addPost($newPost);
 		$this->blogRepository->update($this->blog);
-		$this->flashMessageContainer->add('Your new post was created.');
+		$this->addFlashMessage('Your new post was created.');
 		$this->redirect('index');
 	}
 
@@ -154,7 +154,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 */
 	public function updateAction(\TYPO3\Blog\Domain\Model\Post $post) {
 		$this->postRepository->update($post);
-		$this->flashMessageContainer->add('Your post has been updated.');
+		$this->addFlashMessage('Your post has been updated.');
 		$this->redirect('index');
 	}
 
@@ -168,7 +168,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 		$this->postRepository->remove($post);
 		$post->getBlog()->removePost($post);
 		$this->blogRepository->update($this->blog);
-		$this->flashMessageContainer->add('The post has been deleted.');
+		$this->addFlashMessage('The post has been deleted.');
 		$this->redirect('index');
 	}
 
@@ -180,9 +180,9 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {
 			case 'createAction' :
-				return 'Could not create the new post:';
+				return new \TYPO3\FLOW3\Error\Error('Could not create the new post');
 			case 'updateAction' :
-				return 'Could not update the post:';
+				return new \TYPO3\FLOW3\Error\Error('Could not update the post');
 			default :
 				return parent::getErrorFlashMessage();
 		}

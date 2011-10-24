@@ -58,7 +58,7 @@ class LoginController extends \TYPO3\Blog\Controller\AbstractBaseController {
 			$this->authenticationManager->authenticate();
 			$this->redirect('index', 'Admin');
 		} catch (\TYPO3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
-			$this->flashMessageContainer->add('Wrong username or password.');
+			$this->addFlashMessage('Wrong username or password.');
 			throw $exception;
 		}
 	}
@@ -70,7 +70,7 @@ class LoginController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 */
 	public function logoutAction() {
 		$this->authenticationManager->logout();
-		$this->flashMessageContainer->add('Successfully logged out.');
+		$this->addFlashMessage('Successfully logged out.');
 		$this->redirect('index', 'Post');
 	}
 }

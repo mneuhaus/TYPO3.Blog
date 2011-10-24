@@ -107,7 +107,7 @@ class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 		$this->accountRepository->update($account);
 		$this->partyRepository->update($account->getParty());
-		$this->flashMessageContainer->add('Your account details have been updated.');
+		$this->addFlashMessage('Your account details have been updated.');
 		$this->redirect('index', 'Admin');
 	}
 }

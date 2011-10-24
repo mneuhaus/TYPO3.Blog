@@ -52,7 +52,7 @@ class BlogController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 */
 	public function updateAction(\TYPO3\Blog\Domain\Model\Blog $blog) {
 		$this->blogRepository->update($blog);
-		$this->flashMessageContainer->add('Your blog details have been updated.');
+		$this->addFlashMessage('Your blog details have been updated.');
 		$this->redirect('edit', 'Blog');
 	}
 }

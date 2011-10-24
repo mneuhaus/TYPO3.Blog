@@ -39,7 +39,7 @@ class CommentController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	public function createAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $newComment) {
 		$post->addComment($newComment);
 		$this->postRepository->update($post);
-		$this->flashMessageContainer->add('Your new comment was created.');
+		$this->addFlashMessage('Your new comment was created.');
 		$this->emitCommentCreated($newComment, $post);
 		$this->redirect('show', 'Post', NULL, array('post' => $post));
 	}
@@ -65,7 +65,7 @@ class CommentController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {
 			case 'createAction' :
-				return 'Could not create the new comment.';
+				return new \TYPO3\FLOW3\Error\Error('Could not create the new comment');
 			default :
 				return parent::getErrorFlashMessage();
 		}

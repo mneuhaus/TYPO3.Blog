@@ -36,6 +36,12 @@ class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	protected $categoryRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var TYPO3\Blog\Domain\Repository\PostRepository
+	 */
+	protected $postRepository;
+
+	/**
 	 * List action for this controller.
 	 *
 	 * @return string
@@ -52,7 +58,7 @@ class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 */
 	public function createAction(\TYPO3\Blog\Domain\Model\Category $newCategory) {
 		$this->categoryRepository->add($newCategory);
-		$this->flashMessageContainer->add('Your new category was created.');
+		$this->addFlashMessage('Your new category was created.');
 		$this->redirect('index');
 	}
 
@@ -74,7 +80,7 @@ class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 */
 	public function updateAction(\TYPO3\Blog\Domain\Model\Category $category) {
 		$this->categoryRepository->update($category);
-		$this->flashMessageContainer->add('Your category has been updated.');
+		$this->addFlashMessage('Your category has been updated.');
 		$this->redirect('index');
 	}
 
@@ -85,8 +91,13 @@ class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * @return void
 	 */
 	public function deleteAction(\TYPO3\Blog\Domain\Model\Category $category) {
-		$this->categoryRepository->remove($category);
-		$this->flashMessageContainer->add('The category has been deleted.');
+		$numberOfPostsInThisCategory = $this->postRepository->countByCategory($category);
+		if ($numberOfPostsInThisCategory > 0) {
+			$this->addFlashMessage('%d post(s) refer to category "%s". Please adjust them first.', 'Category can\'t be deleted', \TYPO3\FLOW3\Error\Message::SEVERITY_ERROR, array($numberOfPostsInThisCategory, $category));
+		} else {
+			$this->categoryRepository->remove($category);
+			$this->addFlashMessage('The category has been deleted.');
+		}
 		$this->redirect('index');
 	}
 
@@ -98,7 +109,7 @@ class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	protected function getErrorFlashMessage() {
 		switch ($this->actionMethodName) {
 			case 'createAction' :
-				return 'Could not create the new category:';
+				return new \TYPO3\FLOW3\Error\Error('Could not create the new category');
 			default :
 				return parent::getErrorFlashMessage();
 		}
