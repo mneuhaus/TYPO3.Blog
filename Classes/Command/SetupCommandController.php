@@ -45,9 +45,9 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 
 	/**
 	 * @FLOW3\Inject
-	 * @var \TYPO3\Party\Domain\Repository\PersonRepository
+	 * @var \TYPO3\Party\Domain\Repository\PartyRepository
 	 */
-	protected $personRepository;
+	protected $partyRepository;
 
 	/**
 	 * @FLOW3\Inject
@@ -87,7 +87,7 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 		$person = new \TYPO3\Party\Domain\Model\Person();
 		$person->setName($personName);
 		$person->addAccount($account);
-		$this->personRepository->add($person);
+		$this->partyRepository->add($person);
 
 		return "The new account was created.";
 	}
@@ -167,7 +167,7 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 		$person = new \TYPO3\Party\Domain\Model\Person();
 		$person->setName($personName);
 		$person->addAccount($account);
-		$this->personRepository->add($person);
+		$this->partyRepository->add($person);
 
 		return 'Done, created 1 blog, ' . $postCount . ' posts, ' . $commentCount . ' comments.';
 	}

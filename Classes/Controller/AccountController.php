@@ -37,6 +37,12 @@ class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
 	 * @FLOW3\Inject
+	 * @var \TYPO3\Party\Domain\Repository\PartyRepository
+	 */
+	protected $partyRepository;
+
+	/**
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
@@ -100,6 +106,7 @@ class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 		}
 
 		$this->accountRepository->update($account);
+		$this->partyRepository->update($account->getParty());
 		$this->flashMessageContainer->add('Your account details have been updated.');
 		$this->redirect('index', 'Admin');
 	}

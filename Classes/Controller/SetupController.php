@@ -44,9 +44,9 @@ class SetupController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 * @FLOW3\Inject
-	 * @var \TYPO3\Party\Domain\Repository\PersonRepository
+	 * @var \TYPO3\Party\Domain\Repository\PartyRepository
 	 */
-	protected $personRepository;
+	protected $partyRepository;
 
 	/**
 	 * @FLOW3\Inject
@@ -93,7 +93,7 @@ class SetupController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 		$person = new \TYPO3\Party\Domain\Model\Person();
 		$person->setName($personName);
 		$person->addAccount($account);
-		$this->personRepository->add($person);
+		$this->partyRepository->add($person);
 
 		$authenticationTokens = $this->securityContext->getAuthenticationTokensOfType('TYPO3\FLOW3\Security\Authentication\Token\UsernamePassword');
 		if (count($authenticationTokens) === 1) {
