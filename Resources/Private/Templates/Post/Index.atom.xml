@@ -4,7 +4,7 @@
 		<title>{blog.title -> f:format.stripTags() -> f:format.htmlspecialchars()} – {blog.description -> f:format.stripTags() -> f:format.htmlspecialchars()}</title>
 		<link><f:uri.action action="index" controller="Post" absolute="TRUE"/></link>
 		<atom:link href="{f:uri.action(action: 'index', controller: 'Post', format: 'atom.xml' absolute: 'TRUE')}" rel="self" type="application/atom+xml" />
-		<description>{blog.fullDescription -> f:format.stripTags() -> f:format.htmlspecialchars()}}</description>
+		<description>{blog.fullDescription -> f:format.stripTags() -> f:format.htmlspecialchars()}</description>
 		<language>en-us</language>
 		<generator>FLOW3</generator>
 		<f:for each="{posts}" as="post">
