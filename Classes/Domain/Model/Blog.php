@@ -21,11 +21,13 @@ namespace TYPO3\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * A blog
  *
- * @scope prototype
- * @entity
+ * @FLOW3\Entity
  */
 class Blog {
 
@@ -33,8 +35,9 @@ class Blog {
 	 * The blog's title.
 	 *
 	 * @var string
-	 * @validate Text, StringLength(minimum = 1, maximum = 80)
-	 * @Column(length="80")
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=80 })
+	 * @ORM\Column(length=80)
 	 */
 	protected $title = '';
 
@@ -42,8 +45,9 @@ class Blog {
 	 * A short description of the blog
 	 *
 	 * @var string
-	 * @validate Text, StringLength(maximum = 150)
-	 * @Column(length="150")
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=150 })
+	 * @ORM\Column(length=150)
 	 */
 	protected $description = '';
 
@@ -51,7 +55,8 @@ class Blog {
 	 * A longer description of the blog, mainly used in the meta tag for search engines
 	 *
 	 * @var string
-	 * @validate Text, StringLength(maximum = 255)
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=255 })
 	 */
 	protected $fullDescription = '';
 
@@ -59,8 +64,8 @@ class Blog {
 	 * A comma separated list of keywords, to be used in the meta information
 	 *
 	 * @var string
-	 * @validate Text, StringLength(maximum = 255)
-	 * @Column(length="255")
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=255 })
 	 */
 	protected $keywords = '';
 
@@ -68,8 +73,9 @@ class Blog {
 	 * A short blurb about the blog or author
 	 *
 	 * @var string
-	 * @Column(type="text", length="400")
-	 * @validate Text, StringLength(maximum = 400)
+	 * @ORM\Column(type="text", length=400)
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=400 })
 	 */
 	protected $blurb = '';
 
@@ -77,25 +83,27 @@ class Blog {
 	 * A picture of the author
 	 *
 	 * @var \TYPO3\FLOW3\Resource\Resource
-	 * @ManyToOne
+	 * @ORM\ManyToOne
 	 */
 	protected $authorPicture;
 
 	/**
 	 * Twitter username - if any
 	 *
-	 * @validate Text, StringLength(maximum = 80)
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=80 })
 	 * @var string
-	 * @Column(length="80")
+	 * @ORM\Column(length=80)
 	 */
 	protected $twitterUsername = '';
 
 	/**
 	 * Google Analytics account number - if any
 	 *
-	 * @validate Text, StringLength(maximum = 20)
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=20 })
 	 * @var string
-	 * @Column(length="20")
+	 * @ORM\Column(length=20)
 	 */
 	protected $googleAnalyticsAccountNumber = '';
 
@@ -103,8 +111,8 @@ class Blog {
 	 * The posts contained in this blog
 	 *
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
-	 * @OneToMany(mappedBy="blog")
-	 * @OrderBy({"date" = "DESC"})
+	 * @ORM\OneToMany(mappedBy="blog")
+	 * @ORM\OrderBy({"date" = "DESC"})
 	 */
 	protected $posts;
 

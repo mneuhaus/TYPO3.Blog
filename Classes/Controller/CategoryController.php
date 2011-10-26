@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * The category controller for the Blog package
  *
@@ -28,7 +30,7 @@ namespace TYPO3\Blog\Controller;
 class CategoryController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;

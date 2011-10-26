@@ -21,77 +21,79 @@ namespace TYPO3\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * A blog post
  *
- * @scope prototype
- * @entity
+ * @FLOW3\Entity
  */
 class Post {
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Blog
-	 * @ManyToOne(inversedBy="posts")
+	 * @ORM\ManyToOne(inversedBy="posts")
 	 */
 	protected $blog;
 
 	/**
 	 * @var string
-	 * @validate StringLength(minimum = 1, maximum = 100)
-	 * @identity
-	 * @Column(length="100")
+	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=100 })
+	 * @FLOW3\Identity
+	 * @ORM\Column(length=100)
 	 */
 	protected $title;
 
 	/**
-	 * @identity
+	 * @FLOW3\Identity
 	 * @var \DateTime
 	 */
 	protected $date;
 
 	/**
 	 * @var string
-	 * @validate StringLength(minimum = 1, maximum = 50)
-	 * @Column(length="50")
+	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=50 })
+	 * @ORM\Column(length=50)
 	 */
 	protected $author;
 
 	/**
 	 * @var string
-	 * @Column(type="text")
-	 * @validate Raw
+	 * @ORM\Column(type="text")
+	 * @FLOW3\Validate(type="Raw")
 	 */
 	protected $content;
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Image
-	 * @ManyToOne
+	 * @ORM\ManyToOne
 	 */
 	protected $image;
 
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Tag>
-	 * @ManyToMany(inversedBy="posts")
+	 * @ORM\ManyToMany(inversedBy="posts")
 	 */
 	protected $tags;
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Category
-	 * @ManyToOne
+	 * @ORM\ManyToOne
 	 */
 	protected $category;
 
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Comment>
-	 * @OneToMany(mappedBy="post")
-	 * @OrderBy({"date" = "DESC"})
+	 * @ORM\OneToMany(mappedBy="post")
+	 * @ORM\OrderBy({"date" = "DESC"})
 	 */
 	protected $comments;
 
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
-	 * @ManyToMany
-	 * @JoinTable(inverseJoinColumns={@joinColumn(name="related_id")})
+	 * @ORM\ManyToMany
+	 * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(name="related_id")})
 	 */
 	protected $relatedPosts;
 

@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * The admin controller for the Blog package
  *
@@ -32,7 +34,7 @@ class AdminController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 *
 	 * @return void
 	 * @author Robert Lemke <robert@typo3.org>
-	 * @skipCsrfProtection
+	 * @FLOW3\SkipCsrfProtection
 	 */
 	public function indexAction() {
 	}

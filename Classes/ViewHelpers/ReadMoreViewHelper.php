@@ -24,7 +24,6 @@ namespace TYPO3\Blog\ViewHelpers;
 /**
  * This view helper crops the text of a blog post in a meaningful way.
  *
- * @scope prototype
  * @api
  */
 class ReadMoreViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {

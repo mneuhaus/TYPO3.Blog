@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * An action controller with base functionality for all action controllers of
  * the Blog package.
@@ -29,13 +31,13 @@ namespace TYPO3\Blog\Controller;
 abstract class AbstractBaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;

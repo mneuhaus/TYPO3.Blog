@@ -21,25 +21,27 @@ namespace TYPO3\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * An image
  *
- * @scope prototype
- * @entity
+ * @FLOW3\Entity
  */
 class Image {
 
 	/**
 	 * @var string
-	 * @validate StringLength(maximum = 100)
-	 * @Column(length="100")
+	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=100 })
+	 * @ORM\Column(length=100)
 	 */
 	protected $title;
 
 	/**
 	 * @var \TYPO3\FLOW3\Resource\Resource
-	 * @ManyToOne
-	 * validate NotEmpty
+	 * @ORM\ManyToOne
+	 * FLOW3\Validate(type="NotEmpty")
 	 */
 	protected $originalResource;
 

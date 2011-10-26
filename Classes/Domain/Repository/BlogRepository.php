@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * A repository for Blogs
  *
@@ -28,13 +30,13 @@ namespace TYPO3\Blog\Domain\Repository;
 class BlogRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
 	 */
 	protected $postRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;

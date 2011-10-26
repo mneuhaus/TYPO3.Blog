@@ -21,46 +21,48 @@ namespace TYPO3\Blog\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * The setup controller for the Blog package, for setting up some
  * data to play with.
  *
- * @scope singleton
+ * @FLOW3\Scope("singleton")
  */
 class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandController {
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\BlogRepository
 	 */
 	protected $blogRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Party\Domain\Repository\PersonRepository
 	 */
 	protected $personRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\AccountRepository
 	 */
 	protected $accountRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\AccountFactory
 	 */
 	protected $accountFactory;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;

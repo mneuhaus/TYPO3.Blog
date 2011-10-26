@@ -21,18 +21,21 @@ namespace TYPO3\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * A blog post tag
  *
- * @scope prototype
- * @valueobject
+ * @FLOW3\ValueObject
  */
 class Tag {
 
 	/**
 	 * @var string
-	 * @validate Alphanumeric, StringLength(minimum = 1, maximum = 20)
-	 * @Column(length="20")
+	 * @FLOW3\Validate(type="Alphanumeric")
+	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=20 })
+	 * @ORM\Column(length=20)
 	 */
 	protected $name;
 
@@ -40,7 +43,7 @@ class Tag {
 	 * The posts tagged with this tag
 	 *
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
-	 * @ManyToMany(mappedBy="tags")
+	 * @ORM\ManyToMany(mappedBy="tags")
 	 */
 	protected $posts;
 

@@ -21,44 +21,48 @@ namespace TYPO3\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * A blog post comment
  *
- * @scope prototype
- * @entity
+ * @FLOW3\Entity
  */
 class Comment {
 
 	/**
 	 * @var \DateTime
-	 * @identity
+	 * @FLOW3\Identity
 	 */
 	protected $date;
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Post
-	 * @ManyToOne(inversedBy="comments")
+	 * @ORM\ManyToOne(inversedBy="comments")
 	 */
 	protected $post;
 
 	/**
 	 * @var string
-	 * @validate Text, StringLength(minimum = 3, maximum = 80)
-	 * @identity
-	 * @Column(length="80")
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=3, "maximum"=80 })
+	 * @FLOW3\Identity
+	 * @ORM\Column(length=80)
 	 */
 	protected $author;
 
 	/**
 	 * @var string
-	 * @validate EmailAddress
+	 * @FLOW3\Validate(type="EmailAddress")
 	 */
 	protected $emailAddress;
 
 	/**
 	 * @var string
-	 * @validate Text, NotEmpty
-	 * @Column(type="text")
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="NotEmpty")
+	 * @ORM\Column(type="text")
 	 */
 	protected $content;
 

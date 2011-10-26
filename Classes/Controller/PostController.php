@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * The posts controller for the Blog package
  *
@@ -28,13 +30,13 @@ namespace TYPO3\Blog\Controller;
 class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\Context
 	 */
 	protected $securityContext;
@@ -66,8 +68,8 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 *
 	 * @param \TYPO3\Blog\Domain\Model\Post $post The post to display
 	 * @param \TYPO3\Blog\Domain\Model\Comment $newComment If the comment form as has been submitted but the comment was not valid, this argument is used for displaying the entered values again
-	 * @dontvalidate $post
-	 * @dontvalidate $newComment
+	 * @FLOW3\IgnoreValidation("$post")
+	 * @FLOW3\IgnoreValidation("$newComment")
 	 * @return void
 	 */
 	public function showAction(\TYPO3\Blog\Domain\Model\Post $post, \TYPO3\Blog\Domain\Model\Comment $newComment = NULL) {
@@ -122,7 +124,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * Displays a form for editing an existing post
 	 *
 	 * @param \TYPO3\Blog\Domain\Model\Post $post An existing post object taken as a basis for the rendering
-	 * @ignorevalidation $post
+	 * @FLOW3\IgnoreValidation("$post")
 	 * @return void
 	 */
 	public function editAction(\TYPO3\Blog\Domain\Model\Post $post) {

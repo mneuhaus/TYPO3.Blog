@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * Comments controller for the Blog package
  *
@@ -73,7 +75,7 @@ class CommentController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * @param \TYPO3\Blog\Domain\Model\Comment $comment
 	 * @param \TYPO3\Blog\Domain\Model\Post $post
 	 * @return void
-	 * @signal
+	 * @FLOW3\Signal
 	 */
 	protected function emitCommentCreated(\TYPO3\Blog\Domain\Model\Comment $comment, \TYPO3\Blog\Domain\Model\Post $post) {}
 }

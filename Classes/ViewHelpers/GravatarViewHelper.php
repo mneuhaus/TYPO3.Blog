@@ -33,7 +33,6 @@ namespace TYPO3\Blog\ViewHelpers;
  * Output:
  * <img class="gravatar" src="http://www.gravatar.com/avatar/<hash>?d=http%3A%2F%2Fdomain.com%2Fgravatar_default.gif" />
  *
- * @scope prototype
  */
 class GravatarViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
 

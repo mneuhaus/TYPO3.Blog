@@ -21,6 +21,8 @@ namespace TYPO3\Blog\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * The account controller for the Blog package
  *
@@ -28,26 +30,26 @@ namespace TYPO3\Blog\Controller;
 class AccountController extends \TYPO3\Blog\Controller\AbstractBaseController {
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\AccountRepository
 	 */
 	protected $accountRepository;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
 	/**
-	 * @inject
+	 * @FLOW3\Inject
 	 * @var TYPO3\FLOW3\Security\Context
 	 */
 	protected $securityContext;
 
 	/**
+	 * @FLOW3\Inject
 	 * @var \TYPO3\FLOW3\Security\Cryptography\HashService
-	 * @inject
 	 */
 	protected $hashService;
 

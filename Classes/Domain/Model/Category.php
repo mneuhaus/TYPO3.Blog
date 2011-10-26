@@ -21,11 +21,13 @@ namespace TYPO3\Blog\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
  * A blog post category
  *
- * @scope prototype
- * @entity
+ * @FLOW3\Entity
  */
 class Category {
 
@@ -33,9 +35,10 @@ class Category {
 	 * The category name
 	 *
 	 * @var string
-	 * @identity
-	 * @validate Text, StringLength(minimum = 1, maximum = 80)
-	 * @Column(length="80")
+	 * @FLOW3\Identity
+	 * @FLOW3\Validate(type="Text")
+	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=80 })
+	 * @ORM\Column(length=80)
 	 */
 	protected $name;
 
