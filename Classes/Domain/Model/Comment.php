@@ -60,7 +60,6 @@ class Comment {
 
 	/**
 	 * @var string
-	 * @FLOW3\Validate(type="Text")
 	 * @FLOW3\Validate(type="NotEmpty")
 	 * @ORM\Column(type="text")
 	 */
