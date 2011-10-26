@@ -46,7 +46,7 @@
 								| <f:link.action onclick="return confirm('Really delete this comment?');" action="delete" arguments="{post: post, comment: comment}" controller="Comment"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
 							</f:security.ifHasRole>
 						</p>
-						<blog:gravatar email="{comment.emailAddress}" default="{f:uri.resource(path: 'gravatar_default.gif')}" class="gravatar" />
+						<blog:gravatar email="{comment.emailAddress}" default="{f:uri.resource(path: 'gravatar_default.png')}" class="gravatar" />
 						<p class="content"><f:format.nl2br>{comment.content}</f:format.nl2br></p>
 					</li>
 				</f:for>
@@ -55,7 +55,7 @@
 		</f:if>
 		<h3>Leave a reply</h3>
 		<f:render partial="FormErrors" arguments="{for: 'newComment'}" />
-		<f:form action="create" arguments="{post: post}" controller="Comment" object="{newComment}" name="newComment" class="form newcomment">
+		<f:form action="create" arguments="{post: post}" controller="Comment" object="{newComment}" name="newComment" class="form newcomment" section="comments">
 			<ul>
 				<li><f:form.textbox id="comment.author" property="author" /></li>
 				<li><label for="comment.author">Name <span class="required">*</span></label></li>

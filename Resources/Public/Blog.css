@@ -301,9 +301,17 @@ li.comment p.content {
 
 fieldset { border: none; padding: 0; margin: 0;}
 
-ul.flashmessages {
-	list-style-type: none;
+.flashmessages {
+	background: #FFFFAA;
+	border: 1px solid #D6D680;
+	color: #757553;
 	font-weight: bold;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+.flashmessages li {
+	margin: 0;
+	list-style: none;
 }
 
 /*--------------- pagination ------------------*/
@@ -325,17 +333,29 @@ ul.typo3-widget-paginator li {
 input.typo3-form-error {
 	border: 1px solid #8a1f11;
 }
-ul.errors {
-}
-.error, .notice, .success {
-	padding:.8em;
+
+.errors {
+	padding: .8em;
 	margin-bottom:1em;
-	border:2px solid #ddd;
+	border: 1px solid #FBC2C4;
+}
+.errors dt {
+	float: left;
+	color:#8a1f11;
+	width: 100px;
+	font-weight: bold;
+}
+.errors dd {
+	margin-left: 100px;
+	color:#8a1f11;
+}
+
+.error, .f3-form-error {
+	background:#FBE3E4;
+	border-color:#FBC2C4;
 }
 .error {
-	background:#FBE3E4;
 	color:#8a1f11;
-	border-color:#FBC2C4;
 }
 .notice {
 	background:#FFF6BF;
