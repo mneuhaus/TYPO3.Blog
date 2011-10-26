@@ -39,6 +39,12 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 
 	/**
 	 * @FLOW3\Inject
+	 * @var \TYPO3\Blog\Domain\Repository\PostRepository
+	 */
+	protected $postRepository;
+
+	/**
+	 * @FLOW3\Inject
 	 * @var \TYPO3\Blog\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
@@ -79,7 +85,6 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 	 * @return void
 	 */
 	public function createAccountCommand($identifier, $password, $firstName, $lastName) {
-		$this->authenticationManager->logout();
 		$account = $this->accountFactory->createAccountWithPassword($identifier, $password, array('Editor'));
 		$this->accountRepository->add($account);
 
@@ -89,25 +94,31 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 		$person->addAccount($account);
 		$this->partyRepository->add($person);
 
-		return "The new account was created.";
+		$this->outputLine('The account "%s" was created.', array($identifier));
 	}
 
 	/**
 	 * Create dummy posts and comments
 	 *
-	 * WARNING: Deletes all existing data!
-	 *
 	 * Sets up a a blog with a lot of posts and comments which is a nice test bed
 	 * for profiling.
+	 * You can set the "--force" flag in order to force deletion of any existing Blogs and Accounts
+	 * Note: This command requires the TYPO3.Faker package to be installed
 	 *
 	 * @param integer $postCount Number of posts to generate
 	 * @param integer $tagCount Number of tags to generate
 	 * @param integer $categoryCount Number of categories to generate
+	 * @param boolean $force Set this flag to generate override any existing blogs
 	 * @return string
 	 */
-	public function profilingDataCommand($postCount = 250, $tagCount = 5, $categoryCount = 5) {
+	public function profilingDataCommand($postCount = 250, $tagCount = 5, $categoryCount = 5, $force = FALSE) {
 		if (!class_exists('TYPO3\Faker\Lorem')) {
-			return "The required package TYPO3.Faker is not active.";
+			$this->outputLine('The required package TYPO3.Faker is not active.');
+			$this->quit(1);
+		}
+		if ($force !== TRUE && $this->blogRepository->countAll() > 0) {
+			$this->outputLine('There are blogs in the system. Set the --force option to DELETE all blogs and accounts.');
+			$this->quit(1);
 		}
 		$this->blogRepository->removeAll();
 
@@ -151,13 +162,11 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 				$comment->setContent(implode(chr(10),\TYPO3\Faker\Lorem::paragraphs(2)));
 				$comment->setDate(\TYPO3\Faker\Date::random('+ 10 minutes', '+ 6 weeks', $post->getDate()));
 				$post->addComment($comment);
-				$commentCount++;
+				$commentCount ++;
 			}
-
+			$this->postRepository->add($post);
 			$blog->addPost($post);
 		}
-
-		$this->authenticationManager->logout();
 		$this->accountRepository->removeAll();
 
 		$account = $this->accountFactory->createAccountWithPassword('editor', 'joh316', array('Editor'));
@@ -169,7 +178,7 @@ class SetupCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControll
 		$person->addAccount($account);
 		$this->partyRepository->add($person);
 
-		return 'Done, created 1 blog, ' . $postCount . ' posts, ' . $commentCount . ' comments.';
+		$this->outputLine('Done, created 1 blog, %d posts, %d comments.', array($postCount, $commentCount));
 	}
 }
 ?>
