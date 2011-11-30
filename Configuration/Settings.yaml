@@ -17,5 +17,17 @@ TYPO3:
   Blog:
     notifications:
       to:
-        email: ''
+        email: 'apocalip@gmail.com'
         name: 'Blog Admin'
+
+Admin:
+  Beings:
+    TYPO3\Blog\Domain\Model\Comment:
+      Properties:
+        author:
+          Label: Author
+        emailAddress:
+          Label: E-Mail
+          Infotext: The E-Mail will not be publicly displayed
+        content:
+          Widget: Textarea
