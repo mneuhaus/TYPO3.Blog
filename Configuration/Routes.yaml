@@ -143,9 +143,9 @@
     '@controller': 'Login'
     '@action':     'index'
 
--
-  name: 'Fallback rule'
-  uriPattern:    ''
-  defaults:
-    '@controller': 'Post'
-    '@action':     'index'
+# -
+#   name: 'Fallback rule'
+#   uriPattern:    ''
+#   defaults:
+#     '@controller': 'Post'
+#     '@action':     'index'

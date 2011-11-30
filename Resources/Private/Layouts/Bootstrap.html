@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{namespace a=Admin\ViewHelpers}
+	
+	<meta charset="utf-8">
+	<title>Blog - Admin Package</title>
+	
+	<a:render section="header" optional="true">
+		<f:base />
+	</a:render>
+	
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<link href="{f:uri.resource(path: 'bootstrap/bootstrap.css', package: 'Admin')}" rel="stylesheet">
+	<link href="{f:uri.resource(path: 'admin/css/mixins.css', package: 'Admin')}" rel="stylesheet">
+	<link href="{f:uri.resource(path: 'admin/css/style.css', package: 'Admin')}" rel="stylesheet">
+	<link href="{f:uri.resource(path: 'admin/css/images.css', package: 'Admin')}" rel="stylesheet">
+</head>
+
+<body>
+	
+	<f:render section='pre-container' optional="true">
+	</f:render>
+	
+	<div class="navbar navbar-fixed">
+		<div class="navbar-inner">
+			<div class="fluid-container">
+				<a class="brand" href="/admin/"><a:settings path="Admin.PageTitle" /></a>
+				<ul class="nav" data-dropdown="dropdown">
+				<a:navigation position="top">
+					<f:if condition="{navBar.hasChildren}">
+						<f:then>
+						<li class="dropdown">
+							<a href="{navBar.link}">{navBar.name}</a>
+							<ul class="dropdown-menu"><f:format.raw>{navBar.children}</f:format.raw></ul>
+						</li>
+						</f:then>
+						<f:else>
+							<li class="">
+								<a href="{navBar.link}">{navBar.name}</a>
+							</li>
+						</f:else>
+					</f:if>
+				</a:navigation>
+				</ul>
+				
+				<a:user>
+				<f:if condition="{user}">
+					<f:then>
+					<p class="pull-right">
+						{admin-debug-info}
+						Logged in as 
+						<f:link.action action="update" controller="Standard" package="Admin" arguments="{user.arguments}">{user}</f:link.action>
+						| <f:link.action action="logout" controller="Login" package="Admin">Logout</f:link.action>
+					</p>
+					</f:then>
+					<f:else>
+					<p class="pull-right">
+						<f:link.action action="index" controller="Login" package="Admin">Login</f:link.action>
+					</p>
+					</f:else>
+				</f:if>
+				</a:user>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	
+	<a:render section='container' optional="true">
+	<style type="text/css" media="screen">
+		body{ background-color:#EEE; }
+		.page-header{
+			border-bottom: 1px solid #DDD;
+			-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+			-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+			background-color: whiteSmoke;
+			padding: 20px 20px 10px;
+			margin: -20px -20px 20px;
+		}
+		.content {
+			background-color: white;
+			padding: 20px;
+			margin: 0 -20px;
+			-webkit-border-radius: 0 0 6px 6px;
+			-moz-border-radius: 0 0 6px 6px;
+			border-radius: 0 0 6px 6px;
+			-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+			-moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+			box-shadow: 0 1px 2px rgba(0,0,0,.15);
+		}
+		.row {margin-bottom:20px; }
+	</style>
+	<div class="container">
+		<div class="content">
+			<div class="page-header">
+				<div class="pull-right" style="margin-top:-8px;">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-text="The first alpha of the Admin for FLOW3 has just been released. #FLOW3 #Admin #Bootstrap Check it out:" data-count="vertical" data-via="apocalip">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+				</div>
+				<div class="pull-right" style="margin-top:-6px;margin-right:10px;">
+					<!-- Dieses Tag in den Head-Bereich oder direkt vor dem schließenden Body-Tag einfügen -->
+					<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+					<!-- Dieses Tag dort einfügen, wo die +1-Schaltfläche dargestellt werden soll -->
+					<g:plusone size="tall"></g:plusone>
+				</div>
+				<h1>Admin <small>the FLOW3 Administration Package</small> <span class="label important" style="vertical-align:middle;">Alpha1</span></h1>
+			</div>
+			<div class="container">
+			<div class="span7">
+				<a:render section='mainbox' optional="true"></a:render>
+			</div>
+			<div class="span4">
+				<div class="blurb">
+					<f:if condition="{blog.authorPicture}">
+						<img src="{f:uri.resource(resource: blog.authorPicture)}" />
+					</f:if>
+					{blog.blurb}
+				</div>
+				<div class="feed-button"><f:link.action action="index" controller="Post" format="atom.xml"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
+				<f:if condition="{recentPosts}">
+					<h3>Recent Posts</h3>
+					<ul>
+						<f:for each="{recentPosts}" as="recentPost">
+							<li><f:link.action action="show" controller="Post" arguments="{post: recentPost}">{recentPost.title}</f:link.action></li>
+						</f:for>
+					</ul>
+				</f:if>
+				<f:if condition="{blog.twitterUsername}">
+					<div class="twitter">
+						<script>
+							window.onload = function() {
+								var twitterUsername = '{blog.twitterUsername}';
+								var url = 'http://api.twitter.com/1/statuses/user_timeline.json?screen_name=' + twitterUsername + '&count=1&include_rts=true&callback=twitterCallback';
+								var script = document.createElement('script');
+								script.setAttribute('src', url);
+								document.body.appendChild(script);
+							}
+							function twitterCallback(obj) {
+								var t_time = document.getElementById('tweet-time');
+								var t_status = document.getElementById('tweet-status');
+								var html = "";
+								for (var i=0 ; i<3 && i<obj.length ; i++) {
+									t_time.innerHTML = "Sent "+prettyDate(obj[i].created_at);
+									t_time.setAttribute("style","color: #999999");
+									t_status.innerHTML = obj[i].text;
+								}
+								elem.innerHTML = html;
+							}
+							function prettyDate(time){
+								var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+								diff = (((new Date()).getTime() - date.getTime()) / 1000),
+								day_diff = Math.floor(diff / 86400);
+
+								if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+									return;
+
+								return day_diff == 0 && (
+								diff < 60 && "just now" ||
+									diff < 120 && "1 minute ago" ||
+									diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+									diff < 7200 && "1 hour ago" ||
+									diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+									day_diff == 1 && "Yesterday" ||
+									day_diff < 7 && day_diff + " days ago" ||
+									day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+							}
+						</script>
+						<h3>Latest Tweet</h3>
+						<p><span id="tweet-status"></span><br /><span id="tweet-time"></span><br />
+						<a href="http://twitter.com/{blog.twitterUsername}">Follow me on Twitter</a></p>
+					</div>
+				</f:if>
+				</div>
+			</div>
+		</div>
+	</div>
+	</a:render>
+	
+	<f:render section='post-container' optional="true">
+	</f:render>
+	
+	
+	<script src="{f:uri.resource(path: 'admin/js/jquery.1.6.4.min.js', package: 'Admin')}"></script>
+	
+	<script src="{f:uri.resource(path: 'bootstrap/js/bootstrap-alerts.js', package: 'Admin')}"></script>
+	<script src="{f:uri.resource(path: 'bootstrap/js/bootstrap-dropdown.js', package: 'Admin')}"></script>
+	<script src="{f:uri.resource(path: 'bootstrap/js/bootstrap-twipsy.js', package: 'Admin')}"></script>
+	
+	<script src="{f:uri.resource(path: 'admin/js/jquery.inlineHelper.js', package: 'Admin')}"></script>
+	
+	<a:widgetResources render="true" />
+
+	<script src="{f:uri.resource(path: 'admin/js/main.js', package: 'Admin')}"></script>
+	
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-27105965-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</body>
+</html>

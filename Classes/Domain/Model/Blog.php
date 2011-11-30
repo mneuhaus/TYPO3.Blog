@@ -56,6 +56,7 @@ class Blog {
 	 *
 	 * @var string
 	 * @FLOW3\Validate(type="Text")
+	 * @Admin\Annotations\Label("asd")
 	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=255 })
 	 */
 	protected $fullDescription = '';

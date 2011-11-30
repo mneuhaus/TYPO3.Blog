@@ -1,5 +1,6 @@
+{namespace a=Admin\ViewHelpers}
 {namespace blog=TYPO3\Blog\ViewHelpers}
-<f:layout name="Master" />
+<f:layout name="Bootstrap"/>
 
 <f:section name="mainbox">
 	<div id="navigation">
@@ -19,7 +20,7 @@
 			<f:link.action onclick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
 		</f:security.ifHasRole></h1>
 	<f:render partial="/PostMetaData" arguments="{post: post}"/>
-		<p class="content"><f:format.crop maxCharacters="1000000">{f:format.raw(value: post.content)}</f:format.crop></p>
+		<p ><f:format.crop maxCharacters="1000000">{f:format.raw(value: post.content)}</f:format.crop></p>
 	<f:if condition="{post.image.originalResource}">
 		<p><img src="{f:uri.resource(resource: post.image.originalResource)}" style="max-width: 100%" alt="{post.image.title}" /></p>
 	</f:if>
@@ -47,23 +48,20 @@
 							</f:security.ifHasRole>
 						</p>
 						<blog:gravatar email="{comment.emailAddress}" default="{f:uri.resource(path: 'gravatar_default.png')}" class="gravatar" />
-						<p class="content"><f:format.nl2br>{comment.content}</f:format.nl2br></p>
+						<p ><f:format.nl2br>{comment.content}</f:format.nl2br></p>
 					</li>
 				</f:for>
 			</ol>
 			<div class="clear"></div>
 		</f:if>
 		<h3>Leave a reply</h3>
-		<f:render partial="FormErrors" arguments="{for: 'newComment'}" />
-		<f:form action="create" arguments="{post: post}" controller="Comment" object="{newComment}" name="newComment" class="form newcomment" section="comments">
-			<ul>
-				<li><f:form.textbox id="comment.author" property="author" /></li>
-				<li><label for="comment.author">Name <span class="required">*</span></label></li>
-				<li><f:form.textbox id="comment.emailaddress" property="emailAddress" /></li>
-				<li><label for="comment.emailaddress">Email <span class="required">*</span> (won't be displayed)</label></li>
-				<li><f:form.textarea id="comment.content" property="content" rows="10" cols="50"/></li>
-				<li><f:form.submit class="submit" value="Submit"/></li>
-			</ul>
+		<f:form action="create" arguments="{post: post}" controller="Comment" fieldNamePrefix="newComment" object="{newComment}" name="newComment" class="form-stacked" section="comments">
+			<a:being className="\TYPO3\Blog\Domain\Model\Comment" ignore="post,date" >
+				<a:form being="{being}"/>
+			</a:being>
+			<div class="actions pull-right">
+				<f:form.submit class="btn" value="Submit"/>
+			</div>
 		</f:form>
 	</div>
 </f:section>

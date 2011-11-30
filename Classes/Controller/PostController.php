@@ -22,6 +22,7 @@ namespace TYPO3\Blog\Controller;
  *                                                                        */
 
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Admin\Annotations as Admin;
 
 /**
  * The posts controller for the Blog package
@@ -47,6 +48,7 @@ class PostController extends \TYPO3\Blog\Controller\AbstractBaseController {
 	 * @param \TYPO3\Blog\Domain\Model\Tag $tag The tag to display posts for
 	 * @param \TYPO3\Blog\Domain\Model\Category $category The category to display posts for
 	 * @return void
+	 * @Admin\Navigation(title="Blog", position="top", priority="9000")
 	 */
 	public function indexAction(\TYPO3\Blog\Domain\Model\Tag $tag = NULL, \TYPO3\Blog\Domain\Model\Category $category = NULL) {
 		if ($tag === NULL && $category === NULL) {
