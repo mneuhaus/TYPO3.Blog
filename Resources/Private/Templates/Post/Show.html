@@ -15,12 +15,10 @@
 
 	<f:flashMessages class="flashmessages" />
 
-	<h1>{post.title}<f:security.ifHasRole role="Editor">
-			<f:link.action action="edit" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_edit.png')}" title="Edit post" /></f:link.action>
-			<f:link.action onclick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
-		</f:security.ifHasRole></h1>
+	<h1>{post.title}</h1>
 	<f:render partial="/PostMetaData" arguments="{post: post}"/>
-		<p ><f:format.crop maxCharacters="1000000">{f:format.raw(value: post.content)}</f:format.crop></p>
+	<blog:markdown>{f:format.raw(value: post.content)}</blog:markdown>
+	
 	<f:if condition="{post.image.originalResource}">
 		<p><img src="{f:uri.resource(resource: post.image.originalResource)}" style="max-width: 100%" alt="{post.image.title}" /></p>
 	</f:if>
@@ -35,9 +33,11 @@
 		</div>
 		<div class="clear"></div>
 	</f:if>
+	
+	<hr />
 	<div id="comments" class="comments">
 		<f:if condition="{post.numberOfComments}">
-			<h3>Comments</h3>
+			<b>Comments</b>
 			<ol class="commentlist">
 				<f:for each="{post.comments}" as="comment" reverse="TRUE">
 					<li class="comment">
@@ -56,8 +56,16 @@
 		</f:if>
 		<h3>Leave a reply</h3>
 		<f:form action="create" arguments="{post: post}" controller="Comment" fieldNamePrefix="newComment" object="{newComment}" name="newComment" class="form-stacked" section="comments">
-			<a:being className="\TYPO3\Blog\Domain\Model\Comment" ignore="post,date" >
-				<a:form being="{being}"/>
+			<a:being className="\TYPO3\Blog\Domain\Model\Comment">
+				<div class="container">
+					<div class="span4">
+						<a:form.field property="{being.author}" />
+						<a:form.field property="{being.emailAddress}" />
+					</div>
+					<div class="span4">
+						<a:form.field property="{being.content}" />
+					</div>
+				</div>
 			</a:being>
 			<div class="actions pull-right">
 				<f:form.submit class="btn" value="Submit"/>

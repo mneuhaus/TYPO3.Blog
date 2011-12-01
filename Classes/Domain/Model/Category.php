@@ -23,11 +23,13 @@ namespace TYPO3\Blog\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Admin\Annotations as Admin;
 
 /**
  * A blog post category
  *
  * @FLOW3\Entity
+ * @Admin\Active
  */
 class Category {
 

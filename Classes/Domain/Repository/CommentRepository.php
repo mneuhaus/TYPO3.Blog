@@ -21,17 +21,25 @@ namespace TYPO3\Blog\Domain\Repository;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use \TYPO3\FLOW3\Persistence\QueryInterface;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 /**
- * A repository for Categories
+ * A repository for Blog Posts
  *
  */
-class CategoryRepository extends \TYPO3\FLOW3\Persistence\Repository {
-
+class CommentRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	/**
-	 * @var array
+	 * @var \Admin\Core\Helper
+	 * @author Marc Neuhaus <apocalip@gmail.com>
+	 * @FLOW3\Inject
 	 */
-	protected $defaultOrderings = array('name' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING);
-
+	protected $helper;
+	
+	var $defaultOrderings = array(
+		"date" => "DESC"
+	);
+	
 	/**
 	 * Schedules a modified object for persistence.
 	 *

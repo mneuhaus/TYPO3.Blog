@@ -23,23 +23,27 @@ namespace TYPO3\Blog\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Admin\Annotations as Admin;
 
 /**
  * A blog post comment
  *
  * @FLOW3\Entity
+ * @Admin\Active
  */
 class Comment {
 
 	/**
 	 * @var \DateTime
 	 * @FLOW3\Identity
+	 * @Admin\Ignore("inline")
 	 */
 	protected $date;
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Post
 	 * @ORM\ManyToOne(inversedBy="comments")
+	 * @Admin\Ignore
 	 */
 	protected $post;
 
@@ -72,7 +76,11 @@ class Comment {
 	public function __construct() {
 		$this->date = new \DateTime();
 	}
-
+	
+	public function __toString(){
+		return $this->getContent();
+	}
+	
 	/**
 	 * Setter for date
 	 *

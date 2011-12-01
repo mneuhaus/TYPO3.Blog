@@ -19,6 +19,7 @@
 	<link href="{f:uri.resource(path: 'admin/css/mixins.css', package: 'Admin')}" rel="stylesheet">
 	<link href="{f:uri.resource(path: 'admin/css/style.css', package: 'Admin')}" rel="stylesheet">
 	<link href="{f:uri.resource(path: 'admin/css/images.css', package: 'Admin')}" rel="stylesheet">
+	<link href="{f:uri.resource(path: 'Blog.css')}" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>
@@ -98,6 +99,11 @@
 	<div class="container">
 		<div class="content">
 			<div class="page-header">
+				<div class="pull-right" style="margin-top:24px;margin-left:10px;height:30px;overflow:hidden;">
+					<f:link.action action="index" controller="Post" format="atom.xml">
+						<img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" />
+					</f:link.action>
+				</div>
 				<div class="pull-right" style="margin-top:-8px;">
 					<a href="https://twitter.com/share" class="twitter-share-button" data-text="The first alpha of the Admin for FLOW3 has just been released. #FLOW3 #Admin #Bootstrap Check it out:" data-count="vertical" data-via="apocalip">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 				</div>
@@ -105,22 +111,21 @@
 					<!-- Dieses Tag in den Head-Bereich oder direkt vor dem schließenden Body-Tag einfügen -->
 					<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 					<!-- Dieses Tag dort einfügen, wo die +1-Schaltfläche dargestellt werden soll -->
-					<g:plusone size="tall"></g:plusone>
+					<g:plusone size="tall"></g:plusone>					
 				</div>
 				<h1>Admin <small>the FLOW3 Administration Package</small> <span class="label important" style="vertical-align:middle;">Alpha1</span></h1>
 			</div>
 			<div class="container">
-			<div class="span7">
+			<div class="span8">
 				<a:render section='mainbox' optional="true"></a:render>
 			</div>
-			<div class="span4">
+			<div class="span3">
 				<div class="blurb">
 					<f:if condition="{blog.authorPicture}">
 						<img src="{f:uri.resource(resource: blog.authorPicture)}" />
 					</f:if>
 					{blog.blurb}
 				</div>
-				<div class="feed-button"><f:link.action action="index" controller="Post" format="atom.xml"><img src="{f:uri.resource(path: 'Icons/SubscribeFeed.png')}" width="31" height="53" title="Subscribe to feed" /></f:link.action></div>
 				<f:if condition="{recentPosts}">
 					<h3>Recent Posts</h3>
 					<ul>

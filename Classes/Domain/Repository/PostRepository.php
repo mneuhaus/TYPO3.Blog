@@ -22,13 +22,60 @@ namespace TYPO3\Blog\Domain\Repository;
  *                                                                        */
 
 use \TYPO3\FLOW3\Persistence\QueryInterface;
+use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
  * A repository for Blog Posts
  *
  */
 class PostRepository extends \TYPO3\FLOW3\Persistence\Repository {
+	/**
+	 * @var \Admin\Core\Helper
+	 * @author Marc Neuhaus <apocalip@gmail.com>
+	 * @FLOW3\Inject
+	 */
+	protected $helper;
+	
+	var $defaultOrderings = array(
+		"date" => "DESC"
+	);
 
+	/**
+	 * Schedules a modified object for persistence.
+	 *
+	 * @param object $object The modified object
+	 * @throws \TYPO3\FLOW3\Persistence\Exception\IllegalObjectTypeException
+	 * @api
+	 */
+	public function add($object) {
+		if(!$this->helper->isDemoMode() || $this->helper->isUserSuperAdmin())
+			parent::add($object);
+	}
+	
+	/**
+	 * Schedules a modified object for persistence.
+	 *
+	 * @param object $object The modified object
+	 * @throws \TYPO3\FLOW3\Persistence\Exception\IllegalObjectTypeException
+	 * @api
+	 */
+	public function update($object) {
+		if(!$this->helper->isDemoMode() || $this->helper->isUserSuperAdmin())
+			parent::update($object);
+	}
+	
+	/**
+	 * Schedules a modified object for persistence.
+	 *
+	 * @param object $object The modified object
+	 * @throws \TYPO3\FLOW3\Persistence\Exception\IllegalObjectTypeException
+	 * @api
+	 */
+	public function remove($object) {
+		if(!$this->helper->isDemoMode() || $this->helper->isUserSuperAdmin())
+			parent::remove($object);
+	}
+	
 	/**
 	 * Finds posts by the specified blog
 	 *

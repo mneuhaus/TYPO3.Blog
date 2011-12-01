@@ -23,6 +23,7 @@ namespace TYPO3\Blog\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Admin\Annotations as Admin;
 
 /**
  * A blog
@@ -56,8 +57,8 @@ class Blog {
 	 *
 	 * @var string
 	 * @FLOW3\Validate(type="Text")
-	 * @Admin\Annotations\Label("asd")
 	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=255 })
+	 * @Admin\Ignore("list")
 	 */
 	protected $fullDescription = '';
 
@@ -67,6 +68,7 @@ class Blog {
 	 * @var string
 	 * @FLOW3\Validate(type="Text")
 	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=255 })
+	 * @Admin\Ignore("list")
 	 */
 	protected $keywords = '';
 
@@ -77,6 +79,7 @@ class Blog {
 	 * @ORM\Column(type="text", length=400)
 	 * @FLOW3\Validate(type="Text")
 	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=400 })
+	 * @Admin\Ignore("list")
 	 */
 	protected $blurb = '';
 
@@ -85,6 +88,7 @@ class Blog {
 	 *
 	 * @var \TYPO3\FLOW3\Resource\Resource
 	 * @ORM\ManyToOne
+	 * @Admin\Ignore("list")
 	 */
 	protected $authorPicture;
 
@@ -95,6 +99,7 @@ class Blog {
 	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=80 })
 	 * @var string
 	 * @ORM\Column(length=80)
+	 * @Admin\Ignore("list")
 	 */
 	protected $twitterUsername = '';
 
@@ -105,6 +110,7 @@ class Blog {
 	 * @FLOW3\Validate(type="StringLength", options={ "maximum"=20 })
 	 * @var string
 	 * @ORM\Column(length=20)
+	 * @Admin\Ignore("list")
 	 */
 	protected $googleAnalyticsAccountNumber = '';
 
@@ -114,6 +120,7 @@ class Blog {
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
 	 * @ORM\OneToMany(mappedBy="blog")
 	 * @ORM\OrderBy({"date" = "DESC"})
+	 * @Admin\Ignore("list")
 	 */
 	protected $posts;
 
@@ -123,7 +130,11 @@ class Blog {
 	public function __construct() {
 		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
-
+	
+	public function __toString(){
+		return $this->getTitle();
+	}
+	
 	/**
 	 * Sets this blog's title
 	 *

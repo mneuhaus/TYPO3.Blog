@@ -23,11 +23,13 @@ namespace TYPO3\Blog\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Admin\Annotations as Admin;
 
 /**
  * A blog post
  *
  * @FLOW3\Entity
+ * @Admin\Active
  */
 class Post {
 
@@ -62,24 +64,31 @@ class Post {
 	 * @var string
 	 * @ORM\Column(type="text")
 	 * @FLOW3\Validate(type="Raw")
+	 * @Admin\Ignore("list")
+	 * @Admin\Editor("Markdown")
 	 */
 	protected $content;
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Image
 	 * @ORM\ManyToOne
+	 * @Admin\Ignore("list")
+	 * @Admin\Inline
 	 */
 	protected $image;
 
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Tag>
 	 * @ORM\ManyToMany(inversedBy="posts")
+	 * @Admin\Ignore
 	 */
 	protected $tags;
 
 	/**
 	 * @var \TYPO3\Blog\Domain\Model\Category
 	 * @ORM\ManyToOne
+	 * @Admin\Ignore("list")
+	 * @Admin\Widget("Chosen")
 	 */
 	protected $category;
 
@@ -87,6 +96,9 @@ class Post {
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Comment>
 	 * @ORM\OneToMany(mappedBy="post")
 	 * @ORM\OrderBy({"date" = "DESC"})
+	 * @Admin\Ignore("list")
+	 * @Admin\Inline
+	 * @Admin\Variant("Tabular")
 	 */
 	protected $comments;
 
@@ -94,6 +106,7 @@ class Post {
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Blog\Domain\Model\Post>
 	 * @ORM\ManyToMany
 	 * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(name="related_id")})
+	 * @Admin\Ignore("list")
 	 */
 	protected $relatedPosts;
 
@@ -105,6 +118,10 @@ class Post {
 		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->relatedPosts = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+	
+	public function __toString(){
+		return $this->getTitle();
 	}
 
 	/**
@@ -251,7 +268,17 @@ class Post {
 	public function getContent() {
 		return $this->content;
 	}
-
+	
+	/**
+	 * Adds a comment to this post
+	 *
+	 * @param \TYPO3\Blog\Domain\Model\Comment $comment
+	 * @return void
+	 */
+	public function setComments($comments) {
+		$this->comments = $comments;
+	}
+	
 	/**
 	 * Adds a comment to this post
 	 *

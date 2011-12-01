@@ -19,21 +19,23 @@
   				</div>
   			</f:security.ifHasRole>
   			<f:widget.paginate configuration="{itemsPerPage:5, maximumNumberOfLinks: 5}" objects="{posts}" as="paginatedPosts">
-  				<ol class="posts">
   					<f:for each="{paginatedPosts}" as="post">
-  						<li class="post">
+  						<div class="post">
   							<h2>
-  								<f:link.action action="show" controller="Post" arguments="{post: post}">{post.title}</f:link.action>
-  								<f:security.ifHasRole role="Editor">
-  									<f:link.action action="edit" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_edit.png')}" title="Edit post" /></f:link.action>
-  									<f:link.action onclick="return confirm('Really delete this post?');" action="delete" arguments="{post: post}" controller="Post"><img src="{f:uri.resource(path: 'Icons/FamFamFam/page_delete.png')}" title="Delete post" /></f:link.action>
-  								</f:security.ifHasRole>
+  								<f:link.action action="show" controller="Post" arguments="{post: post}">
+								{post.title}
+								</f:link.action>
   							</h2>
   							<f:render partial="PostMetaData" arguments="{post: post}"/>
-  							<p><blog:readMore>{f:format.raw(value: post.content)}</blog:readMore> <f:link.action action='show' arguments='{post: post}'>Read more</f:link.action></p>
-  						</li>
+  							<p>
+								<blog:readMore>
+									<f:format.stripTags>
+										<blog:markdown>{f:format.raw(value: post.content)}</blog:markdown>
+									</f:format.stripTags>
+								</blog:readMore>
+							<f:link.action action='show' arguments='{post: post}'>Read more</f:link.action></p>
+  						</div>
   					</f:for>
-  				</ol>
   			</f:widget.paginate>
   		</f:then>
   		<f:else>
