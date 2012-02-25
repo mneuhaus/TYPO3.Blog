@@ -6,22 +6,22 @@
 	<f:render partial="FormErrors" arguments="{for: 'blog'}" />
 	<f:form method="blog" action="update" object="{blog}" name="blog" enctype="multipart/form-data">
 		<label>Title</label><br />
-		<f:form.textbox property="title" id="title" /><br />
+		<f:form.textfield property="title" id="title" /><br />
 		<label for="description">Description</label><br />
-		<f:form.textbox property="description" id="description" /><br />
+		<f:form.textfield property="description" id="description" /><br />
 		<label for="fullDescription">Long Description</label><br />
-		<f:form.textbox property="fullDescription" id="fullDescription" /><br />
+		<f:form.textfield property="fullDescription" id="fullDescription" /><br />
 		<label for="keywords">Keywords (comma separated)</label><br />
-		<f:form.textbox property="keywords" id="keywords" /><br />
+		<f:form.textfield property="keywords" id="keywords" /><br />
 		<label for="blurb">Blurb</label><br />
 		<f:form.textarea property="blurb" rows="5" cols="40" id="blurb" /><br />
 		<f:if condition="{blog.authorPicture}"><img src="{f:uri.resource(resource: blog.authorPicture)}" style="max-width: 60px; float:right;" /></f:if>
 		<label for="authorPicture">Author picture</label><br />
 		<f:form.upload property="authorPicture" id="authorPicture" /><br />
 		<label for="twitterUsername">Twitter username</label><br />
-		<f:form.textbox property="twitterUsername" id="twitterUsername" /><br />
+		<f:form.textfield property="twitterUsername" id="twitterUsername" /><br />
 		<label for="googleAnalyticsAccountNumber">Google Analytics Account #</label><br />
-		<f:form.textbox property="googleAnalyticsAccountNumber" id="googleAnalyticsAccountNumber" /><br />
+		<f:form.textfield property="googleAnalyticsAccountNumber" id="googleAnalyticsAccountNumber" /><br />
 
 		<f:form.submit value="Update"/>
 	</f:form>

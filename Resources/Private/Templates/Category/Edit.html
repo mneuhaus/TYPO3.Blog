@@ -6,7 +6,7 @@
 	<f:render partial="FormErrors" arguments="{for: 'category'}" />
 	<f:form action="update" object="{category}" name="category">
 		<label>Name</label><br />
-		<f:form.textbox property="name" /><br />
+		<f:form.textfield property="name" /><br />
 		<f:form.submit value="Update"/>
 	</f:form>
 </f:section>

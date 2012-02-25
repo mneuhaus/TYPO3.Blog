@@ -6,11 +6,11 @@
 	<f:render partial="FormErrors" arguments="{for: 'account'}" />
 	<f:form action="update" object="{account}" name="account">
 		<label for="accountIdentifier">Username</label><br />
-		<f:form.textbox property="accountIdentifier" id="accountIdentifier" /><br />
+		<f:form.textfield property="accountIdentifier" id="accountIdentifier" /><br />
 		<label for="firstname">First name</label><br />
-		<f:form.textbox property="party.name.firstName" id="firstname" /><br />
+		<f:form.textfield property="party.name.firstName" id="firstname" /><br />
 		<label for="lastname">Last name</label><br />
-		<f:form.textbox property="party.name.lastName" id="lastname" /><br />
+		<f:form.textfield property="party.name.lastName" id="lastname" /><br />
 		<label for="password">New password</label><br />
 		<f:form.password name="password" id="password" /><br />
 		<f:form.submit value="Update"/>

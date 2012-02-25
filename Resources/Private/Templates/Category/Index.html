@@ -18,7 +18,7 @@
 	<f:render partial="FormErrors" arguments="{for: 'newCategory'}" />
 	<f:form method="post" action="create" object="{newCategory}" name="newCategory">
 		<label>Name</label><br />
-		<f:form.textbox property="name" /><br />
+		<f:form.textfield property="name" /><br />
 		<f:form.submit value="Add category"/>
 	</f:form>
 
